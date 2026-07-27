@@ -1,0 +1,345 @@
+bt_navigator:
+  ros__parameters:
+    use_sim_time: True
+    global_frame: map
+    robot_base_frame: base_link
+    odom_topic: /odom/mujoco_odom
+    bt_loop_duration: 10
+    default_server_timeout: 20
+    wait_for_service_timeout: 1000
+    navigators: ['navigate_to_pose', 'navigate_through_poses']
+    navigate_to_pose:
+      plugin: "navigo_bt_navigator::NavigateToPoseNavigator"
+      enable_groot_monitoring: false
+      groot_server_port: 1667
+    navigate_through_poses:
+      plugin: "navigo_bt_navigator::NavigateThroughPosesNavigator"
+      enable_groot_monitoring: false
+      groot_server_port: 1669
+    plugin_lib_names:
+      - navigo_compute_path_to_pose_action_bt_node
+      - navigo_compute_path_through_poses_action_bt_node
+      - navigo_smooth_path_action_bt_node
+      - navigo_follow_path_action_bt_node
+      - navigo_spin_action_bt_node
+      - navigo_wait_action_bt_node
+      - navigo_assisted_teleop_action_bt_node
+      - navigo_back_up_action_bt_node
+      - navigo_drive_on_heading_bt_node
+      - navigo_clear_costmap_service_bt_node
+      - navigo_is_stuck_condition_bt_node
+      - navigo_goal_reached_condition_bt_node
+      - navigo_goal_updated_condition_bt_node
+      - navigo_globally_updated_goal_condition_bt_node
+      - navigo_is_path_valid_condition_bt_node
+      - navigo_initial_pose_received_condition_bt_node
+      - navigo_reinitialize_global_localization_service_bt_node
+      - navigo_rate_controller_bt_node
+      - navigo_distance_controller_bt_node
+      - navigo_speed_controller_bt_node
+      - navigo_truncate_path_action_bt_node
+      - navigo_truncate_path_local_action_bt_node
+      - navigo_goal_updater_node_bt_node
+      - navigo_recovery_node_bt_node
+      - navigo_pipeline_sequence_bt_node
+      - navigo_round_robin_node_bt_node
+      - navigo_transform_available_condition_bt_node
+      - navigo_time_expired_condition_bt_node
+      - navigo_path_expiring_timer_condition
+      - navigo_distance_traveled_condition_bt_node
+      - navigo_single_trigger_bt_node
+      - navigo_goal_updated_controller_bt_node
+      - navigo_is_battery_low_condition_bt_node
+      - navigo_navigate_through_poses_action_bt_node
+      - navigo_navigate_to_pose_action_bt_node
+      - navigo_remove_passed_goals_action_bt_node
+      - navigo_planner_selector_bt_node
+      - navigo_path_controller_selector_bt_node
+      - navigo_goal_checker_selector_bt_node
+      - navigo_path_controller_cancel_bt_node
+      - navigo_path_longer_on_approach_bt_node
+      - navigo_wait_cancel_bt_node
+      - navigo_spin_cancel_bt_node
+      - navigo_back_up_cancel_bt_node
+      - navigo_assisted_teleop_cancel_bt_node
+      - navigo_drive_on_heading_cancel_bt_node
+      - navigo_is_battery_charging_condition_bt_node
+
+bt_navigator_navigate_through_poses_rclcpp_node:
+  ros__parameters:
+    use_sim_time: True
+
+bt_navigator_navigate_to_pose_rclcpp_node:
+  ros__parameters:
+    use_sim_time: True
+
+behavior_server:
+  ros__parameters:
+    costmap_topic: local_costmap/costmap_raw
+    footprint_topic: local_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins: ["spin", "backup", "drive_on_heading", "assisted_teleop", "wait"]
+    spin:
+      plugin: "navigo_behaviors/Spin"
+    backup:
+      plugin: "navigo_behaviors/BackUp"
+    drive_on_heading:
+      plugin: "navigo_behaviors/DriveOnHeading"
+    wait:
+      plugin: "navigo_behaviors/Wait"
+    assisted_teleop:
+      plugin: "navigo_behaviors/AssistedTeleop"
+    global_frame: odom
+    robot_base_frame: base_link
+    transform_tolerance: 0.1
+    use_sim_time: true
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 0.8
+    min_rotational_vel: 0.3
+    rotational_acc_lim: 2.4
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      update_frequency: 8.0
+      publish_frequency: 4.0
+      global_frame: odom
+      robot_base_frame: base_link
+      use_sim_time: True
+      rolling_window: true
+      width: 8
+      height: 8
+      resolution: 0.05
+      footprint: "[[0.30,0.15],[0.30,-0.15],[-0.30,-0.15],[-0.30,0.15]]"
+      plugins: ["obstacle_layer", "inflation_layer"]
+      obstacle_layer:
+        plugin: "navigo_costmap_2d::ObstacleLayer"
+        enabled: True
+        footprint_clearing_enabled: true
+        observation_persistence: 0.20
+        observation_sources: pointcloud
+        pointcloud:
+          topic: /livox/lidar
+          min_obstacle_height: 0.10
+          max_obstacle_height: 1.20
+          clearing: True
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 6.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 5.5
+          obstacle_min_range: 0.10
+      inflation_layer:
+        plugin: "navigo_costmap_2d::InflationLayer"
+        cost_scaling_factor: 4.0
+        inflation_radius: 0.32
+      always_send_full_costmap: True
+  local_costmap_client:
+    ros__parameters:
+      use_sim_time: False
+  local_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: False
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      update_frequency: 5.0
+      publish_frequency: 2.0
+      global_frame: map
+      robot_base_frame: base_link
+      use_sim_time: True
+      footprint: "[[0.30,0.15],[0.30,-0.15],[-0.30,-0.15],[-0.30,0.15]]"
+      resolution: 0.05
+      track_unknown_space: false
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      static_layer:
+        plugin: "navigo_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: True
+        footprint_clearing_enabled: True
+        restore_cleared_footprint: True
+      obstacle_layer:
+        plugin: "navigo_costmap_2d::ObstacleLayer"
+        enabled: True
+        footprint_clearing_enabled: true
+        observation_persistence: 0.30
+        observation_sources: pointcloud
+        pointcloud:
+          topic: /livox/lidar
+          min_obstacle_height: 0.10
+          max_obstacle_height: 1.20
+          clearing: True
+          marking: True
+          data_type: "PointCloud2"
+          raytrace_max_range: 8.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 7.5
+          obstacle_min_range: 0.10
+      inflation_layer:
+        plugin: "navigo_costmap_2d::InflationLayer"
+        cost_scaling_factor: 4.0
+        inflation_radius: 0.32
+      always_send_full_costmap: True
+
+map_server:
+  ros__parameters:
+    use_sim_time: False
+    yaml_filename: ".run/go2w_house/map/house_map.yaml"
+
+map_saver:
+  ros__parameters:
+    use_sim_time: False
+    save_map_timeout: 5.0
+    free_thresh_default: 0.25
+    occupied_thresh_default: 0.65
+    map_subscribe_transient_local: True
+
+planner_server:
+  ros__parameters:
+    expected_planner_frequency: 20.0
+    odom_topic: /odom/mujoco_odom
+    use_sim_time: True
+    planner_plugins: ["GridBased"]
+    GridBased:
+      plugin: "navigo_navfn_planner/NavfnPlanner"
+      tolerance: 0.30
+      use_astar: true
+      allow_unknown: false
+
+controller_server:
+  ros__parameters:
+    controller_frequency: 30.0
+    odom_topic: "/odom/mujoco_odom"
+    progress_checker_plugin: "progress_checker"
+    goal_checker_plugins: ["general_goal_checker"]
+    controller_plugins: ["FollowPath"]
+    progress_checker:
+      plugin: "navigo_path_controller::SimpleProgressChecker"
+      required_movement_radius: 0.15
+      movement_time_allowance: 25.0
+    general_goal_checker:
+      stateful: True
+      plugin: "navigo_path_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.30
+    FollowPath:
+      plugin: "navigo_mppi_controller::MPPIController"
+      visualize: true
+      time_steps: 56
+      model_dt: 0.05
+      batch_size: 2000
+      vx_std: 0.16
+      vy_std: 0.2
+      wz_std: 0.35
+      vx_max: 0.35
+      vx_min: -0.15
+      vy_max: 0.0
+      wz_max: 0.55
+      ax_max: 0.60
+      ay_max: 0.0
+      ax_min: -0.60
+      az_max: 0.70
+      iteration_count: 1
+      prune_distance: 1.5
+      transform_tolerance: 0.1
+      temperature: 0.3
+      gamma: 0.015
+      motion_model: "DiffDrive"
+      visualize_all_sampled_traj: false
+      visualize_optimized_traj: true
+      TrajectoryVisualizer:
+        trajectory_step: 5
+        time_step: 3
+      AckermannConstraints:
+        min_turning_r: 0.1667
+      critics: ["ConstraintCritic", "CostCritic", "GoalCritic", "PathAlignCritic", "GoalAngleCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
+      ConstraintCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 4.0
+      GoalCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        threshold_to_consider: 1.4
+      GoalAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 3.0
+        threshold_to_consider: 0.5
+      PreferForwardCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        threshold_to_consider: 0.5
+      CostCritic:
+        enabled: true
+        cost_power: 2
+        cost_weight: 3.81
+        critical_cost: 300.0
+        consider_footprint: true
+        collision_cost: 1000000.0
+        near_goal_distance: 1.0
+        trajectory_point_step: 2
+      PathAlignCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 14.0
+        max_path_occupancy_ratio: 0.05
+        trajectory_point_step: 4
+        threshold_to_consider: 0.5
+        offset_from_furthest: 20
+        use_path_orientations: false
+      PathFollowCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        offset_from_furthest: 5
+        threshold_to_consider: 1.4
+      PathAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 2.0
+        offset_from_furthest: 4
+        threshold_to_consider: 0.5
+        max_angle_to_furthest: 1.0
+        mode: 0
+        forward_preference: true
+
+smoother_server:
+  ros__parameters:
+    use_sim_time: False
+    smoother_plugins: ["simple_smoother"]
+    simple_smoother:
+      plugin: "navigo_smoother::SimpleSmoother"
+      tolerance: 1.0e-10
+      max_its: 1000
+      do_refinement: True
+
+waypoint_follower:
+  ros__parameters:
+    use_sim_time: True
+    odom_topic: /odom/mujoco_odom
+    loop_rate: 20
+    stop_on_failure: false
+    waypoint_task_executor_plugin: "wait_at_waypoint"
+    wait_at_waypoint:
+      plugin: "navigo_waypoint_follower::WaitAtWaypoint"
+      enabled: True
+      waypoint_pause_duration: 200
+
+velocity_optimizer:
+  ros__parameters:
+    smoothing_frequency: 20.0
+    scale_velocities: false
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.35, 0.0, 0.55]
+    min_velocity: [-0.15, 0.0, -0.55]
+    deadband_velocity: [0.0, 0.0, 0.0]
+    velocity_timeout: 1.0
+    max_accel: [0.60, 0.0, 0.70]
+    max_decel: [-0.60, 0.0, -0.70]
+    odom_topic: "/odom/mujoco_odom"
+    odom_duration: 0.1
+    use_realtime_priority: false
+    enable_stamped_cmd_vel: false

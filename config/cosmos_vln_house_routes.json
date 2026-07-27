@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "scene": {
+    "id": 6,
+    "name": "HouseWorld",
+    "description": "MATRiX three-bedroom indoor home scene.",
+    "source_xml": "matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_house.xml",
+    "bounds_polygon": [
+      [-4.98, -9.51],
+      [2.32, -9.51],
+      [2.32, -8.76],
+      [14.65, -8.76],
+      [14.65, 8.29],
+      [9.09, 8.29],
+      [9.09, 7.19],
+      [4.15, 7.19],
+      [4.15, 10.03],
+      [-2.74, 10.03],
+      [-2.74, 2.11],
+      [-4.98, 2.11]
+    ]
+  },
+  "spawn": {
+    "frame_id": "map",
+    "x": 1.1,
+    "y": -7.2,
+    "yaw_rad": 1.5707963267948966
+  },
+  "forbidden_goals": [
+    {
+      "id": "east_mid_isolated",
+      "x": 13.0,
+      "y": -0.5,
+      "reason": "Continuous HouseWorld collision walls isolate this region from the spawn component."
+    },
+    {
+      "id": "lower_mid_isolated",
+      "x": 5.0,
+      "y": -7.0,
+      "reason": "No traversable opening exists for the Go2-W footprint from the spawn component."
+    },
+    {
+      "id": "lower_right_isolated",
+      "x": 12.0,
+      "y": -6.5,
+      "reason": "The apparent model seams are too narrow to be treated as doors."
+    }
+  ],
+  "routes": [
+    {
+      "route_id": "house_north_lounge",
+      "description": "Leave the southwest spawn room, follow the connected northbound indoor corridor, avoid the furniture, and stop in the open north lounge.",
+      "task_examples": [
+        "Navigate to the open lounge using the safe indoor route.",
+        "Go to the north lounge and avoid the furniture.",
+        "Move through the home to the large open lounge, then stop."
+      ],
+      "stages": [
+        {
+          "stage_id": "enter_north_lounge",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -0.5,
+            "y": 7.5,
+            "yaw_rad": 2.017857382
+          }
+        }
+      ]
+    },
+    {
+      "route_id": "house_kitchen_safe",
+      "description": "Cross the north lounge and upper-center room, align through the narrow east doorway at low speed, and stop in the kitchen area.",
+      "task_examples": [
+        "Navigate safely from the living area to the kitchen.",
+        "Go through the home to the kitchen and avoid all furniture.",
+        "Use the approved indoor route to reach the kitchen."
+      ],
+      "stages": [
+        {
+          "stage_id": "north_lounge",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -0.5,
+            "y": 7.5,
+            "yaw_rad": 2.017857382
+          }
+        },
+        {
+          "stage_id": "north_room",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.0,
+            "y": 8.5,
+            "yaw_rad": 0.447061055
+          }
+        },
+        {
+          "stage_id": "upper_center",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.5,
+            "y": 2.5,
+            "yaw_rad": -0.447061055
+          }
+        },
+        {
+          "stage_id": "east_corridor_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 8.2,
+            "y": 1.2,
+            "yaw_rad": -1.013903441
+          }
+        },
+        {
+          "stage_id": "east_corridor_align",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 9.2,
+            "y": 1.2,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "east_door_curve_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 9.65,
+            "y": 1.55,
+            "yaw_rad": 0.5
+          }
+        },
+        {
+          "stage_id": "east_door_curve_mid",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.0,
+            "y": 2.15,
+            "yaw_rad": 1.0
+          }
+        },
+        {
+          "stage_id": "east_door_inside",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.2,
+            "y": 2.75,
+            "yaw_rad": 1.35
+          }
+        },
+        {
+          "stage_id": "east_door_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.25,
+            "y": 3.55,
+            "yaw_rad": 1.466851191
+          }
+        },
+        {
+          "stage_id": "kitchen",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 12.0,
+            "y": 5.0,
+            "yaw_rad": 0.475353057
+          }
+        }
+      ]
+    },
+    {
+      "route_id": "house_long_safe_tour",
+      "description": "Take the longest approved indoor tour from the southwest spawn room through the west room, north lounge, upper-center area, narrow east doorway, kitchen, and conservative far northeast endpoint. The east doorway is the only low-clearance section and requires slow aligned motion.",
+      "task_examples": [
+        "Complete the longest safe tour through the home and finish at the far northeast endpoint.",
+        "Explore the approved rooms, avoid the furniture, pass the narrow doorway carefully, and stop at the far end.",
+        "Navigate through the entire reachable part of the house using the longest approved route."
+      ],
+      "stages": [
+        {
+          "stage_id": "west_room",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -3.7,
+            "y": -0.3,
+            "yaw_rad": 2.694531598
+          }
+        },
+        {
+          "stage_id": "north_lounge",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -0.5,
+            "y": 7.5,
+            "yaw_rad": 0.934504343
+          }
+        },
+        {
+          "stage_id": "north_room",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.0,
+            "y": 8.5,
+            "yaw_rad": 0.447061055
+          }
+        },
+        {
+          "stage_id": "upper_center",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.5,
+            "y": 2.5,
+            "yaw_rad": -0.447061055
+          }
+        },
+        {
+          "stage_id": "corridor_west",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 8.2,
+            "y": 1.2,
+            "yaw_rad": -1.013903441
+          }
+        },
+        {
+          "stage_id": "corridor_east",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 9.2,
+            "y": 1.2,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "east_door_curve_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 9.65,
+            "y": 1.55,
+            "yaw_rad": 0.5
+          }
+        },
+        {
+          "stage_id": "east_door_curve_mid",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.0,
+            "y": 2.15,
+            "yaw_rad": 1.0
+          }
+        },
+        {
+          "stage_id": "east_door_inside",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.2,
+            "y": 2.75,
+            "yaw_rad": 1.35
+          }
+        },
+        {
+          "stage_id": "east_door_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.25,
+            "y": 3.55,
+            "yaw_rad": 1.466851191
+          }
+        },
+        {
+          "stage_id": "kitchen",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 12.0,
+            "y": 5.0,
+            "yaw_rad": 0.475353057
+          }
+        },
+        {
+          "stage_id": "far_northeast_safe",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 10.35,
+            "y": 7.45,
+            "yaw_rad": 2.017857382
+          }
+        }
+      ]
+    }
+  ]
+}

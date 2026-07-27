@@ -1,0 +1,267 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Selection
+    Name: Selection
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.3
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 110; 116; 122
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Plane: XY
+      Plane Cell Count: 30
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.85
+      Class: rviz_default_plugins/Map
+      Color Scheme: map
+      Draw Behind: true
+      Enabled: true
+      Name: House Static Map
+      Topic:
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /map_updates
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.35
+      Class: rviz_default_plugins/Map
+      Color Scheme: costmap
+      Draw Behind: false
+      Enabled: true
+      Name: Global Costmap
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /global_costmap/costmap
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /global_costmap/costmap_updates
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.55
+      Class: rviz_default_plugins/Map
+      Color Scheme: costmap
+      Draw Behind: false
+      Enabled: true
+      Name: Local Costmap
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /local_costmap/costmap
+      Update Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /local_costmap/costmap_updates
+      Use Timestamp: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 32; 170; 255
+      Enabled: true
+      Line Style: Billboards
+      Line Width: 0.07
+      Name: Global Plan
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /plan
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 255; 160; 32
+      Enabled: true
+      Line Style: Billboards
+      Line Width: 0.05
+      Name: Controller Plan
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /transformed_global_plan
+      Value: true
+    - Alpha: 0.85
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0.5
+      Enabled: true
+      Name: House LiDAR
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 2
+      Size (m): 0.02
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /livox/lidar
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Class: rviz_default_plugins/Axes
+      Enabled: true
+      Length: 0.8
+      Name: Robot Position
+      Radius: 0.06
+      Reference Frame: base_link
+      Value: true
+    - Alpha: 0.9
+      Class: rviz_default_plugins/Polygon
+      Color: 55; 220; 110
+      Enabled: true
+      Name: Robot Footprint
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /local_costmap/published_footprint
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: Controller Trajectories
+      Namespaces:
+        Candidate Trajectories: true
+        Optimal Trajectory: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /trajectories
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: NWM-Cosmos3Edge Target And Prediction
+      Namespaces:
+        cosmos_vln: true
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cosmos_vln/markers
+      Value: true
+    - Alpha: 0.95
+      Axes Length: 0.45
+      Axes Radius: 0.05
+      Class: rviz_default_plugins/Pose
+      Color: 77; 207; 155
+      Enabled: true
+      Head Length: 0.25
+      Head Radius: 0.12
+      Name: NWM-Cosmos3Edge Resolved Route Goal
+      Shaft Length: 0.65
+      Shaft Radius: 0.06
+      Shape: Arrow
+      Topic:
+        Depth: 10
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /cosmos_vln/target_pose
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: false
+      Frame Timeout: 15
+      Marker Scale: 0.35
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Update Interval: 0
+      Value: false
+  Enabled: true
+  Global Options:
+    Background Color: 30; 34; 38
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Single click: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /clicked_point
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Angle: 0
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: House Navigation
+      Scale: 40
+      Target Frame: <Fixed Frame>
+      X: 5
+      Y: 0
+      Value: TopDownOrtho (rviz)
+    Saved: ~
+Window Geometry:
+  Height: 900
+  Hide Left Dock: false
+  Hide Right Dock: false
+  Width: 1260
+  X: 1280
+  Y: 40

@@ -1,0 +1,14 @@
+go2w_house_pointcloud_to_laserscan:
+  ros__parameters:
+    use_sim_time: false
+    input_topic: /livox/lidar
+    output_topic: /scan
+    frame_id: lidar
+    min_height: -0.10
+    max_height: 0.45
+    angle_min: -3.141592653589793
+    angle_max: 3.141592653589793
+    angle_increment: 0.008726646259971648
+    range_min: 0.20
+    range_max: 12.0
+    scan_time: 0.10
