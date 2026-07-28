@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "output_video": "output/go2w_target_video_prediction_seed560/vision.mp4",
+  "sha256": "47d9af8e0d0f14d2607dc67f7d4055baa2162ad678e68b70d4224a400e4e306a",
+  "codec": "h264",
+  "width": 320,
+  "height": 192,
+  "fps": 10,
+  "frames": 25,
+  "duration_sec": 2.5,
+  "size_bytes": 679570,
+  "elapsed_wall_sec": 21.3,
+  "sampling_sec_approx": 9.7,
+  "max_resident_set_kib": 6220360,
+  "freeze_intervals": 0,
+  "identical_adjacent_frame_pairs": 0,
+  "adjacent_frame_mad": {
+    "min": 2.455203,
+    "mean": 15.671597,
+    "max": 44.415641
+  },
+  "first_last_frame_mad": 52.032254,
+  "luma_std": {
+    "min": 70.729396,
+    "mean": 72.636206,
+    "max": 74.121705
+  },
+  "aruco_560_detected_output_frames": 0,
+  "visual_assessment": {
+    "nonblank": true,
+    "continuous_motion": true,
+    "scene_preserved": true,
+    "target_shape_preserved": true,
+    "target_progressively_approached": true,
+    "target_reached": false,
+    "machine_readable_marker_preserved": false
+  }
+}

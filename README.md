@@ -31,7 +31,7 @@ flowchart TD
     SEEDS[阶段自适应 seed 采样<br/>搜索 1 个 / 接近 2 个]
     ADAPTER[跨本体几何适配器<br/>Camera relative pose to Base Twist]
     RANK[候选过滤与评分<br/>只选择模型生成的动作]
-    WINDOW[风险自适应执行窗口<br/>搜索 16 / 12 / 8, 接近最多 8]
+    WINDOW[风险自适应执行窗口<br/>搜索 H = 4 / 8 / 16, 接近最多 8]
     SHIELD[Veto-only Safety Shield<br/>限幅、减速或清零]
     CMD["/cmd_vel_nav"]
     LOW[DreamWaQ 底层控制<br/>速度跟踪与姿态稳定]
@@ -169,15 +169,27 @@ s_r\,\operatorname{yaw}(R_B)
 
 这一过程是零样本几何接口，不应描述为 Go2-W policy fine-tuning。
 
+Adapter 的运行时张量合同为：
+
+```text
+Generator: 16 x 9D
+Adapter:   H x 2, H in {4, 8, 16}
+step:      [linear_x, angular_z]
+```
+
+其中 `H` 是本轮允许执行的预测时域，不改变 Generator 的原始 `16 x 9D` 输出。Adapter 没有下蹲或模态切换动作头；停车后的 `charge` 下蹲由独立安全状态机根据多模态终止证据触发。
+
 ### 3.3 风险自适应 action chunk
 
-模型每次预测 16 个动作。系统按局部净空决定搜索阶段实际执行的 prefix：
+模型每次预测 16 个动作。系统先根据预测动作变化率选择 `4/8/16`，再用实时净空施加上限：
 
-| 环境条件 | 搜索 prefix |
+| 条件 | 搜索 prefix 上限 |
 | --- | ---: |
-| 前方至少 `2.0 m`，两侧至少 `1.20 m` | 16 步 |
-| 前方至少 `1.20 m`，两侧至少 `0.73 m` | 12 步 |
-| 其他有效净空 | 8 步 |
+| 预测方向变化，或峰值偏航至少 `0.28 rad/s` | 4 步 |
+| 预测峰值偏航至少 `0.12 rad/s` | 8 步 |
+| 稳定、低偏航预测 | 16 步 |
+| 前方进入 `3.00 m` 危险区、处于方向锁滞回区，或侧向净空不足 | 4 步 |
+| 开放区但侧向净空低于 `1.20 m` | 8 步 |
 | 接近、保持和重捕获阶段 | 最多 8 步 |
 
 每步对应约 `0.1 s`。长 chunk 只减少重新请求模型的频率，不等于 1.6 秒开环盲走：
@@ -189,9 +201,11 @@ s_r\,\operatorname{yaw}(R_B)
 
 ### 3.4 阶段自适应候选采样
 
-候选 seed 配置为 `[0, 2, 3, 5]`：
+候选 seed 配置为 `[0,1,2,3,4,5,6,7]`：
 
-- 搜索阶段每轮轮换一个 seed，控制推理延迟；
+- 开放区搜索先评估 1-2 个 seed，控制推理延迟；
+- 首次墙前建锁评估全部 8 个 seed，由第一条合法 Generator 四帧共识建立方向锁；
+- 已有方向锁后先评估 2 个 seed，没有安全共识时扩展到全部 8 个；
 - 接近、保持和重捕获阶段比较前两个 seed；
 - 候选先经过适配与 shield，再根据目标对准、净空和动作有效性评分。
 
@@ -202,6 +216,8 @@ s_r\,\operatorname{yaw}(R_B)
 Safety shield 使用 LiDAR、RGB-D、里程计、姿态和视觉目标误差约束动作：
 
 - 前方净空不足时禁止平移；
+- 墙前危险区强制 `linear_x=0`，只允许通过四帧同向共识和方向锁的 Generator `angular_z`；
+- 锁定侧失去 `1.20 m` 净空且另一侧安全时，只允许在同一次全 seed 评估内由反向 Generator 四帧共识换锁；LiDAR 不生成新方向；
 - 靠近侧墙时降低前进速度；
 - 朝过近侧墙转向时将偏航动作清零；
 - 目标横向误差过大时禁止继续前进；
@@ -360,7 +376,7 @@ stateDiagram-v2
 
 1. 将 AV-domain 9D 相机相对位姿通过几何适配器接入 `/cmd_vel_nav`，让 Go2-W 能实际执行 Generator action。
 2. 尝试过更激进的速度、更多 seed 和更长接近 chunk；复测出现墙角和行为退化后，恢复到已成功版本。
-3. 当前保留搜索 `16/12/8` 的风险自适应 prefix，接近固定最多 `8` 步，并逐步复核传感器。
+3. 当前搜索由预测变化率和实时净空自主选择 `H=4/8/16`，墙前固定四帧 yaw-only 共识；接近最多 `8` 步，并逐步复核传感器。
 4. DreamWaQ 底层前进限幅恢复为 `0.35 m/s`，不沿用实验性 `0.90 m/s` 底层上限。
 5. Reasoner 预算提高到 `1024`，强制完整六字段 JSON，取消任何缺字段猜测补全。
 6. 目标跟踪与任务完成权限分离，tracker 不得触发最终到达。
@@ -434,10 +450,48 @@ Reasoner 只验证任务语义，tracker 只维持短时连续性，最终完成
 
 完整依赖安装和排障见 [README_MAPLESS_CHARGER_SEARCH.md](README_MAPLESS_CHARGER_SEARCH.md)。
 
+### 10.1 新机器完整部署
+
+完整仿真要求 Ubuntu 22.04、ROS 2 Humble、glibc 2.35 及 NVIDIA
+driver 535 或更高版本。Ubuntu 20.04/ROS 2 Galactic 不能通过改脚本名称替代。
+
+仓库不重复托管数十 GB 的第三方二进制，而是固定经过验证的上游 revision、
+MATRiX `v0.1.2` Release 校验和和 Cosmos3-Edge checkpoint revision。新克隆按
+以下顺序部署：
+
+```bash
+cd /path/to/wave-go
+
+# 克隆固定版本的 MATRiX、RoamerX、DreamWaQ 和 cosmos-framework，并应用补丁
+bash scripts/bootstrap_go2w_house.sh sources
+
+# 安装 ROS 2 Humble、robot-forward、rmw_zenoh_cpp 和系统运行库（需要 sudo）
+bash scripts/bootstrap_go2w_house.sh system
+
+# 下载并校验 MATRiX base/assets/shared 和 HouseWorld
+bash scripts/bootstrap_go2w_house.sh assets
+
+# 从 Hugging Face 下载固定 revision 的 nvidia/Cosmos3-Edge
+bash scripts/bootstrap_go2w_house.sh model
+
+# 构建 RoamerX、Cosmos Python 环境和 Go2-W DreamWaQ bridge
+bash scripts/bootstrap_go2w_house.sh build
+
+# 只读完整性检查
+bash scripts/bootstrap_go2w_house.sh check
+```
+
+固定版本、许可证标识、下载地址、文件大小和 SHA256 见
+[`config/go2w_house_dependencies.json`](config/go2w_house_dependencies.json)。
+MATRiX Release 的必需下载量约为 `7.0 GB`，Cosmos3-Edge checkpoint 约为
+`9.2 GB`；Cosmos 环境还会占用额外磁盘。首次部署建议至少预留 `150 GiB`。
+
+### 10.2 启动
+
 启动 HouseWorld、Go2-W、世界模型服务、在线 SLAM 和无图搜索节点：
 
 ```bash
-cd /home/unitree/matrix_go2w_lcm_demo
+cd /path/to/wave-go
 /usr/bin/python3 scripts/start_go2w_house_navigation.py start \
   --onscreen --with-cosmos --rviz --start-timeout 240
 ```
@@ -475,12 +529,13 @@ ros2 topic echo --full-length /cosmos_vln/charger_search_status
 
 ## 11. 测试
 
-本备份仓库包含 98 项聚焦回归测试：
+本备份仓库包含 126 项聚焦回归测试：
 
 ```bash
 source /opt/ros/humble/setup.bash
 source /path/to/genisom_roamerx_open/install/setup.bash
 python3 -m unittest \
+  tests.test_go2w_house_dependencies \
   tests.test_go2w_house_generator_action \
   tests.test_go2w_house_mapless_search \
   tests.test_go2w_house_runtime
@@ -517,6 +572,8 @@ python3 -m unittest \
 - 运行缓存和临时状态。
 
 因此，本仓库保存的是方法实现、配置、测试与证据，不是开箱即用的完整模型发行包。
+这些依赖已有固定公开来源和自动部署入口；运行
+`bash scripts/bootstrap_go2w_house.sh check` 可得到逐项缺失报告。
 
 ## 13. 数据采集与 Cosmos3 训练计划
 

@@ -1,0 +1,10 @@
+{
+  "source_image": "target_image.jpg",
+  "source_reasoner_result": "/home/unitree/matrix_go2w_lcm_demo/.run/go2w_house/cosmos/charger_search/20260728T135549_965643132/reasoner_text.txt",
+  "target_kind": "robot_charging_dock",
+  "marker_dictionary": "DICT_4X4_1000",
+  "marker_id": 560,
+  "appearance": "A narrow white floor-level rectangular charging dock with a black-and-white ArUco marker mounted at its top.",
+  "local_context": "The dock stands against a white wall above a dark wooden baseboard. A small white alignment pad lies on the dark wooden floor in front of it, and a multicolored patterned curtain is to the right.",
+  "navigation_goal": "Keep the dock visible, center it progressively, approach without collision, and stop directly in front of it."
+}

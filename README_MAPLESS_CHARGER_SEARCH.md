@@ -4,6 +4,17 @@
 
 当前 checkpoint 没有 Go2-W action domain 或 Go2-W 微调权重。本链使用基础 Cosmos3-Edge 的 `av` 9D 相机相对位姿输出，经 `experimental_av_relative_pose` 零样本跨 embodiment 适配器转换为 Go2-W `Twist`。因此它是 Generator 闭环仿真试验，不应表述为已经训练完成的 Go2-W 专用策略。
 
+动作接口合同为：
+
+```text
+Generator raw output: 16 x 9D
+adaptive horizon:     H in {4, 8, 16}
+Go2-W Adapter output: H x 2
+single step:          [linear_x, angular_z]
+```
+
+`H` 由预测动作变化率和实时净空共同决定。Adapter 不输出下蹲或模态切换类别；只有近距 ID、RGB-D、LiDAR、停车和姿态门控全部满足后，安全状态机才会写入 `charge` 并触发下蹲。
+
 ## 当前配置
 
 - 场景：HouseWorld，scene ID `6`
@@ -18,9 +29,9 @@
 - 视觉标记：OpenCV ArUco `DICT_4X4_1000`，ID `560`
 - NWM-Cosmos3Edge 目标类型：`robot_charging_dock`
 - Generator 服务：`http://127.0.0.1:8098`，`av / 9D / 16 steps / 10 Hz / 256 px`
-- Generator 执行窗：搜索按净空动态执行 `16 / 12 / 8` 步，接近最多执行 `8` 步，每步重新检查视觉、RGB-D、LiDAR 和姿态；命令 TTL `0.20 s`
-- Generator 候选：搜索请求在 `[0,2,3,5]` 中每轮旋转一个 seed，接近/重捕获比较前两个 seed
-- Generator 速度上限：搜索 `0.90 m/s`、远距接近 `0.50 m/s`、偏航 `0.50 rad/s`
+- Generator 执行窗：搜索自主选择 `H=4 / 8 / 16`；墙前危险区固定 `H=4` 且只执行 Generator yaw，接近最多执行 `8` 步；每步重新检查视觉、RGB-D、LiDAR 和姿态，命令 TTL `0.20 s`
+- Generator 候选：开放区按风险评估 1-2 个 seed；首次墙前建锁评估全部 8 个 seed，已有方向锁后先评估 2 个，失败再扩展到全部；接近/重捕获比较前两个 seed
+- Generator 速度上限：搜索 `0.90 m/s`、远距接近 `0.50 m/s`、偏航 `1.00 rad/s`
 - Reasoner 输出预算：`1024` tokens；提示要求先输出完整六字段 JSON，缺字段、截断或附加字段仍严格拒绝
 
 出生点由 [start_go2w_house_navigation.py](scripts/start_go2w_house_navigation.py) 设置。无图搜索本身的参数在 [go2w_house_mapless_search.json](config/go2w_house_mapless_search.json)；默认 `online_slam` 环境不会注入固定路线目录。
@@ -44,11 +55,56 @@
 
 ## 启动
 
+完整仿真要求 Ubuntu 22.04 + ROS 2 Humble，不能在 Ubuntu 20.04 + Galactic
+上通过改路径代替。新克隆先从公开上游拉取固定版本的 MATRiX/HouseWorld、
+RoamerX、DreamWaQ、Cosmos framework 和 Cosmos3-Edge：
+
 ```bash
-cd /home/unitree/matrix_go2w_lcm_demo
+cd /path/to/wave-go
+bash scripts/bootstrap_go2w_house.sh sources
+bash scripts/bootstrap_go2w_house.sh system
+bash scripts/bootstrap_go2w_house.sh assets
+bash scripts/bootstrap_go2w_house.sh model
+bash scripts/bootstrap_go2w_house.sh build
+bash scripts/bootstrap_go2w_house.sh check
+```
+
+依赖清单位于
+[`config/go2w_house_dependencies.json`](config/go2w_house_dependencies.json)。
+脚本使用 MATRiX `v0.1.2` GitHub Release 的 base/assets/shared/HouseWorld
+分块及 SHA256，Cosmos3-Edge 则从 Hugging Face 固定 revision 下载；不会把
+本机虚拟环境、core、构建目录或数十 GB 的重复二进制写入本仓库。
+
+预检全部通过后从仓库根目录启动：
+
+```bash
+cd /path/to/wave-go
 /usr/bin/python3 scripts/start_go2w_house_navigation.py start \
   --onscreen --with-cosmos --rviz --start-timeout 240
 ```
+
+无界面复测和出生条件变体可直接使用启动脚本已有的参数，不需要修改脚本：
+
+```bash
+/usr/bin/python3 scripts/start_go2w_house_navigation.py start \
+  --offscreen --with-cosmos --start-timeout 420 \
+  --initial-x 1.10 \
+  --initial-y -7.20 \
+  --initial-yaw-deg 90
+```
+
+当前已做几何净空审计的 in-domain 条件为：
+
+| 条件 | `x` | `y` | `yaw` | 单变量变化 |
+| --- | ---: | ---: | ---: | --- |
+| ID-00 | `1.10` | `-7.20` | `90 deg` | 默认对照 |
+| ID-01 | `1.10` | `-6.80` | `90 deg` | 出生位置前移 `0.40 m` |
+| ID-03 | `1.10` | `-7.20` | `70 deg` | 初始朝向左偏 `20 deg` |
+
+这些出生变体只用于默认 `online_slam` 无图闭环，不要添加
+`--known-map-nav`。每轮任务发布前都必须从 `/odom/mujoco_odom` 核验实际
+出生位姿、机身高度大于 `0.35 m` 且速度已经稳定；启动器日志会在下一轮启动时
+重写，实验状态和最终可视化必须先归档。
 
 检查服务和出生点：
 
@@ -61,7 +117,9 @@ cd /home/unitree/matrix_go2w_lcm_demo
 `cosmos_bridge` 或 `cosmos_mission`。在线 `/map` 只用于观察和记录，无图搜索节点仍不
 订阅地图；运行环境中也不存在 `COSMOS_VLN_ROUTES_FILE`。
 
-确认 `/odom/mujoco_odom` 的位置约为 `x=1.1, y=-7.2`，高度应保持在 `0.35 m` 以上，且机器人速度为零后再发布任务。
+默认条件下确认 `/odom/mujoco_odom` 的位置约为 `x=1.1, y=-7.2`；使用出生
+变体时则与命令参数比较。高度应保持在 `0.35 m` 以上，且机器人速度为零后再
+发布任务。
 
 ## 发布世界模型测试
 
@@ -145,18 +203,19 @@ CSRT 跟踪结果最多在最近一次精确 ID `560` 后使用 `4.0 s`，不会
 
 搜索阶段第一次检测到 ID `560` 后，候选状态最多保持 `6.0 s`，覆盖远距离小二维码的短时漏检，期间不会恢复 Generator 搜索动作。候选停车只衰减当前 Generator 命令；若前方进入避障距离立即清零。当前 LiDAR 没有后向净空扇区，因此 shield 禁止倒车，也不会自行生成转向。调用共享 Edge Reasoner 前，里程计线速度必须不超过 `0.03 m/s`、角速度不超过 `0.06 rad/s`，且站立姿态连续稳定 `1.0 s`；`6.0 s` 内无法稳定会报告 `cosmos_precheck_not_stable`。
 
-接近 Generator 命令的远距上限为 `0.50 m/s`：当前帧精确 ID/RGB-D 深度大于 `1.50 m` 时允许使用该上限，`0.80-1.50 m` 限为 `0.25 m/s`，`0.40-0.80 m` 限为 `0.12 m/s`，进入 `0.40 m` 即禁止前进。只有 tracker 而没有当前帧精确深度时也限为 `0.12 m/s`；水平误差超过最终容差两倍时最多 `0.25 m/s`，超过 `0.32` 时禁止前进。远场闭环标定确认：图像左侧目标需要正 `/cmd_vel_nav.angular.z`，即目标偏差与 ROS 偏航命令反号；LCM 和 DreamWaQ bridge 保持标准 ROS 偏航符号，不做额外反转。接近阶段最长 `240 s`。推理开始时旧 chunk 会被清空并发布零速；响应到达后重新采样传感器，搜索根据净空执行最多 `16` 个 `0.1 s` 预测步，接近最多执行 `8` 步。每一步都重新采样安全观测，ROS 发布 TTL 最多 `0.20 s`；任何 veto 都可缩短该 prefix。最终到达仍只由实时 RGB-D、精确 ID、里程计和安全门控决定。
+接近 Generator 命令的远距上限为 `0.50 m/s`：当前帧精确 ID/RGB-D 深度大于 `1.50 m` 时允许使用该上限，`0.80-1.50 m` 限为 `0.25 m/s`，`0.40-0.80 m` 限为 `0.12 m/s`，进入 `0.40 m` 即禁止前进。只有 tracker 而没有当前帧精确深度时也限为 `0.12 m/s`；水平误差超过最终容差两倍时最多 `0.25 m/s`，超过 `0.32` 时禁止前进。远场闭环标定确认：图像左侧目标需要正 `/cmd_vel_nav.angular.z`，即目标偏差与 ROS 偏航命令反号；LCM 和 DreamWaQ bridge 保持标准 ROS 偏航符号，不做额外反转。接近阶段最长 `240 s`。推理开始时旧 chunk 会被清空并发布零速；响应到达后重新采样传感器，搜索按预测变化率和净空从 `4/8/16` 个 `0.1 s` 预测步中自适应选择，接近最多执行 `8` 步。每一步都重新采样安全观测，ROS 发布 TTL 最多 `0.20 s`；任何 veto 都可缩短该 prefix。最终到达仍只由实时 RGB-D、精确 ID、里程计和安全门控决定。
 
 HouseWorld 启动器设置 `GO2W_RL_IDLE_STAND=0`，所以普通零速度命令仍由 DreamWaQ 使用重力和陀螺反馈保持平衡，不会从动态策略硬切到固定关节站姿。异常姿态触发的 `recover` 同样使用零速度策略反馈；只有经过近距停车门控后写入 `charge` 才会执行下蹲关节轨迹。
 
-搜索 prompt 要求保持通道中心和约 `1.20 m` 墙距。前方不足 `0.68 m` 时搜索平移被 veto；接近阶段的紧急门槛为 `0.42 m`。转向靠近过近侧墙会被 veto，shield 不产生弧线、倒车或替代探索方向。
+搜索 prompt 要求保持通道中心和约 `1.20 m` 墙距。前方进入 `3.00 m` 墙前阶段时，旧开放区 prefix 立即停止；Generator 的 `linear_x` 被清零，只保留通过四帧同向共识、方向锁和侧向净空门控的 `angular_z`。已有方向锁时该阶段保持到前距达到 `3.25 m`，避免阈值抖动。若连续 8 次没有可执行的同向共识，且锁定侧已经低于 `1.20 m`、另一侧仍满足净空，系统保持零速并在同一次全 seed 评估内释放旧锁；新方向仍必须由一条安全的 Generator 四帧共识建立，LiDAR 不直接指定方向。两侧都不安全或没有新的安全共识时仍 fail closed。前方不足 `0.68 m` 时搜索平移被 veto；接近阶段的紧急门槛为 `0.42 m`。shield 不产生弧线、倒车或替代探索方向。
 
 ## 验收日志
 
-2026-07-25 的完整闭环验收从 `started` 到 `succeeded` 用时 `297.89 s`，其中无图搜索到
+2026-07-25 的历史完整闭环验收从 `started` 到 `succeeded` 用时 `297.89 s`，其中无图搜索到
 `target_confirmed` 为 `235.25 s`，从确认到 `arrived_stopped` 为 `58.77 s`。常驻 Generator
-除首次编译/预热 `3.88 s` 外，120 次热请求平均 `0.195 s`；搜索实际执行了
-`8/12/16` 步动态窗口，接近执行 `8` 步窗口，执行命令峰值 `0.90 m/s`。最终累计接近
+除首次编译/预热 `3.88 s` 外，120 次热请求平均 `0.195 s`。该证据使用的是旧版
+`8/12/16` 搜索窗口；当前实现已替换为 `H=4/8/16`，不能用旧日志代替当前版本验收。
+历史运行的接近窗口为 `8` 步，执行命令峰值 `0.90 m/s`。最终累计接近
 `2.807 m`，连续三帧以 `target_cell_exact` 零误码确认 ID `560`，RGB-D 深度
 `0.357 m`，停车复核约 `3 s` 后进入 `charging` 并报告 `succeeded`。
 
@@ -202,13 +261,12 @@ state=succeeded
 纯 Python 合同测试：
 
 ```bash
-cd /home/unitree/matrix_go2w_lcm_demo
+cd /path/to/wave-go
 /usr/bin/python3 -m unittest \
   tests.test_go2w_house_generator_action \
-  tests.test_go2w_house_online_slam \
+  tests.test_go2w_house_dependencies \
   tests.test_go2w_house_mapless_search \
-  tests.test_go2w_house_runtime \
-  tests.test_go2w_house_navigation_strategy
+  tests.test_go2w_house_runtime
 ```
 
 完整测试需要先加载 ROS 环境：

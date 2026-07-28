@@ -1,0 +1,105 @@
+diff --git a/cosmos_framework/inference/common/args.py b/cosmos_framework/inference/common/args.py
+index 83d2fe0196cd239b19a12a81a336551775e12c61..1fcf4d757e7cd3cd64ab27fe0af1c76661ae4aaf 100644
+--- a/cosmos_framework/inference/common/args.py
++++ b/cosmos_framework/inference/common/args.py
+@@ -401,7 +401,9 @@ DEFAULT_CONFIG_FILE = "cosmos_framework/configs/base/config.py"
+ class ConfigOverrides(OverridesBase):
+     """Hydra config arguments."""
+
+-    config_file: Training[ConfigFile] = DEFAULT_CONFIG_FILE
++    # Local HF checkpoints may need an explicit framework config even when
++    # training-only CLI options are disabled.
++    config_file: ConfigFile = DEFAULT_CONFIG_FILE
+     """Hydra config store module, Hydra config yaml file, or Hugging Face model json file."""
+     config_file_type: Suppress[ConfigFileType | None] = None
+     """Hydra config file type."""
+diff --git a/pyproject.toml b/pyproject.toml
+index ad595a032558cdac3535a2475001c2486c00e375..b879eebd2dde840de7d6ee266186b1909a5c99c4 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -25,6 +25,7 @@ classifiers = [
+ dependencies = [
+   "accelerate",
+   "av",
++  "boto3",
+   "cattrs",
+   "diffusers>=0.39.0",
+   "einops",
+@@ -38,6 +39,7 @@ dependencies = [
+   "obstore",
+   "omegaconf",
+   "pydantic",
++  "qwen-vl-utils",
+   "requests",
+   "scipy",
+   "termcolor",
+@@ -69,7 +71,6 @@ train = [
+   "aiohttp",
+   "arrgh",
+   "blobfile",
+-  "boto3",
+   "botocore",
+   "datasets",
+   "dists-pytorch",
+@@ -121,7 +122,6 @@ train = [
+   "python-memcached",
+   "pytz",
+   "pyyaml",
+-  "qwen-vl-utils",
+   "robotmq",
+   "rsa",
+   "s3fs",
+diff --git a/uv.lock b/uv.lock
+index 467d8e7553b7c2129ff0b00da256ccd7f4cdbba7..3369b43886dd0211a250bf5c91ad27e5a86743e4 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -1710,6 +1710,7 @@ source = { editable = "." }
+ dependencies = [
+     { name = "accelerate" },
+     { name = "av" },
++    { name = "boto3" },
+     { name = "cattrs" },
+     { name = "diffusers" },
+     { name = "einops" },
+@@ -1723,6 +1724,7 @@ dependencies = [
+     { name = "obstore" },
+     { name = "omegaconf" },
+     { name = "pydantic" },
++    { name = "qwen-vl-utils" },
+     { name = "requests" },
+     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11' or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu128-train') or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu130') or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu130-train') or (extra == 'group-16-cosmos-framework-cu128-train' and extra == 'group-16-cosmos-framework-cu130') or (extra == 'group-16-cosmos-framework-cu128-train' and extra == 'group-16-cosmos-framework-cu130-train') or (extra == 'group-16-cosmos-framework-cu130' and extra == 'group-16-cosmos-framework-cu130-train')" },
+     { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11' or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu128-train') or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu130') or (extra == 'group-16-cosmos-framework-cu128' and extra == 'group-16-cosmos-framework-cu130-train') or (extra == 'group-16-cosmos-framework-cu128-train' and extra == 'group-16-cosmos-framework-cu130') or (extra == 'group-16-cosmos-framework-cu128-train' and extra == 'group-16-cosmos-framework-cu130-train') or (extra == 'group-16-cosmos-framework-cu130' and extra == 'group-16-cosmos-framework-cu130-train')" },
+@@ -1753,7 +1755,6 @@ train = [
+     { name = "aiohttp" },
+     { name = "arrgh" },
+     { name = "blobfile" },
+-    { name = "boto3" },
+     { name = "botocore" },
+     { name = "datasets" },
+     { name = "dists-pytorch" },
+@@ -1806,7 +1807,6 @@ train = [
+     { name = "python-memcached" },
+     { name = "pytz" },
+     { name = "pyyaml" },
+-    { name = "qwen-vl-utils" },
+     { name = "robotmq" },
+     { name = "rsa" },
+     { name = "s3fs" },
+@@ -1981,7 +1981,7 @@ requires-dist = [
+     { name = "av" },
+     { name = "better-profanity", marker = "extra == 'guardrail'" },
+     { name = "blobfile", marker = "extra == 'train'" },
+-    { name = "boto3", marker = "extra == 'train'" },
++    { name = "boto3" },
+     { name = "botocore", marker = "extra == 'train'" },
+     { name = "cattrs" },
+     { name = "datasets", marker = "extra == 'train'" },
+@@ -2051,7 +2051,7 @@ requires-dist = [
+     { name = "python-memcached", marker = "extra == 'train'" },
+     { name = "pytz", marker = "extra == 'train'" },
+     { name = "pyyaml", marker = "extra == 'train'" },
+-    { name = "qwen-vl-utils", marker = "extra == 'train'" },
++    { name = "qwen-vl-utils" },
+     { name = "ray", extras = ["serve"], marker = "extra == 'serve'" },
+     { name = "requests" },
+     { name = "retinaface-py", marker = "extra == 'guardrail'" },

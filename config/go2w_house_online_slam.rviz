@@ -141,8 +141,8 @@ Visualization Manager:
       Class: rviz_default_plugins/TopDownOrtho
       Name: Online House Mapping
       Scale: 35
-      Target Frame: <Fixed Frame>
-      X: 1
-      Y: -7
+      Target Frame: base_link
+      X: 0
+      Y: 0
       Value: TopDownOrtho (rviz)
     Saved: ~

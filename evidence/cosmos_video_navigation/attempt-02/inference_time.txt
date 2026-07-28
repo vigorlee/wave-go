@@ -1,0 +1,23 @@
+	Command being timed: "env LD_LIBRARY_PATH= .venv/bin/python -m cosmos_framework.scripts.inference --parallelism-preset=latency --input-files /home/unitree/wave-go/evidence/cosmos_video_navigation/attempt-02/request.json --output-dir /home/unitree/wave-go/evidence/cosmos_video_navigation/attempt-02/output --checkpoint-path /home/unitree/matrix_g1_lcm_demo/Cosmos3-Edge --config-file /home/unitree/matrix_g1_lcm_demo/packages/cosmos-framework/cosmos_framework/inference/configs/model/Cosmos3-Edge.yaml --seed 560 --no-guardrails"
+	User time (seconds): 28.51
+	System time (seconds): 6.68
+	Percent of CPU this job got: 141%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:24.91
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 6196592
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 121
+	Minor (reclaiming a frame) page faults: 2307308
+	Voluntary context switches: 18213
+	Involuntary context switches: 4972
+	Swaps: 0
+	File system inputs: 2168096
+	File system outputs: 31792
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "host": {
+    "os": "Ubuntu 22.04",
+    "architecture": "x86_64",
+    "minimum_glibc": "2.35",
+    "minimum_nvidia_driver": "535",
+    "recommended_free_disk_gib": 150
+  },
+  "layout": {
+    "matrix": "matrix",
+    "roamerx": "genisom_roamerx_open",
+    "dreamwaq": "third_party/DreamWaQ_Go2W",
+    "cosmos_root": ".external/cosmos",
+    "cosmos_framework": ".external/cosmos/packages/cosmos-framework",
+    "cosmos_checkpoint": ".external/cosmos/Cosmos3-Edge"
+  },
+  "sources": {
+    "matrix": {
+      "repository": "https://github.com/zsibot/matrix.git",
+      "revision": "918fae36216e4abb70fbbe275c687c0127fe4b02",
+      "license": "BSD-3-Clause",
+      "patch": "patches/matrix-house-runtime.patch",
+      "release": {
+        "tag": "v0.1.2",
+        "manifest": "https://github.com/zsibot/matrix/releases/download/v0.1.2/manifest-0.1.2.json",
+        "packages": {
+          "assets-0.1.2.tar.gz": {
+            "size": 1030738643,
+            "sha256": "c4af445e468bb919909176113a8b8e9b0ede5dabf80be7112a5e7e86085bb369"
+          },
+          "base-0.1.2.tar.gz": {
+            "size": 2116244298,
+            "sha256": "2cbb40861e89c40735cd64b24e8b64d88d012f335bdb405b5ed52db86f8b4e38"
+          },
+          "shared-0.1.2.tar.gz": {
+            "size": 3451081662,
+            "sha256": "b460ca1ab7560ff0ef78ee4d6a18013accd4f16d6bab2e0dd9cb4fff1849256c"
+          },
+          "HouseWorld-0.1.2.tar.gz": {
+            "size": 402917615,
+            "sha256": "489d8db9c8471bc652bbebb5f0555c1bf50ea5854a90490cecc157667e150822"
+          }
+        }
+      }
+    },
+    "roamerx": {
+      "repository": "https://github.com/zsibot/genisom_roamerx_open.git",
+      "revision": "51d1e9d22e9bf73380e92a9c4792983d0b355ad0",
+      "license": "BSD-3-Clause",
+      "patch": "patches/roamerx-house-runtime.patch"
+    },
+    "dreamwaq": {
+      "repository": "https://github.com/ShengqianChen/DreamWaQ_Go2W.git",
+      "revision": "b64f7b90856fc71595870cb283ce29dd0f4d6f0f",
+      "weights_directory": "deploy/pre_train/g2wDWAQ",
+      "required_weights": [
+        "actor_dwaq.pt",
+        "encoder_dwaq.pt",
+        "latent_mu_dwaq.pt",
+        "latent_var_dwaq.pt",
+        "vel_mu_dwaq.pt",
+        "vel_var_dwaq.pt"
+      ]
+    },
+    "cosmos_framework": {
+      "repository": "https://github.com/NVIDIA/cosmos-framework.git",
+      "revision": "058c8c046877f087e07b3472a76cac214f3ad39c",
+      "license": "Apache-2.0",
+      "patch": "patches/cosmos-house-runtime.patch",
+      "cuda_group": "cu128"
+    },
+    "cosmos_checkpoint": {
+      "repository": "nvidia/Cosmos3-Edge",
+      "revision": "6f58f6b4c91288838e60b6bcb2cc45d997e961de",
+      "license": "OpenMDW-1.1",
+      "url": "https://huggingface.co/nvidia/Cosmos3-Edge"
+    }
+  },
+  "system_packages": {
+    "robot_forward": "0.2.6",
+    "ros": [
+      "ros-humble-desktop",
+      "ros-humble-rmw-zenoh-cpp",
+      "ros-humble-slam-toolbox"
+    ]
+  }
+}

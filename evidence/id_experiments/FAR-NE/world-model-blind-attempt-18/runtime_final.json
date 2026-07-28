@@ -1,0 +1,44 @@
+{
+  "scene": "HouseWorld",
+  "scene_id": 6,
+  "ros_domain_id": 90,
+  "with_cosmos": false,
+  "offscreen": true,
+  "ready": false,
+  "updated_at": 1785235565.4104855,
+  "map_source": "known_map",
+  "map": "/home/unitree/matrix_go2w_lcm_demo/.run/go2w_house/map/house_map.yaml",
+  "map_topic": "/map",
+  "visualization": "/home/unitree/matrix_go2w_lcm_demo/.run/go2w_house/cosmos/latest_visualization.jpg",
+  "cosmos_generator": null,
+  "processes": {
+    "zenohd": {
+      "pid": 1871051,
+      "running": true
+    },
+    "bridge": {
+      "pid": 1871280,
+      "running": true
+    },
+    "sim": {
+      "pid": 1871281,
+      "running": true
+    },
+    "lidar_tf": {
+      "pid": 1871282,
+      "running": true
+    },
+    "lidar_bridge": {
+      "pid": 1871287,
+      "running": true
+    },
+    "robot_forward": {
+      "pid": 1872941,
+      "running": true
+    },
+    "navigation": {
+      "pid": 1872942,
+      "running": true
+    }
+  }
+}

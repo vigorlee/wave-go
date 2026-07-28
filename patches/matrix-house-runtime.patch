@@ -1,0 +1,179 @@
+diff --git a/scripts/run_sim.sh b/scripts/run_sim.sh
+index bdb5556a4667c0eed66fdfd78ff35e088d4f2665..63eb9da1c61746e03c8619920b08d3d09e8dace7 100755
+--- a/scripts/run_sim.sh
++++ b/scripts/run_sim.sh
+@@ -196,6 +196,23 @@ USE_OFFSCREEN=""
+ USE_PIXELSTREAMER=""
+ [[ "$PIXELSTREAM" == "1" ]] && USE_PIXELSTREAMER="-PixelStreamingURL=ws://127.0.0.1:8888"
+
++UE_MAX_FPS="${MATRIX_UE_MAX_FPS:-30}"
++UE_RES_X="${MATRIX_UE_RES_X:-1600}"
++UE_RES_Y="${MATRIX_UE_RES_Y:-900}"
++UE_PERFORMANCE_PROFILE="${MATRIX_UE_PERFORMANCE_PROFILE:-0}"
++UE_NO_RHI_THREAD="${MATRIX_UE_NO_RHI_THREAD:-0}"
++UE_EXEC_CMDS="t.MaxFPS ${UE_MAX_FPS}"
++UE_EXTRA_ARGS=()
++
++if [[ "${UE_PERFORMANCE_PROFILE}" == "1" ]]; then
++    UE_EXEC_CMDS+=",sg.ViewDistanceQuality 1,sg.AntiAliasingQuality 1,sg.ShadowQuality 1,sg.GlobalIlluminationQuality 1,sg.ReflectionQuality 1,sg.PostProcessQuality 1,sg.TextureQuality 2,sg.EffectsQuality 1,sg.FoliageQuality 1,r.ScreenPercentage 75,r.RayTracing 0,r.VSync 0"
++    UE_EXTRA_ARGS+=("-ResX=${UE_RES_X}" "-ResY=${UE_RES_Y}" -windowed -nosplash)
++fi
++
++if [[ "${UE_NO_RHI_THREAD}" == "1" ]]; then
++    UE_EXTRA_ARGS+=(-norhithread)
++fi
++
+ #######################################
+ # 场景配置
+ #######################################
+@@ -236,7 +253,12 @@ case "$SCENE_ID" in
+         ;;
+ esac
+
+-sed -i "s/^robot_scene: .*/robot_scene: \"$SCENE\"/" src/robot_mujoco/simulate/config.yaml
++MUJOCO_SCENE="${MATRIX_MUJOCO_SCENE:-$SCENE}"
++sed -i "s|^robot_scene: .*|robot_scene: \"$MUJOCO_SCENE\"|" src/robot_mujoco/simulate/config.yaml
++
++ROBOT_INITIAL_X="${MATRIX_ROBOT_INITIAL_X:-$(jq -r '.robot.position.x // 0' config/config.json)}"
++ROBOT_INITIAL_Y="${MATRIX_ROBOT_INITIAL_Y:-$(jq -r '.robot.position.y // 0' config/config.json)}"
++ROBOT_INITIAL_YAW_DEG="${MATRIX_ROBOT_INITIAL_YAW_DEG:-$(jq -r '.robot.rotation.yaw // 0' config/config.json)}"
+
+ #######################################
+ # 机器人类型 & 启动策略
+@@ -372,7 +394,8 @@ case "$ROBOT_ARG" in
+         ;;
+ esac
+
+-sed -i "s/^robot: .*/robot: \"$ROBOTTYPE\"/" src/robot_mujoco/simulate/config.yaml
++MUJOCO_ROBOTTYPE="${MATRIX_MUJOCO_ROBOT_TYPE:-$ROBOTTYPE}"
++sed -i "s/^robot: .*/robot: \"$MUJOCO_ROBOTTYPE\"/" src/robot_mujoco/simulate/config.yaml
+
+ #######################################
+ # JSON 同步
+@@ -387,6 +410,16 @@ jq \
+     --arg robot_type "$ROBOTTYPE" \
+     --arg weapon "$WEAPON" \
+     --argjson mujoco_running "$MUJOCO_RUNNING_JSON" \
++    --argjson performance_profile "${UE_PERFORMANCE_PROFILE}" \
++    --argjson camera_width "${MATRIX_CAMERA_WIDTH:-1280}" \
++    --argjson camera_height "${MATRIX_CAMERA_HEIGHT:-720}" \
++    --argjson camera_frequency "${MATRIX_CAMERA_FREQUENCY:-5}" \
++    --argjson depth_width "${MATRIX_DEPTH_WIDTH:-320}" \
++    --argjson depth_height "${MATRIX_DEPTH_HEIGHT:-240}" \
++    --argjson depth_frequency "${MATRIX_DEPTH_FREQUENCY:-5}" \
++    --argjson robot_initial_x "${ROBOT_INITIAL_X}" \
++    --argjson robot_initial_y "${ROBOT_INITIAL_Y}" \
++    --argjson robot_initial_yaw_deg "${ROBOT_INITIAL_YAW_DEG}" \
+     '
+     .robot = (.robot // {})
+     | .robot.robot_type = $robot_type
+@@ -396,6 +429,18 @@ jq \
+     | .robot.cmd_port = (.robot.cmd_port // 25002)
+     | .robot.EgoView = (.robot.EgoView // true)
+     | .robot.position = (.robot.position // {"x": 0, "y": 0, "z": 0})
++    | .robot.position.x = $robot_initial_x
++    | .robot.position.y = $robot_initial_y
++    | .robot.rotation = (.robot.rotation // {"roll": 0, "pitch": 0, "yaw": 0})
++    | .robot.rotation.yaw = $robot_initial_yaw_deg
++    | if $performance_profile == 1 then
++        .robot.sensors.camera.width = $camera_width
++        | .robot.sensors.camera.height = $camera_height
++        | .robot.sensors.camera.frequency = $camera_frequency
++        | .robot.sensors.depth_sensor.width = $depth_width
++        | .robot.sensors.depth_sensor.height = $depth_height
++        | .robot.sensors.depth_sensor.frequency = $depth_frequency
++      else . end
+     ' config/config.json > "$CONFIG_TMP" && mv "$CONFIG_TMP" config/config.json
+
+ mkdir -p src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config
+@@ -403,6 +448,15 @@ mkdir -p src/UeSim/Linux/zsibot_mujoco_ue/Content/model/SceneLoder
+ cp config/config.json src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config/config.json
+ cp scene/scene.json  src/UeSim/Linux/zsibot_mujoco_ue/Content/model/SceneLoder/scene.json
+
++if [[ "${MATRIX_DISABLE_IMAGE_SENSORS:-0}" == "1" ]]; then
++    UE_CONFIG="src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config/config.json"
++    CONFIG_TMP="$(mktemp)"
++    jq 'del(.robot.sensors.camera, .robot.sensors.depth_sensor)' \
++        "$UE_CONFIG" > "$CONFIG_TMP"
++    mv "$CONFIG_TMP" "$UE_CONFIG"
++    echo "[INFO] Disabled UE RGB/depth capture; viewport and LiDAR remain enabled."
++fi
++
+ #######################################
+ # UE 场景入口同步
+ #######################################
+@@ -429,6 +483,9 @@ sync_ue_runtime_scene() {
+
+     local runtime_dir="$ue_model_root/$RUNTIME_ROBOTTYPE"
+     local source_scene="$runtime_dir/$SCENE"
++    if [[ -n "${MATRIX_UE_SCENE_OVERRIDE:-}" ]]; then
++        source_scene="${MATRIX_UE_SCENE_OVERRIDE}"
++    fi
+     local target_scene="$runtime_dir/scene_terrain.xml"
+
+     if [[ ! -d "$runtime_dir" ]]; then
+@@ -450,11 +507,29 @@ sync_ue_runtime_scene() {
+
+ sync_ue_runtime_scene
+
++# Optional upper-layer contract check. Robot-specific launchers use this to
++# stop before physics starts if the active world belongs to another robot.
++if [[ -n "${MATRIX_WORLD_MODEL_VALIDATOR:-}" ]]; then
++    if [[ ! -x "${MATRIX_WORLD_MODEL_VALIDATOR}" ]]; then
++        echo "[ERROR] World-model validator is not executable: ${MATRIX_WORLD_MODEL_VALIDATOR}" >&2
++        exit 1
++    fi
++    "${MATRIX_WORLD_MODEL_VALIDATOR}"
++fi
++
+ #######################################
+ # 机器人初始位姿
+ #######################################
+ ROBOT_X=$(jq -r '.robot.position.x' config/config.json)
+ ROBOT_Y=$(jq -r '.robot.position.y' config/config.json)
++ROBOT_YAW_DEG=$(jq -r '.robot.rotation.yaw // 0' config/config.json)
++read -r ROBOT_QW ROBOT_QZ < <(
++    awk -v yaw_deg="${ROBOT_YAW_DEG}" 'BEGIN {
++        pi = atan2(0, -1);
++        half_yaw = yaw_deg * pi / 360.0;
++        printf "%.12f %.12f\n", cos(half_yaw), sin(half_yaw);
++    }'
++)
+
+ if [[ "$ROBOTTYPE" == "custom" ]]; then
+     CUSTOM_MODEL_DIR="${CUSTOM_NAME:-custom}"
+@@ -466,7 +541,10 @@ if [[ "$ROBOTTYPE" == "custom" ]]; then
+     fi
+ else
+     XML_FILE="src/robot_mujoco/zsibot_robots/${ROBOTTYPE}/${ROBOTTYPE}.xml"
+-    sed -i "s/<body name=\"base_link\" pos=\"[^\"]*\"/<body name=\"base_link\" pos=\"${ROBOT_X} ${ROBOT_Y} 0.65\"/" "$XML_FILE"
++    sed -E -i \
++        "s|<body name=\"base_link\" pos=\"[^\"]*\"( quat=\"[^\"]*\")?|<body name=\"base_link\" pos=\"${ROBOT_X} ${ROBOT_Y} 0.65\" quat=\"${ROBOT_QW} 0 0 ${ROBOT_QZ}\"|" \
++        "$XML_FILE"
++    echo "[INFO] Robot initial pose: x=${ROBOT_X}, y=${ROBOT_Y}, yaw=${ROBOT_YAW_DEG} deg"
+ fi
+
+ #######################################
+@@ -483,7 +561,12 @@ fi
+
+ cd ../../../UeSim/Linux
+ echo "[INFO] Starting UE"
+-LD_LIBRARY_PATH="$(ue_ld_library_path)" ./zsibot_mujoco_ue.sh -game "$MAPNAME" -ExecCmds="t.MaxFPS 30" $USE_OFFSCREEN $USE_PIXELSTREAMER > zsibot_mujoco_ue.log 2>&1 &
++echo "[INFO] UE profile: fps=${UE_MAX_FPS}, resolution=${UE_RES_X}x${UE_RES_Y}, performance=${UE_PERFORMANCE_PROFILE}, no_rhi_thread=${UE_NO_RHI_THREAD}"
++VK_ICD_FILENAMES="${MATRIX_VK_ICD:-/usr/share/vulkan/icd.d/nvidia_icd.json}" \
++CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}" \
++LD_LIBRARY_PATH="$(ue_ld_library_path)" \
++./zsibot_mujoco_ue.sh -game "$MAPNAME" "-ExecCmds=${UE_EXEC_CMDS}" \
++    "${UE_EXTRA_ARGS[@]}" $USE_OFFSCREEN $USE_PIXELSTREAMER > zsibot_mujoco_ue.log 2>&1 &
+ PIDS+=($!)
+
+ sleep 7
+@@ -515,4 +598,7 @@ fi
+ # 阻塞等待
+ #######################################
+ echo "[INFO] All components started."
+-wait
++component_status=0
++wait -n "${PIDS[@]}" || component_status=$?
++echo "[INFO] A simulator component exited (status=${component_status}); stopping the remaining stack."
++exit "${component_status}"

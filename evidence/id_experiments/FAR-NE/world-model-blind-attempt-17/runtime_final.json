@@ -1,0 +1,85 @@
+{
+  "scene": "HouseWorld",
+  "scene_id": 6,
+  "ros_domain_id": 90,
+  "with_cosmos": true,
+  "offscreen": false,
+  "ready": false,
+  "updated_at": 1785234561.6687274,
+  "map_source": "online_slam",
+  "map": null,
+  "map_topic": "/map",
+  "visualization": "/home/unitree/matrix_go2w_lcm_demo/.run/go2w_house/cosmos/latest_visualization.jpg",
+  "cosmos_generator": {
+    "url": "http://127.0.0.1:8098",
+    "managed": true,
+    "ready": false,
+    "checked_at": 1785234561.668723,
+    "contract": {
+      "raw_action_dim": 9,
+      "fps": 10,
+      "action_chunk_size": 16,
+      "num_steps": 4
+    },
+    "reasoner_required": true,
+    "info": null
+  },
+  "processes": {
+    "zenohd": {
+      "pid": 1706372,
+      "running": false
+    },
+    "bridge": {
+      "pid": 1706632,
+      "running": false
+    },
+    "sim": {
+      "pid": 1706633,
+      "running": false
+    },
+    "lidar_tf": {
+      "pid": 1706637,
+      "running": false
+    },
+    "lidar_bridge": {
+      "pid": 1706640,
+      "running": false
+    },
+    "robot_forward": {
+      "pid": 1708234,
+      "running": false
+    },
+    "pointcloud_to_laserscan": {
+      "pid": 1708235,
+      "running": false
+    },
+    "slam_toolbox": {
+      "pid": 1708468,
+      "running": false
+    },
+    "vel_cmd_lcm": {
+      "pid": 1708469,
+      "running": false
+    },
+    "cosmos_generator": {
+      "pid": 1708782,
+      "running": false
+    },
+    "cosmos_visualizer": {
+      "pid": 1709901,
+      "running": false
+    },
+    "charger_search": {
+      "pid": 1709902,
+      "running": false
+    },
+    "rviz": {
+      "pid": 1710126,
+      "running": false
+    },
+    "cosmos_image_view": {
+      "pid": 1710127,
+      "running": false
+    }
+  }
+}

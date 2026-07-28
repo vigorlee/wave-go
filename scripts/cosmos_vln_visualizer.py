@@ -106,6 +106,12 @@ class CosmosVlnVisualizer(Node):
         self.create_subscription(
             String, "/cosmos_vln/mission_status", self.on_mission_status, 10
         )
+        self.create_subscription(
+            String,
+            "/cosmos_vln/charger_search_status",
+            self.on_charger_status,
+            10,
+        )
 
         self.latest_image: bytes | None = None
         self.latest_frame_id = "camera"
@@ -138,7 +144,21 @@ class CosmosVlnVisualizer(Node):
         self.prediction = payload
         self.target_pose = None
         self.clear_markers()
+        if payload.get("action") == "mapless_visual_search":
+            self.publish_mapless_markers()
         self.publish_annotated_image()
+
+    def on_charger_status(self, message: String) -> None:
+        try:
+            payload = json.loads(message.data)
+        except json.JSONDecodeError:
+            return
+        if not isinstance(payload, dict):
+            return
+        self.prediction["adapter_status"] = payload
+        self.prediction["mission_state"] = str(payload.get("state", ""))
+        if self.prediction.get("action") == "mapless_visual_search":
+            self.publish_mapless_markers()
 
     def on_mission_status(self, message: String) -> None:
         try:
@@ -227,6 +247,9 @@ class CosmosVlnVisualizer(Node):
         future = self.prediction.get("future_prediction", {})
         if not isinstance(future, dict):
             future = {}
+        adapter_status = self.prediction.get("adapter_status", {})
+        if not isinstance(adapter_status, dict):
+            adapter_status = {}
         hazards = future.get("hazards", [])
         if isinstance(hazards, list):
             hazards_text = ", ".join(str(item) for item in hazards)
@@ -258,6 +281,29 @@ class CosmosVlnVisualizer(Node):
             (
                 "Resolved target",
                 resolved_target,
+            ),
+            (
+                "Adapter",
+                "request={} seed={} horizon={}".format(
+                    adapter_status.get("request_id", "-"),
+                    adapter_status.get("selected_seed", "-"),
+                    adapter_status.get(
+                        "execution_steps",
+                        adapter_status.get("prefix_steps", "-"),
+                    ),
+                ),
+            ),
+            (
+                "Command",
+                "vx={:+.3f} m/s, wz={:+.3f} rad/s, shield={}".format(
+                    safe_float(adapter_status.get("linear_x")),
+                    safe_float(adapter_status.get("angular_z")),
+                    ",".join(
+                        str(item)
+                        for item in adapter_status.get("shield", [])
+                    )
+                    or "none",
+                ),
             ),
             ("Expected", str(future.get("expected_observation", "Waiting"))),
             ("Hazards", hazards_text or "None reported"),
@@ -412,6 +458,98 @@ class CosmosVlnVisualizer(Node):
         )
 
         self.marker_publisher.publish(MarkerArray(markers=[target, arrow, text]))
+
+    def publish_mapless_markers(self) -> None:
+        adapter_status = self.prediction.get("adapter_status", {})
+        if not isinstance(adapter_status, dict):
+            adapter_status = {}
+        state = str(
+            adapter_status.get(
+                "state",
+                self.prediction.get("mission_state", "waiting"),
+            )
+        )
+        linear_x = safe_float(adapter_status.get("linear_x"))
+        angular_z = safe_float(adapter_status.get("angular_z"))
+        if state in {"blocked", "failed", "canceled"}:
+            red, green, blue = 0.95, 0.25, 0.25
+        elif state in {"succeeded", "charging", "arrived_stopped"}:
+            red, green, blue = 0.25, 0.90, 0.50
+        elif state.startswith("cosmos_") or state == "target_confirmed":
+            red, green, blue = 0.25, 0.75, 1.00
+        else:
+            red, green, blue = 1.00, 0.68, 0.15
+
+        stamp = self.get_clock().now().to_msg()
+        base = Marker()
+        base.header.frame_id = "base_link"
+        base.header.stamp = stamp
+        base.ns = "cosmos_vln"
+        base.id = 10
+        base.type = Marker.CYLINDER
+        base.action = Marker.ADD
+        base.pose.position.z = 0.03
+        base.pose.orientation.w = 1.0
+        base.scale.x = 0.44
+        base.scale.y = 0.44
+        base.scale.z = 0.06
+        base.color.r = red
+        base.color.g = green
+        base.color.b = blue
+        base.color.a = 0.85
+
+        command = Marker()
+        command.header.frame_id = "base_link"
+        command.header.stamp = stamp
+        command.ns = "cosmos_vln"
+        command.id = 11
+        command.type = Marker.ARROW
+        command.action = Marker.ADD
+        command.pose.position.z = 0.18
+        heading = max(-0.75, min(0.75, angular_z))
+        command.pose.orientation.z = math.sin(heading / 2.0)
+        command.pose.orientation.w = math.cos(heading / 2.0)
+        command.scale.x = max(0.10, min(0.90, 0.20 + abs(linear_x)))
+        command.scale.y = 0.10
+        command.scale.z = 0.10
+        command.color.r = red
+        command.color.g = green
+        command.color.b = blue
+        command.color.a = 1.0
+
+        horizon = adapter_status.get(
+            "execution_steps",
+            adapter_status.get("prefix_steps", "-"),
+        )
+        shield = adapter_status.get("shield", [])
+        shield_text = (
+            ",".join(str(item) for item in shield)
+            if isinstance(shield, list) and shield
+            else "none"
+        )
+        text = Marker()
+        text.header.frame_id = "base_link"
+        text.header.stamp = stamp
+        text.ns = "cosmos_vln"
+        text.id = 12
+        text.type = Marker.TEXT_VIEW_FACING
+        text.action = Marker.ADD
+        text.pose.position.z = 1.05
+        text.pose.orientation.w = 1.0
+        text.scale.z = 0.20
+        text.color.r = 0.95
+        text.color.g = 0.97
+        text.color.b = 1.0
+        text.color.a = 1.0
+        text.text = (
+            f"Cosmos3 Go2-W Adapter\n{state}\n"
+            f"request={adapter_status.get('request_id', '-')} "
+            f"seed={adapter_status.get('selected_seed', '-')} H={horizon}\n"
+            f"vx={linear_x:+.3f} wz={angular_z:+.3f}\nshield={shield_text}"
+        )
+        self.marker_publisher.publish(
+            MarkerArray(markers=[base, command, text])
+        )
 
 
 def main() -> None:

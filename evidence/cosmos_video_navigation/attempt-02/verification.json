@@ -1,0 +1,65 @@
+{
+  "status": "success",
+  "output_video": "output/go2w_target_video_prediction_long_seed560/vision.mp4",
+  "sha256": "d346fa6a8f601930fc77c021cbc132640a930026f900efa0cf6008c0e850d187",
+  "codec": "h264",
+  "width": 832,
+  "height": 480,
+  "fps": 10,
+  "frames": 61,
+  "duration_sec": 6.1,
+  "size_bytes": 8087429,
+  "elapsed_wall_sec": 24.91,
+  "sampling_sec_approx": 11.8,
+  "max_resident_set_kib": 6196592,
+  "conditioning_frames": 5,
+  "generated_frames": 56,
+  "freeze_intervals": 0,
+  "identical_adjacent_frame_pairs": 0,
+  "adjacent_frame_mad": {
+    "min": 3.814606,
+    "mean": 12.939306,
+    "max": 47.099255
+  },
+  "generated_adjacent_frame_metrics": {
+    "pairs": 55,
+    "mad_luma_mean": 10.757948,
+    "mad_luma_median": 11.236321,
+    "psnr_mean_db": 19.937275,
+    "ssim_mean": 0.743039
+  },
+  "last_second_metrics": {
+    "pairs": 10,
+    "mad_luma_mean": 8.841385,
+    "psnr_mean_db": 20.927771,
+    "ssim_mean": 0.787275,
+    "marker_proxy_linear_growth_ratio": 1.18,
+    "lk_median_motion_mean_px_per_frame": 7.24
+  },
+  "first_last_frame_mad": 57.35067,
+  "luma_std": {
+    "min": 62.598495,
+    "mean": 66.029587,
+    "max": 74.012001
+  },
+  "aruco_560_detected_output_frames": 1,
+  "aruco_560_frame_indexes": [
+    4
+  ],
+  "aruco_560_detected_generated_frames": 0,
+  "wrong_generated_marker_ids": [
+    568,
+    230
+  ],
+  "generated_scene_score_max": 0.082411,
+  "visual_assessment": {
+    "nonblank": true,
+    "continuous_motion": true,
+    "scene_preserved": true,
+    "target_shape_preserved": true,
+    "target_progressively_approached": true,
+    "target_reached": false,
+    "final_stop_confirmed": false,
+    "machine_readable_marker_preserved": false
+  }
+}

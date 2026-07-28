@@ -45,7 +45,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = ROOT_DIR / "config/go2w_house_mapless_search.json"
 DEFAULT_POSTURE_FILE = ROOT_DIR / ".run/go2w_house/posture"
 DEFAULT_JOBS_DIR = ROOT_DIR / ".run/go2w_house/cosmos/mapless_charger_search"
-DEFAULT_COSMOS_ROOT = Path("/home/unitree/matrix_g1_lcm_demo")
+DEFAULT_COSMOS_ROOT = ROOT_DIR / ".external/cosmos"
 TARGET_KIND = "robot_charging_dock"
 MIN_COSMOS_CONFIDENCE = 0.70
 REASONER_MAX_NEW_TOKENS = 1024
@@ -54,6 +54,11 @@ COSMOS_SETTLED_LINEAR_SPEED_MPS = 0.03
 COSMOS_SETTLED_YAW_RATE_RPS = 0.06
 GENERATOR_ACTION_SOURCE = "cosmos3_generator"
 SAFETY_STOP_SOURCE = "safety_stop"
+GO2W_ADAPTER_OUTPUT_DIM = 2
+FRAMEWISE_ADAPTER_MODE = "framewise"
+HAZARD_CONSENSUS_ADAPTER_MODE = "hazard_consensus"
+SEARCH_ARC_STOP_MARGIN_M = 0.35
+MAX_LOCKED_HAZARD_VETO_STREAK = 8
 
 
 @dataclass(frozen=True)
@@ -101,9 +106,36 @@ class GeneratorActionPrefix:
     request_id: int
     selected_seed: int
     nominal_commands: tuple[tuple[float, float], ...]
+    adapter_mode: str = FRAMEWISE_ADAPTER_MODE
+    adapter_support_steps: int = 0
+    search_turn_only: bool = False
     marker_hint: MarkerObservation | None = None
     marker_image: bytes | None = None
     last_exact_seen_at: float = 0.0
+
+
+@dataclass(frozen=True)
+class GeneratorAdaptation:
+    horizon: int
+    output_dim: int
+    mode: str
+    support_steps: int
+    commands: tuple[tuple[float, float], ...]
+
+
+@dataclass(frozen=True)
+class GeneratorPrefixEvaluation:
+    predicted_horizon: int
+    adapter_mode: str
+    adapter_output_dim: int
+    adapter_support_steps: int
+    safe_prefix_steps: int
+    execution_steps: int
+    score: float
+    nominal_commands: tuple[tuple[float, float], ...]
+    shielded_commands: tuple[tuple[float, float], ...]
+    shield_reasons: tuple[tuple[str, ...], ...]
+    rejection_reason: str | None = None
 
 
 @dataclass(frozen=True)
@@ -122,6 +154,10 @@ class GeneratorBlocked(GeneratorError):
     """The Generator repeatedly failed and the task must fail closed."""
 
 
+class SearchSafetyBlocked(RuntimeError):
+    """Live safety constraints prevent progress without breaking a direction lock."""
+
+
 @dataclass(frozen=True)
 class SearchConfig:
     generator: GeneratorConfig
@@ -137,6 +173,14 @@ class SearchConfig:
     creep_speed: float
     approach_min_forward_speed: float
     approach_forward_error_limit: float
+    alignment_arc_speed: float
+    alignment_arc_depth_margin: float
+    alignment_arc_min_yaw_rate: float
+    search_turn_arc_speed: float
+    search_turn_arc_min_speed: float
+    search_turn_arc_trigger: float
+    search_turn_arc_min_front: float
+    search_turn_arc_min_yaw_rate: float
     approach_yaw_gain: float
     approach_max_yaw_rate: float
     approach_yaw_step_limit: float
@@ -431,7 +475,7 @@ def load_generator_config(payload: object) -> GeneratorConfig:
             payload["rotation_scale"],
             "generator.rotation_scale",
             0.01,
-            2.0,
+            4.0,
         ),
         lateral_yaw_gain=bounded_number(
             payload["lateral_yaw_gain"],
@@ -445,7 +489,7 @@ def load_generator_config(payload: object) -> GeneratorConfig:
             payload["max_yaw_rate_rps"],
             "generator.max_yaw_rate_rps",
             0.05,
-            0.50,
+            1.00,
         ),
         max_linear_step_mps=bounded_number(
             payload["max_linear_step_mps"],
@@ -457,7 +501,7 @@ def load_generator_config(payload: object) -> GeneratorConfig:
             payload["max_yaw_step_rps"],
             "generator.max_yaw_step_rps",
             0.01,
-            0.20,
+            1.00,
         ),
     )
 
@@ -513,6 +557,54 @@ def load_config(path: Path = DEFAULT_CONFIG) -> SearchConfig:
             "approach_forward_error_limit",
             0.16,
             0.45,
+        ),
+        alignment_arc_speed=bounded_number(
+            motion["alignment_arc_speed_mps"],
+            "alignment_arc_speed_mps",
+            0.02,
+            0.08,
+        ),
+        alignment_arc_depth_margin=bounded_number(
+            motion["alignment_arc_depth_margin_m"],
+            "alignment_arc_depth_margin_m",
+            0.10,
+            0.40,
+        ),
+        alignment_arc_min_yaw_rate=bounded_number(
+            motion["alignment_arc_min_yaw_rate_rps"],
+            "alignment_arc_min_yaw_rate_rps",
+            0.04,
+            0.20,
+        ),
+        search_turn_arc_speed=bounded_number(
+            motion["search_turn_arc_speed_mps"],
+            "search_turn_arc_speed_mps",
+            0.15,
+            0.28,
+        ),
+        search_turn_arc_min_speed=bounded_number(
+            motion["search_turn_arc_min_speed_mps"],
+            "search_turn_arc_min_speed_mps",
+            0.12,
+            0.24,
+        ),
+        search_turn_arc_trigger=bounded_number(
+            motion["search_turn_arc_trigger_m"],
+            "search_turn_arc_trigger_m",
+            1.50,
+            3.00,
+        ),
+        search_turn_arc_min_front=bounded_number(
+            motion["search_turn_arc_min_front_m"],
+            "search_turn_arc_min_front_m",
+            1.00,
+            1.50,
+        ),
+        search_turn_arc_min_yaw_rate=bounded_number(
+            motion["search_turn_arc_min_yaw_rate_rps"],
+            "search_turn_arc_min_yaw_rate_rps",
+            0.10,
+            0.30,
         ),
         approach_yaw_gain=bounded_number(
             motion["approach_yaw_gain"], "approach_yaw_gain", 0.25, 1.00
@@ -1817,6 +1909,85 @@ def adapt_generator_action_chunk(
     )
 
 
+def adapt_generator_action_prefix(
+    action_chunk: np.ndarray,
+    config: GeneratorConfig,
+    *,
+    horizon: int,
+    require_arc_consensus: bool = False,
+    arc_min_linear_x: float = 0.0,
+    arc_min_yaw_rate: float = 0.0,
+) -> GeneratorAdaptation:
+    """Adapt a selected 4/8/16-frame AV trajectory to an H x 2 Twist prefix."""
+
+    expected_shape = (config.action_chunk_size, config.raw_action_dim)
+    if action_chunk.shape != expected_shape:
+        raise GeneratorError(
+            f"Generator action chunk must have shape {expected_shape}"
+        )
+    if horizon not in {4, 8, 16} or horizon > config.action_chunk_size:
+        raise GeneratorError(
+            "Generator adapter horizon must be 4, 8, or 16 and fit the chunk"
+        )
+    commands = tuple(
+        av_pose_action_to_twist(action, config)
+        for action in action_chunk[:horizon]
+    )
+    if not require_arc_consensus:
+        return GeneratorAdaptation(
+            horizon=horizon,
+            output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+            mode=FRAMEWISE_ADAPTER_MODE,
+            support_steps=horizon,
+            commands=commands,
+        )
+
+    yaw_support_threshold = max(0.04, arc_min_yaw_rate * 0.5)
+    directional_support = tuple(
+        tuple(
+            (linear_x, angular_z)
+            for linear_x, angular_z in commands
+            if linear_x >= arc_min_linear_x
+            and angular_z * direction >= yaw_support_threshold
+        )
+        for direction in (1.0, -1.0)
+    )
+    supporting_commands = max(directional_support, key=len)
+    required_support = math.ceil(horizon * 0.75)
+    if len(supporting_commands) < required_support:
+        return GeneratorAdaptation(
+            horizon=horizon,
+            output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+            mode=FRAMEWISE_ADAPTER_MODE,
+            support_steps=len(supporting_commands),
+            commands=commands,
+        )
+
+    desired_sign = 1.0 if supporting_commands[0][1] > 0.0 else -1.0
+    robust_command = (
+        float(np.median([command[0] for command in supporting_commands])),
+        float(np.median([command[1] for command in supporting_commands])),
+    )
+    if (
+        robust_command[0] < arc_min_linear_x
+        or robust_command[1] * desired_sign < arc_min_yaw_rate
+    ):
+        return GeneratorAdaptation(
+            horizon=horizon,
+            output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+            mode=FRAMEWISE_ADAPTER_MODE,
+            support_steps=len(supporting_commands),
+            commands=commands,
+        )
+    return GeneratorAdaptation(
+        horizon=horizon,
+        output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+        mode=HAZARD_CONSENSUS_ADAPTER_MODE,
+        support_steps=len(supporting_commands),
+        commands=tuple(robust_command for _ in range(horizon)),
+    )
+
+
 def limit_generator_twist(
     linear_x: float,
     angular_z: float,
@@ -1866,6 +2037,7 @@ def shield_generator_action(
     marker: MarkerObservation | None = None,
     marker_depth_m: float | None = None,
     last_exact_depth_m: float | None = None,
+    search_turn_only: bool = False,
 ) -> tuple[float, float, tuple[str, ...]]:
     """Only reduce or veto a Generator command; never create motion."""
 
@@ -1883,6 +2055,41 @@ def shield_generator_action(
     if stage in {"approach_hold", "reacquire"} and linear_x > 0.0:
         linear_x = 0.0
         reasons.append(f"{stage}_translation_veto")
+    search_arc_stop_front = (
+        config.search_turn_arc_min_front
+        + config.search_turn_arc_speed * config.generator.command_ttl_sec
+        + SEARCH_ARC_STOP_MARGIN_M
+    )
+    if stage == "search" and scan.front_m < search_arc_stop_front:
+        if linear_x > 0.0:
+            reasons.append("front_clearance_veto")
+        if abs(angular_z) > 0.0:
+            reasons.append("near_obstacle_yaw_veto")
+        return 0.0, 0.0, tuple(reasons)
+    if stage == "search" and (
+        search_turn_only or scan.front_m < config.search_turn_arc_trigger
+    ):
+        turn_clearance = (
+            scan.left_m
+            if angular_z > 0.0
+            else scan.right_m
+            if angular_z < 0.0
+            else min(scan.left_m, scan.right_m)
+        )
+        can_execute_generator_arc = (
+            linear_x >= config.search_turn_arc_min_speed
+            and abs(angular_z) >= config.search_turn_arc_min_yaw_rate
+            and turn_clearance >= config.wall_clearance
+        )
+        if can_execute_generator_arc:
+            linear_x = 0.0
+            reasons.append("search_turn_yaw_only")
+        else:
+            if linear_x > 0.0:
+                reasons.append("search_turn_arc_translation_veto")
+            if abs(angular_z) > 0.0:
+                reasons.append("search_turn_arc_yaw_veto")
+            return 0.0, 0.0, tuple(reasons)
     minimum_front = (
         config.emergency_clearance
         if stage in {"approach", "approach_hold", "reacquire"}
@@ -1918,8 +2125,31 @@ def shield_generator_action(
             abs(error) >= config.approach_forward_error_limit
             and linear_x > 0.0
         ):
-            linear_x = 0.0
-            reasons.append("marker_alignment_forward_veto")
+            turn_clearance = (
+                scan.left_m if desired_yaw_sign > 0.0 else scan.right_m
+            )
+            has_depth_margin = (
+                marker.exact_id
+                and marker_depth_m is not None
+                and marker_depth_m
+                >= (
+                    config.depth_maximum_charging_range
+                    + config.alignment_arc_depth_margin
+                )
+            )
+            can_arc_align = (
+                has_depth_margin
+                and scan.front_m >= config.turn_clearance
+                and turn_clearance >= config.turn_clearance
+                and angular_z * desired_yaw_sign > 0.0
+                and abs(angular_z) >= config.alignment_arc_min_yaw_rate
+            )
+            if can_arc_align:
+                linear_x = min(linear_x, config.alignment_arc_speed)
+                reasons.append("marker_alignment_arc_creep")
+            else:
+                linear_x = 0.0
+                reasons.append("marker_alignment_forward_veto")
         elif (
             abs(error) > config.final_center_tolerance * 2.0
             and linear_x > config.cautious_speed
@@ -1948,6 +2178,7 @@ def score_generator_candidate(
     config: SearchConfig,
     marker: MarkerObservation | None = None,
     preferred_yaw_sign: float | None = None,
+    search_turn_only: bool = False,
 ) -> float:
     """Rank already-generated, already-shielded commands without creating motion."""
 
@@ -1984,11 +2215,10 @@ def score_generator_candidate(
     if stage in {"approach", "approach_hold", "reacquire"}:
         return 4.0 * alignment + 1.5 * yaw_fraction + linear_fraction
 
-    near_hazard = (
-        scan.front_m < config.wall_clearance
-        or min(scan.left_m, scan.right_m) < config.wall_clearance
+    front_hazard = (
+        search_turn_only or scan.front_m < config.search_turn_arc_trigger
     )
-    if near_hazard:
+    if front_hazard:
         return (
             4.0 * clearance_fraction
             + 3.0 * yaw_fraction
@@ -2001,34 +2231,414 @@ def command_is_live(command: CommandState, now: float) -> bool:
     return command.valid_until >= now
 
 
+def search_hazard_active(scan: LidarScan, config: SearchConfig) -> bool:
+    return (
+        scan.front_m < config.search_turn_arc_trigger
+        or min(scan.left_m, scan.right_m) < config.wall_clearance
+    )
+
+
+def search_turn_phase_active(
+    scan: LidarScan,
+    locked_yaw_sign: float | None,
+    config: SearchConfig,
+) -> bool:
+    """Keep an established front-hazard turn active through its hysteresis."""
+
+    return (
+        scan.front_m < config.search_turn_arc_trigger
+        or (
+            locked_yaw_sign is not None
+            and abs(locked_yaw_sign) > 1e-9
+            and scan.front_m < config.search_turn_arc_trigger + 0.25
+        )
+    )
+
+
+def generator_prediction_horizon(
+    action_chunk: np.ndarray,
+    config: GeneratorConfig,
+) -> int:
+    """Choose 4/8/16 from the Generator trajectory's immediate consistency."""
+
+    expected_shape = (config.action_chunk_size, config.raw_action_dim)
+    if action_chunk.shape != expected_shape:
+        raise GeneratorError(
+            f"Generator action chunk must have shape {expected_shape}"
+        )
+    prediction_steps = min(16, config.action_chunk_size)
+    commands = [
+        av_pose_action_to_twist(action, config)
+        for action in action_chunk[:prediction_steps]
+    ]
+    yaw_rates = [command[1] for command in commands]
+    active_yaw_signs = [
+        1 if yaw_rate > 0.04 else -1
+        for yaw_rate in yaw_rates
+        if abs(yaw_rate) > 0.04
+    ]
+    direction_changes = sum(
+        current != previous
+        for previous, current in zip(active_yaw_signs, active_yaw_signs[1:])
+    )
+    peak_yaw = max((abs(yaw_rate) for yaw_rate in yaw_rates), default=0.0)
+    if direction_changes > 0 or peak_yaw >= 0.28:
+        return 4
+    if peak_yaw >= 0.12:
+        return 8
+    return min(16, config.execute_prefix_steps, config.action_chunk_size)
+
+
 def dynamic_search_prefix_steps(
     scan: LidarScan,
     config: SearchConfig,
+    action_chunk: np.ndarray | None = None,
+    *,
+    search_turn_only: bool = False,
 ) -> int:
-    """Choose a receding-horizon length without creating or changing actions."""
+    """Cap a prediction-driven 4/8/16 horizon with live safety clearance."""
 
-    maximum = config.generator.execute_prefix_steps
+    maximum = min(
+        16,
+        config.generator.execute_prefix_steps,
+        config.generator.action_chunk_size,
+    )
     side_clearance = min(scan.left_m, scan.right_m)
-    if scan.front_m >= 2.0 and side_clearance >= config.wall_clearance:
-        return maximum
     if (
-        scan.front_m >= config.wall_clearance
-        and side_clearance >= config.turn_clearance + 0.05
+        search_turn_only
+        or scan.front_m < config.search_turn_arc_trigger
+        or side_clearance < config.turn_clearance + 0.05
     ):
-        return min(maximum, 12)
-    return min(maximum, 8)
+        safety_cap = min(maximum, 4)
+    elif (
+        scan.front_m >= config.wall_clearance
+        and scan.front_m < 2.0
+    ) or side_clearance < config.wall_clearance:
+        safety_cap = min(maximum, 8)
+    else:
+        safety_cap = maximum
+    if action_chunk is None:
+        return safety_cap
+    predicted_horizon = generator_prediction_horizon(
+        action_chunk, config.generator
+    )
+    return min(safety_cap, predicted_horizon)
+
+
+def evaluate_generator_action_prefix(
+    action_chunk: np.ndarray,
+    *,
+    predicted_horizon: int,
+    previous: tuple[float, float],
+    stage: str,
+    scan: LidarScan,
+    pose: RobotPose,
+    now: float,
+    config: SearchConfig,
+    marker: MarkerObservation | None = None,
+    marker_depth_m: float | None = None,
+    last_exact_depth_m: float | None = None,
+    preferred_yaw_sign: float | None = None,
+    search_turn_only: bool = False,
+) -> GeneratorPrefixEvaluation:
+    """Simulate the exact prefix that can later be committed at 10 Hz."""
+
+    expected_shape = (
+        config.generator.action_chunk_size,
+        config.generator.raw_action_dim,
+    )
+    if action_chunk.shape != expected_shape:
+        raise GeneratorError(
+            f"Generator action chunk must have shape {expected_shape}"
+        )
+    if predicted_horizon not in {4, 8, 16}:
+        raise GeneratorError("Generator prefix horizon must be one of 4, 8, or 16")
+    predicted_horizon = min(
+        predicted_horizon,
+        config.generator.execute_prefix_steps,
+        config.generator.action_chunk_size,
+    )
+    require_arc_consensus = stage == "search" and (
+        search_turn_only or scan.front_m < config.search_turn_arc_trigger
+    )
+    adaptation = adapt_generator_action_prefix(
+        action_chunk,
+        config.generator,
+        horizon=predicted_horizon,
+        require_arc_consensus=require_arc_consensus,
+        arc_min_linear_x=(
+            config.search_turn_arc_min_speed if require_arc_consensus else 0.0
+        ),
+        arc_min_yaw_rate=(
+            config.search_turn_arc_min_yaw_rate
+            if require_arc_consensus
+            else 0.0
+        ),
+    )
+    nominal_commands = adaptation.commands
+    simulated_previous = previous
+    shielded_commands: list[tuple[float, float]] = []
+    all_shield_reasons: list[tuple[str, ...]] = []
+    frame_scores: list[float] = []
+    active_yaw_sign = 0
+    rejection_reason: str | None = None
+
+    for nominal_linear, nominal_yaw in nominal_commands:
+        limited_linear, limited_yaw = limit_generator_twist(
+            nominal_linear,
+            nominal_yaw,
+            simulated_previous,
+            stage,
+            config.generator,
+        )
+        linear_x, angular_z, shield_reasons = shield_generator_action(
+            limited_linear,
+            limited_yaw,
+            stage=stage,
+            scan=scan,
+            pose=pose,
+            now=now,
+            config=config,
+            marker=marker,
+            marker_depth_m=marker_depth_m,
+            last_exact_depth_m=last_exact_depth_m,
+            search_turn_only=search_turn_only,
+        )
+        shielded_commands.append((linear_x, angular_z))
+        all_shield_reasons.append(shield_reasons)
+        frame_score = score_generator_candidate(
+            linear_x,
+            angular_z,
+            stage=stage,
+            scan=scan,
+            config=config,
+            marker=marker,
+            preferred_yaw_sign=preferred_yaw_sign,
+            search_turn_only=search_turn_only,
+        )
+        if not math.isfinite(frame_score):
+            rejection_reason = (
+                shield_reasons[-1]
+                if shield_reasons
+                else "empty_shielded_action"
+            )
+            break
+
+        if (
+            stage == "search"
+            and require_arc_consensus
+            and abs(angular_z) > 1e-6
+        ):
+            yaw_sign = 1 if angular_z > 0.0 else -1
+            if active_yaw_sign != 0 and yaw_sign != active_yaw_sign:
+                rejection_reason = "candidate_yaw_direction_flip"
+                break
+            active_yaw_sign = yaw_sign
+
+        frame_scores.append(frame_score)
+        simulated_previous = (linear_x, angular_z)
+
+    safe_prefix_steps = len(frame_scores)
+    executable_horizons = [
+        horizon
+        for horizon in (4, 8, 16)
+        if horizon <= safe_prefix_steps and horizon <= predicted_horizon
+    ]
+    execution_steps = max(executable_horizons, default=0)
+    score = (
+        float(sum(frame_scores[:execution_steps]) / execution_steps)
+        if execution_steps > 0
+        else -math.inf
+    )
+    return GeneratorPrefixEvaluation(
+        predicted_horizon=predicted_horizon,
+        adapter_mode=adaptation.mode,
+        adapter_output_dim=adaptation.output_dim,
+        adapter_support_steps=adaptation.support_steps,
+        safe_prefix_steps=safe_prefix_steps,
+        execution_steps=execution_steps,
+        score=score,
+        nominal_commands=nominal_commands,
+        shielded_commands=tuple(shielded_commands),
+        shield_reasons=tuple(all_shield_reasons),
+        rejection_reason=rejection_reason,
+    )
 
 
 def generator_candidate_seeds(
-    config: GeneratorConfig, stage: str, request_id: int
+    config: GeneratorConfig,
+    stage: str,
+    request_id: int,
+    *,
+    search_hazard: bool = False,
+    front_hazard: bool = False,
+    preferred_front_hazard_seed: int | None = None,
 ) -> tuple[int, ...]:
-    """Bound per-cycle latency while retaining seed diversity where it matters."""
+    """Scale the seed budget from open search to front-hazard discovery."""
 
     if stage == "search":
+        if front_hazard:
+            index = (request_id - 1) % len(config.candidate_seeds)
+            ordered = list(
+                config.candidate_seeds[index:] + config.candidate_seeds[:index]
+            )
+            if preferred_front_hazard_seed in ordered:
+                ordered.remove(preferred_front_hazard_seed)
+                ordered.insert(0, preferred_front_hazard_seed)
+            return tuple(ordered)
+        if search_hazard:
+            index = (request_id - 1) % len(config.candidate_seeds)
+            return (
+                config.candidate_seeds[index],
+                config.candidate_seeds[(index + 1) % len(config.candidate_seeds)],
+            )
         return (
             config.candidate_seeds[(request_id - 1) % len(config.candidate_seeds)],
         )
     return config.candidate_seeds[:2]
+
+
+def front_hazard_initial_candidate_budget(
+    front_hazard: bool,
+    locked_yaw_sign: float | None,
+    candidate_count: int,
+) -> int | None:
+    """Use all seeds to establish a direction, then probe two to reuse it."""
+
+    if not front_hazard:
+        return None
+    if locked_yaw_sign is None or abs(locked_yaw_sign) <= 1e-9:
+        return candidate_count
+    return min(2, candidate_count)
+
+
+def generator_yaw_matches_locked_arc(
+    angular_z: float,
+    locked_yaw_sign: float | None,
+) -> bool:
+    """Keep a front-hazard turn consistent with the Generator-selected arc."""
+
+    if locked_yaw_sign is None or abs(locked_yaw_sign) <= 1e-9:
+        return True
+    return angular_z * locked_yaw_sign > 1e-9
+
+
+def advance_locked_hazard_veto_streak(
+    previous: int,
+    *,
+    front_hazard: bool,
+    locked_yaw_sign: float | None,
+    vetoed: bool,
+) -> int:
+    if (
+        front_hazard
+        and locked_yaw_sign is not None
+        and abs(locked_yaw_sign) > 1e-9
+        and vetoed
+    ):
+        return previous + 1
+    return 0
+
+
+def locked_search_arc_side_unavailable(
+    scan: LidarScan,
+    locked_yaw_sign: float | None,
+    config: SearchConfig,
+) -> bool:
+    """Allow Generator reselection only when the locked side became unsafe."""
+
+    if locked_yaw_sign is None or abs(locked_yaw_sign) <= 1e-9:
+        return False
+    locked_clearance = scan.left_m if locked_yaw_sign > 0.0 else scan.right_m
+    alternative_clearance = (
+        scan.right_m if locked_yaw_sign > 0.0 else scan.left_m
+    )
+    return (
+        locked_clearance < config.wall_clearance
+        and alternative_clearance >= config.wall_clearance
+    )
+
+
+def update_search_arc_yaw_sign(
+    scan: LidarScan,
+    locked_yaw_sign: float | None,
+    config: SearchConfig,
+    *,
+    generator_angular_z: float | None = None,
+) -> float | None:
+    """Maintain a direction lock established only by a safe Generator action."""
+
+    if scan.front_m >= config.search_turn_arc_trigger + 0.25:
+        return None
+    if locked_yaw_sign is not None and abs(locked_yaw_sign) > 1e-9:
+        return 1.0 if locked_yaw_sign > 0.0 else -1.0
+    if (
+        scan.front_m >= config.search_turn_arc_trigger
+        or generator_angular_z is None
+        or abs(generator_angular_z) <= 1e-9
+    ):
+        return None
+    return 1.0 if generator_angular_z > 0.0 else -1.0
+
+
+def front_hazard_consensus_is_safe(
+    evaluation: GeneratorPrefixEvaluation,
+    required_yaw_sign: float | None,
+) -> bool:
+    """Accept a complete four-frame consensus matching any existing lock."""
+
+    if not (
+        evaluation.predicted_horizon == 4
+        and evaluation.adapter_mode == HAZARD_CONSENSUS_ADAPTER_MODE
+        and evaluation.adapter_support_steps >= 3
+        and evaluation.safe_prefix_steps == 4
+        and evaluation.execution_steps == 4
+        and math.isfinite(evaluation.score)
+        and len(evaluation.shielded_commands) == 4
+    ):
+        return False
+    if any(
+        abs(linear_x) > 1e-9 or abs(angular_z) <= 1e-9
+        for linear_x, angular_z in evaluation.shielded_commands
+    ):
+        return False
+    first_yaw = evaluation.shielded_commands[0][1]
+    consensus_sign = 1.0 if first_yaw > 0.0 else -1.0
+    return all(
+        angular_z * consensus_sign > 1e-9
+        for _linear_x, angular_z in evaluation.shielded_commands
+    ) and generator_yaw_matches_locked_arc(first_yaw, required_yaw_sign)
+
+
+def initial_front_hazard_budget_has_safe_consensus(
+    action_chunks: list[tuple[int, np.ndarray]],
+    *,
+    scan: LidarScan,
+    pose: RobotPose,
+    now: float,
+    config: SearchConfig,
+    required_yaw_sign: float | None,
+) -> bool:
+    """Probe two valid candidates without authorizing any robot command."""
+
+    if len(action_chunks) < 2:
+        return False
+    for _seed, action_chunk in action_chunks[:2]:
+        evaluation = evaluate_generator_action_prefix(
+            action_chunk,
+            predicted_horizon=4,
+            previous=(0.0, 0.0),
+            stage="search",
+            scan=scan,
+            pose=pose,
+            now=now,
+            config=config,
+            preferred_yaw_sign=required_yaw_sign,
+            search_turn_only=True,
+        )
+        if front_hazard_consensus_is_safe(evaluation, required_yaw_sign):
+            return True
+    return False
 
 
 def observation_pose_matches(
@@ -2318,6 +2928,9 @@ class MaplessChargerSearch(Node):
         self.pending_search_marker: (
             tuple[MarkerObservation, bytes, float] | None
         ) = None
+        self.search_arc_yaw_sign: float | None = None
+        self.last_successful_front_hazard_seed: int | None = None
+        self.locked_hazard_veto_streak = 0
         self.create_timer(0.10, self.publish_command)
         self.publish_status("ready")
         self.get_logger().info(
@@ -2403,6 +3016,9 @@ class MaplessChargerSearch(Node):
         self.pending_search_prefix = None
         self.pending_approach_prefix = None
         self.pending_search_marker = None
+        self.search_arc_yaw_sign = None
+        self.last_successful_front_hazard_seed = None
+        self.locked_hazard_veto_streak = 0
         threading.Thread(target=self.run_search, daemon=True).start()
 
     def on_cancel(self, _message: Empty) -> None:
@@ -2413,11 +3029,46 @@ class MaplessChargerSearch(Node):
             self.pending_search_prefix = None
             self.pending_approach_prefix = None
             self.pending_search_marker = None
+            self.search_arc_yaw_sign = None
+            self.last_successful_front_hazard_seed = None
+            self.locked_hazard_veto_streak = 0
             self.set_command(0.0, 0.0)
 
     def task_state_snapshot(self) -> tuple[int, bool]:
         with self.task_state_lock:
             return self.task_generation, self.cancel_requested
+
+    def release_unavailable_search_arc_lock(
+        self,
+        scan: LidarScan,
+        *,
+        request_id: int,
+        reason: str,
+    ) -> bool:
+        old_yaw_sign = self.search_arc_yaw_sign
+        if not locked_search_arc_side_unavailable(
+            scan,
+            old_yaw_sign,
+            self.config,
+        ):
+            return False
+        veto_streak = self.locked_hazard_veto_streak
+        self.search_arc_yaw_sign = None
+        self.last_successful_front_hazard_seed = None
+        self.locked_hazard_veto_streak = 0
+        self.publish_status(
+            "search_arc_direction_released",
+            stage="search",
+            request_id=request_id,
+            reason=reason,
+            previous_search_arc_yaw_sign=old_yaw_sign,
+            locked_hazard_veto_streak=veto_streak,
+            front_m=scan.front_m,
+            left_m=scan.left_m,
+            right_m=scan.right_m,
+            action_source=GENERATOR_ACTION_SOURCE,
+        )
+        return True
 
     def commit_generator_command_if_current(
         self,
@@ -2584,6 +3235,26 @@ class MaplessChargerSearch(Node):
                     )
                     self.set_command(0.0, 0.0)
                     return
+            if (
+                not prefix.search_turn_only
+                and search_turn_phase_active(
+                    scan,
+                    self.search_arc_yaw_sign,
+                    self.config,
+                )
+            ):
+                self.set_command(0.0, 0.0)
+                self.last_generator_twist = (0.0, 0.0)
+                self.pending_search_prefix = None
+                self.publish_status(
+                    "generator_action_prefix_stopped",
+                    stage="search",
+                    request_id=prefix.request_id,
+                    chunk_step=chunk_step,
+                    reason="front_hazard_entered_during_prefix",
+                    shield=["front_hazard_phase_transition"],
+                )
+                return
             limited_linear, limited_yaw = limit_generator_twist(
                 nominal_linear,
                 nominal_yaw,
@@ -2599,7 +3270,21 @@ class MaplessChargerSearch(Node):
                 pose=pose,
                 now=now,
                 config=self.config,
+                search_turn_only=prefix.search_turn_only,
             )
+            if (
+                prefix.search_turn_only
+                and not generator_yaw_matches_locked_arc(
+                    angular_z,
+                    self.search_arc_yaw_sign,
+                )
+            ):
+                linear_x = 0.0
+                angular_z = 0.0
+                shield_reasons = (
+                    *shield_reasons,
+                    "search_turn_arc_direction_veto",
+                )
             nonzero = abs(linear_x) > 1e-9 or abs(angular_z) > 1e-9
             if nonzero:
                 if not self.commit_generator_command_if_current(
@@ -2610,6 +3295,15 @@ class MaplessChargerSearch(Node):
                     chunk_step=chunk_step,
                 ):
                     return
+                if prefix.search_turn_only:
+                    self.locked_hazard_veto_streak = 0
+                if (
+                    chunk_step == 0
+                    and prefix.search_turn_only
+                ):
+                    self.last_successful_front_hazard_seed = (
+                        prefix.selected_seed
+                    )
             else:
                 self.set_command(0.0, 0.0)
             previous = (linear_x, angular_z)
@@ -2621,20 +3315,92 @@ class MaplessChargerSearch(Node):
                 selected_seed=prefix.selected_seed,
                 chunk_step=chunk_step,
                 prefix_steps=len(prefix.nominal_commands),
+                adapter_mode=prefix.adapter_mode,
+                adapter_output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+                adapter_support_steps=prefix.adapter_support_steps,
+                search_turn_only=prefix.search_turn_only,
                 command_ttl_sec=self.generator_config.command_ttl_sec,
                 linear_x=linear_x,
                 angular_z=angular_z,
                 action_source=GENERATOR_ACTION_SOURCE,
                 shield=list(shield_reasons),
             )
+            if not nonzero:
+                self.last_generator_twist = (0.0, 0.0)
+                self.pending_search_prefix = None
+                self.publish_status(
+                    "generator_action_prefix_stopped",
+                    stage="search",
+                    request_id=prefix.request_id,
+                    chunk_step=chunk_step,
+                    reason="live_safety_veto",
+                    shield=list(shield_reasons),
+                )
+                self.locked_hazard_veto_streak = (
+                    advance_locked_hazard_veto_streak(
+                        self.locked_hazard_veto_streak,
+                        front_hazard=prefix.search_turn_only,
+                        locked_yaw_sign=self.search_arc_yaw_sign,
+                        vetoed=True,
+                    )
+                )
+                if (
+                    self.locked_hazard_veto_streak
+                    >= MAX_LOCKED_HAZARD_VETO_STREAK
+                ):
+                    if locked_search_arc_side_unavailable(
+                        scan,
+                        self.search_arc_yaw_sign,
+                        self.config,
+                    ):
+                        self.publish_status(
+                            "search_arc_direction_reselection_requested",
+                            stage="search",
+                            request_id=prefix.request_id,
+                            reason="locked_side_live_clearance_unavailable",
+                            search_arc_yaw_sign=self.search_arc_yaw_sign,
+                            locked_hazard_veto_streak=(
+                                self.locked_hazard_veto_streak
+                            ),
+                            front_m=scan.front_m,
+                            left_m=scan.left_m,
+                            right_m=scan.right_m,
+                            action_source=GENERATOR_ACTION_SOURCE,
+                        )
+                        return
+                    raise SearchSafetyBlocked(
+                        "locked Generator yaw remained live-safety-vetoed for "
+                        f"{self.locked_hazard_veto_streak} consecutive decisions"
+                    )
+                return
             step_deadline = time.monotonic() + step_duration
             while time.monotonic() < step_deadline:
                 current_generation, canceled = self.task_state_snapshot()
                 if canceled or current_generation != generation:
                     self.set_command(0.0, 0.0)
                     return
+                if not prefix.search_turn_only:
+                    _image, live_scan, _pose = self.snapshot()
+                    if live_scan is not None and search_turn_phase_active(
+                        live_scan,
+                        self.search_arc_yaw_sign,
+                        self.config,
+                    ):
+                        self.set_command(0.0, 0.0)
+                        self.last_generator_twist = (0.0, 0.0)
+                        self.pending_search_prefix = None
+                        self.publish_status(
+                            "generator_action_prefix_stopped",
+                            stage="search",
+                            request_id=prefix.request_id,
+                            chunk_step=chunk_step,
+                            reason="front_hazard_entered_during_prefix",
+                            shield=["front_hazard_phase_transition"],
+                        )
+                        return
                 time.sleep(0.02)
         self.set_command(0.0, 0.0)
+        self.last_generator_twist = (0.0, 0.0)
         self.pending_search_prefix = None
 
     def execute_approach_action_prefix(
@@ -2767,6 +3533,9 @@ class MaplessChargerSearch(Node):
                 selected_seed=prefix.selected_seed,
                 chunk_step=chunk_step,
                 prefix_steps=len(prefix.nominal_commands),
+                adapter_mode=prefix.adapter_mode,
+                adapter_output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+                adapter_support_steps=prefix.adapter_support_steps,
                 command_ttl_sec=self.generator_config.command_ttl_sec,
                 linear_x=linear_x,
                 angular_z=angular_z,
@@ -2777,6 +3546,18 @@ class MaplessChargerSearch(Node):
                 action_source=GENERATOR_ACTION_SOURCE,
                 shield=list(shield_reasons),
             )
+            if not nonzero:
+                self.last_generator_twist = (0.0, 0.0)
+                self.pending_approach_prefix = None
+                self.publish_status(
+                    "generator_action_prefix_stopped",
+                    stage="approach",
+                    request_id=prefix.request_id,
+                    chunk_step=chunk_step,
+                    reason="live_safety_veto",
+                    shield=list(shield_reasons),
+                )
+                return
             step_deadline = time.monotonic() + step_duration
             while time.monotonic() < step_deadline:
                 current_generation, canceled = self.task_state_snapshot()
@@ -2785,6 +3566,7 @@ class MaplessChargerSearch(Node):
                     return
                 time.sleep(0.02)
         self.set_command(0.0, 0.0)
+        self.last_generator_twist = (0.0, 0.0)
         self.pending_approach_prefix = None
         if last_image is None:
             return None
@@ -2988,14 +3770,47 @@ class MaplessChargerSearch(Node):
             marker_depth_m=marker_depth_m,
             context=context,
         )
+        if stage == "search":
+            self.search_arc_yaw_sign = update_search_arc_yaw_sign(
+                scan,
+                self.search_arc_yaw_sign,
+                self.config,
+            )
+        request_hazard_yaw_sign = self.search_arc_yaw_sign
+        front_hazard = (
+            stage == "search"
+            and search_turn_phase_active(
+                scan,
+                request_hazard_yaw_sign,
+                self.config,
+            )
+        )
+        if not front_hazard or request_hazard_yaw_sign is None:
+            self.locked_hazard_veto_streak = 0
+        search_hazard = (
+            stage == "search" and search_hazard_active(scan, self.config)
+        )
         candidate_seeds = generator_candidate_seeds(
-            self.generator_config, stage, request_id
+            self.generator_config,
+            stage,
+            request_id,
+            search_hazard=search_hazard,
+            front_hazard=front_hazard,
+            preferred_front_hazard_seed=(
+                self.last_successful_front_hazard_seed
+            ),
+        )
+        initial_candidate_budget = front_hazard_initial_candidate_budget(
+            front_hazard,
+            request_hazard_yaw_sign,
+            len(candidate_seeds),
         )
         if stage == "search":
             self.pending_search_prefix = None
         elif stage == "approach":
             self.pending_approach_prefix = None
         self.set_command(0.0, 0.0)
+        self.last_generator_twist = (0.0, 0.0)
         started_at = time.monotonic()
         inference_marker_tracker = (
             create_marker_tracker(image[0], marker)
@@ -3007,12 +3822,29 @@ class MaplessChargerSearch(Node):
             stage=stage,
             request_id=request_id,
             candidate_seeds=list(candidate_seeds),
+            search_hazard=search_hazard,
+            front_hazard=front_hazard,
+            search_arc_yaw_sign=self.search_arc_yaw_sign,
+            preferred_front_hazard_seed=(
+                self.last_successful_front_hazard_seed
+            ),
+            initial_valid_candidate_budget=initial_candidate_budget,
             action_source=GENERATOR_ACTION_SOURCE,
         )
         try:
             action_chunks: list[tuple[int, np.ndarray]] = []
             candidate_errors: list[str] = []
+            attempted_seeds: list[int] = []
+            seed_budget_mode = (
+                "all_for_direction_lock"
+                if front_hazard
+                and initial_candidate_budget is not None
+                and initial_candidate_budget > 2
+                else "standard"
+            )
+            budget_expanded = False
             for seed in candidate_seeds:
+                attempted_seeds.append(seed)
                 try:
                     payload = self.generator_client.predict(
                         image[0], prompt, seed=seed
@@ -3030,9 +3862,45 @@ class MaplessChargerSearch(Node):
                 current_generation, current_canceled = self.task_state_snapshot()
                 if current_canceled or current_generation != generation:
                     break
+                if (
+                    front_hazard
+                    and initial_candidate_budget == 2
+                    and not budget_expanded
+                    and len(action_chunks) == 2
+                ):
+                    if initial_front_hazard_budget_has_safe_consensus(
+                        action_chunks,
+                        scan=scan,
+                        pose=pose,
+                        now=started_at,
+                        config=self.config,
+                        required_yaw_sign=request_hazard_yaw_sign,
+                    ):
+                        seed_budget_mode = "initial_pair"
+                        break
+                    seed_budget_mode = "expanded_all"
+                    budget_expanded = True
+                    self.publish_status(
+                        "generator_seed_budget_expanded",
+                        stage=stage,
+                        request_id=request_id,
+                        attempted_seeds=list(attempted_seeds),
+                        initial_valid_seeds=[
+                            candidate_seed
+                            for candidate_seed, _chunk in action_chunks
+                        ],
+                        reason="no_safe_initial_consensus",
+                        search_arc_yaw_sign=self.search_arc_yaw_sign,
+                        action_source=GENERATOR_ACTION_SOURCE,
+                    )
             if not action_chunks:
                 raise GeneratorError(
                     "all seeded Generator candidates failed: "
+                    + "; ".join(candidate_errors)
+                )
+            if front_hazard and len(action_chunks) < 2:
+                raise GeneratorError(
+                    "front-hazard inference produced fewer than two valid candidates: "
                     + "; ".join(candidate_errors)
                 )
             current_image, current_scan, current_pose = self.snapshot()
@@ -3120,73 +3988,155 @@ class MaplessChargerSearch(Node):
                         self.config,
                     )
                     last_exact_seen_at = now
+            if stage == "search":
+                self.search_arc_yaw_sign = update_search_arc_yaw_sign(
+                    current_scan,
+                    self.search_arc_yaw_sign,
+                    self.config,
+                )
+            live_front_hazard = (
+                stage == "search"
+                and search_turn_phase_active(
+                    current_scan,
+                    self.search_arc_yaw_sign,
+                    self.config,
+                )
+            )
+            if stage == "search" and live_front_hazard != front_hazard:
+                self.generator_failures = 0
+                self.set_command(0.0, 0.0)
+                self.publish_status(
+                    "generator_action_discarded",
+                    stage=stage,
+                    request_id=request_id,
+                    reason="front_hazard_phase_changed_during_inference",
+                    request_front_hazard=front_hazard,
+                    live_front_hazard=live_front_hazard,
+                    action_source=GENERATOR_ACTION_SOURCE,
+                )
+                return None
+            evaluation_yaw_sign = (
+                self.search_arc_yaw_sign
+                if live_front_hazard
+                else preferred_yaw_sign
+            )
             previous = getattr(self, "last_generator_twist", (0.0, 0.0))
             candidates: list[
                 tuple[
-                    float,
+                    tuple[int, int, float],
                     int,
                     float,
                     float,
                     float,
                     float,
                     tuple[str, ...],
+                    int,
                 ]
             ] = []
             candidate_details: list[dict[str, Any]] = []
+            prefix_evaluations: dict[int, GeneratorPrefixEvaluation] = {}
             for seed, action_chunk in action_chunks:
-                nominal_linear, nominal_yaw = adapt_generator_action_chunk(
-                    action_chunk, self.generator_config
-                )
-                if (
-                    stage in {"search", "approach", "reacquire"}
-                    and abs(nominal_linear) < 1e-6
-                    and abs(nominal_yaw) < 1e-6
-                ):
-                    candidate_details.append(
-                        {"seed": seed, "rejected": "empty_nominal_action"}
+                if stage in {"search", "approach"}:
+                    predicted_horizon = (
+                        4
+                        if stage == "search" and live_front_hazard
+                        else dynamic_search_prefix_steps(
+                            current_scan,
+                            self.config,
+                            action_chunk,
+                        )
+                        if stage == "search"
+                        else min(
+                            8,
+                            generator_prediction_horizon(
+                                action_chunk, self.generator_config
+                            ),
+                        )
                     )
-                    continue
-                limited_linear, limited_yaw = limit_generator_twist(
-                    nominal_linear,
-                    nominal_yaw,
-                    previous,
-                    stage,
-                    self.generator_config,
-                )
-                linear_x, angular_z, shield_reasons = shield_generator_action(
-                    limited_linear,
-                    limited_yaw,
-                    stage=stage,
-                    scan=current_scan,
-                    pose=current_pose,
-                    now=now,
-                    config=self.config,
-                    marker=shield_marker,
-                    marker_depth_m=shield_depth_m,
-                    last_exact_depth_m=last_exact_depth_m,
-                )
-                score = score_generator_candidate(
-                    linear_x,
-                    angular_z,
-                    stage=stage,
-                    scan=current_scan,
-                    config=self.config,
-                    marker=shield_marker,
-                    preferred_yaw_sign=preferred_yaw_sign,
-                )
-                candidates.append(
-                    (
-                        score,
-                        seed,
+                    evaluation = evaluate_generator_action_prefix(
+                        action_chunk,
+                        predicted_horizon=predicted_horizon,
+                        previous=previous,
+                        stage=stage,
+                        scan=current_scan,
+                        pose=current_pose,
+                        now=now,
+                        config=self.config,
+                        marker=shield_marker,
+                        marker_depth_m=shield_depth_m,
+                        last_exact_depth_m=last_exact_depth_m,
+                        preferred_yaw_sign=evaluation_yaw_sign,
+                        search_turn_only=live_front_hazard,
+                    )
+                    prefix_evaluations[seed] = evaluation
+                    nominal_linear, nominal_yaw = evaluation.nominal_commands[0]
+                    linear_x, angular_z = evaluation.shielded_commands[0]
+                    shield_reasons = evaluation.shield_reasons[0]
+                    score = evaluation.score
+                    execution_steps = evaluation.execution_steps
+                    safe_prefix_steps = evaluation.safe_prefix_steps
+                    detail = {
+                        "seed": seed,
+                        "predicted_horizon": evaluation.predicted_horizon,
+                        "adapter_mode": evaluation.adapter_mode,
+                        "adapter_output_dim": evaluation.adapter_output_dim,
+                        "adapter_support_steps": evaluation.adapter_support_steps,
+                        "search_turn_only": live_front_hazard,
+                        "safe_prefix_steps": safe_prefix_steps,
+                        "execution_steps": execution_steps,
+                        "nominal_linear_x": nominal_linear,
+                        "nominal_angular_z": nominal_yaw,
+                        "linear_x": linear_x,
+                        "angular_z": angular_z,
+                        "score": score if math.isfinite(score) else None,
+                        "shield": list(shield_reasons),
+                    }
+                    if evaluation.rejection_reason is not None:
+                        detail["rejected"] = evaluation.rejection_reason
+                else:
+                    nominal_linear, nominal_yaw = adapt_generator_action_chunk(
+                        action_chunk, self.generator_config
+                    )
+                    if (
+                        stage == "reacquire"
+                        and abs(nominal_linear) < 1e-6
+                        and abs(nominal_yaw) < 1e-6
+                    ):
+                        candidate_details.append(
+                            {"seed": seed, "rejected": "empty_nominal_action"}
+                        )
+                        continue
+                    limited_linear, limited_yaw = limit_generator_twist(
                         nominal_linear,
                         nominal_yaw,
+                        previous,
+                        stage,
+                        self.generator_config,
+                    )
+                    linear_x, angular_z, shield_reasons = shield_generator_action(
+                        limited_linear,
+                        limited_yaw,
+                        stage=stage,
+                        scan=current_scan,
+                        pose=current_pose,
+                        now=now,
+                        config=self.config,
+                        marker=shield_marker,
+                        marker_depth_m=shield_depth_m,
+                        last_exact_depth_m=last_exact_depth_m,
+                    )
+                    score = score_generator_candidate(
                         linear_x,
                         angular_z,
-                        shield_reasons,
+                        stage=stage,
+                        scan=current_scan,
+                        config=self.config,
+                        marker=shield_marker,
+                        preferred_yaw_sign=evaluation_yaw_sign,
                     )
-                )
-                candidate_details.append(
-                    {
+                    execution_steps = 1
+                    safe_prefix_steps = 1 if math.isfinite(score) else 0
+                    detail = {
                         "seed": seed,
                         "nominal_linear_x": nominal_linear,
                         "nominal_angular_z": nominal_yaw,
@@ -3195,53 +4145,195 @@ class MaplessChargerSearch(Node):
                         "score": score if math.isfinite(score) else None,
                         "shield": list(shield_reasons),
                     }
+                candidates.append(
+                    (
+                        (execution_steps, safe_prefix_steps, score),
+                        seed,
+                        nominal_linear,
+                        nominal_yaw,
+                        linear_x,
+                        angular_z,
+                        shield_reasons,
+                        execution_steps,
+                    )
                 )
+                candidate_details.append(detail)
             safe_candidates = [
-                candidate for candidate in candidates if math.isfinite(candidate[0])
+                candidate
+                for candidate in candidates
+                if candidate[0][0] > 0 and math.isfinite(candidate[0][2])
             ]
+            direction_locked_out = False
+            direction_reselected = False
+            reselection_candidates: list[
+                tuple[
+                    tuple[int, int, float],
+                    int,
+                    float,
+                    float,
+                    float,
+                    float,
+                    tuple[str, ...],
+                    int,
+                ]
+            ] = []
+            if live_front_hazard:
+                consensus_inconsistent_seeds = {
+                    candidate[1]
+                    for candidate in safe_candidates
+                    if not front_hazard_consensus_is_safe(
+                        prefix_evaluations[candidate[1]],
+                        None,
+                    )
+                }
+                safe_candidates = [
+                    candidate
+                    for candidate in safe_candidates
+                    if candidate[1] not in consensus_inconsistent_seeds
+                ]
+                for detail in candidate_details:
+                    if detail.get("seed") in consensus_inconsistent_seeds:
+                        detail["rejected"] = "front_hazard_consensus_veto"
+                reselection_candidates = list(safe_candidates)
+                direction_inconsistent_seeds = {
+                    candidate[1]
+                    for candidate in safe_candidates
+                    if not generator_yaw_matches_locked_arc(
+                        candidate[5],
+                        self.search_arc_yaw_sign,
+                    )
+                }
+                direction_consistent_candidates = [
+                    candidate
+                    for candidate in safe_candidates
+                    if generator_yaw_matches_locked_arc(
+                        candidate[5],
+                        self.search_arc_yaw_sign,
+                    )
+                ]
+                direction_locked_out = bool(
+                    safe_candidates and not direction_consistent_candidates
+                )
+                safe_candidates = direction_consistent_candidates
+                for detail in candidate_details:
+                    if detail.get("seed") in direction_inconsistent_seeds:
+                        detail["rejected"] = (
+                            "search_turn_arc_direction_veto"
+                        )
             if not safe_candidates:
                 self.generator_failures = 0
                 self.last_generator_twist = (0.0, 0.0)
                 self.set_command(0.0, 0.0)
+                self.locked_hazard_veto_streak = (
+                    advance_locked_hazard_veto_streak(
+                        self.locked_hazard_veto_streak,
+                        front_hazard=live_front_hazard,
+                        locked_yaw_sign=self.search_arc_yaw_sign,
+                        vetoed=True,
+                    )
+                )
                 self.publish_status(
                     "generator_action_vetoed",
                     stage=stage,
                     request_id=request_id,
-                    reason="no_safe_seeded_candidate",
+                    reason=(
+                        "no_direction_consistent_seeded_candidate"
+                        if direction_locked_out
+                        else "no_safe_seeded_candidate"
+                    ),
+                    search_arc_yaw_sign=self.search_arc_yaw_sign,
+                    seed_budget_mode=seed_budget_mode,
+                    attempted_seeds=attempted_seeds,
+                    valid_candidate_seeds=[
+                        seed for seed, _chunk in action_chunks
+                    ],
+                    candidate_errors=candidate_errors,
+                    locked_hazard_veto_streak=(
+                        self.locked_hazard_veto_streak
+                    ),
                     candidates=candidate_details,
                     action_source=GENERATOR_ACTION_SOURCE,
                 )
-                return None
+                if (
+                    self.locked_hazard_veto_streak
+                    >= MAX_LOCKED_HAZARD_VETO_STREAK
+                ):
+                    released = (
+                        bool(reselection_candidates)
+                        and self.release_unavailable_search_arc_lock(
+                            current_scan,
+                            request_id=request_id,
+                            reason=(
+                                "locked_side_candidate_clearance_unavailable"
+                            ),
+                        )
+                    )
+                    if released:
+                        safe_candidates = reselection_candidates
+                        direction_reselected = True
+                        reselected_seeds = {
+                            candidate[1] for candidate in safe_candidates
+                        }
+                        for detail in candidate_details:
+                            if detail.get("seed") in reselected_seeds:
+                                detail.pop("rejected", None)
+                    else:
+                        raise SearchSafetyBlocked(
+                            "no executable four-frame Generator consensus matched "
+                            f"the locked yaw for {self.locked_hazard_veto_streak} "
+                            "consecutive decisions"
+                        )
+                if not safe_candidates:
+                    return None
             (
-                selected_score,
+                selected_key,
                 selected_seed,
                 nominal_linear,
                 nominal_yaw,
                 linear_x,
                 angular_z,
                 shield_reasons,
+                execution_steps,
             ) = max(safe_candidates, key=lambda candidate: candidate[0])
-            execution_steps = 1
+            selected_score = selected_key[2]
+            if live_front_hazard and self.search_arc_yaw_sign is None:
+                if direction_reselected:
+                    self.search_arc_yaw_sign = (
+                        1.0 if angular_z > 0.0 else -1.0
+                    )
+                else:
+                    self.search_arc_yaw_sign = update_search_arc_yaw_sign(
+                        current_scan,
+                        None,
+                        self.config,
+                        generator_angular_z=angular_z,
+                    )
+                self.publish_status(
+                    "search_arc_direction_locked",
+                    stage=stage,
+                    request_id=request_id,
+                    selected_seed=selected_seed,
+                    search_arc_yaw_sign=self.search_arc_yaw_sign,
+                    generator_angular_z=angular_z,
+                    action_source=GENERATOR_ACTION_SOURCE,
+                )
             if stage in {"search", "approach"}:
-                selected_action_chunk = next(
-                    action_chunk
-                    for seed, action_chunk in action_chunks
-                    if seed == selected_seed
-                )
-                execution_steps = (
-                    dynamic_search_prefix_steps(current_scan, self.config)
-                    if stage == "search"
-                    else min(8, self.generator_config.action_chunk_size)
-                )
-                nominal_commands = tuple(
-                    av_pose_action_to_twist(action, self.generator_config)
-                    for action in selected_action_chunk[:execution_steps]
-                )
+                selected_evaluation = prefix_evaluations[selected_seed]
+                nominal_commands = selected_evaluation.nominal_commands[
+                    :execution_steps
+                ]
                 action_prefix = GeneratorActionPrefix(
                     generation=generation,
                     request_id=request_id,
                     selected_seed=selected_seed,
                     nominal_commands=nominal_commands,
+                    adapter_mode=selected_evaluation.adapter_mode,
+                    adapter_support_steps=(
+                        selected_evaluation.adapter_support_steps
+                    ),
+                    search_turn_only=(
+                        stage == "search" and live_front_hazard
+                    ),
                     marker_hint=shield_marker if stage == "approach" else None,
                     marker_image=current_image[0] if stage == "approach" else None,
                     last_exact_seen_at=(
@@ -3252,42 +4344,23 @@ class MaplessChargerSearch(Node):
                     self.pending_search_prefix = action_prefix
                 else:
                     self.pending_approach_prefix = action_prefix
-                nominal_linear, nominal_yaw = nominal_commands[0]
-                limited_linear, limited_yaw = limit_generator_twist(
-                    nominal_linear,
-                    nominal_yaw,
-                    previous,
-                    stage,
-                    self.generator_config,
-                )
-                linear_x, angular_z, shield_reasons = shield_generator_action(
-                    limited_linear,
-                    limited_yaw,
-                    stage=stage,
-                    scan=current_scan,
-                    pose=current_pose,
-                    now=now,
-                    config=self.config,
-                    marker=shield_marker,
-                    marker_depth_m=shield_depth_m,
-                    last_exact_depth_m=last_exact_depth_m,
-                )
             self.generator_failures = 0
-            self.last_generator_twist = (linear_x, angular_z)
-            if not self.commit_generator_command_if_current(
-                generation,
-                linear_x,
-                angular_z,
-                request_id=request_id,
-                chunk_step=0,
-            ):
-                self.publish_status(
-                    "generator_action_discarded",
-                    stage=stage,
+            if stage not in {"search", "approach"}:
+                self.last_generator_twist = (linear_x, angular_z)
+                if not self.commit_generator_command_if_current(
+                    generation,
+                    linear_x,
+                    angular_z,
                     request_id=request_id,
-                    reason="task_generation_changed_before_commit",
-                )
-                return None
+                    chunk_step=0,
+                ):
+                    self.publish_status(
+                        "generator_action_discarded",
+                        stage=stage,
+                        request_id=request_id,
+                        reason="task_generation_changed_before_commit",
+                    )
+                    return None
             self.publish_status(
                 "generator_action_ready",
                 stage=stage,
@@ -3296,7 +4369,30 @@ class MaplessChargerSearch(Node):
                 selected_seed=selected_seed,
                 selected_score=selected_score,
                 candidate_count=len(action_chunks),
+                seed_budget_mode=seed_budget_mode,
+                attempted_seeds=attempted_seeds,
+                valid_candidate_seeds=[
+                    seed for seed, _chunk in action_chunks
+                ],
+                candidate_errors=candidate_errors,
+                search_arc_yaw_sign=(
+                    self.search_arc_yaw_sign if stage == "search" else None
+                ),
                 execution_steps=execution_steps,
+                adapter_mode=(
+                    prefix_evaluations[selected_seed].adapter_mode
+                    if stage in {"search", "approach"}
+                    else FRAMEWISE_ADAPTER_MODE
+                ),
+                adapter_output_dim=GO2W_ADAPTER_OUTPUT_DIM,
+                adapter_support_steps=(
+                    prefix_evaluations[selected_seed].adapter_support_steps
+                    if stage in {"search", "approach"}
+                    else 1
+                ),
+                search_turn_only=(
+                    stage == "search" and live_front_hazard
+                ),
                 nominal_linear_x=nominal_linear,
                 nominal_angular_z=nominal_yaw,
                 shield=list(shield_reasons),
@@ -4210,6 +5306,15 @@ target_kind must be robot_charging_dock, other, or none. If any fact is uncertai
                 self.publish_status("canceled")
             else:
                 self.publish_status("not_found", reason="mapless_search_timeout")
+        except SearchSafetyBlocked as exc:
+            self.set_command(0.0, 0.0)
+            self.publish_status(
+                "blocked",
+                reason="front_hazard_direction_unavailable",
+                detail=str(exc),
+                search_arc_yaw_sign=self.search_arc_yaw_sign,
+                locked_hazard_veto_streak=self.locked_hazard_veto_streak,
+            )
         except GeneratorBlocked as exc:
             self.set_command(0.0, 0.0)
             self.publish_status("blocked", reason="cosmos3_generator_unavailable", detail=str(exc))

@@ -1,0 +1,101 @@
+{
+  "scene": "HouseWorld",
+  "scene_id": 6,
+  "ros_domain_id": 90,
+  "with_cosmos": true,
+  "offscreen": false,
+  "ready": true,
+  "updated_at": 1785223948.6089272,
+  "map_source": "online_slam",
+  "map": null,
+  "map_topic": "/map",
+  "visualization": "/home/unitree/matrix_go2w_lcm_demo/.run/go2w_house/cosmos/latest_visualization.jpg",
+  "cosmos_generator": {
+    "url": "http://127.0.0.1:8098",
+    "managed": true,
+    "ready": true,
+    "checked_at": 1785223948.6089232,
+    "contract": {
+      "raw_action_dim": 9,
+      "fps": 10,
+      "action_chunk_size": 16,
+      "num_steps": 4
+    },
+    "reasoner_required": true,
+    "info": {
+      "run_name": "",
+      "checkpoint": "/home/unitree/matrix_g1_lcm_demo/Cosmos3-Edge",
+      "config_file": "/home/unitree/matrix_g1_lcm_demo/packages/cosmos-framework/cosmos_framework/inference/configs/model/Cosmos3-Edge.yaml",
+      "config_file_type": "yaml",
+      "guidance": 1.0,
+      "num_steps": 4,
+      "fps": 10,
+      "seed": 0,
+      "action_chunk_size": 16,
+      "max_action_dim": 64,
+      "raw_action_dim": 9,
+      "action_stats_path": null,
+      "reasoner": true,
+      "reasoner_endpoint": "/reason",
+      "request_seed_supported": true
+    }
+  },
+  "processes": {
+    "zenohd": {
+      "pid": 920710,
+      "running": true
+    },
+    "bridge": {
+      "pid": 920757,
+      "running": true
+    },
+    "sim": {
+      "pid": 920758,
+      "running": true
+    },
+    "lidar_tf": {
+      "pid": 920761,
+      "running": true
+    },
+    "lidar_bridge": {
+      "pid": 920763,
+      "running": true
+    },
+    "robot_forward": {
+      "pid": 921324,
+      "running": true
+    },
+    "pointcloud_to_laserscan": {
+      "pid": 921325,
+      "running": true
+    },
+    "slam_toolbox": {
+      "pid": 921499,
+      "running": true
+    },
+    "vel_cmd_lcm": {
+      "pid": 921500,
+      "running": true
+    },
+    "cosmos_generator": {
+      "pid": 921649,
+      "running": true
+    },
+    "cosmos_visualizer": {
+      "pid": 921870,
+      "running": true
+    },
+    "charger_search": {
+      "pid": 921875,
+      "running": true
+    },
+    "rviz": {
+      "pid": 921969,
+      "running": true
+    },
+    "cosmos_image_view": {
+      "pid": 921970,
+      "running": true
+    }
+  }
+}

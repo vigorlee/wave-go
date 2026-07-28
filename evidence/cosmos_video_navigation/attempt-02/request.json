@@ -1,0 +1,20 @@
+{
+  "name": "go2w_target_video_prediction_long_seed560",
+  "model_mode": "video2video",
+  "prompt": "First-person low-mounted robot camera in the exact same simulated HouseWorld room shown by the conditioning patrol clip. Continue immediately from the observed motion with no cut, teleport, pause, or reverse. Over the next 6.1 seconds, drive steadily forward and steer gently left to center the target from the target image: a narrow white floor-level rectangular charging dock standing against the white wall above a dark wooden baseboard, with a black-and-white ArUco DICT_4X4_1000 marker ID 560 mounted at its top and a small white alignment pad on the dark wooden floor directly in front. The multicolored patterned curtain stays on the right. The dock must remain visible and grow continuously from a small distant object to at least one quarter of the image height. During the final second, decelerate smoothly and stop directly in front of the dock without touching it. Preserve the room geometry, lighting, target identity, low camera height, wall clearance, and temporal continuity.",
+  "vision_path": "../attempt-01/inputs/patrol_history.mp4",
+  "condition_frame_indexes_vision": [
+    0,
+    1
+  ],
+  "condition_video_keep": "first",
+  "resolution": "480",
+  "aspect_ratio": "16,9",
+  "fps": 10,
+  "num_frames": 61,
+  "num_steps": 16,
+  "guidance": 4.0,
+  "shift": 5.0,
+  "sigma_max": 80.0,
+  "seed": 560
+}

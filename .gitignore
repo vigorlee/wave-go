@@ -1,6 +1,7 @@
 .run/
 .backups/
 .local/
+.external/
 .venv*/
 artifacts/
 build/
@@ -10,6 +11,9 @@ snapshots/
 matrix/
 genisom_roamerx_open/
 third_party/
+evidence/id_experiments/**/raw/
+evidence/id_experiments/**/runtime.json
+evidence/id_experiments/**/matrix_config.json
 
 __pycache__/
 *.py[cod]

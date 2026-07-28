@@ -1,0 +1,127 @@
+{
+  "status": "success",
+  "inputs": {
+    "instruction": "request.json prompt",
+    "patrol_video": "../attempt-01/inputs/patrol_history.mp4",
+    "patrol_video_sha256": "044c53e4a8e82fae6e4004bf0fa268c07958f5bd21207c9831c31b3cac0ceb36",
+    "target_image": "../attempt-01/inputs/target_image.jpg",
+    "target_image_sha256": "4c5f1d2b71dbafecc839bff971ea7f55ecd907ed8546d8123ecf8f2f6099eb13",
+    "target_info": "../attempt-01/inputs/target_info.json",
+    "target_info_sha256": "cb385357a0f9b255f87f6d829b02fe2af922f3ba1fca246f0edf4bf81cc31551",
+    "fusion_mode": "patrol video as vision tensor; target-image semantics injected into prompt"
+  },
+  "output_video": "output/go2w_target_video_prediction_12s_seed560/vision.mp4",
+  "sha256": "296471e5c67b4051fd67d9037995978dfdeba2d876401348573c16724ce7a881",
+  "codec": "h264",
+  "width": 832,
+  "height": 480,
+  "fps": 10,
+  "frames": 121,
+  "duration_sec": 12.1,
+  "size_bytes": 11272047,
+  "elapsed_wall_sec": 45.86,
+  "sampling_sec_approx": 23.4,
+  "max_resident_set_kib": 6216380,
+  "conditioning_frames": 5,
+  "generated_frames": 116,
+  "verification_method": {
+    "opencv_version": "4.5.4",
+    "device": "cpu",
+    "aruco_dictionary": "DICT_4X4_1000",
+    "freeze_filter": "freezedetect=n=0.003:d=0.5"
+  },
+  "freeze_intervals": 0,
+  "identical_adjacent_frame_pairs": 0,
+  "adjacent_frame_mad_luma": {
+    "min": 0.511914,
+    "mean": 5.693692,
+    "median": 3.28355,
+    "max": 47.099254
+  },
+  "generated_adjacent_frame_metrics": {
+    "pairs": 115,
+    "mad_luma_min": 0.511914,
+    "mad_luma_mean": 4.24512,
+    "mad_luma_median": 3.039836,
+    "mad_luma_max": 16.226415,
+    "ssim_mean": 0.902868,
+    "scene_score_max": 0.076366
+  },
+  "last_second_metrics": {
+    "pairs": 10,
+    "mad_luma_mean": 1.3445,
+    "ssim_mean": 0.973555,
+    "lk_median_motion_mean_px_per_frame": 1.365551
+  },
+  "last_two_seconds_metrics": {
+    "pairs": 20,
+    "mad_bgr_mean": 1.507918,
+    "mad_luma_mean": 1.415152,
+    "psnr_mean_db": 30.175767,
+    "ssim_mean": 0.971712,
+    "farneback_background_edge_median_flow_mean_px_per_frame": 0.6943,
+    "mad_luma_reduction_vs_previous_two_seconds_ratio": 0.4424
+  },
+  "terminal_two_second_lk_median_motion_mean_px_per_frame": 1.49,
+  "mid_rollout_lk_median_motion_mean_px_per_frame": {
+    "frames_60_to_80": 4.42,
+    "frames_80_to_100": 3.59
+  },
+  "first_last_frame_mad_luma": 75.914005,
+  "target_marker_proxy": {
+    "note": "Near-square gray<100 main connected component in the center ROI; this tracks the visual marker board and is not a successful ID 560 decode.",
+    "frame_5": {
+      "area_px2": 674,
+      "equivalent_side_px": 26.0,
+      "center_xy": [396.5, 328.5]
+    },
+    "frame_60": {
+      "area_px2": 2112,
+      "equivalent_side_px": 46.0,
+      "center_xy": [396.2, 288.2]
+    },
+    "frame_80": {
+      "area_px2": 7730,
+      "equivalent_side_px": 87.9,
+      "center_xy": [403.0, 245.0]
+    },
+    "frame_120": {
+      "area_px2": 8370,
+      "equivalent_side_px": 91.5,
+      "center_xy": [399.8, 319.8]
+    },
+    "area_growth_ratio_frame_5_to_120": 12.42,
+    "linear_growth_ratio_frame_5_to_120": 3.52,
+    "final_horizontal_center_error_px": 16.2,
+    "final_horizontal_center_error_width_ratio": 0.0195,
+    "initial_window_median_bbox_wh_px": [24, 28],
+    "final_window_median_bbox_wh_px": [93, 98],
+    "final_visible_target_height_lower_bound_px": 208,
+    "final_visible_target_height_lower_bound_ratio": 0.4333,
+    "target_bottom_clipped_by_frame": true
+  },
+  "aruco_560_detected_generated_frames": 0,
+  "wrong_generated_marker_ids": [
+    694,
+    660,
+    441,
+    404,
+    412,
+    107
+  ],
+  "visual_assessment": {
+    "nonblank": true,
+    "subject_scene_continuity": true,
+    "no_generated_hard_cut": true,
+    "target_progressively_approached": true,
+    "target_horizontally_centered": true,
+    "terminal_deceleration": true,
+    "terminal_pose_nearly_static": true,
+    "complete_stop_confirmed": false,
+    "target_identity_preserved": false,
+    "machine_readable_marker_preserved": false,
+    "alignment_geometry_preserved": false,
+    "safe_physical_arrival_verified": false
+  },
+  "verdict": "Continuous target-directed future video and near-target terminal view are demonstrated. Correct target identity, docking geometry, safe distance, and physical arrival are not verified."
+}

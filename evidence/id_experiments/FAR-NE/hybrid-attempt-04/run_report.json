@@ -1,0 +1,73 @@
+{
+  "method": "map-based hybrid navigation",
+  "scene": "HouseWorld",
+  "condition": "FAR-NE",
+  "requested_spawn": {
+    "x": 11.2,
+    "y": 6.8,
+    "yaw_deg": -90.0
+  },
+  "started_at": "2026-07-28T06:25:13.917256+00:00",
+  "navigation": [
+    {
+      "name": "initial_handoff",
+      "goal": {
+        "x": -0.1,
+        "y": 7.5,
+        "yaw_deg": 140.0
+      },
+      "start_pose": {
+        "x": 11.172221680002544,
+        "y": 6.560158763089684,
+        "z": 0.4290186366895636,
+        "yaw_deg": -92.95231795079243,
+        "roll_rad": 0.026514048836729205,
+        "pitch_rad": 0.031795883000892644,
+        "linear_speed_mps": 0.0002834990936009722,
+        "yaw_rate_rps": -4.992034370603318e-05
+      },
+      "end_pose": {
+        "x": 0.050725783554848226,
+        "y": 7.406015921358617,
+        "z": 0.42302227131191916,
+        "yaw_deg": 151.56375223151582,
+        "roll_rad": 0.01961036148090193,
+        "pitch_rad": 0.05402857476355942,
+        "linear_speed_mps": 0.007294690087157494,
+        "yaw_rate_rps": 0.018771670945857077
+      },
+      "action_status": 4,
+      "duration_sec": 113.84877987900109,
+      "final_position_error_m": 0.17762676843959252,
+      "timed_out": false,
+      "odom_lost": false,
+      "cancel_confirmed": true,
+      "succeeded": true
+    }
+  ],
+  "visual_tasks": [],
+  "max_realignments": 2,
+  "success": false,
+  "actual_start_pose": {
+    "x": 11.172242694367036,
+    "y": 6.560282020748312,
+    "z": 0.4290936151716235,
+    "yaw_deg": -92.9477189119277,
+    "roll_rad": 0.026559710677959487,
+    "pitch_rad": 0.032367979915249485,
+    "linear_speed_mps": 0.00018077004763821045,
+    "yaw_rate_rps": -1.0360814334826333e-05
+  },
+  "finished_at": "2026-07-28T06:28:44.419420+00:00",
+  "final_pose": {
+    "x": -0.6406118417492799,
+    "y": 7.774689136202824,
+    "z": 0.42489225876770936,
+    "yaw_deg": 150.30483237749914,
+    "roll_rad": 0.019594722514308504,
+    "pitch_rad": 0.046620019382869374,
+    "linear_speed_mps": 0.003240444844717758,
+    "yaw_rate_rps": 0.007858566192008516
+  },
+  "cleanup_error": "Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389"
+}

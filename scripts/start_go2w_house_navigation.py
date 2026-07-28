@@ -52,7 +52,7 @@ HOUSE_LINK = MATRIX_DIR / "src/robot_mujoco/zsibot_robots/xgw/go2w_house"
 SUPERVISOR_LOG = LOG_DIR / "supervisor.log"
 RUNTIME_STATE = RUN_DIR / "runtime.json"
 POSTURE_FILE = RUN_DIR / "posture"
-DEFAULT_COSMOS_ROOT = Path("/home/unitree/matrix_g1_lcm_demo")
+DEFAULT_COSMOS_ROOT = ROOT_DIR / ".external/cosmos"
 COSMOS_GENERATOR_SCRIPT = ROOT_DIR / "scripts/cosmos3_go2w_generator_server.py"
 COSMOS_GENERATOR_HOST = "127.0.0.1"
 COSMOS_GENERATOR_PORT = 8098
@@ -311,7 +311,7 @@ def base_environment(args: argparse.Namespace) -> dict[str, str]:
             "GO2W_RL_STOCHASTIC": os.environ.get("GO2W_RL_STOCHASTIC", "0"),
             "GO2W_RL_MAX_VX": "0.35",
             "GO2W_RL_MAX_VY": "0.20",
-            "GO2W_RL_MAX_YAW": "0.65",
+            "GO2W_RL_MAX_YAW": "1.0",
             "GO2W_RL_IDLE_STAND": "0",
             "GO2W_RL_TERRAIN_GUARD": "0",
             "GO2W_RL_STAIR_ASSIST": "0",
@@ -368,7 +368,12 @@ def base_environment(args: argparse.Namespace) -> dict[str, str]:
 def require_files(paths: Sequence[Path]) -> None:
     missing = [str(path) for path in paths if not path.is_file()]
     if missing:
-        raise RuntimeFailure("required files are missing: " + ", ".join(missing))
+        raise RuntimeFailure(
+            "required files are missing: "
+            + ", ".join(missing)
+            + "; run scripts/bootstrap_go2w_house.sh check for the complete "
+            "dependency report"
+        )
 
 
 def reject_conflicting_runtime() -> None:
@@ -638,6 +643,7 @@ class Supervisor:
                 "PYTHONUNBUFFERED": "1",
                 "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
                 "PYTORCH_ALLOC_CONF": "expandable_segments:True",
+                "UV_OFFLINE": "1",
             }
         )
         self.cosmos_generator_managed = True
@@ -1145,6 +1151,7 @@ def start_service(args: argparse.Namespace) -> int:
     if unit_active(UNIT):
         print(f"[ERROR] {UNIT} is already active", file=sys.stderr)
         return 1
+    systemctl("unmask", "--runtime", UNIT)
     systemctl("reset-failed", UNIT)
     SUPERVISOR_LOG.write_text("", encoding="utf-8")
 

@@ -1,0 +1,116 @@
+diff --git a/build.sh b/build.sh
+index 1ca693cbc38003005603f3e40f5392d0fee3e3f7..e8c9457e633e8b00b91bbb1f22088f0a25860753 100755
+--- a/build.sh
++++ b/build.sh
+@@ -2,6 +2,9 @@
+
+ set -e
+
++# ROS 2 Humble system packages require the distro Python and its apt modules.
++export PATH="/usr/bin:/bin:${PATH}"
++
+ source /opt/ros/humble/setup.bash
+
+ usage() {
+diff --git a/src/navigation/src/robot_navigo/launch/navigation_launch.py b/src/navigation/src/robot_navigo/launch/navigation_launch.py
+index b86740ad603dbcb0801b6a4036f5291b1173d72a..4597f626c53274d3aeafab04039ee3addefb82d5 100644
+--- a/src/navigation/src/robot_navigo/launch/navigation_launch.py
++++ b/src/navigation/src/robot_navigo/launch/navigation_launch.py
+@@ -131,7 +131,7 @@ def generate_launch_description():
+                 respawn_delay=2.0,
+                 parameters=[configured_params],
+                 arguments=['--ros-args', '--log-level', log_level],
+-                remappings=remappings
++                remappings=remappings + [('cmd_vel', 'cmd_vel_nav')]
+             ),
+             Node(
+                 package='navigo_path_planner',
+@@ -160,7 +160,7 @@ def generate_launch_description():
+                 respawn_delay=2.0,
+                 parameters=[configured_params],
+                 arguments=['--ros-args', '--log-level', log_level],
+-                remappings=remappings
++                remappings=remappings + [('cmd_vel', 'cmd_vel_nav')]
+             ),
+             Node(
+                 package='navigo_velocity_optimizer',
+@@ -171,7 +171,10 @@ def generate_launch_description():
+                 respawn_delay=2.0,
+                 parameters=[configured_params],
+                 arguments=['--ros-args', '--log-level', log_level],
+-                remappings=remappings
++                remappings=remappings + [
++                    ('cmd_vel', 'cmd_vel_nav'),
++                    ('cmd_vel_smoothed', 'cmd_vel'),
++                ]
+             ),
+             Node(
+                 package='navigo_bt_navigator',
+diff --git a/src/navigation/src/robot_navigo/src/vel_cmd_lcm_publisher.cpp b/src/navigation/src/robot_navigo/src/vel_cmd_lcm_publisher.cpp
+index c77ff1b0435cee5c84aa4a7302dd58a933e60f58..da63cad223cdf08b498d401320e11634860bcb04 100644
+--- a/src/navigation/src/robot_navigo/src/vel_cmd_lcm_publisher.cpp
++++ b/src/navigation/src/robot_navigo/src/vel_cmd_lcm_publisher.cpp
+@@ -1,6 +1,8 @@
+ #include "gamepad_lcmt.hpp"
+ #include "geometry_msgs/msg/twist.hpp"
+
++#include <cerrno>
++#include <cstdlib>
+ #include <lcm/lcm-cpp.hpp>
+ #include <rclcpp/rclcpp.hpp>
+
+@@ -9,26 +11,50 @@ class VelCmdLcmPublisher : public rclcpp::Node
+ public:
+     VelCmdLcmPublisher()
+         : Node("vel_cmd_lcm_publisher"),
+-          lc("udpm://239.255.76.67:7667?ttl=255")
++          lc("udpm://239.255.76.67:7667?ttl=255"),
++          linear_deadzone_(read_linear_deadzone())
+     {
+         planner_vel_cmd_subscriber = this->create_subscription<geometry_msgs::msg::Twist>(
+             "/cmd_vel", 10, std::bind(&VelCmdLcmPublisher::HandlPlannerVelCallback, this, std::placeholders::_1));
+-        RCLCPP_INFO(this->get_logger(), "vel_cmd_lcm_publisher started");
++        RCLCPP_INFO(
++            this->get_logger(),
++            "vel_cmd_lcm_publisher started (linear deadzone %.3f m/s)",
++            linear_deadzone_);
+     }
+
+ private:
++    static double read_linear_deadzone()
++    {
++        constexpr double default_deadzone = 0.085;
++        const char*      value            = std::getenv("GO2W_LCM_LINEAR_DEADZONE_MPS");
++        if (value == nullptr || *value == '\0')
++        {
++            return default_deadzone;
++        }
++
++        errno     = 0;
++        char* end = nullptr;
++        double parsed = std::strtod(value, &end);
++        if (errno != 0 || end == value || *end != '\0' || parsed < 0.0 || parsed > 0.20)
++        {
++            return default_deadzone;
++        }
++        return parsed;
++    }
++
+     void HandlPlannerVelCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
+     {
+         std::lock_guard<std::mutex> lk(planner_vel_mutex_);
+         gamepad_lcmt                lcmt;
+-        lcmt.leftStickAnalog[1]  = std::fabs(msg->linear.x) < 0.085 ? 0.0 : msg->linear.x;
+-        lcmt.leftStickAnalog[0]  = std::fabs(msg->linear.y) < 0.085 ? 0.0 : msg->linear.y;
++        lcmt.leftStickAnalog[1]  = std::fabs(msg->linear.x) < linear_deadzone_ ? 0.0 : msg->linear.x;
++        lcmt.leftStickAnalog[0]  = std::fabs(msg->linear.y) < linear_deadzone_ ? 0.0 : msg->linear.y;
+         lcmt.rightStickAnalog[0] = -msg->angular.z;
+
+         lc.publish("vel_cmd_lcm_data", &lcmt);
+     }
+
+     lcm::LCM                                                   lc;
++    double                                                     linear_deadzone_;
+     std::mutex                                                 planner_vel_mutex_;
+     rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr planner_vel_cmd_subscriber;
+ };
