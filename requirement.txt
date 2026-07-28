@@ -1,0 +1,8 @@
+# Python dependencies used directly by the public WAVE-Go scripts.
+# ROS 2 Humble, rmw_zenoh_cpp, and cosmos_framework are workspace/system
+# dependencies and must be installed separately.
+numpy>=1.23,<2.0
+opencv-contrib-python>=4.5,<5.0
+Pillow>=9.0
+PyQt5>=5.15
+PyYAML>=6.0
