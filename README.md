@@ -517,3 +517,9 @@ python3 -m unittest \
 - 运行缓存和临时状态。
 
 因此，本仓库保存的是方法实现、配置、测试与证据，不是开箱即用的完整模型发行包。
+
+## 13. 数据采集与 Cosmos3 训练计划
+
+针对“巡游视频上下文 + 当前观测 + 目标图像 -> 候选未来视频与动作 -> 多轮闭环到达目标”的数据合同、Cosmos3 Reasoner/Generator/action 三类训练格式、InternData-N1 使用边界和 ID/OOD 评测方案，见：
+
+- [README_COSMOS3_NAVIGATION_DATA_PLAN.md](README_COSMOS3_NAVIGATION_DATA_PLAN.md)
