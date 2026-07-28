@@ -1,6 +1,6 @@
 # Cosmos3 导航世界模型：数据采集、训练与 ID/OOD 评测计划
 
-> 文档版本：v1.0
+> 文档版本：v1.1
 >
 > 审计日期：2026-07-28
 >
@@ -12,7 +12,16 @@
 
 ### 0.1 当前仿真是否满足数据采集要求
 
-**结论：仿真传感器和控制底座可用，但当前采集链和已有落盘数据不满足正式训练要求。**
+**结论：仿真传感器和控制底座可用，但当前采集链、已有落盘数据和长时稳定性均不满足正式训练要求。**
+
+当前应采用分级判断：
+
+| 用途 | 当前判断 | 说明 |
+| --- | --- | --- |
+| recorder/schema 开发 | Conditional Go | 可以短时采集并逐 episode 校验 |
+| HouseWorld 小规模 pilot | Conditional Go | 先通过 P0 稳定性闸门，再采 `20–50` 条 episode |
+| 正式批量训练数据 | No-Go | 连续同步、仿真真值、动作标签和稳定性尚未达标 |
+| scene-OOD / 论文结论 | No-Go | 当前只有 HouseWorld 完成闭环验证 |
 
 当前环境可以立即用于：
 
@@ -163,7 +172,7 @@ d_i           continue / stop / replan / abort
 
 | 问题 | 当前状态 | 必须采取的动作 |
 | --- | --- | --- |
-| RGB/Depth 帧率 | 默认 `2 Hz`，与动作 `10 Hz` 不一致 | 推荐统一为 `10 Hz`；资源不足时最低 `5 Hz` 并显式重采样 |
+| RGB/Depth 帧率 | 默认 `2 Hz`，与动作 `10 Hz` 不一致 | 推荐统一为 `10 Hz`；资源不足时建立完整的 `5 Hz` 采集/动作 profile，禁止复制帧凑成 `10 Hz` |
 | 时间戳 | 搜索节点以 `time.monotonic()` 记录 callback 到达时间 | 保留 source timestamp、sim timestamp 和 receive timestamp |
 | 连续记录 | recorder 只记任务事件、odom 和阶段截图 | 新增 MCAP episode recorder |
 | 动作标签 | 未完整保存原始 `16 x 9D` | 同时保存 expert、raw、nominal、executed 和 actual delta |
@@ -174,7 +183,35 @@ d_i           continue / stop / replan / abort
 | 场景多样性 | 当前闭环只验证固定 HouseWorld | 验收额外独立布局，按 `scene_id` 切分 |
 | 视觉/物理一致性 | 白色充电桩未进入当前碰撞点云 | 正式采集前修复资产或增加独立接触真值 |
 
-### 2.3 当前在线接口与目标任务不一致
+### 2.3 最新长时稳定性证据
+
+`FAR-NE/hybrid-attempt-03` 中所有关键健康检查曾通过，runtime 在
+`2026-07-28 13:52:52 CST` 为 ready；但约 `1000 s` 后 runtime 变为
+not-ready，supervisor 报告：
+
+```text
+[HOUSE_FAIL] critical process sim exited with status 0
+```
+
+底层 `sim.log` 同时记录：
+
+```text
+[INFO] A simulator component exited (status=0); stopping the remaining stack.
+```
+
+这不证明 Vulkan handled ensure 是直接根因，但足以说明当前栈尚未通过无人值守长时采集验收。正式批量采集前必须：
+
+1. 隔离首个退出的 simulator child，并排除外层 timeout、OOM、GPU Xid 和主动正常退出；
+2. 先用当前传感器频率完成一次至少 `30 min` 的基线 soak；
+3. 再启用 recorder，并逐级验证 `5 Hz`、目标 `10 Hz` 的 RGB-D 负载；
+4. 在最终目标采集配置下连续通过 `3` 次 soak；每次时长为
+   `max(30 min, 2 x 计划中最长 episode 时长)`；
+5. 每次均要求没有 critical process exit、MCAP 尾部损坏、topic 长时间停更、
+   时间戳回退或超限丢帧。
+
+在这项稳定性闸门通过前，只允许短时 schema/pilot 调试，不应启动正式批量采集。
+
+### 2.4 当前在线接口与目标任务不一致
 
 当前客户端仅发送：
 
@@ -755,6 +792,16 @@ collision_risk:
 - 长 episode 应切为短 clip，不要把完整巡游视频直接作为一个 SFT window；
 - 当前 `vision_sft_edge` recipe 明确关闭 `action_gen`，只能训练视觉生成，不能直接得到 Go2-W action policy。
 
+这里有一个必须显式处理的双时间尺度合同：
+
+```text
+动作 policy 视图: 17 帧 + 16 个动作，来自连续 1.6 s 窗口
+Generator 视频 SFT: 每个 window 至少 61 帧，按所选 recipe 固定实际帧数
+```
+
+两者应由同一条不可变 raw episode 分别导出。禁止把 17 帧重复或补齐到 61
+帧冒充视频 SFT 样本；这会制造静止伪运动并破坏动力学监督。
+
 因此，视频 SFT 的作用是学习 goal-conditioned future visual rollout；动作训练必须走下一节的 action loader 和 recipe。
 
 ## 8. Cosmos3 Go2-W 动作训练格式
@@ -1145,7 +1192,7 @@ Generator/action 阶段以 Matrix 数据为主。外部数据的混合比例通�
 
 | 阶段 | 建议工期 | 主要依赖 | 退出条件 |
 | --- | ---: | --- | --- |
-| P0 数据合同与 recorder | 1–2 周 | Matrix/ROS/仿真真值接口 | 10 分钟稳定采集与 validator 全通过 |
+| P0 数据合同与 recorder | 1–2 周 | Matrix/ROS/仿真真值接口 | 目标配置连续 3 次长时 soak 与 validator 全通过 |
 | P1 HouseWorld pilot | 1 周 | P0 | 三种训练视图可由同一 MCAP 重建 |
 | P2 Reasoner/Verifier | 2–3 周 | P1、多媒体 loader | 上下文消融与 false-stop 指标合格 |
 | P3 多轮闭环 | 2 周 | P2、rollout API | 候选排序和 receding-horizon 闭环稳定 |
@@ -1161,7 +1208,7 @@ Generator/action 阶段以 Matrix 数据为主。外部数据的混合比例通�
 
 任务：
 
-- 将 RGB/Depth 提升到 `10 Hz`，完成负载和掉帧测试；
+- 先定位当前 simulator child 长时退出，再将 RGB/Depth 分级提升到 `5/10 Hz` 并完成负载和掉帧测试；
 - 新增 MCAP recorder；
 - 保存 source/sim/receive 三套时间；
 - 新增 target、visibility、contact、collision 和 geodesic GT；
@@ -1172,7 +1219,8 @@ Generator/action 阶段以 Matrix 数据为主。外部数据的混合比例通�
 
 验收：
 
-- 连续 10 分钟采集无进程崩溃；
+- 最终目标配置连续通过 `3` 次 soak，每次
+  `max(30 min, 2 x 计划中最长 episode 时长)`，无 critical process exit；
 - schema 通过率 100%；
 - 丢帧率 `<1%`；
 - RGB-Depth P95 同步误差 `<=50 ms`；
