@@ -1,0 +1,22 @@
+{
+  "name": "go2w_image_goal_endpoint_conditioned_seed561",
+  "model_mode": "video2video",
+  "prompt": "Generate one continuous first-person low-mounted robot navigation shot between the supplied hard visual endpoints in the same HouseWorld room. The opening condition is the five-frame patrol history. The terminal condition is the exact goal image of the white charging dock with ArUco DICT_4X4_1000 marker ID 560 and the white floor alignment pad. Fill the unconditioned middle frames with physically plausible forward driving and gentle left steering from the patrol pose to the terminal goal-image viewpoint. Preserve the walls, dark wooden floor, baseboards, patterned curtain, camera height, dock geometry, marker identity, and alignment pad. The target must grow through real camera translation, remain visible, and converge smoothly to the exact terminal image with no cut, teleport, cross-fade, camera zoom, object morphing, collision, overshoot, or reverse. Decelerate before the terminal viewpoint and remain stopped through the final conditioned frames.",
+  "vision_path": "inputs/patrol_to_target_condition.mp4",
+  "condition_frame_indexes_vision": [
+    0,
+    1,
+    29,
+    30
+  ],
+  "condition_video_keep": "first",
+  "resolution": "480",
+  "aspect_ratio": "16,9",
+  "fps": 10,
+  "num_frames": 121,
+  "num_steps": 16,
+  "guidance": 4.0,
+  "shift": 5.0,
+  "sigma_max": 80.0,
+  "seed": 561
+}

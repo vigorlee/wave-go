@@ -1,0 +1,45 @@
+{
+  "status": "success",
+  "acceptance_status": "failed_temporal_continuity",
+  "output_video": "output/go2w_image_goal_endpoint_conditioned_seed561/vision.mp4",
+  "sha256": "84c0b99718fcfde087e9957f97f8d51cbc7f166b97d7a80f19691faa079b3373",
+  "codec": "h264",
+  "width": 832,
+  "height": 480,
+  "fps": 10,
+  "frames": 121,
+  "duration_sec": 12.1,
+  "size_bytes": 9036909,
+  "elapsed_wall_sec": 45.53,
+  "max_resident_set_kib": 6234972,
+  "conditioning": {
+    "vision_path": "inputs/patrol_to_target_condition.mp4",
+    "vision_sha256": "d8a2b692bdcf70c8a100ee5973999369c1c6a3ef765d234acf7f6a100aabea55",
+    "latent_indexes": [0, 1, 29, 30],
+    "opening_condition_pixel_frames": [0, 1, 2, 3, 4],
+    "terminal_condition_pixel_frames": [113, 114, 115, 116, 117, 118, 119, 120]
+  },
+  "terminal_boundary": {
+    "frame_pair": [112, 113],
+    "mad_luma": 37.781283,
+    "ssim": 0.781275,
+    "scene_score_at_frame_113": 0.315262,
+    "hard_cut_threshold": 0.25,
+    "hard_cut_detected": true,
+    "previous_pair_mad_luma": 1.124171
+  },
+  "terminal_target_match": {
+    "comparison": "CPU bilinear resize to 854x480 followed by centered 832x480 crop",
+    "frame_120_mad_bgr_to_target": 3.748813,
+    "frame_120_ssim_to_target": 0.96406,
+    "aruco_560_detected_frames": [114, 118, 119, 120]
+  },
+  "visual_assessment": {
+    "target_pixels_directly_conditioned": true,
+    "terminal_target_identity_recovered": true,
+    "machine_readable_marker_recovered_at_terminal": true,
+    "continuous_navigation_to_terminal_image": false,
+    "safe_physical_arrival_verified": false
+  },
+  "verdict": "Direct endpoint conditioning preserves the goal image at the terminal frames but introduces a hard visual cut at frame 113, so it fails the continuous-future-video requirement."
+}
