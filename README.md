@@ -46,6 +46,24 @@ Mission Supervisor ──► Nav2 / RoamerX ──► Go2-W base controller
 
 场景包含 18 段连续导航、4 个楼梯/坡道中央圆柱、3 个动态行人，以及实体坡高度变化。详细配置、启动方式和故障排查请参阅 demo 目录中的 [README](demos/go2w-cosmos-extended-navigation/README.md)。
 
+### 可视化结果
+
+下面的连续帧展示了实体 Go2-W 在坡道、中央圆柱和动态行人场景中的导航过程，右下角为机器人视角，左侧为 RViz/场景状态：
+
+<p align="center">
+  <img src="demos/go2w-cosmos-extended-navigation/evidence/physical_continuous_contact_sheet.jpg" alt="Go2-W 实体连续导航结果" width="100%">
+</p>
+
+完整视频可在 Release 中查看或下载：
+
+[▶ 播放 extended navigation demo（15 fps）](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-extended-navigation-full-15fps.mp4) · [下载实体坡道片段](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-physical-ramp-excerpt.mp4)
+
+无图充电 Demo 的最终视觉状态：
+
+<p align="center">
+  <img src="evidence/final_visualization.jpg" alt="无图充电视觉搜索结果" width="78%">
+</p>
+
 ## 已验证结果
 
 | 指标 | 结果 |
