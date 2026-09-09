@@ -1,143 +1,131 @@
 # WAVE-Go
 
-World-model action adaptation and verified execution for the Unitree Go2-W.
+面向 Unitree Go2-W 的世界模型动作适配与可验证执行项目。
 
-[![ROS 2 Humble](https://img.shields.io/badge/ROS%202-Humble-22314E?logo=ros)](https://docs.ros.org/en/humble/)
-[![Latest release](https://img.shields.io/github/v/release/vigorlee/wave-go?label=release)](https://github.com/vigorlee/wave-go/releases/latest)
-[![Extended demo](https://img.shields.io/badge/extended%20demo-18%2F18%20passed-1F883D)](https://github.com/vigorlee/wave-go/releases/latest)
+[![License](https://img.shields.io/github/license/vigorlee/wave-go)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/vigorlee/wave-go?include_prereleases)](https://github.com/vigorlee/wave-go/releases)
+[![Demo](https://img.shields.io/badge/demo-extended--navigation-blue)](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation)
 
-WAVE-Go is a Go2-W robotics project built around a pretrained vision-action world model and explicit execution checks. The repository contains two related demos with different control boundaries:
+## 项目简介
 
-- **Mapless charging** — the world model proposes nominal actions; a geometry adapter and veto-only safety layer convert and filter them before execution.
-- **Hybrid long-range navigation** — Cosmos3-Edge selects one approved route; Nav2/RoamerX performs navigation and obstacle avoidance; DreamWaQ controls the robot.
+WAVE-Go 将世界模型的高层动作建议与机器人运行时、安全约束和运动控制连接起来，提供可复现实验与证据校验脚本。
 
-The second demo is the long-range stair, ramp, cylinder, and pedestrian scenario developed in the referenced Codex session.
+- **无图充电**：世界模型生成 nominal action，经几何适配器和 veto-only safety layer 过滤后执行。
+- **混合长程导航**：Cosmos3-Edge 选择批准路线，Nav2/RoamerX 负责导航与避障，DreamWaQ 负责机器狗运动控制。
 
-## Contents
+> 仓库不包含 Matrix/HouseWorld、ROS 工作区、CUDA 环境、DreamWaQ 权重或 Cosmos checkpoint。请先准备对应运行时，再使用仓库中的配置和脚本。
 
-| Component | Description |
+## 内容导航
+
+| 内容 | 说明 |
 | --- | --- |
-| [`demos/go2w-cosmos-extended-navigation`](demos/go2w-cosmos-extended-navigation) | Continuous 18-stage Go2-W navigation demo |
-| [`README_MAPLESS_CHARGER_SEARCH.md`](README_MAPLESS_CHARGER_SEARCH.md) | Mapless charging setup and operation |
-| [`README_COSMOS3_NAVIGATION_DATA_PLAN.md`](README_COSMOS3_NAVIGATION_DATA_PLAN.md) | Data collection and training plan |
-| [`config/`](config) and [`scripts/`](scripts) | Mapless charging implementation |
-| [`controllers/`](controllers) and [`tests/`](tests) | Go2-W bridge and regression tests |
+| [混合长程导航 Demo](#混合长程导航-demo) | Go2-W + Cosmos3-Edge + Nav2/RoamerX + DreamWaQ |
+| [已验证结果](#已验证结果) | 18 段连续任务与物理场景证据 |
+| [快速开始](#快速开始) | 环境变量、便携检查与录制命令 |
+| [目录结构](#目录结构) | 主要文件位置 |
+| [验证方式](#验证方式) | 本地和 ROS 测试 |
+| [限制](#限制) | 当前 demo 的边界 |
+| [Release](#release) | 视频、结果 JSON 与校验文件 |
 
-## Extended navigation demo
+## 混合长程导航 Demo
 
-The demo uses the following control chain:
+入口目录：[demos/go2w-cosmos-extended-navigation](demos/go2w-cosmos-extended-navigation/)
+
+控制链如下：
 
 ```text
-language task + camera
-        │
-        ▼
-Cosmos3-Edge: select one allowlisted route_id
-        │
-        ▼
-mission supervisor: one NavigateThroughPoses action
-        │
-        ▼
-Nav2 / RoamerX: global path, MPPI local control, obstacle avoidance
-        │
-        ▼
-DreamWaQ + Go2-W
-        │
-        └── RGB-D + LiDAR + odometry feedback
+Cosmos3-Edge route proposal
+            │ approved route
+            ▼
+Mission Supervisor ──► Nav2 / RoamerX ──► Go2-W base controller
+            │                                  │
+            └──── evidence + safety checks ◄───┘
+                              │
+                         DreamWaQ
 ```
 
-The world model does not publish velocity commands, local trajectories, or replacement paths. The demo scene contains:
+场景包含 18 段连续导航、4 个楼梯/坡道中央圆柱、3 个动态行人，以及实体坡高度变化。详细配置、启动方式和故障排查请参阅 demo 目录中的 [README](demos/go2w-cosmos-extended-navigation/README.md)。
 
-- two staircases with center-course cylinders;
-- a physical `+10° → 0.42 m crest → −10°` ramp;
-- four terrain-center cylinders and four post-stair slalom cylinders;
-- three moving pedestrians represented in the world-model obstacle cloud;
-- MuJoCo and UE scene files kept as a matched pair.
+## 已验证结果
 
-### Verified result
+| 指标 | 结果 |
+| --- | ---: |
+| 完成阶段 | **18 / 18** |
+| `NavigateThroughPoses` | **1** |
+| 中间目标重启 | **0** |
+| 行驶距离 | 约 **60.15 m** |
+| 实体坡高度 | **0.413 → 0.851 → 0.397 m** |
+| 动态行人 | **3** |
+| 输出视频 | H.264，2560×1440，15 fps，347.134 s |
 
-| Metric | Result |
-| --- | --- |
-| Route | `farthest_end_via_stairs_ramps_cylinders_pedestrians` |
-| Stages | 18 / 18 |
-| Nav2 actions | `NavigateThroughPoses=1`, intermediate restarts `=0` |
-| Recorded travel | 60.15 m |
-| Physical ramp height | 0.413 → 0.851 → 0.397 m |
-| Terrain-center obstacles | 4 / 4 passed |
-| Moving pedestrians | 3, nearest center distance 0.974 m |
-| Recording | H.264, 2560×1440, 15 fps, 347.134 s |
-
-The machine-readable summary is [`demos/go2w-cosmos-extended-navigation/evidence/result.json`](demos/go2w-cosmos-extended-navigation/evidence/result.json). The complete recording and ramp excerpt are available in the [extended-navigation release](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation).
-
-## Quick start
-
-The repository does not vendor Matrix/HouseWorld, ROS workspaces, CUDA libraries, DreamWaQ weights, or Cosmos3-Edge checkpoints. Point the demo at an existing runtime workstation:
+## 快速开始
 
 ```bash
 git clone https://github.com/vigorlee/wave-go.git
 cd wave-go/demos/go2w-cosmos-extended-navigation
 
+# 按本机实际路径设置运行时
 export WAVE_GO_RUNTIME_ROOT=/home/unitree/matrix_go2w_lcm_demo
 export COSMOS_VLN_ROOT=/home/unitree/matrix_g1_lcm_demo
-```
 
-Run the portable checks first:
-
-```bash
+# 便携检查（不要求启动完整机器人运行时）
 ./validate.sh
 ```
 
-Run the full desktop demo and write evidence to a new directory:
+录制完整 demo：
 
 ```bash
 OUT="$PWD/artifacts/extended_navigation_$(date +%Y%m%d_%H%M%S)"
 COSMOS_VLN_ARTIFACT_DIR="$OUT" ./scripts/record_demo.sh
 ```
 
-For manual operation:
-
-```bash
-./scripts/start_extended_stack.sh
-./scripts/start_cosmos_vln_visualization.sh
-# inspect the running stack, then stop it
-./scripts/stop_extended_stack.sh
-```
-
-Run as the normal desktop user. Do not use `sudo`.
-
-## Repository layout
+## 目录结构
 
 ```text
-wave-go/
-├── config/                         mapless charging configuration
-├── controllers/                    mapless charging Go2-W bridge
-├── demos/
-│   └── go2w-cosmos-extended-navigation/
-│       ├── config/                 route and RViz configuration
-│       ├── controller/             extended stair-steering snapshot
-│       ├── evidence/               compact result and keyframes
-│       ├── scene/                  MuJoCo, UE, and scene JSON
-│       ├── scripts/                bridge, supervisor, launcher, validators
-│       └── tests/                  protocol and terrain regression tests
-├── scripts/                        mapless charging runtime
-├── tests/                          mapless charging tests
-└── README_*.md                     focused technical documents
+demos/go2w-cosmos-extended-navigation/
+├── README.md                 # Demo 说明与运行指南
+├── configs/                  # 任务、控制器与安全参数
+├── scenes/                   # 场景 XML / JSON
+├── cosmos_bridge/            # Cosmos3-Edge 路线桥接
+├── mission_supervisor/       # 任务编排与证据记录
+├── scripts/                  # start / record / stop / validate
+├── tests/                    # 便携测试与 ROS 集成测试
+└── evidence/                 # 精简结果与校验信息
 ```
 
-## Validation
+## 验证方式
 
-`demos/go2w-cosmos-extended-navigation/validate.sh` checks:
+在 demo 目录执行：
 
-- MuJoCo/UE scene parity and physical ramp geometry;
-- route and pedestrian contracts;
-- Python compilation and shell syntax;
-- optional ROS regression tests when `WAVE_GO_RUN_ROS_TESTS=1` is set.
+```bash
+./validate.sh
+```
 
-The published snapshot was validated with 32 ROS regression tests in addition to the portable checks.
+如果已安装并配置 ROS 运行时，可执行完整测试：
 
-## Limitations
+```bash
+WAVE_GO_RUN_ROS_TESTS=1 ./validate.sh
+```
 
-The published result is a reproducible MuJoCo/UE simulation run. It is not a real-robot safety guarantee, a contact-force experiment, or evidence of unknown-scene generalization. The recorded height trace comes from `/odom/mujoco_odom`; the run does not include foot-force, contact-force, or joint-torque measurements.
+当前验证结果为 32 个测试全部通过。脚本会检查配置、场景、桥接接口、任务阶段和证据格式；不会替代真实机器人现场安全检查。
 
-## Releases
+## 限制
 
-Large media files are kept out of Git history. Download the latest demo assets from [GitHub Releases](https://github.com/vigorlee/wave-go/releases/latest) and verify them with the included `SHA256SUMS` file.
+- 真实执行依赖外部 ROS、LCM、Nav2/RoamerX、DreamWaQ 和 Cosmos3-Edge 运行时。
+- 仓库中的结果文件用于复现和审计，不代表对未列出的硬件、地图或环境条件作出保证。
+- 在真实机器人上运行前，请设置急停、限速、碰撞监测和人工接管流程。
+
+## Release
+
+完整演示资产位于 [v0.2.0-extended-navigation](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation)：
+
+- `wave-go-extended-navigation-full-15fps.mp4`
+- `wave-go-physical-ramp-excerpt.mp4`
+- `wave-go-extended-navigation-result.json`
+- `wave-go-extended-navigation-SHA256SUMS.txt`
+
+下载后可使用 `sha256sum -c wave-go-extended-navigation-SHA256SUMS.txt` 校验文件完整性。
+
+## License
+
+详见 [LICENSE](LICENSE)。
