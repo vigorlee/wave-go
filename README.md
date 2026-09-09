@@ -54,6 +54,8 @@ Mission Supervisor ──► Nav2 / RoamerX ──► Go2-W base controller
   <img src="demos/go2w-cosmos-extended-navigation/evidence/physical_continuous_contact_sheet.jpg" alt="Go2-W 实体连续导航结果" width="100%">
 </p>
 
+<sub>证据帧：坡道通过、中央圆柱避障、动态行人区域与最终目标。原始结果记录见 <a href="demos/go2w-cosmos-extended-navigation/evidence/result.json">result.json</a>。</sub>
+
 完整视频可在 Release 中查看或下载：
 
 [▶ 播放 extended navigation demo（15 fps）](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-extended-navigation-full-15fps.mp4) · [下载实体坡道片段](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-physical-ramp-excerpt.mp4)
@@ -63,6 +65,8 @@ Mission Supervisor ──► Nav2 / RoamerX ──► Go2-W base controller
 <p align="center">
   <img src="evidence/final_visualization.jpg" alt="无图充电视觉搜索结果" width="78%">
 </p>
+
+<sub>视觉搜索状态：检测到充电桩标记并进入 charging 状态。</sub>
 
 ## 已验证结果
 
