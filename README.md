@@ -28,13 +28,13 @@ WAVE-Go 现在按两个清晰的实验轨道组织：
 
 ```mermaid
 flowchart LR
-    T[English task + first-person RGB] --> C[Cosmos3-Edge\nroute_id only]
+    T[English task + first-person RGB] --> C[Cosmos3-Edge<br/>route_id only]
     C --> M[fail-closed mission supervisor]
     M --> N[one NavigateThroughPoses]
     P[RGB-D + LiDAR + odom] --> S[Nav2 MPPI + costmap]
     N --> S --> D[DreamWaQ / Go2-W]
     D --> P
-    W[scene JSON\n3 moving pedestrians + 13 cylinders] --> S
+    W[scene JSON<br/>3 moving pedestrians + 13 cylinders] --> S
 ```
 
 已验证的 MuJoCo/UE 结果是 18/18、60.15 m、`NavigateThroughPoses=1`、实体坡高度 `0.413 → 0.851 → 0.397 m`；四个楼梯/坡道中央圆柱和三个动态行人均通过验收。具体边界、依赖和命令见 demo README：
