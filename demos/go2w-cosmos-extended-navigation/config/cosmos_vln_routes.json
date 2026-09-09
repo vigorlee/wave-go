@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "route_id": "upper_landing",
+      "description": "From the centered staircase entrance, follow the validated safe route up the middle of the stairs to the upper landing and stop.",
+      "task_examples": [
+        "Follow the center of the staircase to the upper landing, then stop.",
+        "Navigate along the safe route to the other side.",
+        "Reach the upper landing safely."
+      ],
+      "profile": "stair_up",
+      "navigation_mode": "up",
+      "goal": {
+        "frame_id": "map",
+        "x": 0.2,
+        "y": 4.8,
+        "yaw_rad": 1.5707963267948966
+      }
+    },
+    {
+      "route_id": "far_end_via_stairs",
+      "description": "From the centered staircase entrance, climb to the upper landing, descend the far staircase, then stop at the current nearby endpoint before the remote obstacle zone.",
+      "task_examples": [
+        "Navigate along the stair route to the current nearby endpoint.",
+        "Climb the stairs, descend on the other side, and stop before the remote obstacles.",
+        "Complete the stair course without entering the distant obstacle route."
+      ],
+      "stages": [
+        {
+          "stage_id": "climb_to_upper_landing",
+          "profile": "stair_up",
+          "navigation_mode": "up",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.2,
+            "y": 4.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "descend_far_staircase",
+          "profile": "stair_down",
+          "navigation_mode": "down",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.2,
+            "y": 10.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "navigate_to_far_end",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.4,
+            "y": 14.4,
+            "yaw_rad": 1.5707963267948966
+          }
+        }
+      ]
+    },
+    {
+      "route_id": "farthest_end_via_stairs_and_obstacles",
+      "description": "From the centered staircase entrance, complete the validated stair course, continue beyond the current far route through the remote obstacles, traverse the north gallery and east corridor, and stop at the farthest approved endpoint.",
+      "task_examples": [
+        "Complete both staircases, pass the remote obstacles, and navigate to the farthest approved endpoint.",
+        "Take the longest safe route through the stairs and remote obstacle zone to the far end.",
+        "Navigate beyond the current far route, through the remote obstacles, to the most distant approved endpoint."
+      ],
+      "stages": [
+        {
+          "stage_id": "climb_to_upper_landing",
+          "profile": "stair_up",
+          "navigation_mode": "up",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.2,
+            "y": 4.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "descend_far_staircase",
+          "profile": "stair_down",
+          "navigation_mode": "down",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.2,
+            "y": 10.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "navigate_to_far_end",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.4,
+            "y": 14.4,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "approach_remote_obstacles",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.2,
+            "y": 17.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "clear_remote_obstacles",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.2,
+            "y": 19.5,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "traverse_north_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.4,
+            "y": 28.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "round_north_corner",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 2.5,
+            "y": 32.8,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "cross_north_gallery",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.5,
+            "y": 32.5,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "enter_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 31.0,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "traverse_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 26.5,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "navigate_to_farthest_endpoint",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 22.8,
+            "yaw_rad": -1.5707963267948966
+          }
+        }
+      ]
+    },
+    {
+      "route_id": "farthest_end_via_stairs_ramps_cylinders_pedestrians",
+      "description": "Avoid center-course cylinders placed on both staircases and on the green uphill/downhill ramps, weave through the post-stair cylinder slalom, avoid remote cylinders and moving pedestrians, then traverse the north gallery and east corridor to the farthest approved endpoint.",
+      "task_examples": [
+        "Climb and descend both stairs while steering around their centerline cylinders, avoid the cylinders on both ramps and the moving pedestrians, and reach the farthest endpoint.",
+        "Take the long route around the stair and ramp center-course barriers, through the cylinder slalom, dynamic people, and remote corridor to the far end.",
+        "Navigate the complete mixed-terrain route with local obstacle avoidance on the stairs and ramp pair, including moving pedestrians."
+      ],
+      "stages": [
+        {
+          "stage_id": "climb_to_upper_landing",
+          "profile": "stair_up",
+          "navigation_mode": "up",
+          "goal": {"frame_id": "map", "x": 0.2, "y": 4.8, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "descend_far_staircase",
+          "profile": "stair_down",
+          "navigation_mode": "down",
+          "goal": {"frame_id": "map", "x": 0.2, "y": 10.2, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "slalom_pass_first_pair",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.08, "y": 11.15, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "slalom_pass_second_pair",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": -0.08, "y": 11.85, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "slalom_exit_before_ramp",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.08, "y": 12.48, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "ramp_up_entry",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {"frame_id": "map", "x": 0.25, "y": 13.35, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "ramp_up_crest",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {"frame_id": "map", "x": 0.50, "y": 15.40, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "ramp_down_entry",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {"frame_id": "map", "x": 0.50, "y": 16.30, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "ramp_down_exit",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {"frame_id": "map", "x": 0.55, "y": 18.05, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "approach_remote_obstacles",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.85, "y": 18.95, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "cross_dynamic_pedestrian_zone",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.85, "y": 20.80, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "clear_remote_obstacles",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.40, "y": 22.00, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "traverse_north_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 0.40, "y": 28.80, "yaw_rad": 1.5707963267948966}
+        },
+        {
+          "stage_id": "round_north_corner",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 2.50, "y": 32.80, "yaw_rad": 0.0}
+        },
+        {
+          "stage_id": "cross_north_gallery",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 17.50, "y": 32.50, "yaw_rad": 0.0}
+        },
+        {
+          "stage_id": "enter_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 18.00, "y": 31.00, "yaw_rad": -1.5707963267948966}
+        },
+        {
+          "stage_id": "traverse_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 18.00, "y": 26.50, "yaw_rad": -1.5707963267948966}
+        },
+        {
+          "stage_id": "navigate_to_farthest_endpoint",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {"frame_id": "map", "x": 18.00, "y": 22.80, "yaw_rad": -1.5707963267948966}
+        }
+      ]
+    }
+  ]
+}

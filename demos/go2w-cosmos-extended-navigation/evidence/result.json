@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "result": "succeeded",
+  "reason": "continuous_route_completed",
+  "route_id": "farthest_end_via_stairs_ramps_cylinders_pedestrians",
+  "stage_count": 18,
+  "duration_sec": 311.92333542904817,
+  "recorded_travel_distance_m": 60.14559659937906,
+  "final_pose": {
+    "x": 18.063413263546938,
+    "y": 23.165424504794775,
+    "z": 0.3581582803519577,
+    "roll_rad": -0.007335522587153436,
+    "pitch_rad": -0.11942480958651082,
+    "yaw_rad": -1.5069756853282967
+  },
+  "continuous_navigation": {
+    "execution_mode": "navigate_through_poses",
+    "navigate_through_poses_goal_count": 1,
+    "navigate_to_pose_goal_count": 0,
+    "intermediate_goal_restarts": 0,
+    "passed": true
+  },
+  "physical_ramp_metrics": {
+    "passed": true,
+    "approach_z_m": 0.4128037875320712,
+    "crest_max_z_m": 0.8510872824512205,
+    "exit_z_m": 0.3974623841706788,
+    "elevation_gain_m": 0.43828349491914925,
+    "elevation_drop_m": 0.45362489828054164,
+    "uphill_max_abs_pitch_rad": 0.058045809992215786,
+    "downhill_max_abs_pitch_rad": 0.20061710964666682,
+    "minimum_elevation_gain_m": 0.3,
+    "minimum_pitch_rad": 0.07,
+    "trace": "odom_physics.csv"
+  },
+  "terrain_center_obstacle_count": 4,
+  "terrain_avoidance_metrics": {
+    "extended_stair_up_center_cylinder": {
+      "xml_name": "Cylinder37",
+      "x": -0.15,
+      "y": 3.15,
+      "z": 1.775,
+      "radius_m": 0.13,
+      "min_robot_center_distance_m": 0.7851966278076411,
+      "min_robot_center_to_obstacle_surface_m": 0.6551966278076411,
+      "passed": true
+    },
+    "extended_stair_down_center_cylinder": {
+      "xml_name": "Cylinder38",
+      "x": -0.15,
+      "y": 8.45,
+      "z": 1.025,
+      "radius_m": 0.13,
+      "min_robot_center_distance_m": 0.5179390863665025,
+      "min_robot_center_to_obstacle_surface_m": 0.38793908636650254,
+      "passed": true
+    },
+    "extended_ramp_up_center_cylinder": {
+      "xml_name": "Cylinder39",
+      "x": -0.05,
+      "y": 14.15,
+      "z": 0.55561,
+      "radius_m": 0.13,
+      "min_robot_center_distance_m": 0.3912330760812107,
+      "min_robot_center_to_obstacle_surface_m": 0.2612330760812107,
+      "passed": true
+    },
+    "extended_ramp_down_center_cylinder": {
+      "xml_name": "Cylinder41",
+      "x": 0.05,
+      "y": 17.05,
+      "z": 0.52035,
+      "radius_m": 0.13,
+      "min_robot_center_distance_m": 0.3918616463701825,
+      "min_robot_center_to_obstacle_surface_m": 0.2618616463701825,
+      "passed": true
+    }
+  },
+  "dynamic_obstacle_summary": {
+    "actor_count": 3,
+    "min_center_distance_m": 0.9735780703906954,
+    "nearest_actor": "pedestrian_gallery_crossing"
+  },
+  "world_model_counts": {
+    "static_cylinders": 13,
+    "static_modeled_points": 2256,
+    "dynamic_modeled_points": 624,
+    "published_clouds": 3701
+  }
+}

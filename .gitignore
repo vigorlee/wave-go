@@ -11,6 +11,12 @@ matrix/
 genisom_roamerx_open/
 third_party/
 
+# The extended demo stores generated runtime state beside its portable recipe.
+demos/go2w-cosmos-extended-navigation/.run/
+demos/go2w-cosmos-extended-navigation/logs/
+demos/go2w-cosmos-extended-navigation/artifacts/
+demos/go2w-cosmos-extended-navigation/evidence/*.mp4
+
 __pycache__/
 *.py[cod]
 *.so

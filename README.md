@@ -2,11 +2,64 @@
 
 **World-model Action Adaptation with Verified Execution for Go2-W**
 
-WAVE-Go 是一个面向轮足机器人 Go2-W 的无图充电闭环框架。系统使用预训练视觉-动作世界模型，根据实时第一视角图像和语言任务生成短时动作序列，再通过训练无关的跨本体几何适配器转换为 ROS `Twist`。执行过程中，RGB、RGB-D、LiDAR、里程计和姿态反馈持续参与安全否决与终止验证，最终完成充电桩搜索、身份确认、近距离接近、停车和下蹲。
+[![ROS 2 Humble](https://img.shields.io/badge/ROS%202-Humble-22314E?logo=ros)](https://docs.ros.org/en/humble/)
+[![Cosmos3-Edge](https://img.shields.io/badge/world%20model-Cosmos3--Edge-6E56CF)](https://github.com/nvidia-cosmos/cosmos-predict2)
+[![demo status](https://img.shields.io/badge/extended%20demo-18%2F18%20passed-1F883D)](https://github.com/vigorlee/wave-go/releases/latest)
 
-当前实现以 **Cosmos3-Edge** 实例化视觉-动作世界模型，但 WAVE-Go 指的是完整机器人方法，而不是对基础模型的重命名。
+WAVE-Go 现在按两个清晰的实验轨道组织：
 
-> 准确的方法定位：以预训练视觉-动作世界模型作为唯一高层 nominal action source，通过跨本体动作适配、风险自适应 action-chunk 执行和多模态证据门控，完成 map-independent 的充电桩搜索与接近。
+1. **Mapless charging**：世界模型生成 nominal action，经跨本体适配和 veto-only safety shield 完成充电桩搜索与接近。
+2. **Hybrid long-range navigation**：Cosmos3-Edge 只选择一次白名单路线，Nav2/RoamerX 负责路径与避障，DreamWaQ 负责 Go2-W 运动控制；它不会把 Nav2 的速度命令冒充成世界模型动作。
+
+这两个轨道共享 Go2-W、Cosmos 和证据门控基础设施，但控制权限不同，文档和代码入口也分开。当前仓库保存的是可审阅的源码、配置、测试和精简证据；Matrix/HouseWorld、模型权重、CUDA 环境仍需从外部工作站提供。
+
+## 快速入口
+
+| 目标 | 入口 |
+| --- | --- |
+| 运行原有无图充电闭环 | [`README_MAPLESS_CHARGER_SEARCH.md`](README_MAPLESS_CHARGER_SEARCH.md) |
+| 运行本次 18 段实体坡连续导航 | [`demos/go2w-cosmos-extended-navigation/`](demos/go2w-cosmos-extended-navigation/) |
+| 查看成功结果摘要 | [`evidence/result.json`](demos/go2w-cosmos-extended-navigation/evidence/result.json) |
+| 下载完整视频和坡道片段 | [Latest GitHub Release](https://github.com/vigorlee/wave-go/releases/latest) |
+
+## Go2-W × Cosmos3-Edge 扩展长程 Demo
+
+这是本次整理的主 demo。任务启动时只进行一次 Cosmos route selection；mission supervisor 随后只提交一个 `NavigateThroughPoses`，在 18 个通过点更新状态和地形 profile，不取消或重发中间目标。
+
+```mermaid
+flowchart LR
+    T[English task + first-person RGB] --> C[Cosmos3-Edge\nroute_id only]
+    C --> M[fail-closed mission supervisor]
+    M --> N[one NavigateThroughPoses]
+    P[RGB-D + LiDAR + odom] --> S[Nav2 MPPI + costmap]
+    N --> S --> D[DreamWaQ / Go2-W]
+    D --> P
+    W[scene JSON\n3 moving pedestrians + 13 cylinders] --> S
+```
+
+已验证的 MuJoCo/UE 结果是 18/18、60.15 m、`NavigateThroughPoses=1`、实体坡高度 `0.413 → 0.851 → 0.397 m`；四个楼梯/坡道中央圆柱和三个动态行人均通过验收。具体边界、依赖和命令见 demo README：
+
+```bash
+cd demos/go2w-cosmos-extended-navigation
+./validate.sh
+```
+
+完整视频不进入 Git 历史，作为 release asset 提供；这样源码 checkout 保持轻量，证据仍可下载和校验 SHA-256。
+
+## 目录总览
+
+```text
+config/                                  mapless charging 配置
+controllers/                             Go2-W bridge 源码
+scripts/                                 原有 mapless charging 运行时
+tests/                                   原有方法回归测试
+demos/go2w-cosmos-extended-navigation/  18 段混合导航 demo（独立入口）
+evidence/                                mapless charging 成功证据
+```
+
+下面的章节保留 WAVE-Go mapless charging 方法的完整定义；扩展导航 demo 的控制边界请以其独立 README 为准。
+
+> 方法定位（Track A）：以预训练视觉-动作世界模型作为唯一高层 nominal action source，通过跨本体动作适配、风险自适应 action-chunk 执行和多模态证据门控，完成 map-independent 的充电桩搜索与接近。
 
 ## 1. 方法边界
 

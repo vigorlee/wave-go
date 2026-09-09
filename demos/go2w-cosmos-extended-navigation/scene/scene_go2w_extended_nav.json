@@ -1,0 +1,108 @@
+{
+  "Element1": {
+    "name": "extended_slalom_cylinder_1",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": -82, "y": 1082, "z": 34},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element2": {
+    "name": "extended_slalom_cylinder_2",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": 82, "y": 1148, "z": 34},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element3": {
+    "name": "extended_slalom_cylinder_3",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": -82, "y": 1214, "z": 34},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element4": {
+    "name": "extended_slalom_cylinder_4",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": 82, "y": 1280, "z": 34},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element5": {
+    "name": "pedestrian_ramp_exit",
+    "type": "dynamic",
+    "model": "human1",
+    "avoid": false,
+    "position": {"x": 250, "y": 2080, "z": 90},
+    "rotation": {"pitch": 0, "yaw": 180, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1},
+    "velocity": 0.28,
+    "trajectory": {
+      "point1": {"x": -250, "y": 2080, "z": 0},
+      "point2": {"x": 250, "y": 2080, "z": 0}
+    }
+  },
+  "Element6": {
+    "name": "pedestrian_north_corridor",
+    "type": "dynamic",
+    "model": "human1",
+    "avoid": true,
+    "position": {"x": -220, "y": 2580, "z": 90},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1},
+    "velocity": 0.24,
+    "trajectory": {
+      "point1": {"x": 220, "y": 2580, "z": 0},
+      "point2": {"x": -220, "y": 2580, "z": 0}
+    }
+  },
+  "Element7": {
+    "name": "pedestrian_gallery_crossing",
+    "type": "dynamic",
+    "model": "human1",
+    "avoid": false,
+    "position": {"x": 1200, "y": 3250, "z": 90},
+    "rotation": {"pitch": 0, "yaw": 270, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1},
+    "velocity": 0.22,
+    "trajectory": {
+      "point1": {"x": 850, "y": 3250, "z": 0},
+      "point2": {"x": 1200, "y": 3250, "z": 0}
+    }
+  },
+  "Element8": {
+    "name": "Cylinder37",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": -15, "y": 315, "z": 178},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element9": {
+    "name": "Cylinder38",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": -15, "y": 845, "z": 103},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element10": {
+    "name": "Cylinder39",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": -5, "y": 1415, "z": 56},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  },
+  "Element11": {
+    "name": "Cylinder41",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {"x": 5, "y": 1705, "z": 52},
+    "rotation": {"pitch": 0, "yaw": 0, "roll": 0},
+    "scale": {"x": 1, "y": 1, "z": 1}
+  }
+}
