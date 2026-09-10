@@ -1,0 +1,29 @@
+{
+  "source_video": "matrix_go2w_cosmos_extended_navigation_15fps.mp4",
+  "source_video_sha256": "a39600a60a8e75861b65f11cc7508a73a526da70b39f97562368826ad174330e",
+  "source_video_duration_seconds": 426.6,
+  "crop": "1172:582:1313:750",
+  "frames": [
+    {
+      "file": "stairs.jpg",
+      "source_seconds": 60
+    },
+    {
+      "file": "slalom.jpg",
+      "source_seconds": 103
+    },
+    {
+      "file": "ramp-up.jpg",
+      "source_seconds": 117
+    },
+    {
+      "file": "ramp-down.jpg",
+      "source_seconds": 134
+    },
+    {
+      "file": "dynamic-obstacle.jpg",
+      "source_seconds": 178
+    }
+  ],
+  "overview": "Two actual video frames with editorial labels; no generated scene content."
+}

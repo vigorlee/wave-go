@@ -1,0 +1,63 @@
+{
+  "result": "succeeded",
+  "acceptance_passed": true,
+  "stage_count": 18,
+  "recorded_travel_distance_m": 60.881858405448355,
+  "duration_sec": 391.21821268298663,
+  "min_dynamic_center_distance_m": 1.6208715565123435,
+  "dynamic_avoidance_metrics": {
+    "minimum_center_distance_m": 0.65,
+    "passed": true,
+    "source": "mujoco_qpos_relay"
+  },
+  "physical_ramp_metrics": {
+    "passed": true,
+    "approach_z_m": 0.40976136524137985,
+    "crest_max_z_m": 0.8542943515303204,
+    "exit_z_m": 0.4042926458171168,
+    "elevation_gain_m": 0.44453298628894056,
+    "elevation_drop_m": 0.4500017057132036,
+    "uphill_max_abs_pitch_rad": 0.06759158774613105,
+    "downhill_max_abs_pitch_rad": 0.1860007349622796,
+    "minimum_elevation_gain_m": 0.3,
+    "minimum_pitch_rad": 0.07,
+    "trace": "odom_physics.csv"
+  },
+  "continuous_navigation": {
+    "execution_mode": "navigate_through_poses",
+    "navigate_through_poses_goal_count": 1,
+    "navigate_to_pose_goal_count": 0,
+    "intermediate_goal_restarts": 0,
+    "passed": true
+  },
+  "run_date": "2026-09-10",
+  "completed_stages": 18,
+  "dynamic_actor_minimum_center_distances_m": {
+    "ramp_exit": 1.6208715565123435,
+    "north_corridor": 1.7133729360898033,
+    "gallery_crossing": 1.6877921780763379
+  },
+  "terrain_avoidance_metrics": {
+    "extended_stair_up_center_cylinder": {
+      "passed": true,
+      "min_robot_center_distance_m": 0.49574692849915813,
+      "min_robot_center_to_obstacle_surface_m": 0.36574692849915813
+    },
+    "extended_stair_down_center_cylinder": {
+      "passed": true,
+      "min_robot_center_distance_m": 0.5406031249578801,
+      "min_robot_center_to_obstacle_surface_m": 0.4106031249578801
+    },
+    "extended_ramp_up_center_cylinder": {
+      "passed": true,
+      "min_robot_center_distance_m": 0.3905357525799172,
+      "min_robot_center_to_obstacle_surface_m": 0.2605357525799172
+    },
+    "extended_ramp_down_center_cylinder": {
+      "passed": true,
+      "min_robot_center_distance_m": 0.5891451779043881,
+      "min_robot_center_to_obstacle_surface_m": 0.45914517790438814
+    }
+  },
+  "source_result_sha256": "ea08011afbae8760e4833a9bf8595f4bfb15ff04f0f44ca8f10c1190333aa897"
+}

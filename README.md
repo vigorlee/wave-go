@@ -1,153 +1,154 @@
+<div align="center">
+
 # WAVE-Go
 
-面向 Unitree Go2-W 的世界模型动作适配与可验证执行项目。
+**世界模型动作适配 · Go2-W 可验证执行**
 
-[![License](https://img.shields.io/github/license/vigorlee/wave-go)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/vigorlee/wave-go?include_prereleases)](https://github.com/vigorlee/wave-go/releases)
-[![Demo](https://img.shields.io/badge/demo-extended--navigation-blue)](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation)
+从高层任务到实体运动，连接世界模型、导航规划与轮足控制。
 
-## 项目简介
+[![Platform](https://img.shields.io/badge/Robot-Unitree_Go2--W-164e63?style=flat-square)](demos/go2w-cosmos-extended-navigation/) [![Simulation](https://img.shields.io/badge/Simulation-MuJoCo_×_UE-334155?style=flat-square)](#三类场景实录) [![Verified](https://img.shields.io/badge/2026--09--10-18%2F18_passed-15803d?style=flat-square)](#本次复测结果)
 
-WAVE-Go 将世界模型的高层动作建议与机器人运行时、安全约束和运动控制连接起来，提供可复现实验与证据校验脚本。
+[场景实录](#三类场景实录) · [验收指标](#本次复测结果) · [运行指南](#快速开始) · [无图充电](README_MAPLESS_CHARGER_SEARCH.md)
 
-- **无图充电**：世界模型生成 nominal action，经几何适配器和 veto-only safety layer 过滤后执行。
-- **混合长程导航**：Cosmos3-Edge 选择批准路线，Nav2/RoamerX 负责导航与避障，DreamWaQ 负责机器狗运动控制。
+</div>
 
-> 仓库不包含 Matrix/HouseWorld、ROS 工作区、CUDA 环境、DreamWaQ 权重或 Cosmos checkpoint。请先准备对应运行时，再使用仓库中的配置和脚本。
+![WAVE-Go：机器狗实际上坡、绕过中央圆柱并下坡，2026年9月10日成功复测](demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/overview.jpg)
 
-## 内容导航
+<p align="center"><sub>来自成功运行的真实仿真录屏。坡道显示与碰撞面已对齐，机身高度随坡面实际升降。</sub></p>
 
-| 内容 | 说明 |
-| --- | --- |
-| [混合长程导航 Demo](#混合长程导航-demo) | Go2-W + Cosmos3-Edge + Nav2/RoamerX + DreamWaQ |
-| [已验证结果](#已验证结果) | 18 段连续任务与物理场景证据 |
-| [快速开始](#快速开始) | 环境变量、便携检查与录制命令 |
-| [目录结构](#目录结构) | 主要文件位置 |
-| [验证方式](#验证方式) | 本地和 ROS 测试 |
-| [限制](#限制) | 当前 demo 的边界 |
-| [Release](#release) | 视频、结果 JSON 与校验文件 |
+## 三类场景实录
 
-## 混合长程导航 Demo
+**楼梯障碍 → 双坡道障碍 → 平地圆柱与动态避障。** 以下图片均取自 2026-09-10 同一次完整运行，点击可查看大图。
 
-入口目录：[demos/go2w-cosmos-extended-navigation](demos/go2w-cosmos-extended-navigation/)
+<table>
+<tr>
+<td width="50%">
+<a href="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/stairs.jpg"><img src="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/stairs.jpg" alt="机器狗爬上实体楼梯，中央圆柱在前方可见" width="100%"></a>
+<br><b>01 · 楼梯与中央圆柱</b><br>
+<sub>完成上下楼梯，通过两处楼梯中央圆柱。</sub>
+</td>
+<td width="50%">
+<a href="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/ramp-up.jpg"><img src="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/ramp-up.jpg" alt="机器狗从中央圆柱右侧爬上修正后的实体坡道" width="100%"></a>
+<br><b>02 · 双坡道与中央圆柱</b><br>
+<sub>坡道方向修正，实际完成上坡、过顶和下坡。</sub>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<a href="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/slalom.jpg"><img src="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/slalom.jpg" alt="机器狗穿过平地上交错排列的圆柱，前方为上坡段" width="100%"></a>
+<br><b>03A · 平地交错圆柱</b><br>
+<sub>四个交错圆柱清晰可见，机器人穿过通道进入坡道。</sub>
+</td>
+<td width="50%">
+<a href="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/dynamic-obstacle.jpg"><img src="demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/dynamic-obstacle.jpg" alt="通道内的移动高圆柱代理与等待通行的机器狗" width="100%"></a>
+<br><b>03B · 动态障碍通行</b><br>
+<sub>移动高圆柱代理横穿通道，机器人等待后继续前进。</sub>
+</td>
+</tr>
+</table>
 
-控制链如下：
+[查看截图来源与验收说明](demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/README.md) · [查看结果 JSON](demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/result-summary.json)
 
-```text
-Cosmos3-Edge route proposal
-            │ approved route
-            ▼
-Mission Supervisor ──► Nav2 / RoamerX ──► Go2-W base controller
-            │                                  │
-            └──── evidence + safety checks ◄───┘
-                              │
-                         DreamWaQ
+## 本次复测结果
+
+| 连续任务 | 实体上下坡 | 动态通行 |
+| :--- | :--- | :--- |
+| **18 / 18** 阶段完成 | **+44.5 cm / −45.0 cm** 高度变化 | **1.62 m** 最近中心距离 |
+| 约 **60.88 m** 行程 | **4 / 4** 地形圆柱检查通过 | **3 / 3** 动态代理通过 |
+| **1** 次导航动作，**0** 次中途重发 | 机身高度 **0.410 → 0.854 → 0.404 m** | 验收线 **≥ 0.65 m** |
+
+本次 `acceptance_passed = true`；完整四窗口录像为 **426.6 s · 2560×1440 · 15 fps**，已通过全片解码检查。动态代理在坡道出口、北侧通道和横廊的最近中心距离分别为 **1.621 / 1.713 / 1.688 m**。
+
+> **版本说明**：上方图片和指标来自 9 月 10 日的本地修复版。本次更新发布截图及验收摘要；仓库现有运行包和 `v0.2.0` Release 仍对应 9 月 3 日版本，不能视为已包含本次全部运行时修复。
+
+## 如何工作
+
+```mermaid
+flowchart LR
+    A[高层任务] --> B[Cosmos3-Edge\n选择批准路线]
+    B --> C[任务监督器]
+    C --> D[Nav2 / RoamerX\n规划与避障]
+    D --> E[DreamWaQ\nGo2-W 运动控制]
+    E --> F[MuJoCo / UE\n物理执行与画面]
+    F --> G[状态与点云反馈]
+    G --> D
+    G --> H[阶段 · 高度 · 距离验收]
 ```
 
-场景包含 18 段连续导航、4 个楼梯/坡道中央圆柱、3 个动态行人，以及实体坡高度变化。详细配置、启动方式和故障排查请参阅 demo 目录中的 [README](demos/go2w-cosmos-extended-navigation/README.md)。
+Cosmos3-Edge 在任务开始时选择路线；局部导航与底层运动分别由 Nav2/RoamerX 和 DreamWaQ 执行。9 月 10 日修复版还使用实际仿真关节状态预测动态障碍的横穿窗口。
 
-### 可视化结果
+| 项目方向 | 执行方式 | 文档 |
+| :--- | :--- | :--- |
+| **混合长程导航** | 高层路线选择 → 导航避障 → 轮足运动 | [Demo 运行指南](demos/go2w-cosmos-extended-navigation/README.md) |
+| **无图充电** | 世界模型动作建议 → 几何适配 → 安全过滤 → 执行 | [充电视觉搜索](README_MAPLESS_CHARGER_SEARCH.md) |
 
-下面的连续帧展示了实体 Go2-W 在坡道、中央圆柱和动态行人场景中的导航过程，右下角为机器人视角，左侧为 RViz/场景状态：
+<details>
+<summary><b>展开查看无图充电结果</b></summary>
 
-<p align="center">
-  <img src="demos/go2w-cosmos-extended-navigation/evidence/physical_continuous_contact_sheet.jpg" alt="Go2-W 实体连续导航结果" width="100%">
-</p>
+<p align="center"><img src="evidence/final_visualization.jpg" alt="无图充电视觉搜索：检测充电桩标记并进入 charging 状态" width="85%"></p>
 
-<sub>证据帧：坡道通过、中央圆柱避障、动态行人区域与最终目标。原始结果记录见 <a href="demos/go2w-cosmos-extended-navigation/evidence/result.json">result.json</a>。</sub>
+视觉搜索状态：检测到充电桩标记并进入 `charging` 状态。此结果属于独立的无图充电实验。
 
-完整视频可在 Release 中查看或下载：
-
-[▶ 播放 extended navigation demo（15 fps）](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-extended-navigation-full-15fps.mp4) · [下载实体坡道片段](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-physical-ramp-excerpt.mp4)
-
-无图充电 Demo 的最终视觉状态：
-
-<p align="center">
-  <img src="evidence/final_visualization.jpg" alt="无图充电视觉搜索结果" width="78%">
-</p>
-
-<sub>视觉搜索状态：检测到充电桩标记并进入 charging 状态。</sub>
-
-## 已验证结果
-
-| 指标 | 结果 |
-| --- | ---: |
-| 完成阶段 | **18 / 18** |
-| `NavigateThroughPoses` | **1** |
-| 中间目标重启 | **0** |
-| 行驶距离 | 约 **60.15 m** |
-| 实体坡高度 | **0.413 → 0.851 → 0.397 m** |
-| 动态行人 | **3** |
-| 输出视频 | H.264，2560×1440，15 fps，347.134 s |
+</details>
 
 ## 快速开始
+
+以下命令检查并运行仓库现有的导航包。需先准备 ROS 2、MATRiX/HouseWorld、RoamerX、DreamWaQ 与 Cosmos3-Edge 运行时；仓库不捆绑大型场景资产或模型权重。
 
 ```bash
 git clone https://github.com/vigorlee/wave-go.git
 cd wave-go/demos/go2w-cosmos-extended-navigation
 
-# 按本机实际路径设置运行时
-export WAVE_GO_RUNTIME_ROOT=/home/unitree/matrix_go2w_lcm_demo
-export COSMOS_VLN_ROOT=/home/unitree/matrix_g1_lcm_demo
+# 按本机实际位置设置外部运行时
+export WAVE_GO_RUNTIME_ROOT=/path/to/matrix_go2w_lcm_demo
+export COSMOS_VLN_ROOT=/path/to/matrix_g1_lcm_demo
 
-# 便携检查（不要求启动完整机器人运行时）
+# 静态检查与便携测试
 ./validate.sh
 ```
 
-录制完整 demo：
+录制现有运行包的完整演示：
 
 ```bash
 OUT="$PWD/artifacts/extended_navigation_$(date +%Y%m%d_%H%M%S)"
 COSMOS_VLN_ARTIFACT_DIR="$OUT" ./scripts/record_demo.sh
 ```
 
-## 目录结构
+[完整启动、停止与故障排查](demos/go2w-cosmos-extended-navigation/README.md)
+
+<details>
+<summary><b>目录结构与验证方式</b></summary>
 
 ```text
 demos/go2w-cosmos-extended-navigation/
-├── README.md                 # Demo 说明与运行指南
-├── configs/                  # 任务、控制器与安全参数
-├── scenes/                   # 场景 XML / JSON
-├── cosmos_bridge/            # Cosmos3-Edge 路线桥接
-├── mission_supervisor/       # 任务编排与证据记录
-├── scripts/                  # start / record / stop / validate
-├── tests/                    # 便携测试与 ROS 集成测试
-└── evidence/                 # 精简结果与校验信息
+├── config/       # 路线、参数与 RViz 配置
+├── controller/   # Go2-W 控制器说明与源码
+├── scene/        # MuJoCo / UE 场景
+├── scripts/      # 启动、任务、录制与停止
+├── tests/        # 便携与 ROS 测试
+├── evidence/     # 历史发布证据
+│   └── 2026-09-10/  # 本次成功复测图片与摘要
+└── validate.sh
 ```
 
-## 验证方式
-
-在 demo 目录执行：
-
-```bash
-./validate.sh
-```
-
-如果已安装并配置 ROS 运行时，可执行完整测试：
+在 demo 目录执行 `./validate.sh`。已配置 ROS 的环境可执行：
 
 ```bash
 WAVE_GO_RUN_ROS_TESTS=1 ./validate.sh
 ```
 
-当前验证结果为 32 个测试全部通过。脚本会检查配置、场景、桥接接口、任务阶段和证据格式；不会替代真实机器人现场安全检查。
+静态检查不替代实际场景运行与录像验收。
 
-## 限制
+</details>
 
-- 真实执行依赖外部 ROS、LCM、Nav2/RoamerX、DreamWaQ 和 Cosmos3-Edge 运行时。
-- 仓库中的结果文件用于复现和审计，不代表对未列出的硬件、地图或环境条件作出保证。
-- 在真实机器人上运行前，请设置急停、限速、碰撞监测和人工接管流程。
+## 实验边界
 
-## Release
+本页展示 **MuJoCo / UE 仿真结果**。动态行人使用移动高圆柱代理，未使用写实人物模型；点云由传感器数据与场景几何融合，动态位置来自实际仿真状态。中心距离是近似包络指标。上述结果不代表未知环境纯视觉导航或真机测试。
 
-完整演示资产位于 [v0.2.0-extended-navigation](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation)：
+## 历史 Release
 
-- `wave-go-extended-navigation-full-15fps.mp4`
-- `wave-go-physical-ramp-excerpt.mp4`
-- `wave-go-extended-navigation-result.json`
-- `wave-go-extended-navigation-SHA256SUMS.txt`
+[v0.2.0-extended-navigation](https://github.com/vigorlee/wave-go/releases/tag/v0.2.0-extended-navigation) 保留 9 月 3 日的原始视频与结果，用于版本追溯：
 
-下载后可使用 `sha256sum -c wave-go-extended-navigation-SHA256SUMS.txt` 校验文件完整性。
+[完整历史录像](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-extended-navigation-full-15fps.mp4) · [历史坡道片段](https://github.com/vigorlee/wave-go/releases/download/v0.2.0-extended-navigation/wave-go-physical-ramp-excerpt.mp4)
 
-## License
-
-详见 [LICENSE](LICENSE)。
+这些历史视频不作为本页 9 月 10 日修复结果的视觉验收。最新截图与机器可读指标见 [2026-09-10 证据目录](demos/go2w-cosmos-extended-navigation/evidence/2026-09-10/)。
