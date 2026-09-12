@@ -1,0 +1,18 @@
+{
+  "/livox/lidar_raw": {
+    "frames": 120,
+    "arrival_hz": 10.031510446157927,
+    "median_points": 19725.0,
+    "max_arrival_gap_s": 0.13771426099992823,
+    "first_stamp": 1789203355.37157,
+    "last_stamp": 1789203367.237296
+  },
+  "/go2w/anything/mid360_points": {
+    "frames": 120,
+    "arrival_hz": 10.030885074067708,
+    "median_points": 19725.0,
+    "max_arrival_gap_s": 0.13936177299183328,
+    "first_stamp": 1789203355.37157,
+    "last_stamp": 1789203367.237296
+  }
+}

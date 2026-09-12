@@ -1,0 +1,12 @@
+{
+  "source": "/go2w/anything/mid360_points",
+  "geometry_source": "/livox/lidar_raw",
+  "frame": "odom",
+  "stamp": 1789205808.56977,
+  "robot_xy": [
+    0.4290297801486064,
+    10.66057136220305
+  ],
+  "points": 19993,
+  "labeled": 1418
+}

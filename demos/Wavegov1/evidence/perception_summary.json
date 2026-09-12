@@ -1,0 +1,9 @@
+{
+  "frames_observed": 690,
+  "first_input_stamp": 1789203218.310811,
+  "last_input_stamp": 1789203402.152052,
+  "note": "Subset captured during live Wavegov1 run; inference time is not a segmentation accuracy measurement.",
+  "median_inference_ms": 195.88420049694832,
+  "median_raw_points": 19693.0,
+  "median_labeled_points": 730.0
+}

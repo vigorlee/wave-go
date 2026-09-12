@@ -1,0 +1,158 @@
+{
+  "depth_ms": 31.848159997025505,
+  "dino_ms": 127.66378099331632,
+  "sam_ms": 34.90855099516921,
+  "total_ms": 194.42353599879425,
+  "device": "cuda",
+  "prompt": "stairs. ramp. cylinder. person. wall. floor.",
+  "detection_filter_audit": [
+    {
+      "raw_label": "wall",
+      "score": 0.535534679889679,
+      "box_xyxy": [
+        455.8463439941406,
+        0.5428415536880493,
+        959.2299194335938,
+        448.9029235839844
+      ],
+      "class_id": 5,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "raw_label": "ramp",
+      "score": 0.4358214735984802,
+      "box_xyxy": [
+        1.5957355499267578,
+        354.9522399902344,
+        956.9696044921875,
+        538.6581420898438
+      ],
+      "class_id": 2,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "raw_label": "cylinder",
+      "score": 0.43515583872795105,
+      "box_xyxy": [
+        142.2073974609375,
+        336.9281005859375,
+        231.7412567138672,
+        415.70452880859375
+      ],
+      "class_id": 3,
+      "accepted": false,
+      "reason": "class_confidence"
+    },
+    {
+      "raw_label": "ramp floor",
+      "score": 0.4107411205768585,
+      "box_xyxy": [
+        1.8042755126953125,
+        354.15118408203125,
+        957.335205078125,
+        538.4830322265625
+      ],
+      "class_id": 0,
+      "accepted": false,
+      "reason": "ambiguous_text"
+    },
+    {
+      "raw_label": "wall",
+      "score": 0.3891124427318573,
+      "box_xyxy": [
+        0.8544445037841797,
+        0.43216824531555176,
+        326.0182189941406,
+        429.7236022949219
+      ],
+      "class_id": 5,
+      "accepted": false,
+      "reason": "class_confidence"
+    },
+    {
+      "raw_label": "stairs",
+      "score": 0.2877439558506012,
+      "box_xyxy": [
+        454.44647216796875,
+        0.7010704278945923,
+        958.85595703125,
+        449.24249267578125
+      ],
+      "class_id": 1,
+      "accepted": false,
+      "reason": "class_confidence"
+    }
+  ],
+  "temporal_confirmation": true,
+  "semantic_source": "GroundingDINO_text_detection_plus_SAM2_masks",
+  "depth_source": "DepthAnythingV2_relative_inverse_depth",
+  "uses_scene_prior": false,
+  "frame": 135,
+  "input_stamp": 1789203256.511981,
+  "received_at": 1789203256.5201585,
+  "finished_at": 1789203256.9113004,
+  "input_age_seconds": 0.3911426067352295,
+  "objects": [
+    {
+      "label": "ramp",
+      "class_id": 2,
+      "detection_score": 0.4358214735984802,
+      "sam_iou_prediction": 0.9888056516647339,
+      "box_xyxy": [
+        1.5957355499267578,
+        354.9522399902344,
+        956.9696044921875,
+        538.6581420898438
+      ],
+      "mask_pixels": 135694
+    },
+    {
+      "label": "wall",
+      "class_id": 5,
+      "detection_score": 0.535534679889679,
+      "sam_iou_prediction": 0.9738250374794006,
+      "box_xyxy": [
+        455.8463439941406,
+        0.5428415536880493,
+        959.2299194335938,
+        448.9029235839844
+      ],
+      "mask_pixels": 181689
+    }
+  ],
+  "labels": [
+    "unassigned",
+    "stairs",
+    "ramp",
+    "cylinder",
+    "person",
+    "wall",
+    "floor",
+    "stairs/ramp ambiguous"
+  ],
+  "rgb_depth_delta_seconds": 3.0994415283203125e-06,
+  "depth_odom_delta_seconds": 0.002562284469604492,
+  "mid360_points": 19329,
+  "mid360_labeled_points": 0,
+  "mid360_semantic_age_seconds": 0.40080809593200684,
+  "mid360_geometry_source": "/livox/lidar_raw",
+  "mid360_association_radius_m": 0.12,
+  "mid360_publish_mode": "sensor_callback_independent_of_inference",
+  "lidar_sensor_type": "mid360",
+  "lidar_output_topic": "/go2w/anything/mid360_points",
+  "metric_cloud_points": 153596,
+  "metric_cloud_depth_source": "UE_depth_sensor_not_DepthAnything",
+  "metric_cloud_semantics": "GroundingDINO_plus_SAM2",
+  "semantic_pixel_counts": {
+    "unassigned": 201017,
+    "stairs": 0,
+    "ramp": 135694,
+    "cylinder": 0,
+    "person": 0,
+    "wall": 181689,
+    "floor": 0,
+    "stairs/ramp ambiguous": 0
+  }
+}

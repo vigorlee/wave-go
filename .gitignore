@@ -35,3 +35,7 @@ __pycache__/
 .idea/
 .vscode/
 .DS_Store
+
+# Wavegov1 contains a curated source/config overlay, not runtime binaries.
+!/demos/Wavegov1/runtime/matrix/
+!/demos/Wavegov1/runtime/genisom_roamerx_open/

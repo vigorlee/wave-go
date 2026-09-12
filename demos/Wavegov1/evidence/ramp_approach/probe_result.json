@@ -1,0 +1,16 @@
+{
+  "action_status": 4,
+  "passed": true,
+  "samples": 10730,
+  "start": [
+    0.011885493719421924,
+    12.535207323195449,
+    0.38705035698233575
+  ],
+  "end": [
+    0.9588106663066904,
+    18.730569069062483,
+    0.4089381111090258
+  ],
+  "limitation": "Ramp approach probe starting at the preceding slalom exit; full original course not covered."
+}

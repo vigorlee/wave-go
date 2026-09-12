@@ -1,0 +1,16 @@
+{
+  "/livox/lidar_raw": {
+    "frames": 120,
+    "hz": 10.029898988125023,
+    "median_points": 20001.0,
+    "max_gap_seconds": 0.13758521400450263,
+    "unique_stamps": 120
+  },
+  "/go2w/anything/mid360_points": {
+    "frames": 120,
+    "hz": 10.023133418895139,
+    "median_points": 20001.0,
+    "max_gap_seconds": 0.15104133301065303,
+    "unique_stamps": 120
+  }
+}

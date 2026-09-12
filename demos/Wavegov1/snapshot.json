@@ -1,0 +1,24 @@
+{
+  "version": "Wavegov1",
+  "recorded_date": "2026-09-12",
+  "scope": "Original YardWorld course; upright MID360 without green UE scan points; four windows; one continuous Nav2 route with RViz reference/plan/trail.",
+  "upstream": {
+    "matrix": {
+      "remote": "https://github.com/zsibot/matrix.git",
+      "commit": "918fae36216e4abb70fbbe275c687c0127fe4b02"
+    },
+    "genisom_roamerx_open": {
+      "remote": "https://github.com/zsibot/genisom_roamerx_open.git",
+      "commit": "51d1e9d22e9bf73380e92a9c4792983d0b355ad0"
+    }
+  },
+  "runtime_dependencies_not_vendored": [
+    "MATRiX packaged UE and MuJoCo runtime + YardWorld assets + Go2-W robot meshes",
+    "RoamerX built ROS 2 Humble workspace",
+    "robot_forward executable",
+    "eCAL 5.13.3, Protobuf 3.12.4, LCM 1.5.1, zsibot_common 0.5.9",
+    "DreamWaQ Go2-W g2wDWAQ actor/encoder checkpoints",
+    "Three Hugging Face checkpoints listed in runtime/models/anything/manifest.json"
+  ],
+  "files_copied": 82
+}

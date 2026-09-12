@@ -1,0 +1,193 @@
+<mujoco model="go2w extended terrain navigation scene">
+  <include file="go2w.xml" />
+  <statistic center="5 16 0.4" extent="30" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" offwidth="1600" offheight="900" />
+    <map znear="0.01" zfar="100"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+    <material name="platform" rgba="0.75294 0.75294 0.75294 1" specular="0.3" shininess="0.5" />
+    <material name="extended_ramp" rgba="0.12 0.62 0.34 1" specular="0.15" shininess="0.35" />
+    <material name="extended_bollard" rgba="0.95 0.48 0.08 1" specular="0.20" shininess="0.40" />
+    <material name="extended_pedestrian" rgba="0.82 0.08 0.88 1" specular="0.10" shininess="0.20" />
+    <material name="extended_marker" rgba="0.12 0.42 0.88 1" />
+    <mesh name="PEDESTRIAN_OBS_LINK" vertex="0.000002 0.000000 -0.870000 0.000002 0.000001 -0.870000 0.000002 0.000002 -0.870000 0.000001 0.000002 -0.870000 0.000000 0.000002 -0.870000 -0.000001 0.000002 -0.870000 -0.000002 0.000002 -0.870000 -0.000002 0.000001 -0.870000 -0.000002 0.000000 -0.870000 -0.000002 -0.000001 -0.870000 -0.000002 -0.000002 -0.870000 -0.000001 -0.000002 -0.870000 -0.000000 -0.000002 -0.870000 0.000001 -0.000002 -0.870000 0.000002 -0.000002 -0.870000 0.000002 -0.000001 -0.870000 0.110000 0.000000 -0.840526 0.101627 0.042095 -0.840526 0.077782 0.077782 -0.840526 0.042095 0.101627 -0.840526 0.000000 0.110000 -0.840526 -0.042095 0.101627 -0.840526 -0.077782 0.077782 -0.840526 -0.101627 0.042095 -0.840526 -0.110000 0.000000 -0.840526 -0.101627 -0.042095 -0.840526 -0.077782 -0.077782 -0.840526 -0.042095 -0.101627 -0.840526 -0.000000 -0.110000 -0.840526 0.042095 -0.101627 -0.840526 0.077782 -0.077782 -0.840526 0.101627 -0.042095 -0.840526 0.190526 0.000000 -0.760000 0.176023 0.072911 -0.760000 0.134722 0.134722 -0.760000 0.072911 0.176023 -0.760000 0.000000 0.190526 -0.760000 -0.072911 0.176023 -0.760000 -0.134722 0.134722 -0.760000 -0.176023 0.072911 -0.760000 -0.190526 0.000000 -0.760000 -0.176023 -0.072911 -0.760000 -0.134722 -0.134722 -0.760000 -0.072911 -0.176023 -0.760000 -0.000000 -0.190526 -0.760000 0.072911 -0.176023 -0.760000 0.134722 -0.134722 -0.760000 0.176023 -0.072911 -0.760000 0.220000 0.000000 -0.650000 0.203253 0.084190 -0.650000 0.155563 0.155563 -0.650000 0.084190 0.203253 -0.650000 0.000000 0.220000 -0.650000 -0.084190 0.203253 -0.650000 -0.155563 0.155563 -0.650000 -0.203253 0.084190 -0.650000 -0.220000 0.000000 -0.650000 -0.203253 -0.084190 -0.650000 -0.155563 -0.155563 -0.650000 -0.084190 -0.203253 -0.650000 -0.000000 -0.220000 -0.650000 0.084190 -0.203253 -0.650000 0.155563 -0.155563 -0.650000 0.203253 -0.084190 -0.650000 0.220000 0.000000 0.650000 0.203253 0.084190 0.650000 0.155563 0.155563 0.650000 0.084190 0.203253 0.650000 0.000000 0.220000 0.650000 -0.084190 0.203253 0.650000 -0.155563 0.155563 0.650000 -0.203253 0.084190 0.650000 -0.220000 0.000000 0.650000 -0.203253 -0.084190 0.650000 -0.155563 -0.155563 0.650000 -0.084190 -0.203253 0.650000 -0.000000 -0.220000 0.650000 0.084190 -0.203253 0.650000 0.155563 -0.155563 0.650000 0.203253 -0.084190 0.650000 0.190526 0.000000 0.760000 0.176023 0.072911 0.760000 0.134722 0.134722 0.760000 0.072911 0.176023 0.760000 0.000000 0.190526 0.760000 -0.072911 0.176023 0.760000 -0.134722 0.134722 0.760000 -0.176023 0.072911 0.760000 -0.190526 0.000000 0.760000 -0.176023 -0.072911 0.760000 -0.134722 -0.134722 0.760000 -0.072911 -0.176023 0.760000 -0.000000 -0.190526 0.760000 0.072911 -0.176023 0.760000 0.134722 -0.134722 0.760000 0.176023 -0.072911 0.760000 0.110000 0.000000 0.840526 0.101627 0.042095 0.840526 0.077782 0.077782 0.840526 0.042095 0.101627 0.840526 0.000000 0.110000 0.840526 -0.042095 0.101627 0.840526 -0.077782 0.077782 0.840526 -0.101627 0.042095 0.840526 -0.110000 0.000000 0.840526 -0.101627 -0.042095 0.840526 -0.077782 -0.077782 0.840526 -0.042095 -0.101627 0.840526 -0.000000 -0.110000 0.840526 0.042095 -0.101627 0.840526 0.077782 -0.077782 0.840526 0.101627 -0.042095 0.840526 0.000002 0.000000 0.870000 0.000002 0.000001 0.870000 0.000002 0.000002 0.870000 0.000001 0.000002 0.870000 0.000000 0.000002 0.870000 -0.000001 0.000002 0.870000 -0.000002 0.000002 0.870000 -0.000002 0.000001 0.870000 -0.000002 0.000000 0.870000 -0.000002 -0.000001 0.870000 -0.000002 -0.000002 0.870000 -0.000001 -0.000002 0.870000 -0.000000 -0.000002 0.870000 0.000001 -0.000002 0.870000 0.000002 -0.000002 0.870000 0.000002 -0.000001 0.870000" />
+  </asset>
+  <compiler fitaabb="true" />
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" type="plane" material="groundplane" />
+    <geom name="box_OBS1" pos="0.0 1.5 0.05" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS2" pos="0.0 1.7 0.2" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS3" pos="0.0 1.9 0.35" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS4" pos="0.0 2.1 0.5" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS5" pos="0.0 2.3 0.65" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS6" pos="0.0 2.5 0.8" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS7" pos="0.0 2.7 0.95" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS8" pos="0.0 2.9 1.1" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS9" pos="0.0 3.1 1.25" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box_OBS10" pos="0.0 3.3 1.4" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS1" pos="0.0 8.5 0.05" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS2" pos="0.0 8.3 0.2" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS3" pos="0.0 8.1 0.35" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS4" pos="0.0 7.9 0.5" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS5" pos="0.0 7.7 0.65" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS6" pos="0.0 7.5 0.8" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS7" pos="0.0 7.3 0.95" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS8" pos="0.0 7.1 1.1" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS9" pos="0.0 6.9 1.25" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" />
+    <geom name="box2_OBS10" pos="0.0 6.7 1.4" type="box" size="1.5 0.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="box2_OBS11" pos="0.0 5.0 1.55" type="box" size="1.5 1.75 0.075" quat="1.0 0.0 0.0 0.0"  rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box0" type="box" size="2.5 0.2 1.5" pos="-3.6 -4.58 1.5" euler="0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box1" type="box" size="3.5 0.5 1.5" pos="2.09 -4.21 1.5" euler="0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box2" type="box" size="1.5 0.5 1.5" pos="5.89 -2.71 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box3" type="box" size="4.5 1.0 1.5" pos="5.02 2.79 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box4" type="box" size="2.0 3.5 1.5" pos="7.02 8.79 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box5" type="box" size="5.0 0.05 1.5" pos="10.41 15.49 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box6" type="box" size="5.0 0.5 1.5" pos="6.96 20.6 1.5" euler="0.0 0.0 -3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box7" type="box" size="1.5 0.2 1.5" pos="-5.6 -3.08 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box8" type="box" size="9.0 1.5 1.5" pos="-5.1 6.61 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box9" type="box" size="1.9 1.5 1.5" pos="-4.6 16.19 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box10" type="box" size="4.75 2.5 1.5" pos="-3.6 24.85 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box11" type="box" size="3.5 0.05 1.5" pos="-1.58 33.09 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box12" type="box" size="4.75 0.05 1.5" pos="1.99 24.85 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box13" type="box" size="7.5 0.05 1.5" pos="5.91 36.24 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box14" type="box" size="3.0 1.0 1.5" pos="13.37 36.1 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box15" type="box" size="3.0 1.5 1.5" pos="13.37 30.46 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box16" type="box" size="4.5 0.05 1.5" pos="6.48 29.54 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box17" type="box" size="1.5 0.05 1.5" pos="18.26 35.71 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box18" type="box" size="0.5 0.1 1.5" pos="16.26 35.63 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box19" type="box" size="0.5 0.1 1.5" pos="20.26 35.63 1.5" euler="0.0 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box20" type="box" size="2.5 0.05 1.5" pos="20.16 33.71 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box21" type="box" size="5.0 0.5 1.5" pos="20.38 26.58 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box22" type="box" size="5.0 0.5 1.5" pos="16.22 26.58 1.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box23" type="box" size="2.0 0.05 1.5" pos="18.26 21.48 1.5" euler="0.0 0.0 -3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box24" type="box" size="1.0 0.5 1.5" pos="0.55 -3.24 1.5" euler="0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box25" type="box" size="1.0 0.5 0.05" pos="4.83 -2.74 0.09" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box26" type="box" size="1.0 0.5 0.05" pos="-2.63 16.08 0.1" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box27" type="box" size="1.0 0.5 0.05" pos="3.35 19.62 0.1" euler="0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box28" type="box" size="1.0 0.5 0.05" pos="-1.05 32.59 0.1" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box29" type="box" size="0.1 0.5 0.5" pos="6.82 11.09 0.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box30" type="box" size="0.5 0.65 0.5" pos="8.24 11.3 0.5" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box31" type="box" size="0.65 0.65 0.5" pos="9.8 12.2 0.5" euler="0.0 0.0 1.745329" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box32" type="box" size="0.1 0.5 0.5" pos="10.02 13.59 0.1" euler="-1.570796 1.570796 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box33" type="box" size="0.1 0.5 0.5" pos="10.02 13.69 0.6" euler="-1.570796 0.0 3.141593" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder34"  type="cylinder" size="0.2 0.5" pos="8.95 12.2 0.5" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder35"  type="cylinder" size="0.2 0.5" pos="9.05 12.65 0.5" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Box36" type="box" size="1.5 0.05 1.5" pos="-5.63 19.05 1.5" euler="0.0 0.0 1.570796" rgba="0.8 0.2 0.2 1"/>
+    <!-- Reuse the stock YardWorld CylinderNN visual path for the four terrain
+         obstacles.  UE renders these names as the high-contrast traffic
+         barrels seen elsewhere in the courtyard. -->
+    <geom name="Cylinder37" type="cylinder" size="0.13 0.30"
+      pos="-0.15 3.15 1.775" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="Cylinder38" type="cylinder" size="0.13 0.30"
+      pos="-0.15 8.45 1.025" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="Cylinder39" type="cylinder" size="0.13 0.30"
+      pos="-0.05 14.15 0.555610" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="Cylinder41" type="cylinder" size="0.13 0.30"
+      pos="0.05 17.05 0.520350" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <!-- Preserve the original remote row under new IDs. -->
+    <geom name="Cylinder42" type="cylinder" size="0.125 0.22" pos="-0.25 18.40 0.22" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder43" type="cylinder" size="0.125 0.22" pos="-0.85 18.40 0.22" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder44" type="cylinder" size="0.125 0.22" pos="-1.45 18.40 0.22" rgba="0.8 0.2 0.2 1"/>
+    <!-- UE renders the box_OBS namespace in YardWorld. These four cylinders
+         are render-only twins of Cylinder37/38/39/41, so the barrels are
+         visible without duplicating collision or LiDAR returns. -->
+    <geom name="box_OBS11" type="cylinder" size="0.13 0.30"
+      pos="-0.15 3.15 1.775" material="extended_bollard" rgba="1.0 0.32 0.02 1" contype="0" conaffinity="0" />
+    <geom name="box_OBS12" type="cylinder" size="0.13 0.30"
+      pos="-0.15 8.45 1.025" material="extended_bollard" rgba="1.0 0.32 0.02 1" contype="0" conaffinity="0" />
+    <geom name="box_OBS13" type="cylinder" size="0.13 0.30"
+      pos="-0.05 14.15 0.555610" material="extended_bollard" rgba="1.0 0.32 0.02 1" contype="0" conaffinity="0" />
+    <geom name="box_OBS14" type="cylinder" size="0.13 0.30"
+      pos="0.05 17.05 0.520350" material="extended_bollard" rgba="1.0 0.32 0.02 1" contype="0" conaffinity="0" />
+    <geom name="Box40" type="box" size="1.0 0.5 0.05" pos="3.04 8.82 0.1" euler="0.0 0.0 -1.570796" rgba="0.8 0.2 0.2 1"/>
+
+    <!-- Extended course: an alternating cylinder slalom immediately after the
+         second staircase, followed by a genuinely load-bearing ramp pair.
+         Travel in +Y climbs 10 degrees, crosses a 0.42 m raised crest, and
+         descends 10 degrees back to the floor. -->
+    <geom name="extended_slalom_cylinder_1" type="cylinder" size="0.16 0.34"
+      pos="-0.82 10.82 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="extended_slalom_cylinder_2" type="cylinder" size="0.16 0.34"
+      pos="0.82 11.48 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="extended_slalom_cylinder_3" type="cylinder" size="0.16 0.34"
+      pos="-0.82 12.14 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+    <geom name="extended_slalom_cylinder_4" type="cylinder" size="0.16 0.34"
+      pos="0.82 12.80 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" />
+
+    <!-- Physical uphill: y=12.8..15.2, top rises from 0.02 m to 0.437 m. -->
+    <geom name="extended_ramp_up" type="box" size="1.10 1.20 0.025"
+      pos="0 14.00 0.203758" euler="0.17453293 0 0"
+      rgba="0.12 0.62 0.34 1" friction="0.98 0.02 0.01" />
+    <geom name="extended_ramp_crest" type="box" size="1.10 0.33 0.040"
+      pos="0 15.50 0.396756" rgba="0.08 0.82 0.30 1" friction="0.98 0.02 0.01" />
+    <!-- Physical downhill: y=15.8..18.2, returns from 0.437 m to 0.02 m. -->
+    <geom name="extended_ramp_down" type="box" size="1.10 1.20 0.025"
+      pos="0 17.00 0.203758" euler="-0.17453293 0 0"
+      rgba="0.12 0.62 0.34 1" friction="0.98 0.02 0.01" />
+    <!-- The packaged UE renderer only exposes the box_OBS namespace. These
+         skins sit 5 mm above, and at exactly the same angle as, the physical
+         contact surfaces; unlike the previous demo they cannot depict a
+         steeper or higher ramp than the robot is actually driving on. -->
+    <geom name="box_OBS15" type="box" size="1.12 1.20 0.012"
+      pos="0 14.00 0.222000" euler="0.17453293 0 0" material="extended_ramp"
+      rgba="0.08 0.82 0.30 1" contype="0" conaffinity="0" />
+    <geom name="box_OBS16" type="box" size="1.12 1.20 0.012"
+      pos="0 17.00 0.222000" euler="-0.17453293 0 0" material="extended_ramp"
+      rgba="0.08 0.82 0.30 1" contype="0" conaffinity="0" />
+    <geom name="extended_ramp_start_marker" type="box" size="0.035 0.035 0.025"
+      pos="-1.04 12.48 0.04" material="extended_marker" />
+    <geom name="extended_ramp_end_marker" type="box" size="0.035 0.035 0.025"
+      pos="1.04 18.18 0.04" material="extended_marker" />
+
+    <!-- Exact-size UE-visible copies for the slalom and ramp crest. -->
+    <geom name="box_OBS20" type="cylinder" size="0.16 0.34" pos="-0.82 10.82 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" contype="0" conaffinity="0" />
+    <geom name="box_OBS21" type="cylinder" size="0.16 0.34" pos="0.82 11.48 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" contype="0" conaffinity="0" />
+    <geom name="box_OBS22" type="cylinder" size="0.16 0.34" pos="-0.82 12.14 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" contype="0" conaffinity="0" />
+    <geom name="box_OBS23" type="cylinder" size="0.16 0.34" pos="0.82 12.80 0.34" rgba="1.0 0.32 0.02 1" friction="0.95 0.02 0.01" contype="0" conaffinity="0" />
+    <geom name="box_OBS24" type="box" size="1.10 0.33 0.040" pos="0 15.50 0.396756" rgba="0.08 0.82 0.30 1" friction="0.98 0.02 0.01" contype="0" conaffinity="0" />
+
+    <!-- Baked YardWorld barrels stay at their original coordinates. -->
+    <geom name="extended_native_barrel_1" type="cylinder" size="0.20 0.40" pos="0.41 18.09 0.40" rgba="0.8 0.2 0.2 1" />
+    <geom name="extended_native_barrel_2" type="cylinder" size="0.20 0.40" pos="-0.49 18.09 0.40" rgba="0.8 0.2 0.2 1" />
+    <geom name="extended_native_barrel_3" type="cylinder" size="0.20 0.40" pos="-1.39 18.09 0.40" rgba="0.8 0.2 0.2 1" />
+    <geom name="box_OBS25" type="cylinder" size="0.125 0.22" pos="-0.25 18.40 0.22" contype="0" conaffinity="0" />
+    <geom name="box_OBS26" type="cylinder" size="0.125 0.22" pos="-0.85 18.40 0.22" contype="0" conaffinity="0" />
+    <geom name="box_OBS27" type="cylinder" size="0.125 0.22" pos="-1.45 18.40 0.22" contype="0" conaffinity="0" />
+    <!-- Fitted cylinders retain a mesh data ID. The packaged UE updater
+         resolves OBS through the mesh resource name; plain primitives do not
+         move. World-model points use the same live slide-joint qpos. -->
+    <body name="pedestrian_ramp_exit_visual" pos="2.5 20.80 0.87">
+      <joint name="pedestrian_ramp_exit_slide" type="slide" axis="1 0 0"
+        limited="true" range="-2.5 2.5" ref="2.5" springref="0"
+        stiffness="0.12544" damping="0" />
+      <geom name="box_OBS17_LINK" type="cylinder" mesh="PEDESTRIAN_OBS_LINK" pos="0 0 0"
+        mass="10" material="extended_pedestrian"
+        rgba="0.82 0.08 0.88 1" contype="0" conaffinity="0" />
+    </body>
+    <body name="pedestrian_north_corridor_visual" pos="-2.2 25.80 0.87">
+      <joint name="pedestrian_north_corridor_slide" type="slide" axis="1 0 0"
+        limited="true" range="-2.2 2.2" ref="-2.2" springref="0"
+        stiffness="0.1190082645" damping="0" />
+      <geom name="box_OBS18_LINK" type="cylinder" mesh="PEDESTRIAN_OBS_LINK" pos="0 0 0"
+        mass="10" material="extended_pedestrian"
+        rgba="0.82 0.08 0.88 1" contype="0" conaffinity="0" />
+    </body>
+    <body name="pedestrian_gallery_crossing_visual" pos="10.25 34.25 0.87">
+      <joint name="pedestrian_gallery_crossing_slide" type="slide" axis="0 1 0"
+        limited="true" range="-1.75 1.75" ref="1.75" springref="0"
+        stiffness="0.1580408163" damping="0" />
+      <geom name="box_OBS19_LINK" type="cylinder" mesh="PEDESTRIAN_OBS_LINK" pos="0 0 0"
+        mass="10" material="extended_pedestrian"
+        rgba="0.82 0.08 0.88 1" contype="0" conaffinity="0" />
+    </body>
+  </worldbody>
+</mujoco>

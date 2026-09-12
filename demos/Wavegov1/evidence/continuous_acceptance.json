@@ -1,0 +1,40 @@
+{
+  "version": "Wavegov1",
+  "scope": "Two complete trials with identical final route and controller parameters; development trials are not included in this acceptance set.",
+  "passed": true,
+  "runs": [
+    {
+      "run": 1,
+      "passed": true,
+      "stages": "11/11",
+      "action_goal_count": 1,
+      "intermediate_goal_restarts": 0,
+      "duration_seconds": 96.50776362419128,
+      "maximum_body_height_m": 2.0493678388336387,
+      "ramp_gain_m": 0.44595468653297504,
+      "ramp_drop_m": 0.4432986206894695,
+      "ramp_exit_segment_seconds": 1.559453010559082,
+      "result_file": "continuous_run_1/result.json"
+    },
+    {
+      "run": 2,
+      "passed": true,
+      "stages": "11/11",
+      "action_goal_count": 1,
+      "intermediate_goal_restarts": 0,
+      "duration_seconds": 97.78827714920044,
+      "maximum_body_height_m": 2.0468635549533856,
+      "ramp_gain_m": 0.44482835824603517,
+      "ramp_drop_m": 0.4446938069390881,
+      "ramp_exit_segment_seconds": 1.7904119491577148,
+      "result_file": "continuous_run_2/result.json"
+    }
+  ],
+  "controller_parameters": {
+    "GO2W_RL_STAIR_ALIGNMENT_MAX_HEADING": 0.4,
+    "GO2W_RL_STAIR_ALIGNMENT_VX": 0.7,
+    "GO2W_RL_STAIR_ROUTE_CENTER_X": 0.65,
+    "GO2W_RL_STOCHASTIC": true
+  },
+  "regression_tests": 61
+}

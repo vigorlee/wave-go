@@ -1,0 +1,17 @@
+{
+  "depth-anything-v2-small": {
+    "repo": "depth-anything/Depth-Anything-V2-Small-hf",
+    "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+    "sha256": "3152477ce0d8d6978d76b995120de97cb5b928701fd0f817769f59e249a16b70"
+  },
+  "grounding-dino-tiny": {
+    "repo": "IDEA-Research/grounding-dino-tiny",
+    "revision": "a2bb814dd30d776dcf7e30523b00659f4f141c71",
+    "sha256": "1a2412ef99bd74bcd3c2a246fa1e48581f8889a1300c9051974741314fc042f3"
+  },
+  "sam2.1-hiera-tiny": {
+    "repo": "facebook/sam2.1-hiera-tiny",
+    "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+    "sha256": "48c14467e5cf9e51870511feb72c89688e82dd74523142c0538b663e193ac2a7"
+  }
+}

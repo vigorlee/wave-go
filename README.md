@@ -16,6 +16,16 @@
 
 <p align="center"><sub>来自成功运行的真实仿真录屏。坡道显示与碰撞面已对齐，机身高度随坡面实际升降。</sub></p>
 
+## Wavegov1 · 连续导航与实时感知
+
+[**打开 Wavegov1 运行指南**](demos/Wavegov1/) · [**下载保存版本**](https://github.com/vigorlee/wave-go/releases/tag/Wavegov1-baseline)
+
+原 YardWorld 楼梯、斜坡与固定障碍，一次连续 Nav2 任务；恢复 MID360，关闭 UE 绿色扫描点。四个窗口同时显示 MuJoCo、RViz 路线与实测点云、Depth Anything V2 + DINO/SAM2、UE 场景。
+
+![Wavegov1：完整参考路线、实时规划和实际行驶轨迹](demos/Wavegov1/evidence/four_windows_continuous.png)
+
+代码、传感器配置、控制器、地图与场景覆盖层保存在版本目录，附 SHA-256 和恢复脚本。此次验收与限制请看 [Wavegov1 说明](demos/Wavegov1/README.md)；下方 18/18 为此前长程版本的历史结果。
+
 ## 三类场景实录
 
 **楼梯障碍 → 双坡道障碍 → 平地圆柱与动态避障。** 以下图片均取自 2026-09-10 同一次完整运行，点击可查看大图。

@@ -1,0 +1,106 @@
+{
+  "depth_ms": 32.15322298638057,
+  "dino_ms": 124.727817994426,
+  "sam_ms": 31.671157004893757,
+  "total_ms": 188.55468998663127,
+  "device": "cuda",
+  "prompt": "stairs. ramp. cylinder. person. wall. floor.",
+  "detection_filter_audit": [
+    {
+      "raw_label": "wall",
+      "score": 0.4680768847465515,
+      "box_xyxy": [
+        430.6064453125,
+        0.9762489795684814,
+        959.1286010742188,
+        538.4071044921875
+      ],
+      "class_id": 5,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "raw_label": "wall",
+      "score": 0.4122418761253357,
+      "box_xyxy": [
+        0.6619119644165039,
+        1.066097617149353,
+        292.41302490234375,
+        538.8903198242188
+      ],
+      "class_id": 5,
+      "accepted": false,
+      "reason": "awaiting_second_frame"
+    },
+    {
+      "raw_label": "ramp",
+      "score": 0.3943907916545868,
+      "box_xyxy": [
+        240.4799346923828,
+        444.9558410644531,
+        862.1397705078125,
+        538.8011474609375
+      ],
+      "class_id": 2,
+      "accepted": false,
+      "reason": "awaiting_second_frame"
+    }
+  ],
+  "temporal_confirmation": true,
+  "semantic_source": "GroundingDINO_text_detection_plus_SAM2_masks",
+  "depth_source": "DepthAnythingV2_relative_inverse_depth",
+  "uses_scene_prior": false,
+  "frame": 147,
+  "input_stamp": 1789203260.112053,
+  "received_at": 1789203260.1299937,
+  "finished_at": 1789203260.4971468,
+  "input_age_seconds": 0.3671534061431885,
+  "objects": [
+    {
+      "label": "wall",
+      "class_id": 5,
+      "detection_score": 0.4680768847465515,
+      "sam_iou_prediction": 0.9695558547973633,
+      "box_xyxy": [
+        430.6064453125,
+        0.9762489795684814,
+        959.1286010742188,
+        538.4071044921875
+      ],
+      "mask_pixels": 227684
+    }
+  ],
+  "labels": [
+    "unassigned",
+    "stairs",
+    "ramp",
+    "cylinder",
+    "person",
+    "wall",
+    "floor",
+    "stairs/ramp ambiguous"
+  ],
+  "rgb_depth_delta_seconds": 5.0067901611328125e-06,
+  "depth_odom_delta_seconds": 0.0027649402618408203,
+  "mid360_points": 19323,
+  "mid360_labeled_points": 0,
+  "mid360_semantic_age_seconds": 0.5338928699493408,
+  "mid360_geometry_source": "/livox/lidar_raw",
+  "mid360_association_radius_m": 0.12,
+  "mid360_publish_mode": "sensor_callback_independent_of_inference",
+  "lidar_sensor_type": "mid360",
+  "lidar_output_topic": "/go2w/anything/mid360_points",
+  "metric_cloud_points": 125189,
+  "metric_cloud_depth_source": "UE_depth_sensor_not_DepthAnything",
+  "metric_cloud_semantics": "GroundingDINO_plus_SAM2",
+  "semantic_pixel_counts": {
+    "unassigned": 290716,
+    "stairs": 0,
+    "ramp": 0,
+    "cylinder": 0,
+    "person": 0,
+    "wall": 227684,
+    "floor": 0,
+    "stairs/ramp ambiguous": 0
+  }
+}

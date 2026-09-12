@@ -1,0 +1,4 @@
+# Keep original CSV bytes for checksum verification; CRLF is valid CSV.
+*.csv -text whitespace=cr-at-eol
+# Occupancy maps are assets, even when stored as ASCII PGM.
+*.pgm binary
