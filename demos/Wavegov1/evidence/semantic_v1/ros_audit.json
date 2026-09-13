@@ -1,0 +1,46 @@
+{
+  "/livox/lidar_raw": {
+    "messages": 151,
+    "distinct_stamps": 151,
+    "hz": 10.000674512154308,
+    "median_points": 20001.0,
+    "frames": [
+      "lidar"
+    ]
+  },
+  "/wavego/semantic/live_points": {
+    "messages": 30,
+    "distinct_stamps": 30,
+    "hz": 1.996847150768012,
+    "median_points": 5088.0,
+    "frames": [
+      "lio_map"
+    ]
+  },
+  "/wavego/semantic/map": {
+    "messages": 5,
+    "distinct_stamps": 5,
+    "hz": 0.2963209931366832,
+    "median_points": 92369.0,
+    "frames": [
+      "lio_map"
+    ]
+  },
+  "wavego_semantic_map_subscriptions": [
+    "/go2w/anything/semantic_points",
+    "/wavego/mapping/points",
+    "/wavego/navigation/odom",
+    "/wavego/slam/registered_points"
+  ],
+  "go2w_anything_pretrained_subscriptions": [
+    "/go2w/depth/image_raw",
+    "/image_raw/compressed",
+    "/livox/lidar_raw",
+    "/wavego/navigation/odom"
+  ],
+  "laser_mapping_subscriptions": [
+    "/imu",
+    "/parameter_events",
+    "/wavego/slam/raw_lidar"
+  ]
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Live pretrained model inference. Model labels + independently measured depth."""
-import argparse,json,time,threading
+import argparse,json,time,threading,os
 from pathlib import Path
 from collections import deque
 import numpy as np,cv2
@@ -33,19 +33,19 @@ def lift_masks(depth,labels,config,pose):
 
 class Live(Node):
  def __init__(self,out):
-  super().__init__('go2w_anything_pretrained');self.latest=None;self.semantic_cache=None;self.midstats={};self.lidars=deque(maxlen=8);self.depths=deque(maxlen=12);self.poses=deque(maxlen=150);self.out=out;out.mkdir(parents=True,exist_ok=True);self.counts={};self.frames=0
+  super().__init__('go2w_anything_pretrained');self.frame=os.environ.get('GO2W_SEMANTIC_FRAME','odom');self.latest=None;self.semantic_cache=None;self.midstats={};self.lidars=deque(maxlen=8);self.depths=deque(maxlen=12);self.poses=deque(maxlen=150);self.out=out;out.mkdir(parents=True,exist_ok=True);self.counts={};self.frames=0
   self.create_subscription(CompressedImage,'/image_raw/compressed',lambda m:setattr(self,'latest',(time.time(),m)),qos_profile_sensor_data)
   self.create_subscription(PointCloud2,'/livox/lidar_raw',self.on_lidar,qos_profile_sensor_data)
   self.midpub=self.create_publisher(PointCloud2,'/go2w/anything/mid360_points',qos_profile_sensor_data)
   self.create_subscription(Image,'/go2w/depth/image_raw',lambda m:self.depths.append(m),qos_profile_sensor_data)
-  self.create_subscription(Odometry,'/odom/mujoco_odom',lambda m:self.poses.append(m),30)
+  self.create_subscription(Odometry,os.environ.get('GO2W_SEMANTIC_ODOM_TOPIC','/odom/mujoco_odom'),lambda m:self.poses.append(m),30)
   self.imgpub=self.create_publisher(Image,'/go2w/anything/annotated_image',qos_profile_sensor_data);self.status=self.create_publisher(String,'/go2w/anything/status',10);self.cloud=self.create_publisher(PointCloud2,'/go2w/anything/semantic_points',qos_profile_sensor_data)
  def on_lidar(self,raw):
   # Geometry follows the sensor clock, independently of model inference.
   self.lidars.append(raw)
   if not self.poses:return
   od=min(list(self.poses),key=lambda x:abs(stamp(x)-stamp(raw)))
-  if abs(stamp(od)-stamp(raw))>.1:return
+  if abs(stamp(od)-stamp(raw))>.1 or (self.frame=='lio_map' and od.header.frame_id!=self.frame):return
   cfg=json.loads((ROOT/'matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config/config.json').read_text())
   pts=point_cloud2.read_points(raw,field_names=('x','y','z'),skip_nans=True)
   pts=np.column_stack([pts[k] for k in ('x','y','z')])
@@ -60,7 +60,7 @@ class Live(Node):
   arr=np.empty(len(world),dtype=[('x','<f4'),('y','<f4'),('z','<f4'),('rgb','<u4'),('label','u1')])
   for i,k in enumerate(('x','y','z')):arr[k]=world[:,i]
   arr['rgb']=(color[:,0]<<16)|(color[:,1]<<8)|color[:,2];arr['label']=labels
-  self.midpub.publish(PointCloud2(header=Header(stamp=raw.header.stamp,frame_id='odom'),height=1,width=len(arr),fields=[PointField(name=k,offset=i*4,datatype=PointField.FLOAT32 if i<3 else PointField.UINT32,count=1) for i,k in enumerate(('x','y','z','rgb'))]+[PointField(name='label',offset=16,datatype=PointField.UINT8,count=1)],point_step=17,row_step=len(arr)*17,data=arr.tobytes(),is_dense=True))
+  self.midpub.publish(PointCloud2(header=Header(stamp=raw.header.stamp,frame_id=self.frame),height=1,width=len(arr),fields=[PointField(name=k,offset=i*4,datatype=PointField.FLOAT32 if i<3 else PointField.UINT32,count=1) for i,k in enumerate(('x','y','z','rgb'))]+[PointField(name='label',offset=16,datatype=PointField.UINT8,count=1)],point_step=17,row_step=len(arr)*17,data=arr.tobytes(),is_dense=True))
   self.midstats=dict(mid360_points=len(arr),mid360_labeled_points=int((labels>0).sum()),mid360_semantic_age_seconds=age,mid360_geometry_source='/livox/lidar_raw',mid360_association_radius_m=.12,mid360_publish_mode='sensor_callback_independent_of_inference',lidar_sensor_type=cfg['robot']['sensors']['lidar']['sensor_type'],lidar_output_topic='/go2w/anything/mid360_points')
  def process(self,engine,latest):
   received,m=latest;rgb=cv2.imdecode(np.frombuffer(m.data,np.uint8),cv2.IMREAD_COLOR)[:,:,::-1];d,labels,objects,stats=engine.infer(rgb)
@@ -69,14 +69,14 @@ class Live(Node):
   if self.depths and self.poses:
    depthmsg=min(list(self.depths),key=lambda x:abs(stamp(x)-stamp(m)));od=min(list(self.poses),key=lambda x:abs(stamp(x)-stamp(depthmsg)));pose=od.pose.pose
    stats['rgb_depth_delta_seconds']=abs(stamp(depthmsg)-stamp(m));stats['depth_odom_delta_seconds']=abs(stamp(od)-stamp(depthmsg))
-   if stats['rgb_depth_delta_seconds']<.15 and stats['depth_odom_delta_seconds']<.1:
+   if stats['rgb_depth_delta_seconds']<.15 and stats['depth_odom_delta_seconds']<.1 and (self.frame!='lio_map' or od.header.frame_id==self.frame):
     cfg=json.loads((ROOT/'matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config/config.json').read_text());s=cfg['robot']['sensors']['depth_sensor']
     try:
      z=np.frombuffer(depthmsg.data,dtype='<f4').reshape(depthmsg.height or s['height'],depthmsg.width or s['width']);xyz,lab=lift_masks(z,labels,cfg,pose);pcloud=(xyz,lab)
      color=COLORS[lab].astype(np.uint32);arr=np.empty(len(xyz),dtype=[('x','<f4'),('y','<f4'),('z','<f4'),('rgb','<u4'),('label','u1')])
      for i,k in enumerate(('x','y','z')):arr[k]=xyz[:,i]
      arr['rgb']=(color[:,0]<<16)|(color[:,1]<<8)|color[:,2];arr['label']=lab
-     self.cloud.publish(PointCloud2(header=Header(stamp=depthmsg.header.stamp,frame_id='odom'),height=1,width=len(arr),fields=[PointField(name=k,offset=i*4,datatype=PointField.FLOAT32 if i<3 else PointField.UINT32,count=1) for i,k in enumerate(('x','y','z','rgb'))]+[PointField(name='label',offset=16,datatype=PointField.UINT8,count=1)],point_step=17,row_step=len(arr)*17,data=arr.tobytes(),is_dense=True))
+     self.cloud.publish(PointCloud2(header=Header(stamp=depthmsg.header.stamp,frame_id=self.frame),height=1,width=len(arr),fields=[PointField(name=k,offset=i*4,datatype=PointField.FLOAT32 if i<3 else PointField.UINT32,count=1) for i,k in enumerate(('x','y','z','rgb'))]+[PointField(name='label',offset=16,datatype=PointField.UINT8,count=1)],point_step=17,row_step=len(arr)*17,data=arr.tobytes(),is_dense=True))
      self.semantic_cache=(stamp(depthmsg),cKDTree(xyz),lab.copy())
      stats.update(self.midstats)
      stats['metric_cloud_points']=len(arr);stats['metric_cloud_depth_source']='UE_depth_sensor_not_DepthAnything';stats['metric_cloud_semantics']='GroundingDINO_plus_SAM2'

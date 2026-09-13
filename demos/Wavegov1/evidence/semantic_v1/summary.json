@@ -1,0 +1,68 @@
+{
+  "state": "live",
+  "frame": "lio_map",
+  "frames": 746,
+  "objects": [
+    {
+      "class_id": 5,
+      "label": "wall",
+      "center": [
+        23.34512710571289,
+        -17.697959899902344,
+        1.3109878301620483
+      ],
+      "size": [
+        3.707479476928711,
+        3.2220306396484375,
+        2.3644444942474365
+      ],
+      "points": 998,
+      "vote_support": 0.9994787573814392,
+      "id": 1041,
+      "last_seen": 1789306573.811872,
+      "hits": 67
+    }
+  ],
+  "cluster_counts": {
+    "unknown obstacle": 0,
+    "stairs": 0,
+    "ramp": 0,
+    "cylinder": 0,
+    "person": 0,
+    "wall": 1,
+    "floor": 0,
+    "stairs/ramp uncertain": 0
+  },
+  "max_simultaneous_clusters": {
+    "unknown obstacle": 10,
+    "stairs": 2,
+    "ramp": 4,
+    "cylinder": 1,
+    "person": 1,
+    "wall": 11,
+    "floor": 0,
+    "stairs/ramp uncertain": 3
+  },
+  "semantic_voxels": 180000,
+  "rejected_semantic_frames": 2,
+  "geometry_source": "raw LiDAR + IMU LIO",
+  "semantic_source": "Grounding DINO + SAM2 + synchronized metric UE depth + LIO pose",
+  "ground_truth_pose_used": false,
+  "voxel_m": 0.12,
+  "association_m": 0.18,
+  "semantic_accuracy_measured": false,
+  "absolute_map_accuracy_measured": false,
+  "loop_closure": false,
+  "processing_ms": 337.7589209994767,
+  "map_points": 153530,
+  "map_class_counts": {
+    "unknown obstacle": 97908,
+    "stairs": 1443,
+    "ramp": 769,
+    "cylinder": 194,
+    "person": 0,
+    "wall": 38650,
+    "floor": 14441,
+    "stairs/ramp uncertain": 125
+  }
+}

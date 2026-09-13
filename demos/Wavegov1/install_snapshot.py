@@ -45,7 +45,7 @@ def main():
     if not args.apply:
         print("Check only. Use --apply to restore this version after stopping the demo.")
         return
-    for unit in ["go2w-course.service", "go2w-navigation.service", "go2w-anything-models.service", "go2w-anything-view.service"]:
+    for unit in ["go2w-course.service", "go2w-navigation.service", "go2w-anything-models.service", "go2w-anything-view.service", "go2w-mapping-sidecar.service", "go2w-semantic-map.service", "go2w-semantic-rviz.service"]:
         if subprocess.run(["systemctl", "--user", "is-active", "--quiet", unit]).returncode == 0:
             raise RuntimeError(f"Stop {unit} before replacing runtime files")
     backup = target / ".backups" / ("Wavegov1_" + datetime.now().strftime("%Y%m%d_%H%M%S_%f"))

@@ -1,0 +1,65 @@
+{
+  "version": "v1",
+  "date": "2026-09-13",
+  "final_run": "semantic_v1_final",
+  "full_route_passed": true,
+  "stages": [
+    19,
+    19
+  ],
+  "nav2_actions": 1,
+  "previous_development_run_passed": true,
+  "duration_seconds": 278.3450849056244,
+  "final_world_pose": {
+    "x": 18.04103073734796,
+    "y": 23.038763142405365,
+    "z": 0.41519136656729244,
+    "roll": 0.015395398845305707,
+    "pitch": 0.05696554884995077,
+    "yaw": -1.5840608940338754
+  },
+  "goal_xy": [
+    18,
+    22.8
+  ],
+  "final_xy_error_m": 0.24226299671762008,
+  "stairs_max_body_z_m": 2.048744562982281,
+  "ramp_physics": {
+    "passed": true,
+    "approach_z_m": 0.40938890058674127,
+    "crest_max_z_m": 0.8537859337425037,
+    "exit_z_m": 0.40620716364321285,
+    "elevation_gain_m": 0.4443970331557624,
+    "elevation_drop_m": 0.4475787700992908,
+    "uphill_max_abs_pitch_rad": 0.07495448266166883,
+    "downhill_max_abs_pitch_rad": 0.21522549482377834,
+    "minimum_elevation_gain_m": 0.3,
+    "minimum_pitch_rad": 0.07
+  },
+  "person_cluster_updates": 21,
+  "peak_simultaneous_clusters": {
+    "unknown obstacle": 10,
+    "stairs": 2,
+    "ramp": 4,
+    "cylinder": 1,
+    "person": 1,
+    "wall": 11,
+    "floor": 0,
+    "stairs/ramp uncertain": 3
+  },
+  "median_processing_ms": 285.0967409904115,
+  "static_map_class_counts": {
+    "unknown obstacle": 97908,
+    "stairs": 1443,
+    "ramp": 769,
+    "cylinder": 194,
+    "person": 0,
+    "wall": 38650,
+    "floor": 14441,
+    "stairs/ramp uncertain": 125
+  },
+  "tests_passed": 85,
+  "semantic_restarts_during_final_run": 0,
+  "absolute_accuracy_measured": false,
+  "semantic_accuracy_measured": false
+}

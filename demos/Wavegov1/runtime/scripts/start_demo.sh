@@ -215,10 +215,12 @@ start_tracked lidar_tf ros2 run tf2_ros static_transform_publisher \
   --roll "$LIDAR_ROLL" --pitch "$LIDAR_PITCH" --yaw "$LIDAR_YAW" \
   --frame-id base_link --child-frame-id lidar
 
-start_tracked world_cloud /usr/bin/python3 "${ROOT_DIR}/scripts/go2w_world_obstacle_cloud.py"
+if [[ "${GO2W_MAPLESS:-0}" != 1 ]]; then
+  start_tracked world_cloud /usr/bin/python3 "${ROOT_DIR}/scripts/go2w_world_obstacle_cloud.py"
+fi
 
 if ! wait_for_topic /odom/mujoco_odom 90 || \
-   ! wait_for_topic /livox/lidar_raw 90 || ! wait_for_topic /livox/lidar 90; then
+   ! wait_for_topic /livox/lidar_raw 90; then
   echo "[ERROR] MATRiX did not reach the PDF topic checkpoint. See ${LOG_DIR}/sim.log." >&2
   "${ROOT_DIR}/scripts/stop_demo.sh" || true
   exit 1
@@ -229,8 +231,12 @@ if ! wait_for_standing 20; then
   exit 1
 fi
 
-ROAMERX_COMMUNICATION_TYPE=LCM \
-  bash "${MATRIX_DIR}/scripts/run_roamerx_lite_link.sh" "${ROAMERX_DIR}" start
+if [[ "${GO2W_MAPLESS:-0}" == 1 ]]; then
+  start_tracked online_exploration ros2 launch "${ROOT_DIR}/scripts/go2w_exploration.launch.py"
+else
+  ROAMERX_COMMUNICATION_TYPE=LCM \
+    bash "${MATRIX_DIR}/scripts/run_roamerx_lite_link.sh" "${ROAMERX_DIR}" start
+fi
 
 if ! wait_for_action /navigate_to_pose 30 || ! wait_for_action /navigate_through_poses 30; then
   "${ROOT_DIR}/scripts/stop_demo.sh" || true
@@ -240,6 +246,10 @@ fi
 # Never inherit the stair filter (min height 0.65 m) into a normal navigation
 # session.  It intentionally ignores low steps and would also ignore the
 # 0.44 m cylinder course shown in the MATRiX demo.
+if [[ "${GO2W_MAPLESS:-0}" == 1 ]]; then
+  mkdir -p "$(dirname "$GO2W_NAV_MODE_FILE")"
+  echo avoid > "$GO2W_NAV_MODE_FILE"
+else
 if ! "${ROOT_DIR}/scripts/set_go2w_nav_mode.sh" avoid; then
   echo "[ERROR] Failed to arm Go2-W local obstacle avoidance." >&2
   "${ROOT_DIR}/scripts/stop_demo.sh" || true
@@ -249,6 +259,8 @@ if ! "${ROOT_DIR}/scripts/validate_go2w_local_avoidance.sh"; then
   echo "[ERROR] Go2-W local obstacle-avoidance validation failed closed." >&2
   "${ROOT_DIR}/scripts/stop_demo.sh" || true
   exit 1
+fi
+
 fi
 
 echo "[OK] MATRiX + Go2-W (${GO2W_CONTROLLER}) + RoamerX LCM demo started."

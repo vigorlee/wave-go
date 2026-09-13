@@ -1,7 +1,7 @@
 {
-  "version": "Wavegov1",
-  "recorded_date": "2026-09-12",
-  "scope": "Original YardWorld course; upright MID360 without green UE scan points; four windows; one continuous Nav2 route with RViz reference/plan/trail.",
+  "version": "v1",
+  "recorded_date": "2026-09-13",
+  "scope": "Real LiDAR/IMU LIO semantic map, DINO/SAM2 labels, DBSCAN clusters and transient pedestrian layer; one-action 19-stage full terrain-to-east-corner mission.",
   "upstream": {
     "matrix": {
       "remote": "https://github.com/zsibot/matrix.git",
@@ -18,7 +18,10 @@
     "robot_forward executable",
     "eCAL 5.13.3, Protobuf 3.12.4, LCM 1.5.1, zsibot_common 0.5.9",
     "DreamWaQ Go2-W g2wDWAQ actor/encoder checkpoints",
-    "Three Hugging Face checkpoints listed in runtime/models/anything/manifest.json"
+    "Three Hugging Face checkpoints listed in runtime/models/anything/manifest.json",
+    "SciPy for cKDTree clustering; ROS 2 sensor_msgs_py",
+    "Local Cosmos3-Edge checkpoint and cosmos-framework environment for navigation; preview-only mode skips Cosmos"
   ],
-  "files_copied": 82
+  "files_copied": 111,
+  "previous_baseline_tag": "Wavegov1-baseline"
 }

@@ -34,7 +34,7 @@ class ContinuousCourse(CosmosVlnMission):
         output.mkdir(parents=True, exist_ok=True)
         configuration = output / 'configuration'
         configuration.mkdir(exist_ok=True)
-        for relative in ('config/go2w_wavegov1_route.json',
+        for relative in (os.environ.get('COSMOS_VLN_ROUTES_FILE','config/go2w_wavegov1_route.json'),
                          'config/go2w_continuous_nav.xml', 'matrix/config/config.json'):
             source = ROOT / relative
             shutil.copy2(source, configuration / source.name)
@@ -44,7 +44,7 @@ class ContinuousCourse(CosmosVlnMission):
         self.last_record = 0.0
         self.plan_messages = 0
         super().__init__()
-        self.course = self.routes['wavegov1_original_course']
+        self.course = self.routes[os.environ.get('GO2W_COURSE_ROUTE_ID','wavegov1_original_course')]
         self.course_stages = self.route_stages(self.course)
         self.terrain = []
         scene = ROOT / 'matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_mid360_course.xml'
@@ -103,7 +103,7 @@ class ContinuousCourse(CosmosVlnMission):
         result = dict(passed=self.state == 'succeeded', state=self.state,
                       action_goal_count=self.continuous_action_goal_count,
                       completed_stages=self.step, total_stages=len(self.course_stages),
-                      route_source='user_requested_fixed_catalog_not_model_inference',
+                      route_source='cosmos_selected_required_terrain_catalog' if os.environ.get('GO2W_COURSE_USE_COSMOS')=='1' else 'user_requested_fixed_catalog_not_model_inference',
                       nav2_plan_messages=self.plan_messages,
                       last_event=self.events[-1] if self.events else None,
                       ramp_physics=self.ramp_physics_details(), samples=len(self.rows))
@@ -112,6 +112,9 @@ class ContinuousCourse(CosmosVlnMission):
     def start_course(self):
         if not self.navigate_through_client.wait_for_server(timeout_sec=10):
             raise RuntimeError('Nav2 action server unavailable')
+        if os.environ.get('GO2W_COURSE_USE_COSMOS')=='1':
+            self.on_mission(String(data=os.environ.get('GO2W_COURSE_INSTRUCTION','Cross ALL original stairs up and down, cylinder slalom, both ramps, then continue along the north gallery into the east corridor and reach the farthest corner. Use the complete all_obstacles_to_east_corner route.')))
+            return
         self.on_mission(String(data='Continuous original stairs, slalom and ramp course'))
         if not self.active:
             raise RuntimeError('Mission startup rejected; see events.jsonl')
@@ -184,7 +187,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--preview-only', action='store_true')
     args = parser.parse_args()
-    os.environ['COSMOS_VLN_ROUTES_FILE'] = str(ROOT/'config/go2w_wavegov1_route.json')
+    os.environ.setdefault('COSMOS_VLN_ROUTES_FILE',str(ROOT/'config/go2w_wavegov1_route.json'))
     os.environ['COSMOS_VLN_CONTINUOUS_ROUTE'] = '1'
     os.environ['COSMOS_VLN_CONTINUOUS_BT_XML'] = str(ROOT/'config/go2w_continuous_nav.xml')
     os.environ.setdefault('COSMOS_VLN_CONTINUOUS_PASS_RADIUS', '.50')

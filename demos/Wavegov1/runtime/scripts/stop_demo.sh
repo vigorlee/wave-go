@@ -14,6 +14,7 @@ fi
 
 export RMW_IMPLEMENTATION="rmw_zenoh_cpp"
 export ROS_DOMAIN_ID="89"
+systemctl --user stop go2w-mapping-sidecar.service go2w-semantic-map.service go2w-semantic-rviz.service >/dev/null 2>&1 || true
 
 "${ROOT_DIR}/scripts/stop_cosmos_vln_visualization.sh" >/dev/null 2>&1 || true
 "${ROOT_DIR}/scripts/stop_cosmos_vln_bridge.sh" >/dev/null 2>&1 || true
@@ -53,6 +54,7 @@ stop_domain_zenohd() {
   done < <(pgrep -x rmw_zenohd 2>/dev/null || true)
 }
 
+stop_pid online_exploration
 stop_pid lidar_tf
 stop_pid world_cloud
 stop_pid sim

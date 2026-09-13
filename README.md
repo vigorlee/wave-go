@@ -6,7 +6,7 @@
 
 从高层任务到实体运动，连接世界模型、导航规划与轮足控制。
 
-[![Platform](https://img.shields.io/badge/Robot-Unitree_Go2--W-164e63?style=flat-square)](demos/go2w-cosmos-extended-navigation/) [![Simulation](https://img.shields.io/badge/Simulation-MuJoCo_×_UE-334155?style=flat-square)](#三类场景实录) [![Verified](https://img.shields.io/badge/2026--09--10-18%2F18_passed-15803d?style=flat-square)](#本次复测结果)
+[![Platform](https://img.shields.io/badge/Robot-Unitree_Go2--W-164e63?style=flat-square)](demos/go2w-cosmos-extended-navigation/) [![Simulation](https://img.shields.io/badge/Simulation-MuJoCo_×_UE-334155?style=flat-square)](#三类场景实录) [![Verified](https://img.shields.io/badge/v1-19%2F19_passed-15803d?style=flat-square)](#本次复测结果)
 
 [场景实录](#三类场景实录) · [验收指标](#本次复测结果) · [运行指南](#快速开始) · [无图充电](README_MAPLESS_CHARGER_SEARCH.md)
 
@@ -16,15 +16,15 @@
 
 <p align="center"><sub>来自成功运行的真实仿真录屏。坡道显示与碰撞面已对齐，机身高度随坡面实际升降。</sub></p>
 
-## Wavegov1 · 连续导航与实时感知
+## v1 · 实时三维语义地图
 
-[**打开 Wavegov1 运行指南**](demos/Wavegov1/) · [**下载保存版本**](https://github.com/vigorlee/wave-go/releases/tag/Wavegov1-baseline)
+[**打开新版 v1**](demos/Wavegov1/) · [**下载发布版本**](https://github.com/vigorlee/wave-go/releases/tag/v1)
 
-原 YardWorld 楼梯、斜坡与固定障碍，一次连续 Nav2 任务；恢复 MID360，关闭 UE 绿色扫描点。四个窗口同时显示 MuJoCo、RViz 路线与实测点云、Depth Anything V2 + DINO/SAM2、UE 场景。
+MID360 + LIO 在线建图，Grounding DINO / SAM2 语义关联与密度聚类。RViz 实时显示行人、圆柱、楼梯、坡道等类别、物体编号和三维包围框，支持 PCD / NPZ / JSON 导出。原始雷达约 10 Hz，实时语义点云约 2 Hz。
 
-![Wavegov1：完整参考路线、实时规划和实际行驶轨迹](demos/Wavegov1/evidence/four_windows_continuous.png)
+![v1：真实行人分割与 RViz 三维语义标签](demos/Wavegov1/evidence/semantic_v1/person_rviz.png)
 
-代码、传感器配置、控制器、地图与场景覆盖层保存在版本目录，附 SHA-256 和恢复脚本。此次验收与限制请看 [Wavegov1 说明](demos/Wavegov1/README.md)；下方 18/18 为此前长程版本的历史结果。
+新版验收、坐标来源和精度限制见 [v1 说明](demos/Wavegov1/README.md)。以下为历史场景结果。
 
 ## 三类场景实录
 

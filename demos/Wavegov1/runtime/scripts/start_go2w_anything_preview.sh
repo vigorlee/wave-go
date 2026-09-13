@@ -11,7 +11,7 @@ export MATRIX_UE_SCENE_OVERRIDE="${MATRIX_UE_SCENE_OVERRIDE:-$ROOT_DIR/matrix/sr
 export MATRIX_SCENE_JSON_OVERRIDE="${MATRIX_SCENE_JSON_OVERRIDE:-$ROOT_DIR/matrix/scene/scene_go2w_extended_nav.json}"
 export GO2W_WORLD_SCENE="${GO2W_WORLD_SCENE:-$ROOT_DIR/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_extended_nav.xml}"
 export GO2W_SCENE_JSON="$MATRIX_SCENE_JSON_OVERRIDE" GO2W_MJ_STATE_RELAY="${GO2W_MJ_STATE_RELAY:-1}"
-export ROAMERX_RVIZ_CONFIG="$ROOT_DIR/config/go2w_anything_navigation.rviz"
+export ROAMERX_RVIZ_CONFIG="${ROAMERX_RVIZ_CONFIG:-$ROOT_DIR/config/go2w_anything_navigation.rviz}"
 OUT="${COSMOS_VLN_ARTIFACT_DIR:-$ROOT_DIR/artifacts/anything_live_preview}"
 mkdir -p "$OUT"
 /usr/bin/python3 - <<'PY'
@@ -33,4 +33,5 @@ bash scripts/start_go2w_systemd.sh
 systemctl --user stop go2w-anything-models.service >/dev/null 2>&1 || true
 systemd-run --user --quiet --collect --unit=go2w-anything-models --property=KillMode=control-group \
  --property="WorkingDirectory=$ROOT_DIR" --property="StandardOutput=append:$OUT/models.log" --property="StandardError=append:$OUT/models.log" \
+ --setenv="GO2W_SEMANTIC_FRAME=${GO2W_SEMANTIC_FRAME:-odom}" --setenv="GO2W_SEMANTIC_ODOM_TOPIC=${GO2W_SEMANTIC_ODOM_TOPIC:-/odom/mujoco_odom}" \
  /bin/bash "$ROOT_DIR/scripts/run_go2w_anything_service.sh" "$OUT/anything"
