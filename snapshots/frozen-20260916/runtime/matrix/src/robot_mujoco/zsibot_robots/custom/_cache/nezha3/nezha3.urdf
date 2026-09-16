@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="nezha3_description">
+  <link
+    name="trunk">
+    <inertial>
+      <origin
+        xyz="-0.000711047828587191 0.0112073624474429 -0.00481932179712652"
+        rpy="0 0 0" />
+      <mass
+        value="44.027" />
+      <inertia
+        ixx="0.47177966"
+        ixy="0.00168376"
+        ixz="0.00009484"
+        iyy="1.99866713"
+        iyz="-0.00529047"
+        izz="2.26564344" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/trunk.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="-0.005 -0.01 0.008"  rpy="0 0 0" />
+        <geometry>
+          <box size="0.70 0.34 0.20" />
+        </geometry>
+      </collision>
+  </link>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/nezha3_gazebo</robotNamespace>
+      <controlPeriod>0.001</controlPeriod>
+    </plugin>
+  </gazebo>
+  <!--通过 ROS 话题 /apply_force/trunk 向机器人的 trunk（躯干）施加外力（力和力矩）,暂时没用到-->
+  <gazebo>
+    <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
+      <bodyName>trunk</bodyName>
+      <topicName>/apply_force/trunk</topicName>
+    </plugin>
+  </gazebo>
+  <!--为 imu_link 添加一个 IMU 传感器，并通过 ROS 发布 IMU 数据（角速度、线加速度、姿态等）-->
+  <gazebo reference="imu_fixed_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>1000</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>trunk_imu</topicName>
+        <bodyName>imu_fixed_link</bodyName>
+        <updateRateHZ>1000.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_fixed_link</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+  <gazebo reference="base">
+    <material>Gazebo/Green</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  <gazebo reference="trunk">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp value="1000000.0"/>
+    <kd value="1.0"/>
+  </gazebo>
+  <gazebo reference="imu_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+  
+  <link
+    name="FL_hip">
+    <inertial>
+      <origin
+        xyz="-0.00673211442389973 0.00396466354822353 -0.00050923455727081"
+        rpy="0 0 0" />
+      <mass
+        value="2.37707148" />
+      <inertia
+        ixx="0.00493506"
+        ixy="0.00013317"
+        ixz="-0.00006604"
+        iyy="0.00665069"
+        iyz="-0.00002512"
+        izz="0.00555123" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FL_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.0 0.05 0.0" rpy="1.570796 0 0" />
+        <geometry>
+          <cylinder radius="0.065" length="0.128"/>
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="FL_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.42614 0.064917 0.013531"
+      rpy="0 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="FL_hip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="FL_thigh">
+    <inertial>
+      <origin
+        xyz="-0.00364152089741987 -0.00280956157067219 -0.0756163979789198"
+        rpy="0 0 0" />
+      <mass
+        value="4.32911658" />
+      <inertia
+        ixx="0.06040923"
+        ixy="-0.00038619"
+        ixz="0.00183648"
+        iyy="0.05814934"
+        iyz="-0.00797877"
+        izz="0.01093858" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FL_thigh.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="-0.01 0.0237 -0.12" rpy="0 0.15 0" />
+        <geometry>
+          <box size="0.06 0.075 0.364" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_thigh_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.1325 0"
+      rpy="0 0 0" />
+    <parent
+      link="FL_hip" />
+    <child
+      link="FL_thigh" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.3"
+      upper="2.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="FL_calf">
+    <inertial>
+      <origin
+        xyz="0.00570820467407546 0.000521579234270764 -0.140460545098694"
+        rpy="0 0 0" />
+      <mass
+        value="0.65961881" />
+      <inertia
+        ixx="0.01181022"
+        ixy="0.0000019"
+        ixz="-0.00035435"
+        iyy="0.01204022"
+        iyz="-0.00003335"
+        izz="0.00043588" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FL_calf.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.0 -0.130" rpy="0 -0.1 0" />
+        <geometry>
+          <box size="0.05 0.045 0.280" />
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="FL_calf_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.0245 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="FL_thigh" />
+    <child
+      link="FL_calf" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.5"
+      upper="-0.7"
+      effort="225"
+      velocity="8" />
+  </joint>
+  <link
+    name="FL_footmotor">
+    <inertial>
+      <origin
+        xyz="0.000635672187147052 -0.00219152408751519 0.00233865635882039"
+        rpy="0 0 0" />
+      <mass
+        value="1.0" />
+      <inertia
+        ixx="0.00116858"
+        ixy="-0.0000271"
+        ixz="0.00002589"
+        iyy="0.00119167"
+        iyz="-0.00010115"
+        izz="0.0010827" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FL_footmotor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.025 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.045" radius="0.055" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_footmotor_fixed"
+    type="fixed">
+    <origin
+      xyz="5.7407E-05 0.0205 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="FL_calf" />
+    <child
+      link="FL_footmotor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="FL_foot">
+    <inertial>
+      <origin
+        xyz="-6.97644014663323E-06 -0.00779490263255184 -1.60732815806183E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.8" />
+      <inertia
+        ixx="0.00412785"
+        ixy="0.0"
+        ixz="-0.00000036"
+        iyy="0.00787206"
+        iyz="0.0"
+        izz="0.00412853" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FL_foot.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.0 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.040" radius="0.11" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_foot_joint"
+    type="revolute">
+    <origin
+      xyz="0.00010365 0.034479 0.00033954"
+      rpy="0 0 0" />
+    <parent
+      link="FL_footmotor" />
+    <child
+      link="FL_foot" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-9999"
+      upper="9999"
+      effort="56"
+      velocity="47" />
+  </joint>
+  <link
+    name="FR_hip">
+    <inertial>
+      <origin
+        xyz="-0.00673211442390007 -0.00396466354822181 0.000509234557269034"
+        rpy="0 0 0" />
+      <mass
+        value="2.37707148" />
+      <inertia
+        ixx="0.00493506"
+        ixy="-0.00013317"
+        ixz="0.00006604"
+        iyy="0.00665069"
+        iyz="-0.00002512"
+        izz="0.00555123" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FR_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.0 -0.05 0.0" rpy="1.570796 0 0" />
+        <geometry>
+          <cylinder radius="0.065" length="0.128"/>
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="FR_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.42614 -0.089083 0.013531"
+      rpy="0 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="FR_hip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="FR_thigh">
+    <inertial>
+      <origin
+        xyz="-0.00364233526809921 0.0027890429411791 -0.0756084966985826"
+        rpy="0 0 0" />
+      <mass
+        value="4.32961796" />
+      <inertia
+        ixx="0.06035734"
+        ixy="0.00038606"
+        ixz="0.00191307"
+        iyy="0.05814947"
+        iyz="0.0079775"
+        izz="0.01099953" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FR_thigh.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="-0.01 -0.0237 -0.12" rpy="0 0.15 0" />
+        <geometry>
+          <box size="0.06 0.075 0.364" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_thigh_joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.1325 0"
+      rpy="0 0 0" />
+    <parent
+      link="FR_hip" />
+    <child
+      link="FR_thigh" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.3"
+      upper="2.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="FR_calf">
+    <inertial>
+      <origin
+        xyz="0.00570837422779719 -0.000521567636274201 -0.140461137190827"
+        rpy="0 0 0" />
+      <mass
+        value="0.65961882" />
+      <inertia
+        ixx="0.01181021"
+        ixy="-0.0000019"
+        ixz="-0.00035435"
+        iyy="0.01204022"
+        iyz="0.00003335"
+        izz="0.00043588" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FR_calf.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.0 -0.130" rpy="0 -0.1 0" />
+        <geometry>
+          <box size="0.05 0.045 0.280" />
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="FR_calf_joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.0245 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="FR_thigh" />
+    <child
+      link="FR_calf" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.5"
+      upper="-0.7"
+      effort="225"
+      velocity="8" />
+  </joint>
+  <link
+    name="FR_footmotor">
+    <inertial>
+      <origin
+        xyz="0.000618123014954036 0.00219152601248906 0.00234336440230692"
+        rpy="0 0 0" />
+      <mass
+        value="1.0" />
+      <inertia
+        ixx="0.00116955"
+        ixy="0.00002707"
+        ixz="0.00002421"
+        iyy="0.00119167"
+        iyz="0.00010116"
+        izz="0.00108173" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FR_footmotor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.025 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.045" radius="0.055" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_footmotor_fixed"
+    type="fixed">
+    <origin
+      xyz="5.7407E-05 -0.0205 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="FR_calf" />
+    <child
+      link="FR_footmotor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="FR_foot">
+    <inertial>
+      <origin
+        xyz="-2.27599779936694E-06 0.00779490263255561 -1.73735700406408E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.8" />
+      <inertia
+        ixx="0.00412771"
+        ixy="0.0"
+        ixz="-0.00000013"
+        iyy="0.00787206"
+        iyz="0.0"
+        izz="0.00412867" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/FR_foot.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.0 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.040" radius="0.11" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_foot_joint"
+    type="revolute">
+    <origin
+      xyz="7.9882E-05 -0.034479 0.0003459"
+      rpy="0 0 0" />
+    <parent
+      link="FR_footmotor" />
+    <child
+      link="FR_foot" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-9999"
+      upper="9999"
+      effort="56"
+      velocity="47" />
+  </joint>
+  <link
+    name="RL_hip">
+    <inertial>
+      <origin
+        xyz="0.00673211442390165 0.00396466354821727 0.00050923455725993"
+        rpy="0 0 0" />
+      <mass
+        value="2.37707148" />
+      <inertia
+        ixx="0.00493506"
+        ixy="-0.00013317"
+        ixz="-0.00006604"
+        iyy="0.00665069"
+        iyz="0.00002512"
+        izz="0.00555123" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RL_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.0 0.05 0.0" rpy="1.570796 0 0" />
+        <geometry>
+          <cylinder radius="0.065" length="0.128"/>
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="RL_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.43586 0.064917 0.013531"
+      rpy="0 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="RL_hip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="RL_thigh">
+    <inertial>
+      <origin
+        xyz="-0.00364151638550647 -0.00280956153407635 -0.075616382334415"
+        rpy="0 0 0" />
+      <mass
+        value="4.32911658" />
+      <inertia
+        ixx="0.06040923"
+        ixy="-0.00038619"
+        ixz="0.00183648"
+        iyy="0.05814934"
+        iyz="-0.00797877"
+        izz="0.01093858" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RL_thigh.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.01 0.0237 -0.12" rpy="0 0.15 0" />
+        <geometry>
+          <box size="0.06 0.075 0.364" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_thigh_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.1325 0"
+      rpy="0 0 0" />
+    <parent
+      link="RL_hip" />
+    <child
+      link="RL_thigh" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.3"
+      upper="2.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="RL_calf">
+    <inertial>
+      <origin
+        xyz="0.00570820467429523 0.000521579234276898 -0.140460545098152"
+        rpy="0 0 0" />
+      <mass
+        value="0.65961881" />
+      <inertia
+        ixx="0.01181022"
+        ixy="0.0000019"
+        ixz="-0.00035435"
+        iyy="0.01204022"
+        iyz="-0.00003335"
+        izz="0.00043588" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RL_calf.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.0 -0.130" rpy="0 -0.1 0" />
+        <geometry>
+          <box size="0.05 0.045 0.280" />
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="RL_calf_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.0245 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="RL_thigh" />
+    <child
+      link="RL_calf" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.5"
+      upper="-0.7"
+      effort="225"
+      velocity="8" />
+  </joint>
+  <link
+    name="RL_footmotor">
+    <inertial>
+      <origin
+        xyz="0.000635672186097058 -0.00219152406777146 0.00233865634635944"
+        rpy="0 0 0" />
+      <mass
+        value="1.0" />
+      <inertia
+        ixx="0.00116858"
+        ixy="-0.0000271"
+        ixz="0.00002589"
+        iyy="0.00119167"
+        iyz="-0.00010115"
+        izz="0.0010827" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RL_footmotor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.025 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.045" radius="0.055" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_footmotor_fixed"
+    type="fixed">
+    <origin
+      xyz="5.7407E-05 0.0205 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="RL_calf" />
+    <child
+      link="RL_footmotor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RL_foot">
+    <inertial>
+      <origin
+        xyz="-4.6815725496252E-06 -0.00779490263255259 1.68850223688372E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.8" />
+      <inertia
+        ixx="0.00412777"
+        ixy="0.0"
+        ixz="0.00000025"
+        iyy="0.00787206"
+        iyz="0.0"
+        izz="0.00412861" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RL_foot.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.0 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.040" radius="0.11" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_foot_joint"
+    type="revolute">
+    <origin
+      xyz="0.00010365 0.034479 0.00033954"
+      rpy="0 0 0" />
+    <parent
+      link="RL_footmotor" />
+    <child
+      link="RL_foot" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-9999"
+      upper="9999"
+      effort="56"
+      velocity="47" />
+  </joint>
+  <link
+    name="RR_hip">
+    <inertial>
+      <origin
+        xyz="0.00673211442388955 -0.00396466354822209 -0.000509234557269811"
+        rpy="0 0 0" />
+      <mass
+        value="2.37707148" />
+      <inertia
+        ixx="0.00493506"
+        ixy="0.00013317"
+        ixz="0.00006604"
+        iyy="0.00665069"
+        iyz="0.00002512"
+        izz="0.00555123" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RR_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.0 -0.05 0.0" rpy="1.570796 0 0" />
+        <geometry>
+          <cylinder radius="0.065" length="0.128"/>
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="RR_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.43586 -0.089083 0.013531"
+      rpy="0 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="RR_hip" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="RR_thigh">
+    <inertial>
+      <origin
+        xyz="-0.00364233560273397 0.00278904293283722 -0.0756084807079803"
+        rpy="0 0 0" />
+      <mass
+        value="4.32961796" />
+      <inertia
+        ixx="0.06035734"
+        ixy="0.00038606"
+        ixz="0.00191307"
+        iyy="0.05814947"
+        iyz="0.0079775"
+        izz="0.01099953" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RR_thigh.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0.01 -0.0237 -0.12" rpy="0 0.15 0" />
+        <geometry>
+          <box size="0.06 0.075 0.364" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_thigh_joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.1325 0"
+      rpy="0 0 0" />
+    <parent
+      link="RR_hip" />
+    <child
+      link="RR_thigh" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.3"
+      upper="2.6"
+      effort="150"
+      velocity="12" />
+  </joint>
+  <link
+    name="RR_calf">
+    <inertial>
+      <origin
+        xyz="0.00570837418799874 -0.00052156766088346 -0.14046113707224"
+        rpy="0 0 0" />
+      <mass
+        value="0.65961882" />
+      <inertia
+        ixx="0.01181021"
+        ixy="-0.0000019"
+        ixz="-0.00035435"
+        iyy="0.01204022"
+        iyz="0.00003335"
+        izz="0.00043588" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RR_calf.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 -0.0 -0.130" rpy="0 -0.1 0" />
+        <geometry>
+          <box size="0.05 0.045 0.280" />
+        </geometry>
+      </collision>
+  </link>
+  <joint
+    name="RR_calf_joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.0245 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="RR_thigh" />
+    <child
+      link="RR_calf" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.5"
+      upper="-0.7"
+      effort="225"
+      velocity="8" />
+  </joint>
+  <link
+    name="RR_footmotor">
+    <inertial>
+      <origin
+        xyz="0.000618123015393102 0.00219152601228606 0.00234336440163171"
+        rpy="0 0 0" />
+      <mass
+        value="1.0" />
+      <inertia
+        ixx="0.00116955"
+        ixy="0.00002707"
+        ixz="0.00002421"
+        iyy="0.00119167"
+        iyz="0.00010116"
+        izz="0.00108173" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RR_footmotor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.025 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.045" radius="0.055" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_footmotor_fixed"
+    type="fixed">
+    <origin
+      xyz="5.7407E-05 -0.0205 -0.33"
+      rpy="0 0 0" />
+    <parent
+      link="RR_calf" />
+    <child
+      link="RR_footmotor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="RR_foot">
+    <inertial>
+      <origin
+        xyz="2.15507223932931E-06 0.00779490263255267 1.73889840293789E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.8" />
+      <inertia
+        ixx="0.00412771"
+        ixy="0.0"
+        ixz="-0.00000012"
+        iyy="0.00787206"
+        iyz="0.0"
+        izz="0.00412867" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/RR_foot.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0.0 0" rpy="1.5707963267948966 0 0" />
+        <geometry>
+          <cylinder length="0.040" radius="0.11" />
+        </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_foot_joint"
+    type="revolute">
+    <origin
+      xyz="7.9882E-05 -0.034479 0.0003459"
+      rpy="0 0 0" />
+    <parent
+      link="RR_footmotor" />
+    <child
+      link="RR_foot" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-9999"
+      upper="9999"
+      effort="56"
+      velocity="47" />
+  </joint>
+  <link
+    name="Lidar">
+    <inertial>
+      <origin
+        xyz="-0.0617151391776908 -0.000409472370772941 0.0790248764595005"
+        rpy="0 0 0" />
+      <mass
+        value="0.81416515" />
+      <inertia
+        ixx="0.00426251"
+        ixy="0.00000301"
+        ixz="-0.00034262"
+        iyy="0.00700838"
+        iyz="-0.00002026"
+        izz="0.00373433" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://nezha3_description/meshes/Lidar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.02 0.0 0.076" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.10 0.10 0.20"/>
+      </geometry>
+     </collision>
+  </link>
+  <joint
+    name="Lidar_fixed_joint"
+    type="fixed">
+    <origin
+      xyz="0.56234 -0.012083 -0.027985"
+      rpy="0 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="Lidar" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+    <!--电机传动-->
+  <transmission name="FR_hip_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FR_hip_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FR_hip_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FR_thigh_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FR_thigh_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FR_thigh_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FR_calf_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FR_calf_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FR_calf_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FR_foot_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FR_foot_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FR_foot_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="FL_hip_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FL_hip_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FL_hip_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FL_thigh_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FL_thigh_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FL_thigh_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FL_calf_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FL_calf_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FL_calf_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="FL_foot_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="FL_foot_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="FL_foot_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="RR_hip_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RR_hip_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RR_hip_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RR_thigh_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RR_thigh_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RR_thigh_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RR_calf_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RR_calf_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RR_calf_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RR_foot_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RR_foot_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RR_foot_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <transmission name="RL_hip_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RL_hip_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RL_hip_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RL_thigh_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RL_thigh_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RL_thigh_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RL_calf_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RL_calf_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RL_calf_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RL_foot_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="RL_foot_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RL_foot_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>

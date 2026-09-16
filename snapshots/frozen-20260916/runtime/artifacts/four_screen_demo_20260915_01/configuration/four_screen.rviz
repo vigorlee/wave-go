@@ -1,0 +1,242 @@
+Panels:
+- Class: rviz_common/Displays
+  Help Height: 78
+  Name: Displays
+  Property Tree Widget:
+    Expanded:
+    - /Global Options1
+    - /Status1
+    - /Map1
+    - /Map2
+    - /Path1
+    - /MarkerArray1
+    - /Path2
+    Splitter Ratio: 0.5
+  Tree Height: 760
+- Class: rviz_common/Selection
+  Name: Selection
+- Class: rviz_common/Tool Properties
+  Expanded:
+  - /Publish Point1
+  Name: Tool Properties
+  Splitter Ratio: 0.5886790156364441
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.5
+- Class: rviz_common/Time
+  Experimental: false
+  Name: Time
+  SyncMode: 0
+  SyncSource: LaserScan
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Alpha: 0.5
+    Cell Size: 1
+    Class: rviz_default_plugins/Grid
+    Color: 160; 160; 164
+    Enabled: false
+    Line Style:
+      Line Width: 0.029999999329447746
+      Value: Lines
+    Name: Grid
+    Normal Cell Count: 0
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Plane: XY
+    Plane Cell Count: 10
+    Reference Frame: <Fixed Frame>
+    Value: false
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Semantic 3D map
+    Enabled: false
+    Value: false
+    Alpha: 0.55
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Axis: Z
+    Use Fixed Frame: true
+    Size (m): 0.055
+    Size (Pixels): 2
+    Style: Points
+    Decay Time: 0
+    Color: 255; 160; 40
+    Topic:
+      Value: /wavego/semantic/map
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      History Policy: Keep Last
+      Depth: 5
+  - Alpha: 1
+    Buffer Length: 1
+    Class: rviz_default_plugins/Path
+    Color: 255; 190; 65
+    Enabled: true
+    Head Diameter: 0.30000001192092896
+    Head Length: 0.20000000298023224
+    Length: 0.30000001192092896
+    Line Style: Billboards
+    Line Width: 0.05
+    Name: Actual LIO trajectory
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Pose Color: 255; 85; 255
+    Pose Style: None
+    Radius: 0.029999999329447746
+    Shaft Diameter: 0.10000000149011612
+    Shaft Length: 0.10000000149011612
+    Topic:
+      Depth: 5
+      Durability Policy: Transient Local
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /wavego/mapping/trajectory
+    Value: true
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: true
+    Name: Object clusters and semantic labels
+    Namespaces:
+      boxes: true
+      labels: true
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /wavego/semantic/objects
+    Value: true
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Live semantic obstacles
+    Enabled: true
+    Value: true
+    Alpha: 1.0
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Axis: Z
+    Use Fixed Frame: true
+    Size (m): 0.055
+    Size (Pixels): 3
+    Style: Points
+    Decay Time: 0
+    Color: 255; 160; 40
+    Topic:
+      Value: /wavego/semantic/live_points
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Depth: 5
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Live dense LiDAR accumulation
+    Enabled: true
+    Value: true
+    Alpha: 0.85
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Size (Pixels): 2
+    Style: Points
+    Topic:
+      Value: /wavego/live_dense/points
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Live adaptive inflation
+    Enabled: true
+    Value: true
+    Topic:
+      Value: /wavego/live_dense/inflation
+      Reliability Policy: Reliable
+      Durability Policy: Volatile
+      Depth: 1
+  Enabled: true
+  Global Options:
+    Background Color: 12; 20; 32
+    Fixed Frame: lio_map
+    Frame Rate: 30
+  Name: root
+  Tools:
+  - Class: rviz_default_plugins/Interact
+    Hide Inactive Objects: true
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  - Class: rviz_default_plugins/FocusCamera
+  - Class: rviz_default_plugins/Measure
+    Line color: 128; 128; 0
+  - Class: rviz_default_plugins/SetInitialPose
+    Covariance x: 0.25
+    Covariance y: 0.25
+    Covariance yaw: 0.06853891909122467
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /initialpose
+  - Class: rviz_default_plugins/SetGoal
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /goal_pose
+  - Class: rviz_default_plugins/PublishPoint
+    Single click: true
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /clicked_point
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 27.0
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 10.0
+        Y: 0.0
+        Z: 1.0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.75
+      Target Frame: lio_map
+      Value: Orbit (rviz)
+      Yaw: 0.8
+    Saved: null
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 880
+  Hide Left Dock: true
+  Hide Right Dock: true
+  Navigation 2:
+    collapsed: false
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: false
+  Width: 1600
+  X: 70
+  Y: 27

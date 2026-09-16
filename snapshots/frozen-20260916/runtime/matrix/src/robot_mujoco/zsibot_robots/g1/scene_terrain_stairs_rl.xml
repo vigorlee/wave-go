@@ -1,0 +1,57 @@
+<mujoco model="g1 12dof stair course">
+  <include file="g1_12dof.xml"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <statistic center="3.5 0 0.7" extent="4.8"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-125" elevation="-22"/>
+    <map znear="0.01" zfar="80"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.30 0.45 0.60" rgb2="0.03 0.04 0.05"
+      width="512" height="3072"/>
+    <texture type="2d" name="g1_ground" builtin="checker" mark="edge"
+      rgb1="0.22 0.25 0.27" rgb2="0.12 0.14 0.15" markrgb="0.7 0.7 0.7"
+      width="300" height="300"/>
+    <material name="g1_ground" texture="g1_ground" texuniform="true" texrepeat="8 8"/>
+    <material name="g1_step" rgba="0.32 0.46 0.54 1" specular="0.15" shininess="0.25"/>
+    <material name="g1_top" rgba="0.38 0.52 0.38 1" specular="0.1" shininess="0.2"/>
+  </asset>
+
+  <worldbody>
+    <light pos="3.5 0 6" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="0 0 0.03" material="g1_ground"
+      friction="1.0 0.01 0.001"/>
+
+    <!-- Validated baseline: 0.30 m tread, 0.05 m rise, six steps. -->
+    <geom name="up_step_1" type="box" pos="1.35 0 0.025" size="0.15 1.0 0.025"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="up_step_2" type="box" pos="1.65 0 0.050" size="0.15 1.0 0.050"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="up_step_3" type="box" pos="1.95 0 0.075" size="0.15 1.0 0.075"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="up_step_4" type="box" pos="2.25 0 0.100" size="0.15 1.0 0.100"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="up_step_5" type="box" pos="2.55 0 0.125" size="0.15 1.0 0.125"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="up_step_6" type="box" pos="2.85 0 0.150" size="0.15 1.0 0.150"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+
+    <geom name="top_platform" type="box" pos="4.10 0 0.150" size="1.10 1.0 0.150"
+      material="g1_top" friction="1.0 0.01 0.001"/>
+
+    <geom name="down_step_1" type="box" pos="5.35 0 0.125" size="0.15 1.0 0.125"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="down_step_2" type="box" pos="5.65 0 0.100" size="0.15 1.0 0.100"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="down_step_3" type="box" pos="5.95 0 0.075" size="0.15 1.0 0.075"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="down_step_4" type="box" pos="6.25 0 0.050" size="0.15 1.0 0.050"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+    <geom name="down_step_5" type="box" pos="6.55 0 0.025" size="0.15 1.0 0.025"
+      material="g1_step" friction="1.0 0.01 0.001"/>
+  </worldbody>
+</mujoco>

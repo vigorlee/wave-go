@@ -1,0 +1,5 @@
+robots_dog_msgs/NavigationError primary
+robots_dog_msgs/NavigationError[] related
+builtin_interfaces/Time stamp
+string scope
+string correlation_id

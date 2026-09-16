@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "name": "custom-upper-body-on-stairs",
+  "initial": {
+    "move": {"vx": 0.0, "vy": 0.0, "yaw": 0.0},
+    "upper": "home",
+    "payload": "none"
+  },
+  "steps": [
+    {
+      "label": "custom-right-arm-pose",
+      "duration": 1.5,
+      "upper": {
+        "pose": "home",
+        "speed": 0.8,
+        "joints": {
+          "right_shoulder_pitch_joint": -0.7,
+          "right_shoulder_roll_joint": -0.35,
+          "right_elbow_joint": 0.9,
+          "right_wrist_yaw_joint": 0.4
+        }
+      }
+    },
+    {
+      "label": "walk-to-stairs",
+      "move": {
+        "vx": 0.55,
+        "vy": 0.0,
+        "yaw": 0.0,
+        "course_hold": true
+      },
+      "until": {"x_gte": 3.4},
+      "timeout": 12.0
+    },
+    {
+      "label": "wave-on-platform",
+      "duration": 1.5,
+      "move": {"vx": 0.0, "vy": 0.0, "yaw": 0.0},
+      "upper": "wave"
+    },
+    {
+      "label": "finish-course",
+      "move": {
+        "vx": 0.6,
+        "vy": 0.0,
+        "yaw": 0.0,
+        "course_hold": true
+      },
+      "upper": "home",
+      "until": {"x_gte": 7.2},
+      "timeout": 12.0
+    },
+    {
+      "label": "stop",
+      "duration": 1.0,
+      "move": {"vx": 0.0, "vy": 0.0, "yaw": 0.0}
+    }
+  ],
+  "expectations": {
+    "stairs": true,
+    "upper": true,
+    "stopped": true,
+    "mission_complete": true
+  }
+}

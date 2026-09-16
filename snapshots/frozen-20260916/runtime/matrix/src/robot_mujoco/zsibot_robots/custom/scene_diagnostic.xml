@@ -1,0 +1,4 @@
+<mujoco model="nezha3 ABI diagnostic">
+  <include file="current.xml" />
+  <option gravity="0 0 0" />
+</mujoco>

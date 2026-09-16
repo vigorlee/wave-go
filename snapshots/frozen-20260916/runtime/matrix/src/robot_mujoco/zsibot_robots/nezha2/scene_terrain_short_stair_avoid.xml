@@ -1,0 +1,25 @@
+<mujoco model="Nezha2 CustomWorld short-stair avoidance scene">
+  <include file="nezha2_yard.xml" />
+  <statistic center="0 1.8 0.25" extent="4.2" />
+  <visual>
+    <headlight diffuse="0.7 0.7 0.7" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <map znear="0.01" zfar="40" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0.02 0.03 0.05" width="512" height="3072" />
+    <texture type="2d" name="ground_short_stairs" builtin="checker" mark="edge" rgb1="0.22 0.31 0.40" rgb2="0.12 0.20 0.28" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="ground_short_stairs" texture="ground_short_stairs" texuniform="true" texrepeat="8 8" reflectance="0.12" />
+  </asset>
+  <worldbody>
+    <light pos="-2 2 6" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" type="plane" material="ground_short_stairs" />
+    <geom name="stair_01" pos="0 0.89 0.0125" type="box" size="1.50 0.14 0.0125" rgba="0.46 0.56 0.70 1" />
+    <geom name="stair_02" pos="0 1.17 0.0250" type="box" size="1.50 0.14 0.0250" rgba="0.46 0.56 0.70 1" />
+    <geom name="stair_03" pos="0 1.45 0.0375" type="box" size="1.50 0.14 0.0375" rgba="0.46 0.56 0.70 1" />
+    <geom name="stair_04" pos="0 1.73 0.0500" type="box" size="1.50 0.14 0.0500" rgba="0.46 0.56 0.70 1" />
+    <geom name="stair_platform" pos="0 2.77 0.0500" type="box" size="1.50 0.90 0.0500" rgba="0.46 0.56 0.70 1" />
+    <!-- Physical obstacle on the third tread; its pose is not planner input. -->
+    <geom name="obstacle_short_stair" pos="0.10 1.45 0.235" type="box" size="0.16 0.16 0.16" rgba="0.95 0.25 0.08 1" />
+  </worldbody>
+</mujoco>

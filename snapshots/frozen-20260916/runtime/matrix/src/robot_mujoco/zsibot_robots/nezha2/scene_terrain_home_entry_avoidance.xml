@@ -1,0 +1,33 @@
+<mujoco model="Nezha2 indoor entry obstacle scene">
+  <include file="nezha2_yard.xml" />
+  <statistic center="0 2.7 0.45" extent="6.5" />
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72" ambient="0.26 0.26 0.26" specular="0 0 0" />
+    <rgba haze="0.08 0.10 0.14 1" />
+    <global azimuth="-128" elevation="-22" />
+    <map znear="0.01" zfar="60" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.68 0.72 0.76" rgb2="0.10 0.12 0.16" width="512" height="3072" />
+    <texture type="2d" name="entry_floor_tex" builtin="checker" mark="edge" rgb1="0.34 0.31 0.27" rgb2="0.22 0.20 0.18" markrgb="0.55 0.52 0.46" width="300" height="300" />
+    <material name="entry_floor_mat" texture="entry_floor_tex" texuniform="true" texrepeat="5 5" reflectance="0.08" />
+    <material name="entry_wall_mat" rgba="0.74 0.70 0.64 1" />
+    <material name="entry_furniture_mat" rgba="0.38 0.23 0.14 1" />
+    <material name="entry_obstacle_mat" rgba="0.92 0.30 0.10 1" />
+  </asset>
+  <worldbody>
+    <light pos="-2 2 7" dir="0 0 -1" directional="true" />
+    <geom name="entry_floor" type="plane" size="0 0 0.01" material="entry_floor_mat" />
+    <!-- Render-only living-room dressing. The LiDAR cannot see it; only the named
+         obstacles below enter the physical local-avoidance problem. -->
+    <geom name="entry_wall_left" type="box" size="0.08 4.0 1.35" pos="-3.0 2.7 1.35" material="entry_wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="entry_wall_right" type="box" size="0.08 4.0 1.35" pos="3.0 2.7 1.35" material="entry_wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="entry_sofa" type="box" size="0.62 0.45 0.38" pos="-2.10 1.15 0.38" material="entry_furniture_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="entry_table" type="box" size="0.42 0.42 0.28" pos="2.10 3.75 0.28" material="entry_furniture_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="obstacle_entry_cylinder" pos="0.00 1.95 0.55" type="cylinder" size="0.34 0.55" material="entry_obstacle_mat" />
+    <geom name="obstacle_entry_box" pos="1.35 3.45 0.48" type="box" size="0.38 0.38 0.48" material="entry_obstacle_mat" />
+    <geom name="obstacle_entry_cylinder_2" pos="-1.35 4.25 0.48" type="cylinder" size="0.30 0.48" material="entry_obstacle_mat" />
+    <geom name="obstacle_entry_barrier_left" pos="-2.40 2.85 0.30" type="box" size="0.10 0.65 0.30" material="entry_obstacle_mat" />
+    <geom name="obstacle_entry_barrier_right" pos="2.40 4.55 0.30" type="box" size="0.10 0.65 0.30" material="entry_obstacle_mat" />
+  </worldbody>
+</mujoco>

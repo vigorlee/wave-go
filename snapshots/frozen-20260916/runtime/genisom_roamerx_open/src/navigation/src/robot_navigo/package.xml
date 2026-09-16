@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>robot_navigo</name>
+  <version>0.3.6</version>
+  <description>TODO: Package description</description>
+  <maintainer email="lingyihu@navigo.com">lingyihu</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>navigation2</build_depend>
+  <build_depend>launch_ros</build_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>OpenCV</build_depend>
+  <build_depend>yaml-cpp</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>OpenCV</exec_depend>
+  <exec_depend>yaml-cpp</exec_depend>
+  <exec_depend>navigo_behavior_tree</exec_depend>
+  <exec_depend>navigo_bt_navigator</exec_depend>
+  <exec_depend>navigo_core</exec_depend>
+  <exec_depend>navigo_costmap_2d</exec_depend>
+  <exec_depend>robots_dog_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>
+
+
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>navigation2</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+
+  <!-- <exec_depend>eigen</exec_depend>
+  <exec_depend>pcl_conversions</exec_depend>
+  <exec_depend>pcl_ros</exec_depend> -->
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

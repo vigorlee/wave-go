@@ -1,0 +1,63 @@
+<mujoco model="go2 scene">
+  <include file="go2.xml" />
+
+  <statistic center="0 0 0.1" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+    <map znear="0.01" zfar="100"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+  <hfield name="perlin_hfield" size="1.0 0.75 0.2 0.2" file="../height_field.png" /><hfield name="image_hfield" size="1.0 1.0 0.02 0.1" file="../unitree_hfield.png" /></asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" pos="0 0.0 0.01" size="0 0 0.05" type="plane" material="groundplane" />
+<geom name="Cube" type="box" size="0.65 0.65 0.65" pos="-2.0 -173.7 0.6" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube2" type="box" size="1.0 0.075 0.5" pos="2.0 -170.8 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube3" type="box" size="1.0 0.075 0.5" pos="2.0 -151.8 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube4" type="box" size="1.0 0.075 0.5" pos="0.2 -151.8 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube5" type="box" size="0.65 0.65 0.65" pos="2.0 -66.7 0.6" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube6" type="box" size="0.65 0.65 0.65" pos="0.0 -56.7 0.6" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube7" type="box" size="1.0 0.05 0.5" pos="-1.9 -47.9 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube8" type="box" size="1.0 0.05 0.5" pos="2.0 -47.9 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube9" type="box" size="1.0 0.05 0.5" pos="-1.9 -32.5 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube10" type="box" size="1.0 0.05 0.5" pos="-0.1 -31.7 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube11" type="box" size="1.0 0.1 0.5" pos="-2.4 -24.7 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube12" type="box" size="1.0 0.1 0.5" pos="2.3 -24.7 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube13" type="box" size="0.9 1.8 0.529412" pos="0.0 -7.6 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube14" type="box" size="0.9 1.8 0.529412" pos="-2.0 44.4 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube15" type="box" size="0.9 1.8 0.529412" pos="0.0 64.4 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube16" type="box" size="0.9 2.6 0.5" pos="-2.0 26.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube17" type="box" size="0.9 9.0 1.5" pos="2.1 35.4 1.17" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube18" type="box" size="0.5 0.5 0.5" pos="2.0 80.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube19" type="box" size="0.6 0.6 0.5" pos="-2.0 92.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube20" type="box" size="1.0 0.05 0.5" pos="2.2 114.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube21" type="box" size="1.0 0.05 0.5" pos="0.25 114.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube22" type="box" size="2.0 0.1 1.0" pos="-1.35 133.5 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube23" type="box" size="1.0 0.05 0.5" pos="2.3 174.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube24" type="box" size="1.0 0.05 0.5" pos="-2.3 174.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube25" type="box" size="0.65 0.05 0.375" pos="0.0 182.3 0.4" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube26" type="box" size="1.0 0.05 0.5" pos="2.0 202.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube27" type="box" size="1.0 0.05 0.5" pos="-2.0 229.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube28" type="box" size="0.6 0.6 0.5" pos="0.0 249.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube" type="box" size="3.0 0.05 0.5" pos="0.0 -4.56 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube2" type="box" size="3.0 0.05 0.5" pos="0.0 263.34 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube29" type="box" size="0.65 0.05 3.35" pos="2.02 23.5 1.32" quat="0.833886 -0.551937 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube30" type="box" size="0.65 0.05 3.4" pos="2.02 47.13 1.32" quat="0.833886 0.551937 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube31" type="box" size="3.0 0.05 2.0" pos="1.31 23.35 1.32" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube32" type="box" size="3.0 0.05 2.0" pos="2.72 23.35 1.32" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube33" type="box" size="3.0 0.05 2.0" pos="1.31 47.25 1.32" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube34" type="box" size="3.0 0.05 2.0" pos="2.72 47.25 1.32" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube35" type="box" size="1.0 1.7 1.0" pos="-2.01 143.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="Cube36" type="box" size="1.0 1.7 1.0" pos="2.01 143.3 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube3" type="box" size="150.0 0.05 3.0" pos="3.1 125.94 3.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube4" type="box" size="150.0 0.05 3.0" pos="-3.05 125.94 3.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+    </worldbody>
+</mujoco>

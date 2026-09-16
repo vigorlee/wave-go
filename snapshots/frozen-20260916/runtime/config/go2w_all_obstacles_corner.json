@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "route_id": "all_obstacles_to_east_corner",
+      "description": "Mandatory complete original stairs UP and DOWN, cylinder slalom, ramp UP and DOWN, then north corridor, north gallery and east corridor to the farthest recorded corner at (18,22.8). Do not bypass the terrain along the flat side alley.",
+      "task_examples": [
+        "Cross ALL original obstacles, stairs and ramps, then reach the farthest east corner."
+      ],
+      "stages": [
+        {
+          "stage_id": "climb_to_upper_landing",
+          "profile": "stair_up",
+          "navigation_mode": "up",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.65,
+            "y": 4.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "descend_far_staircase",
+          "profile": "stair_down",
+          "navigation_mode": "down",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.65,
+            "y": 10.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_pass_first_pair",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.08,
+            "y": 11.15,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_pass_second_pair",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -0.08,
+            "y": 11.85,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_exit_before_ramp",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.08,
+            "y": 12.48,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_up_entry",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.0,
+            "y": 13.25,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_align_right",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.7,
+            "y": 13.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_up_crest",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.78,
+            "y": 15.4,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_down_entry",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.9,
+            "y": 16.3,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_down_exit",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.1,
+            "y": 18.25,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "course_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.1,
+            "y": 18.95,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "traverse_north_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 0.4,
+            "y": 28.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "round_north_corner",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 2.5,
+            "y": 32.8,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "north_gallery_detour_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 5.7,
+            "y": 34.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "north_gallery_detour_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.5,
+            "y": 34.2,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "cross_north_gallery",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.5,
+            "y": 32.5,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "enter_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 31.0,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "traverse_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 26.5,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "navigate_to_farthest_endpoint",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 22.8,
+            "yaw_rad": -1.5707963267948966
+          }
+        }
+      ]
+    }
+  ]
+}

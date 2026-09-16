@@ -1,0 +1,11 @@
+#goal definition
+geometry_msgs/Point target
+float32 speed
+builtin_interfaces/Duration time_allowance
+bool check_collision
+---
+#result definition
+builtin_interfaces/Duration total_elapsed_time
+---
+#feedback definition
+float32 distance_traveled

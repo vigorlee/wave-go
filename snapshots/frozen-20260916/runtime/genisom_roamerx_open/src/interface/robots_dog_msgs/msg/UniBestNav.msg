@@ -1,0 +1,26 @@
+std_msgs/Header header
+float64 utc_time_s
+# Pos
+uint8 p_sol_status
+uint8 pos_type
+float64 latitude_deg
+float64 longitude_deg
+float64 altitude_m
+float32 undulation
+float32 lat_std
+float32 lon_std
+float32 hgt_std
+# State
+float32 diff_age_s
+float32 sol_age_s
+uint8 svs_num
+uint8 soln_svs_num
+# Vel
+uint8 v_sol_status
+uint8 vel_type
+float64 hor_spd
+float64 trk_gnd
+float64 ver_spd
+float32 ver_spd_std
+float32 hor_spd_std
+

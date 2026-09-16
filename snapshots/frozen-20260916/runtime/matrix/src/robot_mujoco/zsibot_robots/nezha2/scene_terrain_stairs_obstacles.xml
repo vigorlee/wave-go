@@ -1,0 +1,37 @@
+<mujoco model="Nezha2 terrain-aware stair obstacle navigation scene">
+  <include file="nezha2_yard.xml" />
+  <statistic center="0 2.7 0.42" extent="5.8" />
+  <visual>
+    <headlight diffuse="0.7 0.7 0.7" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <map znear="0.01" zfar="50" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.30 0.50 0.70" rgb2="0.02 0.03 0.05" width="512" height="3072" />
+    <texture type="2d" name="ground_stairs_obstacles" builtin="checker" mark="edge" rgb1="0.22 0.31 0.40" rgb2="0.12 0.20 0.28" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="ground_stairs_obstacles" texture="ground_stairs_obstacles" texuniform="true" texrepeat="8 8" reflectance="0.12" />
+  </asset>
+  <worldbody>
+    <light pos="-2 2 6" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" type="plane" material="ground_stairs_obstacles" />
+    <geom name="stair_01" pos="0 0.89 0.025" type="box" size="1.5 0.14 0.025" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_02" pos="0 1.17 0.050" type="box" size="1.5 0.14 0.050" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_03" pos="0 1.45 0.075" type="box" size="1.5 0.14 0.075" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_04" pos="0 1.73 0.100" type="box" size="1.5 0.14 0.100" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_05" pos="0 2.01 0.125" type="box" size="1.5 0.14 0.125" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_06" pos="0 2.29 0.150" type="box" size="1.5 0.14 0.150" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_07" pos="0 2.57 0.175" type="box" size="1.5 0.14 0.175" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_08" pos="0 2.85 0.200" type="box" size="1.5 0.14 0.200" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_09" pos="0 3.13 0.225" type="box" size="1.5 0.14 0.225" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_10" pos="0 3.41 0.250" type="box" size="1.5 0.14 0.250" rgba="0.50 0.55 0.60 1" />
+    <geom name="stair_platform" pos="0 4.45 0.250" type="box" size="1.5 0.90 0.250" rgba="0.50 0.55 0.60 1" />
+
+    <!-- Obstacles are real collidable bodies seated on stair treads. The
+         planner never receives these coordinates; it sees them only in LiDAR. -->
+    <geom name="obstacle_stair_lower" pos="0.15 2.01 0.410" type="box" size="0.16 0.16 0.16" rgba="0.95 0.34 0.10 1" />
+    <geom name="obstacle_stair_upper" pos="-0.40 3.41 0.660" type="box" size="0.16 0.16 0.16" rgba="0.96 0.20 0.26 1" />
+    <body name="dynamic_stair_obstacle" mocap="true" pos="0.72 2.85 0.700">
+      <geom name="obstacle_dynamic_crossing" type="cylinder" size="0.15 0.30" rgba="0.98 0.63 0.10 1" />
+    </body>
+  </worldbody>
+</mujoco>

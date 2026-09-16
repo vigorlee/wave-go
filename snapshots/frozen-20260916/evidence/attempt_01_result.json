@@ -1,0 +1,53 @@
+{
+  "passed": false,
+  "state": "failed",
+  "action_goal_count": 1,
+  "completed_stages": 0,
+  "total_stages": 11,
+  "route_source": "user_requested_fixed_catalog_not_model_inference",
+  "nav2_plan_messages": 42,
+  "last_event": {
+    "time": 1789457892.077805,
+    "state": "failed",
+    "stage_index": 0,
+    "stage_id": "climb_to_upper_landing",
+    "completed_stages": 0,
+    "reason": "continuous_route_no_progress",
+    "distance_to_target": 2.842059383286004,
+    "displacement_since_progress": 0.027905084156346825,
+    "robot_pose": {
+      "x": 1.1701899699749636,
+      "y": 2.0059520524404975,
+      "z": 1.2822624407678205,
+      "roll": -0.012291750515825093,
+      "pitch": -0.3416292377872506,
+      "yaw": 1.5754955717401862
+    },
+    "ramp_physics": {
+      "passed": false,
+      "approach_z_m": null,
+      "crest_max_z_m": null,
+      "exit_z_m": null,
+      "elevation_gain_m": null,
+      "elevation_drop_m": null,
+      "uphill_max_abs_pitch_rad": 0.0,
+      "downhill_max_abs_pitch_rad": 0.0,
+      "minimum_elevation_gain_m": 0.3,
+      "minimum_pitch_rad": 0.07
+    },
+    "avoid_mode_restored": true
+  },
+  "ramp_physics": {
+    "passed": false,
+    "approach_z_m": null,
+    "crest_max_z_m": null,
+    "exit_z_m": null,
+    "elevation_gain_m": null,
+    "elevation_drop_m": null,
+    "uphill_max_abs_pitch_rad": 0.0,
+    "downhill_max_abs_pitch_rad": 0.0,
+    "minimum_elevation_gain_m": 0.3,
+    "minimum_pitch_rad": 0.07
+  },
+  "samples": 866
+}

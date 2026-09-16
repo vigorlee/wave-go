@@ -1,0 +1,205 @@
+<mujoco model="XGB scene">
+  <include file="xgb.xml" />
+  <statistic center="0 0 0.1" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+    <map znear="0.01" zfar="100"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+  <hfield name="perlin_hfield" size="1.0 0.75 0.2 0.2" file="../height_field.png" /><hfield name="image_hfield" size="1.0 1.0 0.02 0.1" file="../unitree_hfield.png" /></asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" pos="0 0.0 0.001" size="0 0 0.05" type="plane" material="groundplane" />
+<geom name="phs_Cube" type="box" size="10.0 7.5 0.5" pos="0.0 -0.4 -0.484" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube2" type="box" size="0.125 0.6 0.1" pos="6.63 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube3" type="box" size="0.29 0.6 0.1" pos="5.96 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube4" type="box" size="0.29 0.6 0.1" pos="5.13 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube5" type="box" size="0.25 0.6 0.1" pos="4.34 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube6" type="box" size="0.125 0.6 0.1" pos="4.22 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube7" type="box" size="0.29 0.6 0.1" pos="3.56 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube8" type="box" size="0.29 0.6 0.1" pos="2.73 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube9" type="box" size="0.29 0.6 0.1" pos="3.56 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube10" type="box" size="0.29 0.6 0.1" pos="2.73 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube11" type="box" size="0.29 0.6 0.1" pos="1.16 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube12" type="box" size="0.29 0.6 0.1" pos="0.34 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube13" type="box" size="0.25 0.6 0.1" pos="1.95 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube14" type="box" size="0.15 0.6 0.1" pos="2.05 -3.01 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube15" type="box" size="0.125 0.426 0.1" pos="2.32 -2.84 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube16" type="box" size="0.125 0.475 0.1" pos="2.32 -3.99 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube17" type="box" size="0.125 0.05 0.1" pos="2.32 -4.77 0.0255" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube18" type="box" size="0.125 0.475 0.1" pos="3.144 -3.62 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube19" type="box" size="0.125 0.25 0.1" pos="3.144 -2.65 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube20" type="box" size="0.125 0.235 0.1" pos="3.144 -4.58 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube21" type="box" size="0.125 0.475 0.1" pos="3.97 -3.24 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube22" type="box" size="0.125 0.425 0.1" pos="3.97 -4.39 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube23" type="box" size="0.125 0.06 0.1" pos="3.97 -2.46 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube24" type="box" size="0.125 0.435 0.1" pos="4.715 -2.83 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube25" type="box" size="0.1265 0.42 0.1" pos="6.377 -3.19 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube26" type="box" size="0.1265 0.06 0.1" pos="6.377 -2.455 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube27" type="box" size="0.1265 0.235 0.1" pos="5.543 -3.374 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube28" type="box" size="0.1265 0.24 0.1" pos="5.543 -2.648 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube29" type="box" size="0.125 0.05 0.1" pos="4.715 -3.56 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube30" type="box" size="0.125 0.425 0.1" pos="1.575 -4.39 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube31" type="box" size="0.125 0.055 0.1" pos="1.575 -3.663 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube32" type="box" size="0.125 0.235 0.1" pos="0.75 -4.581 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube33" type="box" size="0.125 0.265 0.1" pos="0.75 -3.828 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube34" type="box" size="0.125 0.6 0.1" pos="-0.33 -4.21 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube35" type="box" size="0.126 0.425 0.1" pos="-0.0775 -4.037 0.025" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube36" type="box" size="0.126 0.05 0.1" pos="-0.0775 -4.77 0.0251" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube37" type="box" size="3.75 0.044 0.1" pos="-2.61 -3.607 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube38" type="box" size="2.5 0.044 0.1" pos="-1.56 -2.43 0.0095" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube39" type="box" size="0.55 0.044 0.1" pos="0.872 -3.02 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube40" type="box" size="0.55 0.055 0.1" pos="-1.525 -3.02 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube41" type="box" size="0.55 0.055 0.1" pos="-3.93 -3.02 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube42" type="box" size="0.56 0.055 0.1" pos="-3.93 -4.21 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube43" type="box" size="0.56 0.055 0.1" pos="-6.33 -4.21 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube44" type="box" size="0.56 0.055 0.1" pos="-1.524 -4.21 0.0095" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube45" type="box" size="0.85 0.03 0.1" pos="-4.53 -4.19 0.0095" quat="0.92388 0.0 0.0 0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube46" type="box" size="0.85 0.03 0.1" pos="-5.73 -4.19 0.0095" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube47" type="box" size="2.425 0.044 0.1" pos="-3.91 -4.81 0.0095" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube48" type="box" size="0.85 0.03 0.1" pos="-2.13 -4.19 0.0095" quat="0.92388 0.0 0.0 0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube49" type="box" size="0.85 0.03 0.1" pos="-3.33 -4.19 0.0095" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube50" type="box" size="0.6 0.6 0.1" pos="-5.76 -3.01 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube51" type="box" size="0.65 0.6 0.1" pos="-6.12 -1.805 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube52" type="box" size="1.8 0.6 0.1" pos="-4.943 -0.605 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube53" type="box" size="1.8 0.6 0.1" pos="-4.943 0.603 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube54" type="box" size="0.625 0.6 0.1" pos="-6.16 1.81 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube55" type="box" size="0.6 0.6 0.1" pos="-5.75 3.06 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube56" type="box" size="0.6 0.05 0.1" pos="-6.16 -1.265 0.27" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube57" type="box" size="0.6 0.05 0.1" pos="-5.76 -2.465 0.27" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube58" type="box" size="0.6 0.05 0.1" pos="-6.16 1.26 0.27" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube59" type="box" size="0.6 0.05 0.1" pos="-5.76 2.46 0.27" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube60" type="box" size="1.25 0.05 0.1" pos="-5.51 0.02 0.27" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube61" type="box" size="1.25 0.05 0.1" pos="-4.31 0.02 0.27" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube62" type="box" size="0.05 0.6 0.1" pos="-6.315 4.22 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube63" type="box" size="0.055 1.25 0.1" pos="-1.52 3.63 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube64" type="box" size="0.025 0.6 0.1" pos="-5.477 4.22 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube65" type="box" size="0.025 0.6 0.1" pos="-5.12 4.22 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube66" type="box" size="0.025 0.6 0.1" pos="-4.77 4.22 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube67" type="box" size="0.05 1.25 0.1" pos="-3.925 3.62 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube68" type="box" size="0.03 1.25 0.1" pos="-3.297 3.62 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube69" type="box" size="0.03 1.25 0.1" pos="-2.15 3.62 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube70" type="box" size="0.05 4.5 0.1" pos="-0.125 3.61 0.01" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube71" type="box" size="0.05 0.3 0.1" pos="-4.87 3.607 0.058" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube72" type="box" size="0.05 2.4 0.1" pos="-3.87 4.82 0.01" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube73" type="box" size="0.05 0.55 0.1" pos="-5.12 4.82 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube74" type="box" size="0.05 0.55 0.1" pos="-2.72 4.82 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube75" type="box" size="0.05 0.55 0.1" pos="-2.72 3.61 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube76" type="box" size="0.05 0.55 0.1" pos="-2.72 2.42 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube77" type="box" size="0.05 2.4 0.1" pos="-1.525 2.41 0.01" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube78" type="box" size="0.05 0.55 0.1" pos="-0.32 2.42 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube79" type="box" size="0.025 0.55 0.1" pos="-0.32 3.59 0.058" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube80" type="box" size="0.055 0.6 0.1" pos="0.88 3.03 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube81" type="box" size="0.055 1.25 0.1" pos="1.95 3.59 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube82" type="box" size="0.055 1.25 0.1" pos="4.35 3.59 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube83" type="box" size="0.055 0.6 0.1" pos="6.75 2.99 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube84" type="box" size="0.025 1.25 0.1" pos="5.56 3.61 0.01" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube85" type="box" size="0.05 2.5 0.1" pos="4.31 2.42 0.01" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube86" type="box" size="0.025 0.8 0.1" pos="-2.72 3.01 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube87" type="box" size="0.025 0.45 0.1" pos="-2.97 3.27 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube88" type="box" size="0.025 0.45 0.1" pos="-2.47 2.77 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube89" type="box" size="0.025 0.8 0.1" pos="-2.72 4.21 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube90" type="box" size="0.025 0.45 0.1" pos="-2.97 4.47 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube91" type="box" size="0.025 0.45 0.1" pos="-2.47 3.97 0.058" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube92" type="box" size="0.03 0.6 0.1" pos="-0.67 3.03 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube93" type="box" size="0.02 0.6 0.1" pos="-0.32 3.03 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube94" type="box" size="0.03 0.6 0.1" pos="0.02 3.02 0.058" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube95" type="box" size="0.055 0.6 0.1" pos="-0.45 4.24 0.01" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube96" type="box" size="0.05 2.4 0.1" pos="1.975 4.81 0.01" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube97" type="box" size="0.275 0.275 0.1" pos="1.53 3.91 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube98" type="box" size="0.275 0.275 0.1" pos="1.56 4.49 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube99" type="box" size="0.275 0.275 0.1" pos="0.99 4.51 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube100" type="box" size="0.275 0.275 0.1" pos="0.97 3.94 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube101" type="box" size="0.275 0.275 0.1" pos="0.48 4.49 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube102" type="box" size="0.275 0.275 0.1" pos="-0.07 4.51 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube103" type="box" size="0.275 0.275 0.1" pos="0.46 3.91 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube104" type="box" size="0.275 0.275 0.1" pos="-0.12 3.94 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube105" type="box" size="0.275 0.275 0.1" pos="3.93 3.91 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube106" type="box" size="0.275 0.275 0.1" pos="3.96 4.49 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube107" type="box" size="0.275 0.275 0.1" pos="3.39 4.51 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube108" type="box" size="0.275 0.275 0.1" pos="3.37 3.94 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube109" type="box" size="0.275 0.275 0.1" pos="2.88 4.49 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube110" type="box" size="0.275 0.275 0.1" pos="2.33 4.51 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube111" type="box" size="0.275 0.275 0.1" pos="2.86 3.91 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube112" type="box" size="0.275 0.275 0.1" pos="2.28 3.94 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube113" type="box" size="0.275 0.275 0.1" pos="3.93 2.71 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube114" type="box" size="0.275 0.275 0.1" pos="3.96 3.29 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube115" type="box" size="0.275 0.275 0.1" pos="3.39 3.31 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube116" type="box" size="0.275 0.275 0.1" pos="3.37 2.74 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube117" type="box" size="0.275 0.275 0.1" pos="2.88 3.29 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube118" type="box" size="0.275 0.275 0.1" pos="2.33 3.31 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube119" type="box" size="0.275 0.275 0.1" pos="2.86 2.71 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube120" type="box" size="0.275 0.275 0.1" pos="2.28 2.74 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube121" type="box" size="0.275 0.275 0.1" pos="6.33 2.71 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube122" type="box" size="0.275 0.275 0.1" pos="6.36 3.29 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube123" type="box" size="0.275 0.275 0.1" pos="5.79 3.31 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube124" type="box" size="0.275 0.275 0.1" pos="5.77 2.74 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube125" type="box" size="0.275 0.275 0.1" pos="5.28 3.29 0.02" quat="0.990268 0.0 -0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube126" type="box" size="0.275 0.275 0.1" pos="4.73 3.31 0.02" quat="0.990268 0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube127" type="box" size="0.275 0.275 0.1" pos="5.26 2.71 0.02" quat="0.990268 -0.139173 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube128" type="box" size="0.275 0.275 0.1" pos="4.68 2.74 0.02" quat="0.990268 0.0 0.139173 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube129" type="box" size="0.85 0.03 0.1" pos="-3.27 -2.99 0.0095" quat="0.92388 0.0 0.0 0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube130" type="box" size="0.85 0.03 0.1" pos="-2.18 -2.99 0.0095" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube131" type="box" size="0.85 0.03 0.1" pos="-0.87 -2.99 0.0095" quat="0.92388 0.0 0.0 0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube132" type="box" size="0.85 0.03 0.1" pos="0.22 -2.99 0.0095" quat="0.92388 0.0 0.0 -0.382683" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube133" type="box" size="0.025 0.6 0.5" pos="6.77 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube134" type="box" size="0.025 0.6 0.5" pos="1.92 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube135" type="box" size="0.025 0.6 0.5" pos="0.89 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube136" type="box" size="0.025 0.6 0.5" pos="-3.94 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube137" type="box" size="0.05 0.6 0.5" pos="-5.11 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube138" type="box" size="0.05 0.6 0.5" pos="-6.4 -3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube139" type="box" size="0.01 0.6 0.5" pos="-6.33 -4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube140" type="box" size="0.01 0.6 0.5" pos="-1.51 -4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube141" type="box" size="0.01 0.6 0.5" pos="-0.46 -4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube142" type="box" size="0.01 0.6 0.5" pos="4.35 -4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube143" type="box" size="0.025 0.675 0.5" pos="1.41 -3.59 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube144" type="box" size="0.01 0.675 0.5" pos="-0.99 -3.61 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube145" type="box" size="0.025 0.69 0.5" pos="-4.47 -3.59 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube146" type="box" size="0.01 0.075 0.5" pos="-6.25 -3.62 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube147" type="box" size="0.01 2.4 0.5" pos="-3.92 -4.82 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube148" type="box" size="0.01 2.4 0.5" pos="1.95 -4.82 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube149" type="box" size="0.025 2.4 0.5" pos="-1.51 -2.39 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube150" type="box" size="0.01 2.4 0.5" pos="4.36 -2.4 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube151" type="box" size="0.025 0.67 0.5" pos="4.88 -3.61 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube152" type="box" size="0.025 0.1 0.5" pos="6.68 -3.63 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube153" type="box" size="0.05 0.6 0.5" pos="-6.79 -1.81 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube154" type="box" size="0.05 0.6 0.5" pos="-5.5 -1.81 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube155" type="box" size="0.025 0.6 0.5" pos="-6.77 1.79 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube156" type="box" size="0.025 0.6 0.5" pos="-5.53 1.79 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube157" type="box" size="0.025 0.6 0.5" pos="-6.38 3.01 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube158" type="box" size="0.025 0.6 0.5" pos="-5.14 3.0 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube159" type="box" size="0.025 1.2 0.5" pos="-4.35 -1.24 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube160" type="box" size="0.025 1.2 0.5" pos="-4.35 0.0 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube161" type="box" size="0.025 1.2 0.5" pos="-4.35 1.22 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube162" type="box" size="0.025 0.6 0.5" pos="-1.5 4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube163" type="box" size="0.025 0.6 0.5" pos="-0.46 4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube164" type="box" size="0.025 0.6 0.5" pos="4.36 4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube165" type="box" size="0.025 0.6 0.5" pos="6.77 3.02 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube166" type="box" size="0.01 0.6 0.5" pos="1.93 3.02 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube167" type="box" size="0.025 0.6 0.5" pos="0.89 3.02 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube168" type="box" size="0.025 0.6 0.5" pos="-3.93 3.02 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube169" type="box" size="0.025 0.625 0.520833" pos="-4.54 3.59 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube170" type="box" size="0.025 0.675 0.5625" pos="-0.99 3.62 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube171" type="box" size="0.025 0.6 0.5" pos="1.49 3.59 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube172" type="box" size="0.025 0.675 0.5625" pos="4.87 3.63 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube173" type="box" size="0.025 0.075 0.5625" pos="6.67 3.63 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube174" type="box" size="0.025 0.6 0.5" pos="-6.35 4.21 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube175" type="box" size="0.015 0.075 0.5" pos="-6.25 3.62 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube176" type="box" size="0.025 2.4 0.520833" pos="-3.92 4.83 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube177" type="box" size="0.025 2.4 0.520833" pos="1.94 4.83 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube178" type="box" size="0.025 2.45 0.520833" pos="4.34 2.39 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube179" type="box" size="0.025 2.45 0.520833" pos="-1.56 2.39 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube180" type="box" size="0.01 15.0 0.5" pos="0.0 -14.0 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube181" type="box" size="0.01 15.0 0.5" pos="0.0 14.0 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube182" type="box" size="0.01 15.0 0.5" pos="14.0 0.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+<geom name="phs_Cube183" type="box" size="0.01 15.0 0.5" pos="-14.0 0.2 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1" solref="0.02 1" solimp="0.9 0.95 0.001"/>
+    </worldbody>
+</mujoco>

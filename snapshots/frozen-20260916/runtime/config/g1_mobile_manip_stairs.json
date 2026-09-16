@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "name": "g1-stair-carry-and-release",
+  "initial": {
+    "move": {
+      "vx": 0.0,
+      "vy": 0.0,
+      "yaw": 0.0
+    },
+    "upper": "carry",
+    "payload": "attach"
+  },
+  "steps": [
+    {
+      "label": "stand-and-secure-payload",
+      "duration": 0.8,
+      "upper": "carry",
+      "payload": "attach"
+    },
+    {
+      "label": "climb-cross-and-descend",
+      "move": {
+        "vx": 0.7,
+        "vy": 0.0,
+        "yaw": 0.0,
+        "course_hold": true,
+        "reference_y": 0.0,
+        "reference_yaw": 0.0
+      },
+      "upper": "carry",
+      "payload": "attach",
+      "until": {
+        "x_gte": 7.2
+      },
+      "timeout": 20.0
+    },
+    {
+      "label": "settle-at-goal",
+      "duration": 1.0,
+      "move": {
+        "vx": 0.0,
+        "vy": 0.0,
+        "yaw": 0.0
+      },
+      "upper": "carry"
+    },
+    {
+      "label": "release-payload",
+      "duration": 0.6,
+      "upper": "release",
+      "payload": "release"
+    },
+    {
+      "label": "stable-hold",
+      "duration": 1.0,
+      "upper": "home"
+    }
+  ],
+  "expectations": {
+    "stairs": true,
+    "upper": true,
+    "payload": true,
+    "stopped": true,
+    "mission_complete": true
+  }
+}

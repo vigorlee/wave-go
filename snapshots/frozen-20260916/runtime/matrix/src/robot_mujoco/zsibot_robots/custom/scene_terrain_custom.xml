@@ -1,0 +1,30 @@
+<mujoco model="nezha3 stair navigation">
+  <include file="current.xml" />
+  <statistic center="3.5 0 0.5" extent="5" />
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <global azimuth="-120" elevation="-22" />
+    <map znear="0.01" zfar="100" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.25 0.28 0.31" rgb2="0.12 0.14 0.16" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.15" />
+    <material name="stair_material" rgba="0.48 0.52 0.56 1" />
+  </asset>
+  <worldbody>
+    <light pos="3 0 6" dir="0 0 -1" directional="true" />
+    <geom name="floor" type="plane" size="0 0 0.05" material="groundplane" friction="1.2 0.01 0.001" />
+    <geom name="stair_01" type="box" size="0.14 1.5 0.025" pos="2.14 0 0.025" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_02" type="box" size="0.14 1.5 0.050" pos="2.42 0 0.050" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_03" type="box" size="0.14 1.5 0.075" pos="2.70 0 0.075" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_04" type="box" size="0.14 1.5 0.100" pos="2.98 0 0.100" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_05" type="box" size="0.14 1.5 0.125" pos="3.26 0 0.125" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_06" type="box" size="0.14 1.5 0.150" pos="3.54 0 0.150" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_07" type="box" size="0.14 1.5 0.175" pos="3.82 0 0.175" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_08" type="box" size="0.14 1.5 0.200" pos="4.10 0 0.200" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_09" type="box" size="0.14 1.5 0.225" pos="4.38 0 0.225" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="stair_10" type="box" size="0.14 1.5 0.250" pos="4.66 0 0.250" material="stair_material" friction="1.2 0.01 0.001" />
+    <geom name="top_platform" type="box" size="2.5 1.5 0.25" pos="7.30 0 0.25" material="stair_material" friction="1.2 0.01 0.001" />
+  </worldbody>
+</mujoco>

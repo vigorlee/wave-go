@@ -1,0 +1,29 @@
+{
+  "source_scene": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/xgw/scene_terrain_office.xml",
+  "source_sha256": "53c430334c3606684c3824d5445f401fea9fb7da378f074db027dc7eb5a451cc",
+  "method": "direct rasterization of collidable worldbody primitives; no synthetic obstacles",
+  "resolution_m": 0.05,
+  "origin_m": [
+    -11.4,
+    -9.200000000000001,
+    0.0
+  ],
+  "size_cells": [
+    681,
+    749
+  ],
+  "size_m": [
+    34.05,
+    37.45
+  ],
+  "world_collision_geometries": 145,
+  "geometry_types": {
+    "box": 145
+  },
+  "occupied_cells": 35923,
+  "free_cells": 474146,
+  "map_file": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/genisom_roamerx_open/map/g1_office.pgm",
+  "map_yaml": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/genisom_roamerx_open/map/g1_office.yaml",
+  "g1_scene": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/g1/scene_terrain_office.xml",
+  "guarantee": "OfficeWorld world collision geometry is unchanged; only the XGW robot include is replaced by the validated G1 12-DOF model."
+}

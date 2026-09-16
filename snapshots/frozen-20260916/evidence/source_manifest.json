@@ -1,0 +1,8 @@
+{
+  "source_run": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_02",
+  "original_video": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_02/go2w_four_screen_demo.mp4",
+  "original_video_wall_start": 1789458138.337986,
+  "segment_wall_start": 1789458150.947677,
+  "segment_duration": 96.57774329185486,
+  "rviz": "Timestamp-aligned replay of this same successful run; no new simulation navigation and no point interpolation"
+}

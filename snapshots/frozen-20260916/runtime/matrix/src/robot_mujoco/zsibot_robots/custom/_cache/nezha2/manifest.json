@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "generator": "prepare_nezha2_matrix_custom_cache.py",
+  "custom_name": "nezha2",
+  "reference_profile": "xgw",
+  "source": {
+    "physics": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/nezha2",
+    "ue_visual": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/nezha2",
+    "view_urdf": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/third_party/nezha2_rl_sar/view/nezha2_view.urdf"
+  },
+  "integrity": {
+    "physics_cache": {
+      "cache": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/custom/_cache/nezha2",
+      "xml": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/custom/_cache/nezha2/nezha2.xml",
+      "xml_sha256": "0e62bc1604f6c21e0fbcd807e1e62dc659122aff39279d98d2d0d2a1a9943383",
+      "asset_count": 24,
+      "asset_sha256": {
+        "FL_calf.STL": "b6c08a32a69dc5fcc0810d07f8d9e3a56c5c0802565acf25924c07317da53314",
+        "FL_foot.STL": "fdeb4fac7cbab13d22a55b23201675eed87914b82c8afcefbc126e967ad018cc",
+        "FL_footmotor.STL": "735e0f764e825ead55a4559ec6e31774e1814d96a43870f4ba0d71a36d8a7035",
+        "FL_hip.STL": "2800615b67846e1d9da4219052c6af3bed0abdf9fc0dc5f080ac503570d66eb7",
+        "FL_thigh.STL": "cb57afed4cbf62929d58cead149f9296033d97755521ddfb731a62db0520f03d",
+        "FR_calf.STL": "409a48f223bd59aceebb8d16e9ada540f325cc72cd63f7fdcdd9fd67f31a3404",
+        "FR_foot.STL": "424d4f57003560f8c641186fc9024052357edcd847fccedff192a88541c03989",
+        "FR_footmotor.STL": "300ed816a39fac535e5396a74aeb14683986b7ec973c043dea1a55a189b86b19",
+        "FR_hip.STL": "b32c88f0edf3b2a462c6ecfe6b79726e0237ce5aa529d3e38c918b6d8635f279",
+        "FR_thigh.STL": "e9c82bc8ddf155051f9180d4a893f6425a7f3173a5c401d366d2dfad5782c737",
+        "Lidar.STL": "57d512d753e2fd3b362610a312ca7713f4e71cf7c32c662c2f9bdaf9c3b6a469",
+        "RL_calf.STL": "798eb9e70af2fb346a88bbc2d94492a76f2b483992d85ca6c3864866ffe06cda",
+        "RL_foot.STL": "727648b7ff63bcd9d8923db921f98099768a97d58247065023842bbcc581e23e",
+        "RL_footmotor.STL": "24b597b2caff973aa8cf1b77faf267b46f714e0691f9536bb796300bf74cada4",
+        "RL_hip.STL": "fe38a0ee787a84d60fe7dd8d96583d7e89ca8dde02fafa12d92b6dd124fb78b2",
+        "RL_thigh.STL": "ab627797c7fe470b6b087ef6950d6b556db9acbc67a6a54ff21784476ddaaa7d",
+        "RR_calf.STL": "4d7ae81fe7975fac540687f6a9078e1c7064444f30f2acdfa65cde116b7f440c",
+        "RR_foot.STL": "ee67399e66b76bcb118d279acab96f43f45c63569671b09e0b570c3c174c654b",
+        "RR_footmotor.STL": "392ab9ae74f2366e099e0ad9df0beda548074f00e094177592413a84bc2ba04c",
+        "RR_hip.STL": "3e0950521b0fcf6d52a4ac67870d157b031a7ac63edf1a5b3f838c6f5b11918e",
+        "RR_thigh.STL": "f2e93489939b325dc1ab5d600db36a8547083fedd97a73e3a7070a80cda3676a",
+        "tops.STL": "aa83c6edc157911d919189fc8237c0c6d751abce92c24cb654a8b15bc374ff2c",
+        "trunk.STL": "9208d02abe9b71baf55ebd50d40646f26899cce4ed486423a4f215abe008abb5",
+        "yard_stairs_visual.STL": "0e3a543df4d7d6b09b7070256c49fe5944cc968881139fac13787a70bd01ed8f"
+      },
+      "render_mesh_format": "stl",
+      "render_meshes": {}
+    },
+    "ue_cache": {
+      "cache": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/custom/_cache/nezha2",
+      "xml": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/custom/_cache/nezha2/nezha2.xml",
+      "xml_sha256": "4ea047f1fb56782b9d586c22379403f825439d8b6fe4ce693de0469823e099b2",
+      "asset_count": 47,
+      "asset_sha256": {
+        "FL_calf.STL": "e5ef5330ef801b2f3dff703d1e98ae4c900f22e780c0aac55c2eb98362bd7d56",
+        "FL_calf.obj": "e19084cc9553c5a9c10f082758c7550db8cc64fa5b54e1b17ef40068065ac760",
+        "FL_foot.STL": "44c6980425823444dcfed7bf21c0745c1ab28b5528183ee6fd86acb1445a11fe",
+        "FL_foot.obj": "8da098e6a2e074be6ec2b12916e533f8e14d70b85ce74324676cc482fcdb2618",
+        "FL_footmotor.STL": "f2dfd6126b7321ccbecd4bb683d99b601c9aae35ebb2a3fc7afa22a107832669",
+        "FL_footmotor.obj": "b1417f9adf56b312ee546e714934592d1b0c8562e9e9e94ea20a3ae63beabf32",
+        "FL_hip.STL": "6cfbb4f27d714607d83f39043b86361b5ccaf130875a1822d42b2f27efda7ce3",
+        "FL_hip.obj": "8d8e4c45bd74609ea738667a8ff8db44b95be39728a1c3c88fad9bc1003c040b",
+        "FL_thigh.STL": "64de6c889dfd6196b12736a6776f5d56fa734d9fb4f32548a324aae3c774cc7c",
+        "FL_thigh.obj": "37233700f01dcd6cc0c220b5926bc962efa1834ce1a4c2e2ae3b72b1a9454cc6",
+        "FR_calf.STL": "51f26c8489b320e6838ac842211ac54e1f63104daf826afbd5910e7b47b55fd5",
+        "FR_calf.obj": "de999e4e858e928e71587f72cc576c045915e4ee9bcd30e63c81c7cbbedeb35b",
+        "FR_foot.STL": "b675c459933785633ad99a9cfb7ecf5f0cec10076d92c07c5a21d0de00208800",
+        "FR_foot.obj": "503891e3b5311c4fa94994fd455c8a729823e21d3fcb35e7f4b58b5459be7328",
+        "FR_footmotor.STL": "a61ded167952de94e4d86dbf8bf542ced43952b03b6990c196f0cb5e874e310c",
+        "FR_footmotor.obj": "a83f1779ae5fa1e69d591f2f85ab95d0e5d4a01c748df4f07a298446f4c329ae",
+        "FR_hip.STL": "78337a38bf9c9d60deddf24495f52cd2724eec7cb1fc89baac9f2206914b536f",
+        "FR_hip.obj": "5e3dac8e17d10026e81cf2a00b0a15f7376c96b085060d63231608f1a78fb74e",
+        "FR_thigh.STL": "caf50bc496e6cf2b3e811882a4dc2ed8257bee4449f371aea54a7161567216e6",
+        "FR_thigh.obj": "23e863d2d15bd261ef278fd62b048acb7f2c1b381c0118c43ee4e15b24dc988c",
+        "Lidar.STL": "7a2767b905a704c3d80645b74f56052a999e5e22934bacec43d1d81f9d39398f",
+        "Lidar.obj": "c3036eb8e3ee304c7f699c661aa6476b2bd6c6b9082839c99f8a952c80dd14c7",
+        "RL_calf.STL": "4595a65011fa10899719df0e1d18b3a8e997ca34351572d2de5db825af3f7555",
+        "RL_calf.obj": "eabd7bc10257dc5f7701024b5b215967fbf50794ba2c1673d9945b8e1643161b",
+        "RL_foot.STL": "ca801ad5ad0399755c497abefa232cb75e25fae6d0199287655fb00cc6ccae28",
+        "RL_foot.obj": "e59928e2c6ce2aabbc28484915773625458bd958e6f958df254868eee45fd0ba",
+        "RL_footmotor.STL": "466c002cf11816844bf17cd7b7619d287abbf627df45c2d1f252376c5112f427",
+        "RL_footmotor.obj": "7d1c264b282dac4f1f788ff5bf71d8abec4f38584249d16d02f610a6a4b1b80f",
+        "RL_hip.STL": "3863c77de5fb31814e55a9282d7bd1ef5de9bf51dca048a5321164c76a7d9718",
+        "RL_hip.obj": "d476e6be56bf53b8ee4d0624349f1a16c0246729cbfee5900697e123a0a0696d",
+        "RL_thigh.STL": "27265614d3763359851cbe15a9a551a1cf72fd1ef6966ea366c4d28009fb4c8e",
+        "RL_thigh.obj": "a4f978b255690b6a112e4c99d40fe0ea2b6a96494820e5c730edb452795c13b7",
+        "RR_calf.STL": "38647811b660a10cdf87eb807de87a70ae907253472fd4df1443a16369ff3222",
+        "RR_calf.obj": "686751b9bc1f0145d8178653daaf254547865eaceee2a0e4c175157a4f5a96f5",
+        "RR_foot.STL": "963f925556c863af42e37b121e65a5a3d70739ca56fd7b30ced2c75127f32b60",
+        "RR_foot.obj": "21c812df508f62a8e76f8dd363b22b87323d17cf1e145a722e9fccaa91939ca6",
+        "RR_footmotor.STL": "691823d6a23d3260f017a2aca7b8ffa5831d5750f0bb47f50cc3cb3f53ba1660",
+        "RR_footmotor.obj": "82e6d0bc08a41280043401518385d83a45c089fce678c4bd5e8fdf71c0788bc9",
+        "RR_hip.STL": "1c290a3fe52679b60f0587625edea86fd3ca1b8a306db9d88af98305705fe4fe",
+        "RR_hip.obj": "bd08fc873d128ad277b359bc95b76df23764327535010c41f88fdcf80cba8205",
+        "RR_thigh.STL": "121953c39719d482649a6ffc7dff5917cf636b2ac0cca5d85b71fcc33f16cb53",
+        "RR_thigh.obj": "59978599811a5fa9dee571f159b077b6c0d61a7b7c748e94bdcaaca8c019c490",
+        "nezha2_standing_shell.STL": "8b63533168cd3c4dcd3fea532edaa62834d88d5ee44de88557358c00332284c0",
+        "tops.STL": "aa83c6edc157911d919189fc8237c0c6d751abce92c24cb654a8b15bc374ff2c",
+        "trunk.STL": "ef78c9a09e6f996aaf295385f12ae6db4bf2e2505e522c5b8c27d6bbe7eb8baa",
+        "trunk.obj": "e577e2e370ce39649bd07bc54b1bc232fb79b2bc77ba172297884fa73084dbfc",
+        "yard_stairs_visual.STL": "0e3a543df4d7d6b09b7070256c49fe5944cc968881139fac13787a70bd01ed8f"
+      },
+      "render_mesh_format": "normalized_binary_stl",
+      "render_meshes": {
+        "trunk.STL": {
+          "render_file": "assets/trunk.STL",
+          "vertices": 8109,
+          "faces": 16382,
+          "extent_max_error_m": 0.00045943260192871094
+        },
+        "Lidar.STL": {
+          "render_file": "assets/Lidar.STL",
+          "vertices": 2823,
+          "faces": 5636,
+          "extent_max_error_m": 0.00010148684183755585
+        },
+        "FL_hip.STL": {
+          "render_file": "assets/FL_hip.STL",
+          "vertices": 9568,
+          "faces": 19558,
+          "extent_max_error_m": 0.0
+        },
+        "FL_thigh.STL": {
+          "render_file": "assets/FL_thigh.STL",
+          "vertices": 8845,
+          "faces": 17815,
+          "extent_max_error_m": 0.0
+        },
+        "FL_calf.STL": {
+          "render_file": "assets/FL_calf.STL",
+          "vertices": 2458,
+          "faces": 4622,
+          "extent_max_error_m": 0.00011350587010383606
+        },
+        "FL_footmotor.STL": {
+          "render_file": "assets/FL_footmotor.STL",
+          "vertices": 7326,
+          "faces": 15110,
+          "extent_max_error_m": 0.0
+        },
+        "FL_foot.STL": {
+          "render_file": "assets/FL_foot.STL",
+          "vertices": 4332,
+          "faces": 8722,
+          "extent_max_error_m": 0.0
+        },
+        "FR_hip.STL": {
+          "render_file": "assets/FR_hip.STL",
+          "vertices": 9568,
+          "faces": 19558,
+          "extent_max_error_m": 0.0
+        },
+        "FR_thigh.STL": {
+          "render_file": "assets/FR_thigh.STL",
+          "vertices": 8922,
+          "faces": 18095,
+          "extent_max_error_m": 0.0005657151341438293
+        },
+        "FR_calf.STL": {
+          "render_file": "assets/FR_calf.STL",
+          "vertices": 2457,
+          "faces": 4623,
+          "extent_max_error_m": 0.00011350587010383606
+        },
+        "FR_footmotor.STL": {
+          "render_file": "assets/FR_footmotor.STL",
+          "vertices": 7283,
+          "faces": 15062,
+          "extent_max_error_m": 6.838515400886536e-05
+        },
+        "FR_foot.STL": {
+          "render_file": "assets/FR_foot.STL",
+          "vertices": 4240,
+          "faces": 8532,
+          "extent_max_error_m": 0.0
+        },
+        "RL_hip.STL": {
+          "render_file": "assets/RL_hip.STL",
+          "vertices": 9568,
+          "faces": 19558,
+          "extent_max_error_m": 0.0
+        },
+        "RL_thigh.STL": {
+          "render_file": "assets/RL_thigh.STL",
+          "vertices": 8921,
+          "faces": 18093,
+          "extent_max_error_m": 0.0005657151341438293
+        },
+        "RL_calf.STL": {
+          "render_file": "assets/RL_calf.STL",
+          "vertices": 2457,
+          "faces": 4623,
+          "extent_max_error_m": 0.00011350587010383606
+        },
+        "RL_footmotor.STL": {
+          "render_file": "assets/RL_footmotor.STL",
+          "vertices": 7283,
+          "faces": 15062,
+          "extent_max_error_m": 6.838515400886536e-05
+        },
+        "RL_foot.STL": {
+          "render_file": "assets/RL_foot.STL",
+          "vertices": 4261,
+          "faces": 8574,
+          "extent_max_error_m": 0.0
+        },
+        "RR_hip.STL": {
+          "render_file": "assets/RR_hip.STL",
+          "vertices": 9568,
+          "faces": 19558,
+          "extent_max_error_m": 0.0
+        },
+        "RR_thigh.STL": {
+          "render_file": "assets/RR_thigh.STL",
+          "vertices": 8876,
+          "faces": 17812,
+          "extent_max_error_m": 0.0
+        },
+        "RR_calf.STL": {
+          "render_file": "assets/RR_calf.STL",
+          "vertices": 2458,
+          "faces": 4622,
+          "extent_max_error_m": 0.00011350587010383606
+        },
+        "RR_footmotor.STL": {
+          "render_file": "assets/RR_footmotor.STL",
+          "vertices": 7326,
+          "faces": 15110,
+          "extent_max_error_m": 0.0
+        },
+        "RR_foot.STL": {
+          "render_file": "assets/RR_foot.STL",
+          "vertices": 4240,
+          "faces": 8532,
+          "extent_max_error_m": 0.0
+        }
+      }
+    },
+    "physics_active": {
+      "root": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/custom",
+      "entry": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/robot_mujoco/zsibot_robots/custom/current.xml",
+      "entry_sha256": "4ea047f1fb56782b9d586c22379403f825439d8b6fe4ce693de0469823e099b2",
+      "asset_count": 47,
+      "nbody": 24,
+      "ngeom": 31,
+      "nu": 16
+    },
+    "ue_active": {
+      "root": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/custom",
+      "entry": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/custom/current.xml",
+      "entry_sha256": "4ea047f1fb56782b9d586c22379403f825439d8b6fe4ce693de0469823e099b2",
+      "asset_count": 47,
+      "nbody": 24,
+      "ngeom": 31,
+      "nu": 16
+    }
+  },
+  "guarantee": "The active custom entry is canonical Nezha2 (BASE_LINK, 24 bodies, 16 actuators); the warehouse MuJoCo scene and RL policy remain unchanged."
+}

@@ -1,0 +1,246 @@
+<mujoco model="go2w scene">
+  <include file="go2w.xml" />
+  <!-- <extension>
+    <plugin plugin="mujoco.sdf.sdflib">
+      <instance name="sdf">
+        <config key="aabb" value="1" />
+      </instance>
+    </plugin>
+  </extension> -->
+
+  <statistic center="0 0 0.1" extent="0.8" />
+
+
+  <option sdf_iterations="5" sdf_initpoints="10"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+    <map znear="0.01" zfar="500"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="1 1" reflectance="0.2" />
+    <material name="platform" rgba="0.75294 0.75294 0.75294 1" specular="0.3" shininess="0.5" />
+    <!-- <mesh name="Warehouse" file="Warehouse.STL"/> -->
+    <!-- <mesh name="Warehouse" file="Warehouse.STL">
+      <plugin instance="sdf"/>
+    </mesh> -->
+  </asset>
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" pos="0 0 0.01" type="plane" material="groundplane" />
+<geom name="Box0" type="box" size="2.0 0.05 0.5" pos="15.7 -8.7 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box1" type="box" size="10.0 0.05 0.5" pos="5.7 -6.7 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box2" type="box" size="4.5 0.05 0.5" pos="-2.6 -2.14 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box3" type="box" size="1.0 0.05 0.5" pos="-3.5 2.0 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box4" type="box" size="1.25 0.05 0.5" pos="-4.0 3.0 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box5" type="box" size="5.0 0.05 0.5" pos="-9.0 4.2 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box6" type="box" size="6.5 0.05 0.5" pos="-20.5 4.2 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box7" type="box" size="6.5 0.05 0.5" pos="-24.85 10.7 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box8" type="box" size="3.1 0.05 0.5" pos="-24.85 20.28 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box9" type="box" size="5.25 0.05 0.5" pos="-18.39 26.0 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box10" type="box" size="5.25 0.05 0.5" pos="-18.38 23.35 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box11" type="box" size="1.5 0.05 0.5" pos="-13.01 24.65 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box12" type="box" size="1.5 0.05 0.5" pos="-10.31 24.65 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box13" type="box" size="5.35 0.05 0.5" pos="-5.01 26.0 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box14" type="box" size="5.35 0.05 0.5" pos="-5.01 23.3 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box15" type="box" size="1.5 0.05 0.5" pos="0.49 24.65 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box16" type="box" size="1.5 0.05 0.5" pos="-10.31 32.15 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box17" type="box" size="5.35 0.05 0.5" pos="-5.01 33.5 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box18" type="box" size="5.35 0.05 0.5" pos="-5.01 30.8 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box19" type="box" size="1.5 0.05 0.5" pos="0.49 32.15 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box20" type="box" size="5.25 0.05 0.5" pos="-18.41 33.5 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box21" type="box" size="5.25 0.05 0.5" pos="-18.41 30.85 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box22" type="box" size="1.5 0.05 0.5" pos="-13.01 32.15 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box23" type="box" size="8.5 0.05 0.5" pos="-26.24 28.48 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box24" type="box" size="5.0 0.05 0.5" pos="-26.41 40.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box25" type="box" size="32.5 0.05 0.5" pos="5.29 45.15 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box26" type="box" size="30.0 0.05 0.5" pos="36.49 15.05 0.52" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box27" type="box" size="10.5 0.05 0.5" pos="26.2 -10.07 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box28" type="box" size="6.9 0.05 0.5" pos="10.74 24.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box29" type="box" size="1.5 0.05 0.5" pos="12.09 31.75 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box30" type="box" size="6.9 0.05 0.5" pos="13.25 24.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box31" type="box" size="1.5 0.05 0.5" pos="12.09 17.95 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box32" type="box" size="2.25 0.05 0.5" pos="26.77 9.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box33" type="box" size="1.5 0.05 0.5" pos="28.03 15.37 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box34" type="box" size="1.5 0.05 0.5" pos="28.04 7.46 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box35" type="box" size="0.5 0.05 0.5" pos="29.17 8.02 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box36" type="box" size="0.5 0.05 0.5" pos="35.3 14.84 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box37" type="box" size="0.75 0.05 0.5" pos="35.82 7.7 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box38" type="box" size="3.9 0.05 0.5" pos="35.3 19.25 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box39" type="box" size="2.75 0.05 0.5" pos="35.3 25.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box40" type="box" size="0.75 0.05 0.5" pos="36.05 28.51 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box41" type="box" size="0.5 0.6 0.5" pos="0.69 43.01 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box42" type="box" size="0.6 0.7 0.5" pos="0.58 44.11 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box43" type="box" size="0.5 0.6 0.5" pos="-0.91 44.25 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box44" type="box" size="0.4 0.8 0.5" pos="6.97 44.61 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box45" type="box" size="0.5 0.6 0.5" pos="-18.31 44.48 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box46" type="box" size="0.5 1.5 0.5" pos="-20.9 44.48 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box47" type="box" size="0.5 0.03 0.5" pos="-23.37 44.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box48" type="box" size="0.5 0.03 0.5" pos="-24.68 44.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box49" type="box" size="0.6 0.015 0.015" pos="-24.03 44.755 0.08" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder50"  type="cylinder" size="0.185 0.5" pos="-23.07 44.91 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box51" type="box" size="0.6 0.6 0.5" pos="-13.55 38.21 0.52" quat="0.5 0.0 0.0 -0.866025" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box52" type="box" size="0.1 0.6 0.05" pos="-12.44 38.31 0.12" quat="0.5 0.0 0.0 -0.866025" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box53" type="box" size="0.1 0.6 0.05" pos="-13.02 37.21 0.12" quat="0.5 0.0 0.0 -0.866025" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box54" type="box" size="0.6 0.6 0.5" pos="19.721007 32.611025 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box55" type="box" size="0.1 0.6 0.05" pos="20.632295 33.252628 0.12" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box56" type="box" size="0.1 0.6 0.05" pos="20.68 32.01 0.12" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box57" type="box" size="0.6 0.6 0.5" pos="16.33 10.58 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box58" type="box" size="0.1 0.6 0.05" pos="17.25 11.2 0.12" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box59" type="box" size="0.1 0.6 0.05" pos="17.28 9.97 0.12" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box60" type="box" size="0.55 0.55 0.5" pos="9.22 7.24 0.52" quat="0.843391 0.0 0.0 -0.5373" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box61" type="box" size="0.6 0.6 0.25" pos="-3.01 3.14 0.29" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box62" type="box" size="1.0 0.5 0.5" pos="-5.37 7.01 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box63" type="box" size="0.8 0.4 0.5" pos="-17.61 5.2 0.52" quat="0.087156 0.0 0.0 0.996195" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder64"  type="cylinder" size="0.185 0.5" pos="-18.0 8.95 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder65"  type="cylinder" size="0.1 0.5" pos="-18.46 8.15 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box66" type="box" size="3.9 0.05 0.5" pos="18.98 11.45 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box67" type="box" size="1.5 0.05 0.5" pos="20.24 15.37 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box68" type="box" size="1.5 0.05 0.5" pos="20.34 7.46 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box69" type="box" size="3.9 0.05 0.5" pos="21.52 11.45 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box70" type="box" size="3.9 0.05 0.5" pos="10.84 11.45 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box71" type="box" size="1.5 0.05 0.5" pos="12.06 15.37 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box72" type="box" size="1.5 0.05 0.5" pos="12.07 7.46 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box73" type="box" size="3.9 0.05 0.5" pos="13.22 11.45 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box74" type="box" size="0.5 0.6 0.5" pos="23.76 1.99 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box75" type="box" size="0.65 0.05 0.5" pos="19.88 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box76" type="box" size="0.65 0.05 0.5" pos="21.38 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box77" type="box" size="0.65 0.05 0.5" pos="24.38 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box78" type="box" size="0.65 0.05 0.5" pos="27.38 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box79" type="box" size="0.65 0.05 0.5" pos="30.38 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box80" type="box" size="0.65 0.05 0.5" pos="33.38 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box81" type="box" size="0.65 0.05 0.5" pos="34.88 1.76 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box82" type="box" size="0.75 0.6 0.5" pos="25.23 1.88 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box83" type="box" size="0.5 0.6 0.025" pos="26.65 2.0 0.08" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box84" type="box" size="0.5 0.6 0.05" pos="28.07 2.0 0.1" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box85" type="box" size="0.5 0.325 0.2" pos="26.66 1.75 0.28" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box86" type="box" size="0.5 0.6 0.5" pos="29.52 1.94 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box87" type="box" size="0.5 0.6 0.15" pos="31.02 1.94 0.21" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box88" type="box" size="0.3 0.6 0.15" pos="31.98 1.94 0.21" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box89" type="box" size="0.3 0.5 0.5" pos="32.78 1.91 0.54" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box90" type="box" size="0.5 0.4 0.5" pos="34.13 1.88 0.54" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box91" type="box" size="0.5 0.35 0.5" pos="20.69 1.76 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box92" type="box" size="0.2 0.35 0.15" pos="21.78 1.66 0.17" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box93" type="box" size="0.25 0.35 0.15" pos="22.29 1.66 0.2" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box94" type="box" size="0.25 0.35 0.25" pos="22.81 1.66 0.26" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box95" type="box" size="5.25 0.05 0.5" pos="25.07 -4.38 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box96" type="box" size="0.5 0.35 0.5" pos="19.36 -4.84 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box97" type="box" size="5.25 0.05 0.5" pos="25.07 -5.28 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box98" type="box" size="0.4 0.6 0.15" pos="30.73 -4.66 0.21" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box99" type="box" size="0.65 0.05 0.5" pos="30.38 -4.84 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box100" type="box" size="0.4 0.4 0.125" pos="31.63 -4.61 0.17" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box101" type="box" size="0.5 0.4 0.15" pos="32.69 -4.61 0.23" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box102" type="box" size="0.5 0.4 0.5" pos="34.19 -4.86 0.54" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box103" type="box" size="0.65 0.05 0.5" pos="34.88 -4.84 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder104"  type="cylinder" size="0.2 0.35" pos="35.21 -4.65 0.41" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box105" type="box" size="6.9 0.05 0.5" pos="18.94 24.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box106" type="box" size="1.5 0.05 0.5" pos="20.29 31.8 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box107" type="box" size="6.9 0.05 0.5" pos="21.54 24.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box108" type="box" size="1.5 0.05 0.5" pos="20.29 17.94 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box109" type="box" size="6.9 0.05 0.5" pos="26.8 25.15 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box110" type="box" size="1.5 0.05 0.5" pos="28.02 31.8 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box111" type="box" size="6.9 0.05 0.5" pos="29.11 24.85 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box112" type="box" size="1.5 0.05 0.5" pos="28.02 17.95 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box113" type="box" size="0.6 0.5 0.5" pos="25.49 21.15 0.52" quat="0.688355 0.0 0.0 -0.725374" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box114" type="box" size="0.1 0.3 0.5" pos="25.49 21.77 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box115" type="box" size="0.1 0.075 0.5" pos="25.49 21.97 0.54" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box116" type="box" size="0.5 0.525 0.5" pos="1.9 17.73 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box117" type="box" size="0.6 0.5 0.5" pos="1.84 18.88 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box118" type="box" size="0.6 0.5 0.5" pos="0.5 18.88 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box119" type="box" size="0.6 0.5 0.5" pos="0.5 17.74 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box120" type="box" size="0.6 0.5 0.5" pos="0.5 16.57 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box121" type="box" size="0.325 0.5 0.5" pos="1.68 16.57 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box122" type="box" size="0.325 0.5 0.5" pos="2.52 16.57 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box123" type="box" size="0.6 0.5 0.5" pos="-2.58 18.15 0.52" quat="0.930418 0.0 0.0 -0.366501" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box124" type="box" size="0.1 0.3 0.5" pos="-2.01 17.71 0.52" quat="0.930418 0.0 0.0 -0.366501" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box125" type="box" size="0.6 0.5 0.5" pos="-2.95 19.98 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box126" type="box" size="0.5 0.6 0.5" pos="-3.5 13.11 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box127" type="box" size="0.3 0.1 0.5" pos="-3.41 12.39 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box128" type="box" size="0.075 0.1 0.5" pos="-3.43 12.22 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box129" type="box" size="0.6 0.5 0.5" pos="-4.81 13.22 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box130" type="box" size="0.6 0.5 0.5" pos="-4.81 11.9 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box131" type="box" size="1.0 3.05 0.5" pos="-7.92 12.2 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box132" type="box" size="0.4 0.8 0.5" pos="-7.37 16.14 0.52" quat="0.999048 0.0 0.0 -0.043619" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box133" type="box" size="0.5 1.5 0.5" pos="-8.41 16.64 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box134" type="box" size="0.35 0.5 0.5" pos="-11.23 12.62 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box135" type="box" size="0.5 2.0 0.5" pos="-13.11 11.14 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box136" type="box" size="0.5 1.5 0.5" pos="-12.09 11.64 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder137"  type="cylinder" size="0.2 0.5" pos="-12.3 9.88 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder138"  type="cylinder" size="0.2 0.5" pos="-16.46 12.38 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder139"  type="cylinder" size="0.2 0.5" pos="-17.94 12.38 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box140" type="box" size="1.0 1.5 0.5" pos="-17.16 10.64 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box141" type="box" size="1.0 1.0 0.5" pos="-17.17 13.64 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box142" type="box" size="0.35 0.5 0.5" pos="-11.85 18.52 0.52" quat="0.999815 0.0 0.0 0.019261" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box143" type="box" size="0.6 0.5 0.5" pos="-11.75 17.31 0.52" quat="0.686331 0.0 0.0 0.727289" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box144" type="box" size="0.5 0.6 0.5" pos="-12.91 17.17 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box145" type="box" size="0.6 0.5 0.5" pos="-12.96 18.56 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box146" type="box" size="0.35 0.5 0.5" pos="-15.15 17.32 0.52" quat="0.866025 0.0 0.0 0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box147" type="box" size="1.0 1.0 0.5" pos="-17.17 18.7 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Cylinder148"  type="cylinder" size="0.2 0.5" pos="-16.92 17.48 0.52" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box149" type="box" size="0.5 0.5 0.5" pos="-17.65 17.2 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box150" type="box" size="0.6 0.7 0.5" pos="-17.02 21.15 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box151" type="box" size="0.1 0.4 0.075" pos="-16.42 22.19 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box152" type="box" size="0.1 0.4 0.075" pos="-17.66 22.19 0.12" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box153" type="box" size="0.125 0.15 0.5" pos="29.92 -3.86 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box154" type="box" size="0.125 0.15 0.5" pos="13.75 -3.86 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box155" type="box" size="0.125 0.15 0.5" pos="-2.2 8.15 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box156" type="box" size="0.125 0.15 0.5" pos="-18.18 8.14 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box157" type="box" size="0.35 0.45 0.5" pos="-23.54 12.0 0.52" quat="0.996195 0.0 0.0 -0.087156" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box158" type="box" size="0.125 0.15 0.5" pos="-18.18 20.12 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box159" type="box" size="0.125 0.15 0.5" pos="-2.18 20.12 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box160" type="box" size="0.125 0.15 0.5" pos="13.76 20.2 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box161" type="box" size="0.125 0.15 0.5" pos="29.91 20.18 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box162" type="box" size="0.125 0.15 0.5" pos="27.05 34.44 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box163" type="box" size="0.125 0.15 0.5" pos="16.01 34.44 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box164" type="box" size="0.125 0.15 0.5" pos="-2.64 34.44 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box165" type="box" size="0.125 0.15 0.5" pos="-16.18 34.44 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box166" type="box" size="0.3 0.25 0.5" pos="-15.28 33.78 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box167" type="box" size="0.15 0.1 0.5" pos="-15.28 34.08 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box168" type="box" size="0.3 0.25 0.5" pos="-16.83 30.41 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box169" type="box" size="0.15 0.1 0.5" pos="-16.79 30.1 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box170" type="box" size="0.7 0.05 0.5" pos="35.76 30.11 0.54" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box171" type="box" size="0.7 0.05 0.5" pos="35.3 13.64 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box172" type="box" size="0.5 0.05 0.5" pos="35.3 11.54 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box173" type="box" size="0.5 0.05 0.5" pos="35.7 13.02 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box174" type="box" size="0.65 0.05 0.5" pos="35.71 12.12 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box175" type="box" size="0.5 0.15 0.4" pos="35.7 12.7 0.14" quat="0.707107 0.707107 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box176" type="box" size="0.65 0.05 0.5" pos="35.71 9.12 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box177" type="box" size="0.65 0.05 0.5" pos="35.89 9.99 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box178" type="box" size="0.5 0.05 0.5" pos="35.3 10.54 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box179" type="box" size="0.75 0.05 0.5" pos="35.27 8.35 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box180" type="box" size="0.5 0.05 0.5" pos="29.17 9.02 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box181" type="box" size="0.5 0.05 0.5" pos="29.17 10.02 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box182" type="box" size="0.35 0.05 0.5" pos="29.17 10.82 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box183" type="box" size="0.75 0.05 0.5" pos="29.17 12.86 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box184" type="box" size="0.6 0.05 0.5" pos="28.52 11.11 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box185" type="box" size="0.6 0.05 0.5" pos="27.74 11.71 0.52" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box186" type="box" size="0.6 0.055 0.5" pos="28.82 12.13 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box187" type="box" size="0.6 0.1 0.5" pos="28.68 14.3 0.19" quat="0.5 0.5 -0.5 -0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box188" type="box" size="0.75 0.05 0.5" pos="28.47 13.57 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box189" type="box" size="0.75 0.05 0.5" pos="28.67 15.12 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box190" type="box" size="0.75 0.05 0.5" pos="28.07 14.32 0.52" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box191" type="box" size="0.5 0.05 0.5" pos="26.67 13.95 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box192" type="box" size="0.7 0.05 0.5" pos="27.28 15.12 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box193" type="box" size="0.7 0.05 0.5" pos="27.28 12.12 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box194" type="box" size="0.7 0.05 0.5" pos="27.29 12.65 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box195" type="box" size="0.4 0.05 0.5" pos="26.67 13.05 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box196" type="box" size="0.7 0.05 0.5" pos="27.32 14.44 0.52" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box197" type="box" size="1.5 0.1 0.5" pos="-23.83 32.16 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box198" type="box" size="1.425 0.05 0.5" pos="-23.69 24.69 0.52" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box199" type="box" size="0.75 0.05 0.5" pos="-25.54 23.33 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box200" type="box" size="0.75 0.05 0.5" pos="-25.54 23.97 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box201" type="box" size="0.75 0.05 0.5" pos="-25.54 25.46 0.52" quat="0.0 0.0 0.0 -1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box202" type="box" size="0.16 0.09 0.075" pos="17.4 -9.28 0.12" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box203" type="box" size="0.0025 0.025 0.05" pos="17.285 -9.97 0.1" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box204" type="box" size="0.0025 0.025 0.05" pos="17.515 -9.97 0.1" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box205" type="box" size="0.005 0.12 0.5" pos="17.4 -9.995 0.56" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box206" type="box" size="0.005 0.03 0.3" pos="17.4 -9.695 0.052" quat="0.5 -0.5 0.5 0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box207" type="box" size="0.005 0.12 0.05" pos="17.4 -9.954 0.052" quat="0.5 -0.5 0.5 0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="Box208" type="box" size="0.7 0.05 0.5" pos="35.76 31.61 0.54" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,87 @@
+{
+    "Element1": {
+        "name": "pedestrian1",
+        "type": "dynamic",
+        "model": "human1",
+        "position": {
+            "x": 2000,
+            "y": 0,
+            "z": 90
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "velocity": 0.5,
+        "trajectory": {
+            "point1": {
+                "x": -1000,
+                "y": 0,
+                "z": 0
+            }
+        }
+    },
+    "Element2": {
+        "name": "pedestrian2",
+        "type": "dynamic",
+        "model": "human1",
+        "position": {
+            "x": 2000,
+            "y": 500,
+            "z": 90
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 180,
+            "roll": 0
+        },
+        "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "velocity": 0.5,
+        "trajectory": {
+            "point1": {
+                "x": -1000,
+                "y": 500,
+                "z": 0
+            }
+        }
+    },
+    "Element3": {
+        "name": "pedestrian3",
+        "type": "dynamic",
+        "model": "human1",
+        "avoid": true,
+        "position": {
+            "x": 2000,
+            "y": -500,
+            "z": 90
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 90,
+            "roll": 0
+        },
+        "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "velocity": 0.5,
+        "trajectory": {
+            "point1": {
+                "x": -1000,
+                "y": -500,
+                "z": 0
+            }
+        }
+    }
+}

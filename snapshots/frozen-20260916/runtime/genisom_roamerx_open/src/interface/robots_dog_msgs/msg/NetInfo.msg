@@ -1,0 +1,7 @@
+string net_interface_name
+uint64 received_byte
+uint64 transmitted_byte
+uint64 total_received
+uint64 total_transmitted
+uint64 total_errors_on_received
+uint64 total_errors_on_transmitted

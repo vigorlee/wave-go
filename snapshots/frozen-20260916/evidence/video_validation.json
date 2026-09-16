@@ -1,0 +1,47 @@
+{
+  "video": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/go2w_four_screen_demo.mp4",
+  "width": 1920,
+  "height": 1080,
+  "fps": 20,
+  "duration_seconds": 96.6,
+  "bytes": 20023328,
+  "source_successful_stages": 11,
+  "full_decode_errors": "",
+  "samples": [
+    {
+      "label": "Start",
+      "video_seconds": 1.0,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_01.png"
+    },
+    {
+      "label": "Stair ascent",
+      "video_seconds": 14.398684740066528,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_02.png"
+    },
+    {
+      "label": "Stair descent",
+      "video_seconds": 37.19868230819702,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_03.png"
+    },
+    {
+      "label": "Obstacles",
+      "video_seconds": 49.598631620407104,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_04.png"
+    },
+    {
+      "label": "Ramp",
+      "video_seconds": 75.19865775108337,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_05.png"
+    },
+    {
+      "label": "Goal reached",
+      "video_seconds": 94.6,
+      "path": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/frame_06.png"
+    }
+  ],
+  "rviz_replay_updates_hz": 1,
+  "rviz_point_voxel_m": 0.04,
+  "final_accumulated_points": 1388517,
+  "pointcloud_timestamp_alignment": "source sensor stamp <= displayed timeline instant; no future scans",
+  "accuracy_note": "The recording wall start has subsecond launch uncertainty; pointcloud snapshots update once per second, while the three original panels retain original 20 fps screen video."
+}

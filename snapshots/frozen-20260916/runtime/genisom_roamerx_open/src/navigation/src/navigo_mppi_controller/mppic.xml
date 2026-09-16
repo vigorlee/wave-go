@@ -1,0 +1,7 @@
+<class_libraries>
+  <library path="mppi_controller">
+    <class type="navigo_mppi_controller::MPPIController" base_class_type="navigo_core::Controller">
+      <description>MPPI Controller for Nav2</description>
+    </class>
+  </library>
+</class_libraries>

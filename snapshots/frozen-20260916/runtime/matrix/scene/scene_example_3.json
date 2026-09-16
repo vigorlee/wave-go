@@ -1,0 +1,150 @@
+{
+    "Element1": {
+        "name": "pedestrian1",
+        "type": "dynamic",
+        "model": "human1",
+        "avoid": true,
+        "position": {
+            "x": 1400,
+            "y": 1200,
+            "z": 90
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "velocity": 0.3,
+        "trajectory": {
+            "point1": {
+                "x": 1400,
+                "y": -100,
+                "z": 0
+            },
+            "point2": {
+                "x": -1400,
+                "y": -100,
+                "z": 0
+            }
+        }
+    },
+    "Element2": {
+        "name": "pedestrian2",
+        "type": "dynamic",
+        "model": "human1",
+        "avoid": true,
+        "position": {
+            "x": 1300,
+            "y": 1200,
+            "z": 90
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 180,
+            "roll": 0
+        },
+        "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+        },
+        "velocity": 0.25,
+        "trajectory": {
+            "point1": {
+                "x": 1300,
+                "y": 100,
+                "z": 0
+            },
+            "point2": {
+                "x": -1300,
+                "y": 100,
+                "z": 0
+            }
+        }
+    },
+    "Element3": {
+        "name": "obstacle1",
+        "type": "static",
+        "model": "cube1",
+        "position": {
+            "x": 700,
+            "y": 700,
+            "z": 500
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 10,
+            "y": 10,
+            "z": 10
+        }
+    },
+    "Element4": {
+        "name": "obstacle2",
+        "type": "static",
+        "model": "cube2",
+        "position": {
+            "x": 950,
+            "y": 100,
+            "z": 100
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 2
+        }
+    },
+    "Element5": {
+        "name": "obstacle3",
+        "type": "static",
+        "model": "cylinder1",
+        "position": {
+            "x": 450,
+            "y": -100,
+            "z": 100
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 2
+        }
+    },
+    "Element6": {
+        "name": "obstacle4",
+        "type": "static",
+        "model": "cube2",
+        "position": {
+            "x": 1400,
+            "y": 900,
+            "z": 100
+        },
+        "rotation": {
+            "pitch": 0,
+            "yaw": 0,
+            "roll": 0
+        },
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 2
+        }
+    }
+}

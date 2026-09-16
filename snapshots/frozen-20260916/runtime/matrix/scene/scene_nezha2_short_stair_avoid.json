@@ -1,0 +1,8 @@
+{
+  "Element01": {"name":"stair_01","type":"static","model":"cube1","position":{"x":0,"y":89,"z":1.25},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.025}},
+  "Element02": {"name":"stair_02","type":"static","model":"cube1","position":{"x":0,"y":117,"z":2.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.05}},
+  "Element03": {"name":"stair_03","type":"static","model":"cube1","position":{"x":0,"y":145,"z":3.75},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.075}},
+  "Element04": {"name":"stair_04","type":"static","model":"cube1","position":{"x":0,"y":173,"z":5.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.10}},
+  "Element05": {"name":"stair_platform","type":"static","model":"cube2","position":{"x":0,"y":277,"z":5.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":1.80,"z":0.10}},
+  "Element06": {"name":"obstacle_short_stair","type":"static","model":"cube2","position":{"x":10,"y":145,"z":23.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":0.32,"y":0.32,"z":0.32}}
+}

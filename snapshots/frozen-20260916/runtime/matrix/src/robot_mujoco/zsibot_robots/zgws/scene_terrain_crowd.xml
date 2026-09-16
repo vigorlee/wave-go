@@ -1,0 +1,153 @@
+<mujoco model="zgw scene">
+  <include file="zgws.xml" />
+
+  <statistic center="0 0 0.1" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+    <map znear="0.01" zfar="100"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" pos="0 0.0 0.01" size="0 0 0.05" type="plane" material="groundplane" />
+    <geom name="Cylinder0"  type="cylinder" size="0.5 0.5" pos="5.0 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder1"  type="cylinder" size="0.5 0.5" pos="5.0 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder2"  type="cylinder" size="0.5 0.5" pos="5.0 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder3"  type="cylinder" size="0.5 0.5" pos="5.0 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder4"  type="cylinder" size="0.5 0.5" pos="5.0 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder5"  type="cylinder" size="0.5 0.5" pos="5.0 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder6"  type="cylinder" size="0.5 0.5" pos="5.0 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder7"  type="cylinder" size="0.5 0.5" pos="5.0 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder8"  type="cylinder" size="0.5 0.5" pos="5.0 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder9"  type="cylinder" size="0.5 0.5" pos="5.0 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder10"  type="cylinder" size="0.5 0.5" pos="5.0 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder11"  type="cylinder" size="0.5 0.5" pos="5.0 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder12"  type="cylinder" size="0.5 0.5" pos="5.0 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder13"  type="cylinder" size="0.5 0.5" pos="-5.5 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder14"  type="cylinder" size="0.5 0.5" pos="-5.5 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder15"  type="cylinder" size="0.5 0.5" pos="-5.5 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder16"  type="cylinder" size="0.5 0.5" pos="-5.5 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder17"  type="cylinder" size="0.5 0.5" pos="-5.5 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder18"  type="cylinder" size="0.5 0.5" pos="-5.5 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder19"  type="cylinder" size="0.5 0.5" pos="-5.5 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder20"  type="cylinder" size="0.5 0.5" pos="-5.5 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder21"  type="cylinder" size="0.5 0.5" pos="-5.5 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder22"  type="cylinder" size="0.5 0.5" pos="-5.5 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder23"  type="cylinder" size="0.5 0.5" pos="-5.5 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder24"  type="cylinder" size="0.5 0.5" pos="-5.5 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder25"  type="cylinder" size="0.5 0.5" pos="-5.5 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder26"  type="cylinder" size="0.5 0.5" pos="-13.1 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder27"  type="cylinder" size="0.5 0.5" pos="-13.1 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder28"  type="cylinder" size="0.5 0.5" pos="-13.1 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder29"  type="cylinder" size="0.5 0.5" pos="-13.1 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder30"  type="cylinder" size="0.5 0.5" pos="-13.1 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder31"  type="cylinder" size="0.5 0.5" pos="-13.1 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder32"  type="cylinder" size="0.5 0.5" pos="-13.1 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder33"  type="cylinder" size="0.5 0.5" pos="-13.1 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder34"  type="cylinder" size="0.5 0.5" pos="-13.1 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder35"  type="cylinder" size="0.5 0.5" pos="-13.1 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder36"  type="cylinder" size="0.5 0.5" pos="-13.1 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder37"  type="cylinder" size="0.5 0.5" pos="-13.1 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder38"  type="cylinder" size="0.5 0.5" pos="-13.1 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder39"  type="cylinder" size="0.5 0.5" pos="-21.4 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder40"  type="cylinder" size="0.5 0.5" pos="-21.4 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder41"  type="cylinder" size="0.5 0.5" pos="-21.4 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder42"  type="cylinder" size="0.5 0.5" pos="-21.4 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder43"  type="cylinder" size="0.5 0.5" pos="-21.4 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder44"  type="cylinder" size="0.5 0.5" pos="-21.4 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder45"  type="cylinder" size="0.5 0.5" pos="-21.4 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder46"  type="cylinder" size="0.5 0.5" pos="-21.4 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder47"  type="cylinder" size="0.5 0.5" pos="-21.4 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder48"  type="cylinder" size="0.5 0.5" pos="-21.4 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder49"  type="cylinder" size="0.5 0.5" pos="-21.4 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder50"  type="cylinder" size="0.5 0.5" pos="-21.4 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder51"  type="cylinder" size="0.5 0.5" pos="-21.4 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder52"  type="cylinder" size="0.5 0.5" pos="-28.9 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder53"  type="cylinder" size="0.5 0.5" pos="-28.9 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder54"  type="cylinder" size="0.5 0.5" pos="-28.9 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder55"  type="cylinder" size="0.5 0.5" pos="-28.9 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder56"  type="cylinder" size="0.5 0.5" pos="-28.9 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder57"  type="cylinder" size="0.5 0.5" pos="-28.9 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder58"  type="cylinder" size="0.5 0.5" pos="-28.9 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder59"  type="cylinder" size="0.5 0.5" pos="-28.9 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder60"  type="cylinder" size="0.5 0.5" pos="-28.9 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder61"  type="cylinder" size="0.5 0.5" pos="-28.9 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder62"  type="cylinder" size="0.5 0.5" pos="-28.9 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder63"  type="cylinder" size="0.5 0.5" pos="-28.9 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder64"  type="cylinder" size="0.5 0.5" pos="-28.9 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder65"  type="cylinder" size="0.5 0.5" pos="-38.1 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder66"  type="cylinder" size="0.5 0.5" pos="-38.1 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder67"  type="cylinder" size="0.5 0.5" pos="-38.1 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder68"  type="cylinder" size="0.5 0.5" pos="-38.1 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder69"  type="cylinder" size="0.5 0.5" pos="-38.1 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder70"  type="cylinder" size="0.5 0.5" pos="-38.1 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder71"  type="cylinder" size="0.5 0.5" pos="-38.1 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder72"  type="cylinder" size="0.5 0.5" pos="-38.1 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder73"  type="cylinder" size="0.5 0.5" pos="-38.1 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder74"  type="cylinder" size="0.5 0.5" pos="-38.1 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder75"  type="cylinder" size="0.5 0.5" pos="-38.1 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder76"  type="cylinder" size="0.5 0.5" pos="-38.1 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder77"  type="cylinder" size="0.5 0.5" pos="-38.1 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder78"  type="cylinder" size="0.5 0.5" pos="17.3 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder79"  type="cylinder" size="0.5 0.5" pos="17.3 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder80"  type="cylinder" size="0.5 0.5" pos="17.3 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder81"  type="cylinder" size="0.5 0.5" pos="17.3 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder82"  type="cylinder" size="0.5 0.5" pos="17.3 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder83"  type="cylinder" size="0.5 0.5" pos="17.3 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder84"  type="cylinder" size="0.5 0.5" pos="17.3 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder85"  type="cylinder" size="0.5 0.5" pos="17.3 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder86"  type="cylinder" size="0.5 0.5" pos="17.3 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder87"  type="cylinder" size="0.5 0.5" pos="17.3 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder88"  type="cylinder" size="0.5 0.5" pos="17.3 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder89"  type="cylinder" size="0.5 0.5" pos="17.3 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder90"  type="cylinder" size="0.5 0.5" pos="17.3 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder91"  type="cylinder" size="0.5 0.5" pos="27.3 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder92"  type="cylinder" size="0.5 0.5" pos="27.3 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder93"  type="cylinder" size="0.5 0.5" pos="27.3 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder94"  type="cylinder" size="0.5 0.5" pos="27.3 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder95"  type="cylinder" size="0.5 0.5" pos="27.3 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder96"  type="cylinder" size="0.5 0.5" pos="27.3 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder97"  type="cylinder" size="0.5 0.5" pos="27.3 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder98"  type="cylinder" size="0.5 0.5" pos="27.3 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder99"  type="cylinder" size="0.5 0.5" pos="27.3 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder100"  type="cylinder" size="0.5 0.5" pos="27.3 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder101"  type="cylinder" size="0.5 0.5" pos="27.3 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder102"  type="cylinder" size="0.5 0.5" pos="27.3 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder103"  type="cylinder" size="0.5 0.5" pos="27.3 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder104"  type="cylinder" size="0.5 0.5" pos="39.3 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder105"  type="cylinder" size="0.5 0.5" pos="39.3 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder106"  type="cylinder" size="0.5 0.5" pos="39.3 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder107"  type="cylinder" size="0.5 0.5" pos="39.3 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder108"  type="cylinder" size="0.5 0.5" pos="39.3 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder109"  type="cylinder" size="0.5 0.5" pos="39.3 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder110"  type="cylinder" size="0.5 0.5" pos="39.3 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder111"  type="cylinder" size="0.5 0.5" pos="39.3 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder112"  type="cylinder" size="0.5 0.5" pos="39.3 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder113"  type="cylinder" size="0.5 0.5" pos="39.3 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder114"  type="cylinder" size="0.5 0.5" pos="39.3 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder115"  type="cylinder" size="0.5 0.5" pos="39.3 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder116"  type="cylinder" size="0.5 0.5" pos="39.3 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder117"  type="cylinder" size="0.5 0.5" pos="53.9 -2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder118"  type="cylinder" size="0.5 0.5" pos="53.9 2.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder119"  type="cylinder" size="0.5 0.5" pos="53.9 -7.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder120"  type="cylinder" size="0.5 0.5" pos="53.9 -12.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder121"  type="cylinder" size="0.5 0.5" pos="53.9 -17.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder122"  type="cylinder" size="0.5 0.5" pos="53.9 -22.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder123"  type="cylinder" size="0.5 0.5" pos="53.9 -27.5 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder124"  type="cylinder" size="0.5 0.5" pos="53.9 33.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder125"  type="cylinder" size="0.5 0.5" pos="53.9 28.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder126"  type="cylinder" size="0.5 0.5" pos="53.9 23.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder127"  type="cylinder" size="0.5 0.5" pos="53.9 18.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder128"  type="cylinder" size="0.5 0.5" pos="53.9 13.2 0.0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="Cylinder129"  type="cylinder" size="0.5 0.5" pos="53.9 8.2 0.0" rgba="0.8 0.2 0.2 1"/>
+  </worldbody>
+</mujoco>

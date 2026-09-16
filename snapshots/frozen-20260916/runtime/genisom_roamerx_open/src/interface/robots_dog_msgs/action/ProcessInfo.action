@@ -1,0 +1,6 @@
+int32 cmd   #  0 close   1 open
+string process_name
+---
+int32 state  #init = 0   running = 2  stoped =1   error  =3  noexist  =4
+---
+int32 progress

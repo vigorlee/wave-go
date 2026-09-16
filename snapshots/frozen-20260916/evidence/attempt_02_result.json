@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "state": "succeeded",
+  "action_goal_count": 1,
+  "completed_stages": 11,
+  "total_stages": 11,
+  "route_source": "user_requested_fixed_catalog_not_model_inference",
+  "nav2_plan_messages": 86,
+  "last_event": {
+    "time": 1789458242.5254202,
+    "state": "succeeded",
+    "stage_index": 10,
+    "stage_id": "course_exit",
+    "completed_stages": 11,
+    "reason": "continuous_route_completed",
+    "route_id": "wavegov1_original_course",
+    "future_prediction": {},
+    "robot_pose": {
+      "x": 1.0589875320163507,
+      "y": 18.71029500387555,
+      "z": 0.4127863471585474,
+      "roll": 0.03773476275082814,
+      "pitch": 0.04850234466898738,
+      "yaw": 1.527349713354273
+    },
+    "execution_mode": "navigate_through_poses",
+    "action_goal_count": 1,
+    "intermediate_goal_restarts": 0,
+    "ramp_physics": {
+      "passed": true,
+      "approach_z_m": 0.4042786847758284,
+      "crest_max_z_m": 0.8544728295899491,
+      "exit_z_m": 0.41263930685271744,
+      "elevation_gain_m": 0.4501941448141207,
+      "elevation_drop_m": 0.44183352273723164,
+      "uphill_max_abs_pitch_rad": 0.06707273022822757,
+      "downhill_max_abs_pitch_rad": 0.21428519735907436,
+      "minimum_elevation_gain_m": 0.3,
+      "minimum_pitch_rad": 0.07
+    },
+    "avoid_mode_restored": true
+  },
+  "ramp_physics": {
+    "passed": true,
+    "approach_z_m": 0.4042786847758284,
+    "crest_max_z_m": 0.8544728295899491,
+    "exit_z_m": 0.41263930685271744,
+    "elevation_gain_m": 0.4501941448141207,
+    "elevation_drop_m": 0.44183352273723164,
+    "uphill_max_abs_pitch_rad": 0.06707273022822757,
+    "downhill_max_abs_pitch_rad": 0.21428519735907436,
+    "minimum_elevation_gain_m": 0.3,
+    "minimum_pitch_rad": 0.07
+  },
+  "samples": 1781
+}

@@ -1,0 +1,16 @@
+{
+  "Element01": {"name":"stair_01","type":"static","model":"cube1","position":{"x":0,"y":89,"z":2.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.05}},
+  "Element02": {"name":"stair_02","type":"static","model":"cube1","position":{"x":0,"y":117,"z":5.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.10}},
+  "Element03": {"name":"stair_03","type":"static","model":"cube1","position":{"x":0,"y":145,"z":7.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.15}},
+  "Element04": {"name":"stair_04","type":"static","model":"cube1","position":{"x":0,"y":173,"z":10.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.20}},
+  "Element05": {"name":"stair_05","type":"static","model":"cube1","position":{"x":0,"y":201,"z":12.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.25}},
+  "Element06": {"name":"stair_06","type":"static","model":"cube1","position":{"x":0,"y":229,"z":15.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.30}},
+  "Element07": {"name":"stair_07","type":"static","model":"cube1","position":{"x":0,"y":257,"z":17.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.35}},
+  "Element08": {"name":"stair_08","type":"static","model":"cube1","position":{"x":0,"y":285,"z":20.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.40}},
+  "Element09": {"name":"stair_09","type":"static","model":"cube1","position":{"x":0,"y":313,"z":22.5},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.45}},
+  "Element10": {"name":"stair_10","type":"static","model":"cube1","position":{"x":0,"y":341,"z":25.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":0.28,"z":0.50}},
+  "Element11": {"name":"stair_platform","type":"static","model":"cube2","position":{"x":0,"y":445,"z":25.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":3.0,"y":1.80,"z":0.50}},
+  "Element12": {"name":"obstacle_stair_lower","type":"static","model":"cube2","position":{"x":15,"y":201,"z":41.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":0.32,"y":0.32,"z":0.32}},
+  "Element13": {"name":"obstacle_stair_upper","type":"static","model":"cube2","position":{"x":-40,"y":341,"z":66.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":0.32,"y":0.32,"z":0.32}},
+  "Element14": {"name":"obstacle_dynamic_crossing","type":"static","model":"cylinder1","position":{"x":72,"y":285,"z":70.0},"rotation":{"pitch":0,"yaw":0,"roll":0},"scale":{"x":0.30,"y":0.30,"z":0.60}}
+}

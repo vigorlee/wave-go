@@ -1,0 +1,253 @@
+<mujoco model="nezha2_description">
+  <default>
+    <default class="robot">
+      <default class="motor">
+        <joint />
+        <motor />
+      </default>
+      <default class="visual">
+        <geom material="visualgeom" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom condim="3" contype="0" conaffinity="1" priority="1" group="1" solref="0.005 1" solimp="0.99 0.999 1e-05" friction="1 0.01 0.01" rgba="0 0 0 0" />
+      </default>
+    </default>
+  </default>
+  <compiler angle="radian" meshdir="assets" />
+  <asset>
+    <material name="nezha2_material_0" rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+    <material name="default_material" rgba="0.7 0.7 0.7 1" />
+    <material name="collision_material" rgba="1.0 0.28 0.1 0.9" />
+    <mesh name="trunk.STL" file="trunk.STL" />
+    <mesh name="Lidar.STL" file="Lidar.STL" />
+    <mesh name="FL_hip.STL" file="FL_hip.STL" />
+    <mesh name="FL_thigh.STL" file="FL_thigh.STL" />
+    <mesh name="FL_calf.STL" file="FL_calf.STL" />
+    <mesh name="FL_footmotor.STL" file="FL_footmotor.STL" />
+    <mesh name="FL_foot.STL" file="FL_foot.STL" />
+    <mesh name="FR_hip.STL" file="FR_hip.STL" />
+    <mesh name="FR_thigh.STL" file="FR_thigh.STL" />
+    <mesh name="FR_calf.STL" file="FR_calf.STL" />
+    <mesh name="FR_footmotor.STL" file="FR_footmotor.STL" />
+    <mesh name="FR_foot.STL" file="FR_foot.STL" />
+    <mesh name="RL_hip.STL" file="RL_hip.STL" />
+    <mesh name="RL_thigh.STL" file="RL_thigh.STL" />
+    <mesh name="RL_calf.STL" file="RL_calf.STL" />
+    <mesh name="RL_footmotor.STL" file="RL_footmotor.STL" />
+    <mesh name="RL_foot.STL" file="RL_foot.STL" />
+    <mesh name="RR_hip.STL" file="RR_hip.STL" />
+    <mesh name="RR_thigh.STL" file="RR_thigh.STL" />
+    <mesh name="RR_calf.STL" file="RR_calf.STL" />
+    <mesh name="RR_footmotor.STL" file="RR_footmotor.STL" />
+    <mesh name="RR_foot.STL" file="RR_foot.STL" />
+  </asset>
+  <worldbody>
+    <body name="BASE_LINK" pos="0 0 0.47" quat="0.707106781187 0 0 0.707106781187" childclass="robot">
+      <inertial mass="44.027" pos="-0.000711047828587053 0.0112073624474439 -0.00481932179712385" quat="1 0 0 0" diaginertia="0.47177966 1.99866713 2.26564344" />
+      <freejoint name="floating_base" />
+      <site name="BASE_LINK_site" pos="0 0 0" />
+      <site name="imu" pos="0 0 0" />
+      <site name="livox_imu" pos="0.13011 0.02329 0.17598" quat="1 0 0 0" />
+      <site name="camera_imu" pos="0.29 0 0.01" />
+      <geom name="trunk_collision" pos="0.048 -0.013 -0.045" quat="1.0 0.0 0.0 0.0" type="box" size="0.5605 0.2 0.115" class="collision" />
+      <geom name="trunk_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="trunk.STL" class="visual" />
+      <body name="imu_fixed_link" pos="0.00112019201975541 -0.0364882468746482 0.0510999999999999" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="-0.00353754349894037 4.2154628186554E-05 -0.00997114982725278" quat="1.0 0.0 0.0 0.0" mass="0.0406912140939172" diaginertia="8.58656611098232e-06 6.09072078801729e-06 1.19225496991543e-05" />
+      </body>
+      <body name="Lidar" pos="0.56234 -0.012083 -0.027985" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="-0.0617151391776909 -0.000409472370772941 0.0790248764595003" quat="1.0 0.0 0.0 0.0" mass="1.18398316336664" diaginertia="0.00426251 0.00700838 0.00373433" />
+        <geom name="Lidar_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="Lidar.STL" class="visual" />
+      </body>
+      <body name="FL_hip" pos="0.42614 0.064917 0.013531" quat="1 0 0 0">
+        <joint name="FL_hip_joint" type="hinge" ref="0" class="motor" range="-0.6 0.62" axis="1 0 0" actuatorfrcrange="-150 150" />
+        <inertial pos="-0.0067321144239024 0.00396466354821697 -0.000509234557261706" quat="1.0 0.0 0.0 0.0" mass="2.377" diaginertia="0.00493506 0.00665069 0.00555123" />
+        <geom name="FL_hip_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FL_hip.STL" class="visual" />
+        <body name="FL_thigh" pos="0 0.1325 0" quat="0.894939828252 0 0.446186848539 0">
+          <joint name="FL_thigh_joint" type="hinge" ref="0.925" class="motor" range="-0.3 2.9" axis="0 1 0" actuatorfrcrange="-150 150" />
+          <inertial pos="-0.0036415164518806 -0.00280956161268478 -0.0756163821838771" quat="1.0 0.0 0.0 0.0" mass="4.329" diaginertia="0.06040923 0.05814934 0.01093858" />
+          <geom name="FL_thigh_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FL_thigh.STL" class="visual" />
+          <body name="FL_calf" pos="0 0.0245 -0.33" quat="0.601834592382 -0 -0.798620763199 -0">
+            <joint name="FL_calf_joint" type="hinge" ref="-1.85" class="motor" range="-2.5 -0.66" axis="0 1 0" actuatorfrcrange="-225 225" />
+            <inertial pos="0.00570820467406358 0.000521579234275288 -0.140460545098694" quat="1.0 0.0 0.0 0.0" mass="0.6596" diaginertia="0.01181022 0.01204022 0.00043588" />
+            <geom name="FL_calf_collision" pos="0 -0.0 -0.170" quat="1.0 0.0 0.0 0.0" type="box" size="0.025 0.0225 0.195" class="collision" />
+            <geom name="FL_calf_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FL_calf.STL" class="visual" />
+            <body name="FL_footmotor" pos="5.7407E-05 0.0205 -0.33" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0.000635672183269709 -0.0021915241093084 0.00233865637817345" quat="1.0 0.0 0.0 0.0" mass="1.0" diaginertia="0.00116858 0.00119167 0.0010827" />
+              <geom name="FL_footmotor_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FL_footmotor.STL" class="visual" />
+              <body name="FL_foot" pos="0.00010365 0.034479 0.00033954" quat="1 0 0 0">
+                <joint name="FL_foot_joint" type="hinge" ref="0" class="motor" range="-9999 9999" axis="0 1 0" actuatorfrcrange="-56 56" />
+                <inertial pos="-1.05056228199563E-05 -0.00779490263255259 -1.40233017138572E-05" quat="1.0 0.0 0.0 0.0" mass="0.8" diaginertia="0.00412805 0.00787206 0.00412833" />
+                <geom name="FL_foot_collision" pos="0 0.0 0" quat="0.7071067811865476 0.7071067811865475 0.0 0.0" type="cylinder" size="0.105 0.02" class="collision" />
+                <geom name="FL_foot_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FL_foot.STL" class="visual" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="FR_hip" pos="0.42614 -0.089083 0.013531" quat="1 0 0 0">
+        <joint name="FR_hip_joint" type="hinge" ref="0" class="motor" range="-0.5 0.6" axis="1 0 0" actuatorfrcrange="-150 150" />
+        <inertial pos="-0.00673211442593147 -0.00396466354749567 0.000509234558729865" quat="1.0 0.0 0.0 0.0" mass="2.377" diaginertia="0.00493506 0.00665069 0.00555123" />
+        <geom name="FR_hip_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FR_hip.STL" class="visual" />
+        <body name="FR_thigh" pos="0 -0.1325 0" quat="0.894939828252 0 0.446186848539 0">
+          <joint name="FR_thigh_joint" type="hinge" ref="0.925" class="motor" range="-0.3 2.9" axis="0 1 0" actuatorfrcrange="-150 150" />
+          <inertial pos="-0.00364233550949208 0.00278904300452204 -0.075608480447833" quat="1.0 0.0 0.0 0.0" mass="4.329" diaginertia="0.06035733 0.05814945 0.01099951" />
+          <geom name="FR_thigh_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FR_thigh.STL" class="visual" />
+          <body name="FR_calf" pos="0 -0.0245 -0.33" quat="0.601834592382 -0 -0.798620763199 -0">
+            <joint name="FR_calf_joint" type="hinge" ref="-1.85" class="motor" range="-2.55 -0.68" axis="0 1 0" actuatorfrcrange="-225 225" />
+            <inertial pos="0.00570837418776177 -0.000521567661026623 -0.140461137071655" quat="1.0 0.0 0.0 0.0" mass="0.6596" diaginertia="0.01181021 0.01204022 0.00043588" />
+            <geom name="FR_calf_collision" pos="0 0.0 -0.170" quat="1.0 0.0 0.0 0.0" type="box" size="0.025 0.0225 0.195" class="collision" />
+            <geom name="FR_calf_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FR_calf.STL" class="visual" />
+            <body name="FR_footmotor" pos="5.7407E-05 -0.0205 -0.33" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="0.000618123010584559 0.0021915259928097 0.0023433643902608" quat="1.0 0.0 0.0 0.0" mass="1.0" diaginertia="0.00116955 0.00119167 0.00108173" />
+              <geom name="FR_footmotor_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FR_footmotor.STL" class="visual" />
+              <body name="FR_foot" pos="7.9882E-05 -0.034479 0.0003459" quat="1 0 0 0">
+                <joint name="FR_foot_joint" type="hinge" ref="0" class="motor" range="-9999 9999" axis="0 1 0" actuatorfrcrange="-56 56" />
+                <inertial pos="8.3528083539286E-06 0.00779490263255272 -1.5402976807459E-05" quat="1.0 0.0 0.0 0.0" mass="0.8" diaginertia="0.00412792 0.00787206 0.00412846" />
+                <geom name="FR_foot_collision" pos="0 -0.0 0" quat="0.7071067811865476 0.7071067811865475 0.0 0.0" type="cylinder" size="0.105 0.02" class="collision" />
+                <geom name="FR_foot_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="FR_foot.STL" class="visual" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RL_hip" pos="-0.43586 0.064917 0.013531" quat="1 0 0 0">
+        <joint name="RL_hip_joint" type="hinge" ref="0" class="motor" range="-0.6 0.61" axis="1 0 0" actuatorfrcrange="-150 150" />
+        <inertial pos="0.00673211442389943 0.00396466354822331 0.000509234557268146" quat="1.0 0.0 0.0 0.0" mass="2.377" diaginertia="0.00493506 0.00665069 0.00555123" />
+        <geom name="RL_hip_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RL_hip.STL" class="visual" />
+        <body name="RL_thigh" pos="0 0.1325 0" quat="0.894939828252 -0 -0.446186848539 -0">
+          <joint name="RL_thigh_joint" type="hinge" ref="-0.925" class="motor" range="-2.8 0.4" axis="0 1 0" actuatorfrcrange="-150 150" />
+          <inertial pos="0.00364233558173344 -0.00278904299458349 -0.075608480564947" quat="1.0 0.0 0.0 0.0" mass="4.329" diaginertia="0.06035733 0.05814945 0.01099951" />
+          <geom name="RL_thigh_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RL_thigh.STL" class="visual" />
+          <body name="RL_calf" pos="0 0.0245 -0.33" quat="0.601834592382 0 0.798620763199 0">
+            <joint name="RL_calf_joint" type="hinge" ref="1.85" class="motor" range="0.68 2.51" axis="0 1 0" actuatorfrcrange="-225 225" />
+            <inertial pos="-0.00570837297440685 0.000521567836985037 -0.140461137474431" quat="1.0 0.0 0.0 0.0" mass="0.6596" diaginertia="0.01181021 0.01204022 0.00043588" />
+            <geom name="RL_calf_collision" pos="0 -0.0 -0.170" quat="1.0 0.0 0.0 0.0" type="box" size="0.025 0.0225 0.195" class="collision" />
+            <geom name="RL_calf_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RL_calf.STL" class="visual" />
+            <body name="RL_footmotor" pos="-5.7407E-05 0.0205 -0.33" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="-0.000618123006148275 -0.00219152597223926 0.00234336437905982" quat="1.0 0.0 0.0 0.0" mass="1.0" diaginertia="0.00116955 0.00119167 0.00108173" />
+              <geom name="RL_footmotor_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RL_footmotor.STL" class="visual" />
+              <body name="RL_foot" pos="-7.9882E-05 0.034479 0.0003459" quat="1 0 0 0">
+                <joint name="RL_foot_joint" type="hinge" ref="0" class="motor" range="-9999 9999" axis="0 1 0" actuatorfrcrange="-56 56" />
+                <inertial pos="-1.09615391211682E-05 -0.00779490263255264 -1.36698852245196E-05" quat="1.0 0.0 0.0 0.0" mass="0.8" diaginertia="0.00412808 0.00787206 0.0041283" />
+                <geom name="RL_foot_collision" pos="0 0.0 0" quat="0.7071067811865476 0.7071067811865475 0.0 0.0" type="cylinder" size="0.105 0.02" class="collision" />
+                <geom name="RL_foot_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RL_foot.STL" class="visual" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="RR_hip" pos="-0.43586 -0.089083 0.013531" quat="1 0 0 0">
+        <joint name="RR_hip_joint" type="hinge" ref="0" class="motor" range="-0.61 0.6" axis="1 0 0" actuatorfrcrange="-150 150" />
+        <inertial pos="0.00673211442388599 -0.00396466354822392 -0.000509234557271587" quat="1.0 0.0 0.0 0.0" mass="2.377" diaginertia="0.00493506 0.00665069 0.00555123" />
+        <geom name="RR_hip_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RR_hip.STL" class="visual" />
+        <body name="RR_thigh" pos="0 -0.1325 0" quat="0.894939828252 -0 -0.446186848539 -0">
+          <joint name="RR_thigh_joint" type="hinge" ref="-0.925" class="motor" range="-2.8 0.4" axis="0 1 0" actuatorfrcrange="-150 150" />
+          <inertial pos="0.00364151642429567 0.00280956151551881 -0.0756163824956206" quat="1.0 0.0 0.0 0.0" mass="4.329" diaginertia="0.06040923 0.05814934 0.01093858" />
+          <geom name="RR_thigh_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RR_thigh.STL" class="visual" />
+          <body name="RR_calf" pos="0 -0.0245 -0.33" quat="0.601834592382 0 0.798620763199 0">
+            <joint name="RR_calf_joint" type="hinge" ref="1.85" class="motor" range="0.63 2.6" axis="0 1 0" actuatorfrcrange="-225 225" />
+            <inertial pos="-0.0057082046739525 -0.000521579234275538 -0.140460545098699" quat="1.0 0.0 0.0 0.0" mass="0.6596" diaginertia="0.01181022 0.01204022 0.00043588" />
+            <geom name="RR_calf_collision" pos="0 0.0 -0.170" quat="1.0 0.0 0.0 0.0" type="box" size="0.025 0.0225 0.195" class="collision" />
+            <geom name="RR_calf_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RR_calf.STL" class="visual" />
+            <body name="RR_footmotor" pos="-5.7407E-05 -0.0205 -0.33" quat="1.0 0.0 0.0 0.0">
+              <inertial pos="-0.000635672187675906 0.00219152406830442 0.00233865634722384" quat="1.0 0.0 0.0 0.0" mass="1.0" diaginertia="0.00116858 0.00119167 0.0010827" />
+              <geom name="RR_footmotor_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RR_footmotor.STL" class="visual" />
+              <body name="RR_foot" pos="-0.00010365 -0.034479 0.00033954" quat="1 0 0 0">
+                <joint name="RR_foot_joint" type="hinge" ref="0" class="motor" range="-9999 9999" axis="0 1 0" actuatorfrcrange="-56 56" />
+                <inertial pos="8.35280835398411E-06 0.00779490263255267 -1.54029768076255E-05" quat="1.0 0.0 0.0 0.0" mass="0.8" diaginertia="0.00412792 0.00787206 0.00412846" />
+                <geom name="RR_foot_collision" pos="0 -0.0 0" quat="0.7071067811865476 0.7071067811865475 0.0 0.0" type="cylinder" size="0.105 0.02" class="collision" />
+                <geom name="RR_foot_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="nezha2_material_0" type="mesh" mesh="RR_foot.STL" class="visual" />
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <site name="trunk_site" pos="0 0 0" quat="1 0 0 0" />
+      <camera name="front_camera" mode="track" fovy="90.0" quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476" pos="0.0 2.0 0.5" />
+      <camera name="side_camera" mode="track" fovy="90.0" quat="-0.5 -0.4999999999999999 0.5 0.5000000000000001" pos="-2.0 0.0 0.5" />
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="FR_ABAD_LINK" joint="FR_hip_joint" />
+    <motor name="FR_HIP_LINK" joint="FR_thigh_joint" />
+    <motor name="FR_KNEE_LINK" joint="FR_calf_joint" />
+    <motor name="FR_FOOT_LINK" joint="FR_foot_joint" />
+    <motor name="FL_ABAD_LINK" joint="FL_hip_joint" />
+    <motor name="FL_HIP_LINK" joint="FL_thigh_joint" />
+    <motor name="FL_KNEE_LINK" joint="FL_calf_joint" />
+    <motor name="FL_FOOT_LINK" joint="FL_foot_joint" />
+    <motor name="RR_ABAD_LINK" joint="RR_hip_joint" />
+    <motor name="RR_HIP_LINK" joint="RR_thigh_joint" />
+    <motor name="RR_KNEE_LINK" joint="RR_calf_joint" />
+    <motor name="RR_FOOT_LINK" joint="RR_foot_joint" />
+    <motor name="RL_ABAD_LINK" joint="RL_hip_joint" />
+    <motor name="RL_HIP_LINK" joint="RL_thigh_joint" />
+    <motor name="RL_KNEE_LINK" joint="RL_calf_joint" />
+    <motor name="RL_FOOT_LINK" joint="RL_foot_joint" />
+  </actuator>
+  <sensor>
+    <jointpos name="FR_hip_pos" joint="FR_hip_joint" />
+    <jointpos name="FR_thigh_pos" joint="FR_thigh_joint" />
+    <jointpos name="FR_calf_pos" joint="FR_calf_joint" />
+    <jointpos name="FR_foot_pos" joint="FR_foot_joint" />
+    <jointpos name="FL_hip_pos" joint="FL_hip_joint" />
+    <jointpos name="FL_thigh_pos" joint="FL_thigh_joint" />
+    <jointpos name="FL_calf_pos" joint="FL_calf_joint" />
+    <jointpos name="FL_foot_pos" joint="FL_foot_joint" />
+    <jointpos name="RR_hip_pos" joint="RR_hip_joint" />
+    <jointpos name="RR_thigh_pos" joint="RR_thigh_joint" />
+    <jointpos name="RR_calf_pos" joint="RR_calf_joint" />
+    <jointpos name="RR_foot_pos" joint="RR_foot_joint" />
+    <jointpos name="RL_hip_pos" joint="RL_hip_joint" />
+    <jointpos name="RL_thigh_pos" joint="RL_thigh_joint" />
+    <jointpos name="RL_calf_pos" joint="RL_calf_joint" />
+    <jointpos name="RL_foot_pos" joint="RL_foot_joint" />
+    <jointvel name="FR_hip_vel" joint="FR_hip_joint" />
+    <jointvel name="FR_thigh_vel" joint="FR_thigh_joint" />
+    <jointvel name="FR_calf_vel" joint="FR_calf_joint" />
+    <jointvel name="FR_foot_vel" joint="FR_foot_joint" />
+    <jointvel name="FL_hip_vel" joint="FL_hip_joint" />
+    <jointvel name="FL_thigh_vel" joint="FL_thigh_joint" />
+    <jointvel name="FL_calf_vel" joint="FL_calf_joint" />
+    <jointvel name="FL_foot_vel" joint="FL_foot_joint" />
+    <jointvel name="RR_hip_vel" joint="RR_hip_joint" />
+    <jointvel name="RR_thigh_vel" joint="RR_thigh_joint" />
+    <jointvel name="RR_calf_vel" joint="RR_calf_joint" />
+    <jointvel name="RR_foot_vel" joint="RR_foot_joint" />
+    <jointvel name="RL_hip_vel" joint="RL_hip_joint" />
+    <jointvel name="RL_thigh_vel" joint="RL_thigh_joint" />
+    <jointvel name="RL_calf_vel" joint="RL_calf_joint" />
+    <jointvel name="RL_foot_vel" joint="RL_foot_joint" />
+    <jointactuatorfrc name="FR_hip_torque" joint="FR_hip_joint" noise="0.00" />
+    <jointactuatorfrc name="FR_thigh_torque" joint="FR_thigh_joint" noise="0.00" />
+    <jointactuatorfrc name="FR_calf_torque" joint="FR_calf_joint" noise="0.00" />
+    <jointactuatorfrc name="FR_foot_torque" joint="FR_foot_joint" noise="0.00" />
+    <jointactuatorfrc name="FL_hip_torque" joint="FL_hip_joint" noise="0.00" />
+    <jointactuatorfrc name="FL_thigh_torque" joint="FL_thigh_joint" noise="0.00" />
+    <jointactuatorfrc name="FL_calf_torque" joint="FL_calf_joint" noise="0.00" />
+    <jointactuatorfrc name="FL_foot_torque" joint="FL_foot_joint" noise="0.00" />
+    <jointactuatorfrc name="RR_hip_torque" joint="RR_hip_joint" noise="0.00" />
+    <jointactuatorfrc name="RR_thigh_torque" joint="RR_thigh_joint" noise="0.00" />
+    <jointactuatorfrc name="RR_calf_torque" joint="RR_calf_joint" noise="0.00" />
+    <jointactuatorfrc name="RR_foot_torque" joint="RR_foot_joint" noise="0.00" />
+    <jointactuatorfrc name="RL_hip_torque" joint="RL_hip_joint" noise="0.00" />
+    <jointactuatorfrc name="RL_thigh_torque" joint="RL_thigh_joint" noise="0.00" />
+    <jointactuatorfrc name="RL_calf_torque" joint="RL_calf_joint" noise="0.00" />
+    <jointactuatorfrc name="RL_foot_torque" joint="RL_foot_joint" noise="0.00" />
+    <framequat name="imu_quat" objtype="site" objname="imu" />
+    <gyro name="imu_gyro" site="imu" />
+    <accelerometer name="imu_acc" site="imu" />
+    <framepos name="frame_pos" objtype="site" objname="imu" />
+    <framelinvel name="frame_vel" objtype="site" objname="imu" />
+    <framequat name="livox_imu_quat" objtype="site" objname="livox_imu" />
+    <gyro name="livox_imu_gyro" site="livox_imu" />
+    <accelerometer name="livox_imu_acc" site="livox_imu" />
+    <framepos name="livox_imu_frame_pos" objtype="site" objname="livox_imu" />
+    <framelinvel name="livox_imu_frame_vel" objtype="site" objname="livox_imu" />
+    <framequat name="camera_imu_quat" objtype="site" objname="camera_imu" />
+    <gyro name="camera_imu_gyro" site="camera_imu" />
+    <accelerometer name="camera_imu_acc" site="camera_imu" />
+    <framepos name="camera_imu_frame_pos" objtype="site" objname="camera_imu" />
+    <framelinvel name="camera_imu_frame_vel" objtype="site" objname="camera_imu" />
+  </sensor>
+</mujoco>

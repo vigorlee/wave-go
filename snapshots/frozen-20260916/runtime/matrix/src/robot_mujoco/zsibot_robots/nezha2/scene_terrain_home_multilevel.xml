@@ -1,0 +1,62 @@
+<mujoco model="Nezha2 indoor multi-level navigation scene">
+  <!-- Original Nezha2 wheel-leg model and its 16-actuator contract. -->
+  <include file="nezha2_yard.xml" />
+
+  <statistic center="0 3.0 0.55" extent="9.0" />
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72" ambient="0.26 0.26 0.26" specular="0 0 0" />
+    <rgba haze="0.08 0.10 0.14 1" />
+    <global azimuth="-128" elevation="-22" />
+    <map znear="0.01" zfar="60" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.68 0.72 0.76" rgb2="0.10 0.12 0.16" width="512" height="3072" />
+    <texture type="2d" name="floor_tex" builtin="checker" mark="edge" rgb1="0.34 0.31 0.27" rgb2="0.22 0.20 0.18" markrgb="0.55 0.52 0.46" width="300" height="300" />
+    <material name="floor_mat" texture="floor_tex" texuniform="true" texrepeat="5 5" reflectance="0.08" />
+    <material name="wall_mat" rgba="0.74 0.70 0.64 1" />
+    <material name="stair_mat" rgba="0.43 0.46 0.50 1" />
+    <material name="ramp_mat" rgba="0.38 0.46 0.42 1" />
+    <material name="furniture_mat" rgba="0.38 0.23 0.14 1" />
+    <material name="obstacle_mat" rgba="0.92 0.30 0.10 1" />
+  </asset>
+
+  <worldbody>
+    <light pos="-2 1 7" dir="0 0 -1" directional="true" />
+    <light pos="1 8 5" dir="0 -1 -0.2" directional="true" />
+    <geom name="home_floor" type="plane" size="0 0 0.01" material="floor_mat" friction="1.2 0.01 0.001" />
+
+    <!-- A bounded indoor corridor with side rooms; all are collidable physical geometry. -->
+    <!-- Architectural dressing is render-only (group 3). It cannot be mistaken for
+         a LiDAR obstacle; stairs, ramp and marked obstacles below are physical. -->
+    <geom name="wall_left" type="box" size="0.08 8.0 1.35" pos="-1.72 3.0 1.35" material="wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="wall_right" type="box" size="0.08 8.0 1.35" pos="1.72 3.0 1.35" material="wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="entry_wall" type="box" size="1.8 0.08 1.35" pos="0 -4.85 1.35" material="wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="upper_wall" type="box" size="1.8 0.08 1.35" pos="0 10.85 1.35" material="wall_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="living_room_sofa" type="box" size="0.38 0.76 0.38" pos="-1.20 -2.95 0.38" material="furniture_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="living_room_table" type="box" size="0.36 0.34 0.28" pos="1.16 -2.80 0.28" material="furniture_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="landing_sideboard" type="box" size="0.36 0.56 0.45" pos="-1.18 4.55 0.45" material="furniture_mat" group="3" contype="0" conaffinity="0" />
+    <geom name="slope_sideboard" type="box" size="0.22 0.42 0.45" pos="-1.38 8.65 0.45" material="furniture_mat" group="3" contype="0" conaffinity="0" />
+
+    <!-- Flat entry obstacle: the local planner must deviate before stairs. -->
+    <geom name="obstacle_entry_cylinder" type="cylinder" size="0.34 0.55" pos="0 -1.55 0.55" material="obstacle_mat" />
+    <geom name="obstacle_entry_box" type="box" size="0.22 0.20 0.42" pos="0.94 -0.45 0.42" material="obstacle_mat" />
+
+    <!-- Ten 5 cm stair rises, upper landing and a clear physical descent. -->
+    <geom name="stair_01" type="box" size="1.50 0.14 0.025" pos="0 0.89 0.025" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_02" type="box" size="1.50 0.14 0.050" pos="0 1.17 0.050" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_03" type="box" size="1.50 0.14 0.075" pos="0 1.45 0.075" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_04" type="box" size="1.50 0.14 0.100" pos="0 1.73 0.100" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_05" type="box" size="1.50 0.14 0.125" pos="0 2.01 0.125" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_06" type="box" size="1.50 0.14 0.150" pos="0 2.29 0.150" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_07" type="box" size="1.50 0.14 0.175" pos="0 2.57 0.175" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_08" type="box" size="1.50 0.14 0.200" pos="0 2.85 0.200" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_09" type="box" size="1.50 0.14 0.225" pos="0 3.13 0.225" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="stair_10" type="box" size="1.50 0.14 0.250" pos="0 3.41 0.250" material="stair_mat" friction="1.2 0.01 0.001" />
+    <geom name="upper_landing" type="box" size="1.50 0.90 0.250" pos="0 4.45 0.250" material="stair_mat" friction="1.2 0.01 0.001" />
+
+    <!-- 10 degree inclined hallway: its terrain geometry is distinct from the stairs. -->
+    <!-- The ramp begins exactly at the 0.50 m stair landing and rises another 0.70 m. -->
+    <geom name="uphill_ramp" type="box" size="1.50 2.00 0.05" pos="0 7.35 0.798" euler="0.174533 0 0" material="ramp_mat" friction="1.2 0.01 0.001" />
+    <geom name="slope_upper_platform" type="box" size="1.50 0.90 0.600" pos="0 10.15 0.600" material="ramp_mat" friction="1.2 0.01 0.001" />
+  </worldbody>
+</mujoco>

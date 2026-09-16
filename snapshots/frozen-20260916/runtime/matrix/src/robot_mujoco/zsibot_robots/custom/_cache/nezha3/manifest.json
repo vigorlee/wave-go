@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "generator_version": 13,
+  "custom_name": "nezha3",
+  "source_path": "/home/unitree/matrix_go2w_lcm_demo/third_party/nezha3_rl_sar/model/nezha3.urdf",
+  "source_file": "nezha3.urdf",
+  "source_sha256": "2138f0e091bfdce9047161f86491ad7813ec9e8078fcf5c9d21665b893548472",
+  "reference_profile": "",
+  "map_key": "custom",
+  "map_asset": "/Game/Maps/CustomWorld",
+  "imported_at": "2026-07-20T10:26:42+08:00"
+}

@@ -1,0 +1,74 @@
+Panels:
+- Class: rviz_common/Displays
+  Name: Displays
+Visualization Manager:
+  Class: ''
+  Global Options:
+    Background Color: 12; 20; 32
+    Fixed Frame: adaptive_preview
+    Frame Rate: 30
+  Displays:
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Recorded PCD - offline
+    Enabled: true
+    Value: true
+    Alpha: 0.85
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Size (Pixels): 2
+    Style: Points
+    Topic:
+      Value: /wavego/adaptive_preview/points
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+  - Class: rviz_default_plugins/Map
+    Name: Adaptive exclusion - unknown remains unknown
+    Enabled: false
+    Value: false
+    Alpha: 0.65
+    Color Scheme: costmap
+    Topic:
+      Value: /wavego/adaptive_preview/inflated
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Probe and adaptive radius
+    Enabled: true
+    Value: true
+    Topic:
+      Value: /wavego/adaptive_preview/markers
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Computed inflation cells - orange
+    Enabled: true
+    Value: true
+    Alpha: 0.45
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Size (m): 0.05
+    Style: Squares
+    Topic:
+      Value: /wavego/adaptive_preview/buffer_cells
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 48
+      Pitch: 0.8
+      Yaw: 0.6
+      Focal Point:
+        X: 18
+        Y: -6
+        Z: 0
+  Tools:
+  - Class: rviz_default_plugins/Interact
+  - Class: rviz_default_plugins/MoveCamera
+Window Geometry:
+  Width: 1600
+  Height: 950

@@ -1,0 +1,20 @@
+<mujoco model="Nezha2 slope navigation scene">
+  <include file="nezha2_yard.xml" />
+  <statistic center="0 2.5 0.35" extent="5.8" />
+  <visual>
+    <headlight diffuse="0.7 0.7 0.7" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.14 0.24 0.34 1" />
+    <map znear="0.01" zfar="50" />
+  </visual>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.32 0.52 0.72" rgb2="0.02 0.03 0.05" width="512" height="3072" />
+    <texture type="2d" name="ground_slope" builtin="checker" mark="edge" rgb1="0.23 0.32 0.41" rgb2="0.13 0.21 0.29" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="ground_slope" texture="ground_slope" texuniform="true" texrepeat="8 8" reflectance="0.12" />
+  </asset>
+  <worldbody>
+    <light pos="-2 2 6" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" type="plane" material="ground_slope" />
+    <geom name="slope_ramp" pos="0 2.35 0.298" euler="0.174533 0 0" type="box" size="1.5 2.0 0.05" rgba="0.45 0.56 0.48 1" friction="1.2 0.01 0.01" />
+    <geom name="slope_platform" pos="0 5.15 0.350" type="box" size="1.5 0.90 0.350" rgba="0.45 0.56 0.48 1" />
+  </worldbody>
+</mujoco>

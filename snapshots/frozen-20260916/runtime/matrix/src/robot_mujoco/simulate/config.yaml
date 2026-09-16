@@ -1,0 +1,6 @@
+robot: "xgw"
+robot_scene: "go2w_lcm/scene_terrain_yard_mid360_course.xml"
+
+print_scene_information: 1 # Print link, joint and sensors information of robot
+
+enable_elastic_band: 0 # Disabled after paused startup handoff

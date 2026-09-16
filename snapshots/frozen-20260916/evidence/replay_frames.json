@@ -1,0 +1,884 @@
+[
+  {
+    "video_second": 0,
+    "source_stamp": 1789458150.947677,
+    "latest_scan_stamp": 1789458150.871377,
+    "accumulated_voxels": 33645,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7300516050999806,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0000.png"
+  },
+  {
+    "video_second": 1,
+    "source_stamp": 1789458151.947677,
+    "latest_scan_stamp": 1789458151.8730628,
+    "accumulated_voxels": 33650,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7300780689143918,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0001.png"
+  },
+  {
+    "video_second": 2,
+    "source_stamp": 1789458152.947677,
+    "latest_scan_stamp": 1789458152.871271,
+    "accumulated_voxels": 33653,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7301973297037365,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0002.png"
+  },
+  {
+    "video_second": 3,
+    "source_stamp": 1789458153.947677,
+    "latest_scan_stamp": 1789458153.871383,
+    "accumulated_voxels": 33655,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7300349468599636,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0003.png"
+  },
+  {
+    "video_second": 4,
+    "source_stamp": 1789458154.947677,
+    "latest_scan_stamp": 1789458154.871352,
+    "accumulated_voxels": 42096,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.060572422858257,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0004.png"
+  },
+  {
+    "video_second": 5,
+    "source_stamp": 1789458155.947677,
+    "latest_scan_stamp": 1789458155.873239,
+    "accumulated_voxels": 46614,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7313800344404909,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0005.png"
+  },
+  {
+    "video_second": 6,
+    "source_stamp": 1789458156.947677,
+    "latest_scan_stamp": 1789458156.8728151,
+    "accumulated_voxels": 54283,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8296368668473919,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0006.png"
+  },
+  {
+    "video_second": 7,
+    "source_stamp": 1789458157.947677,
+    "latest_scan_stamp": 1789458157.8719249,
+    "accumulated_voxels": 72519,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8522841099995055,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0007.png"
+  },
+  {
+    "video_second": 8,
+    "source_stamp": 1789458158.947677,
+    "latest_scan_stamp": 1789458158.8713658,
+    "accumulated_voxels": 103349,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8751202408850591,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0008.png"
+  },
+  {
+    "video_second": 9,
+    "source_stamp": 1789458159.947677,
+    "latest_scan_stamp": 1789458159.8714712,
+    "accumulated_voxels": 144662,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9262540567727506,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0009.png"
+  },
+  {
+    "video_second": 10,
+    "source_stamp": 1789458160.947677,
+    "latest_scan_stamp": 1789458160.8713531,
+    "accumulated_voxels": 197019,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8301850281519627,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0010.png"
+  },
+  {
+    "video_second": 11,
+    "source_stamp": 1789458161.947677,
+    "latest_scan_stamp": 1789458161.8728802,
+    "accumulated_voxels": 265278,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.1423453575658111,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0011.png"
+  },
+  {
+    "video_second": 12,
+    "source_stamp": 1789458162.947677,
+    "latest_scan_stamp": 1789458162.8727748,
+    "accumulated_voxels": 330229,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.779261826950829,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0012.png"
+  },
+  {
+    "video_second": 13,
+    "source_stamp": 1789458163.947677,
+    "latest_scan_stamp": 1789458163.8715441,
+    "accumulated_voxels": 384120,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9102897875945399,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0013.png"
+  },
+  {
+    "video_second": 14,
+    "source_stamp": 1789458164.947677,
+    "latest_scan_stamp": 1789458164.8712351,
+    "accumulated_voxels": 451619,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.2229118601632694,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0014.png"
+  },
+  {
+    "video_second": 15,
+    "source_stamp": 1789458165.947677,
+    "latest_scan_stamp": 1789458165.8713868,
+    "accumulated_voxels": 502588,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.189007635155413,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0015.png"
+  },
+  {
+    "video_second": 16,
+    "source_stamp": 1789458166.947677,
+    "latest_scan_stamp": 1789458166.8727481,
+    "accumulated_voxels": 531545,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.02961689830141,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0016.png"
+  },
+  {
+    "video_second": 17,
+    "source_stamp": 1789458167.947677,
+    "latest_scan_stamp": 1789458167.8737578,
+    "accumulated_voxels": 548820,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9727563692508929,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0017.png"
+  },
+  {
+    "video_second": 18,
+    "source_stamp": 1789458168.947677,
+    "latest_scan_stamp": 1789458168.873151,
+    "accumulated_voxels": 561312,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8085021994056252,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0018.png"
+  },
+  {
+    "video_second": 19,
+    "source_stamp": 1789458169.947677,
+    "latest_scan_stamp": 1789458169.871648,
+    "accumulated_voxels": 571197,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7864124188275601,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0019.png"
+  },
+  {
+    "video_second": 20,
+    "source_stamp": 1789458170.947677,
+    "latest_scan_stamp": 1789458170.871657,
+    "accumulated_voxels": 578119,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7847449776921851,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0020.png"
+  },
+  {
+    "video_second": 21,
+    "source_stamp": 1789458171.947677,
+    "latest_scan_stamp": 1789458171.8717692,
+    "accumulated_voxels": 583945,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7868390700960441,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0021.png"
+  },
+  {
+    "video_second": 22,
+    "source_stamp": 1789458172.947677,
+    "latest_scan_stamp": 1789458172.8729138,
+    "accumulated_voxels": 589026,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7837310692763997,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0022.png"
+  },
+  {
+    "video_second": 23,
+    "source_stamp": 1789458173.947677,
+    "latest_scan_stamp": 1789458173.872,
+    "accumulated_voxels": 593519,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7826119782612224,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0023.png"
+  },
+  {
+    "video_second": 24,
+    "source_stamp": 1789458174.947677,
+    "latest_scan_stamp": 1789458174.872148,
+    "accumulated_voxels": 598640,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7824278061179464,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0024.png"
+  },
+  {
+    "video_second": 25,
+    "source_stamp": 1789458175.947677,
+    "latest_scan_stamp": 1789458175.873857,
+    "accumulated_voxels": 604079,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.780763969998695,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0025.png"
+  },
+  {
+    "video_second": 26,
+    "source_stamp": 1789458176.947677,
+    "latest_scan_stamp": 1789458176.872965,
+    "accumulated_voxels": 609017,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7803009399117051,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0026.png"
+  },
+  {
+    "video_second": 27,
+    "source_stamp": 1789458177.947677,
+    "latest_scan_stamp": 1789458177.873845,
+    "accumulated_voxels": 613677,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7832056455878756,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0027.png"
+  },
+  {
+    "video_second": 28,
+    "source_stamp": 1789458178.947677,
+    "latest_scan_stamp": 1789458178.8718982,
+    "accumulated_voxels": 661794,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7426791611026472,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0028.png"
+  },
+  {
+    "video_second": 29,
+    "source_stamp": 1789458179.947677,
+    "latest_scan_stamp": 1789458179.8720691,
+    "accumulated_voxels": 688116,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.836734240552957,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0029.png"
+  },
+  {
+    "video_second": 30,
+    "source_stamp": 1789458180.947677,
+    "latest_scan_stamp": 1789458180.872034,
+    "accumulated_voxels": 708525,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7929071273811394,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0030.png"
+  },
+  {
+    "video_second": 31,
+    "source_stamp": 1789458181.947677,
+    "latest_scan_stamp": 1789458181.871673,
+    "accumulated_voxels": 726375,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.761691475580379,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0031.png"
+  },
+  {
+    "video_second": 32,
+    "source_stamp": 1789458182.947677,
+    "latest_scan_stamp": 1789458182.873447,
+    "accumulated_voxels": 759151,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7811797995115338,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0032.png"
+  },
+  {
+    "video_second": 33,
+    "source_stamp": 1789458183.947677,
+    "latest_scan_stamp": 1789458183.871855,
+    "accumulated_voxels": 811482,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9434814436799661,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0033.png"
+  },
+  {
+    "video_second": 34,
+    "source_stamp": 1789458184.947677,
+    "latest_scan_stamp": 1789458184.8734279,
+    "accumulated_voxels": 866659,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9090785554907079,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0034.png"
+  },
+  {
+    "video_second": 35,
+    "source_stamp": 1789458185.947677,
+    "latest_scan_stamp": 1789458185.872161,
+    "accumulated_voxels": 909022,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.9562466062485313,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0035.png"
+  },
+  {
+    "video_second": 36,
+    "source_stamp": 1789458186.947677,
+    "latest_scan_stamp": 1789458186.871679,
+    "accumulated_voxels": 938085,
+    "voxel_m": 0.04,
+    "inflation_radius": 1.0089953410739876,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0036.png"
+  },
+  {
+    "video_second": 37,
+    "source_stamp": 1789458187.947677,
+    "latest_scan_stamp": 1789458187.871768,
+    "accumulated_voxels": 966889,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8940477911558291,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0037.png"
+  },
+  {
+    "video_second": 38,
+    "source_stamp": 1789458188.947677,
+    "latest_scan_stamp": 1789458188.8717551,
+    "accumulated_voxels": 985929,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7984309704580395,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0038.png"
+  },
+  {
+    "video_second": 39,
+    "source_stamp": 1789458189.947677,
+    "latest_scan_stamp": 1789458189.873926,
+    "accumulated_voxels": 1012198,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.805221936816024,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0039.png"
+  },
+  {
+    "video_second": 40,
+    "source_stamp": 1789458190.947677,
+    "latest_scan_stamp": 1789458190.871976,
+    "accumulated_voxels": 1026046,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7711613374893467,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0040.png"
+  },
+  {
+    "video_second": 41,
+    "source_stamp": 1789458191.947677,
+    "latest_scan_stamp": 1789458191.8722072,
+    "accumulated_voxels": 1034816,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7767757814075438,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0041.png"
+  },
+  {
+    "video_second": 42,
+    "source_stamp": 1789458192.947677,
+    "latest_scan_stamp": 1789458192.8741848,
+    "accumulated_voxels": 1041971,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7920281171229615,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0042.png"
+  },
+  {
+    "video_second": 43,
+    "source_stamp": 1789458193.947677,
+    "latest_scan_stamp": 1789458193.873396,
+    "accumulated_voxels": 1050337,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.6250000000000001,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0043.png"
+  },
+  {
+    "video_second": 44,
+    "source_stamp": 1789458194.947677,
+    "latest_scan_stamp": 1789458194.8717692,
+    "accumulated_voxels": 1056150,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8116677236115717,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0044.png"
+  },
+  {
+    "video_second": 45,
+    "source_stamp": 1789458195.947677,
+    "latest_scan_stamp": 1789458195.8719091,
+    "accumulated_voxels": 1061454,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8112271081490672,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0045.png"
+  },
+  {
+    "video_second": 46,
+    "source_stamp": 1789458196.947677,
+    "latest_scan_stamp": 1789458196.871855,
+    "accumulated_voxels": 1066795,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.6250000000000001,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0046.png"
+  },
+  {
+    "video_second": 47,
+    "source_stamp": 1789458197.947677,
+    "latest_scan_stamp": 1789458197.873237,
+    "accumulated_voxels": 1072385,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.6250000000000002,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0047.png"
+  },
+  {
+    "video_second": 48,
+    "source_stamp": 1789458198.947677,
+    "latest_scan_stamp": 1789458198.873225,
+    "accumulated_voxels": 1077244,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8054118167739124,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0048.png"
+  },
+  {
+    "video_second": 49,
+    "source_stamp": 1789458199.947677,
+    "latest_scan_stamp": 1789458199.871953,
+    "accumulated_voxels": 1080603,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.6250000000000001,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0049.png"
+  },
+  {
+    "video_second": 50,
+    "source_stamp": 1789458200.947677,
+    "latest_scan_stamp": 1789458200.873426,
+    "accumulated_voxels": 1084260,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7878717368514079,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0050.png"
+  },
+  {
+    "video_second": 51,
+    "source_stamp": 1789458201.947677,
+    "latest_scan_stamp": 1789458201.872027,
+    "accumulated_voxels": 1089023,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8034703259472784,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0051.png"
+  },
+  {
+    "video_second": 52,
+    "source_stamp": 1789458202.947677,
+    "latest_scan_stamp": 1789458202.871774,
+    "accumulated_voxels": 1093178,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8213307470987219,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0052.png"
+  },
+  {
+    "video_second": 53,
+    "source_stamp": 1789458203.947677,
+    "latest_scan_stamp": 1789458203.872187,
+    "accumulated_voxels": 1097129,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7772559430248431,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0053.png"
+  },
+  {
+    "video_second": 54,
+    "source_stamp": 1789458204.947677,
+    "latest_scan_stamp": 1789458204.871964,
+    "accumulated_voxels": 1100066,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7884820543431583,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0054.png"
+  },
+  {
+    "video_second": 55,
+    "source_stamp": 1789458205.947677,
+    "latest_scan_stamp": 1789458205.8738759,
+    "accumulated_voxels": 1102743,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7775154579041628,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0055.png"
+  },
+  {
+    "video_second": 56,
+    "source_stamp": 1789458206.947677,
+    "latest_scan_stamp": 1789458206.8728461,
+    "accumulated_voxels": 1106644,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.736955632835636,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0056.png"
+  },
+  {
+    "video_second": 57,
+    "source_stamp": 1789458207.947677,
+    "latest_scan_stamp": 1789458207.872558,
+    "accumulated_voxels": 1110095,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7439784171647222,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0057.png"
+  },
+  {
+    "video_second": 58,
+    "source_stamp": 1789458208.947677,
+    "latest_scan_stamp": 1789458208.87362,
+    "accumulated_voxels": 1115260,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7870064135022314,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0058.png"
+  },
+  {
+    "video_second": 59,
+    "source_stamp": 1789458209.947677,
+    "latest_scan_stamp": 1789458209.872884,
+    "accumulated_voxels": 1124576,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7765347276982655,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0059.png"
+  },
+  {
+    "video_second": 60,
+    "source_stamp": 1789458210.947677,
+    "latest_scan_stamp": 1789458210.8729851,
+    "accumulated_voxels": 1129251,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7559940092857582,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0060.png"
+  },
+  {
+    "video_second": 61,
+    "source_stamp": 1789458211.947677,
+    "latest_scan_stamp": 1789458211.87282,
+    "accumulated_voxels": 1132501,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7640162275067517,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0061.png"
+  },
+  {
+    "video_second": 62,
+    "source_stamp": 1789458212.947677,
+    "latest_scan_stamp": 1789458212.8725429,
+    "accumulated_voxels": 1137965,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7659643656151567,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0062.png"
+  },
+  {
+    "video_second": 63,
+    "source_stamp": 1789458213.947677,
+    "latest_scan_stamp": 1789458213.873586,
+    "accumulated_voxels": 1144259,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7810216297827757,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0063.png"
+  },
+  {
+    "video_second": 64,
+    "source_stamp": 1789458214.947677,
+    "latest_scan_stamp": 1789458214.872936,
+    "accumulated_voxels": 1152039,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7777788843932982,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0064.png"
+  },
+  {
+    "video_second": 65,
+    "source_stamp": 1789458215.947677,
+    "latest_scan_stamp": 1789458215.8724842,
+    "accumulated_voxels": 1158724,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7988483396950956,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0065.png"
+  },
+  {
+    "video_second": 66,
+    "source_stamp": 1789458216.947677,
+    "latest_scan_stamp": 1789458216.8739,
+    "accumulated_voxels": 1164756,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7721018155660246,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0066.png"
+  },
+  {
+    "video_second": 67,
+    "source_stamp": 1789458217.947677,
+    "latest_scan_stamp": 1789458217.87241,
+    "accumulated_voxels": 1171137,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7748587578017132,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0067.png"
+  },
+  {
+    "video_second": 68,
+    "source_stamp": 1789458218.947677,
+    "latest_scan_stamp": 1789458218.872544,
+    "accumulated_voxels": 1175995,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8099874530725382,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0068.png"
+  },
+  {
+    "video_second": 69,
+    "source_stamp": 1789458219.947677,
+    "latest_scan_stamp": 1789458219.872972,
+    "accumulated_voxels": 1181587,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8054454966374716,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0069.png"
+  },
+  {
+    "video_second": 70,
+    "source_stamp": 1789458220.947677,
+    "latest_scan_stamp": 1789458220.8741481,
+    "accumulated_voxels": 1188886,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8193995604974917,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0070.png"
+  },
+  {
+    "video_second": 71,
+    "source_stamp": 1789458221.947677,
+    "latest_scan_stamp": 1789458221.8726342,
+    "accumulated_voxels": 1194456,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8025945649674504,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0071.png"
+  },
+  {
+    "video_second": 72,
+    "source_stamp": 1789458222.947677,
+    "latest_scan_stamp": 1789458222.872608,
+    "accumulated_voxels": 1199318,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7973007350685049,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0072.png"
+  },
+  {
+    "video_second": 73,
+    "source_stamp": 1789458223.947677,
+    "latest_scan_stamp": 1789458223.874115,
+    "accumulated_voxels": 1206891,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8216670836473003,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0073.png"
+  },
+  {
+    "video_second": 74,
+    "source_stamp": 1789458224.947677,
+    "latest_scan_stamp": 1789458224.874721,
+    "accumulated_voxels": 1218021,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7719564203068913,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0074.png"
+  },
+  {
+    "video_second": 75,
+    "source_stamp": 1789458225.947677,
+    "latest_scan_stamp": 1789458225.8725529,
+    "accumulated_voxels": 1226878,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7779330404813246,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0075.png"
+  },
+  {
+    "video_second": 76,
+    "source_stamp": 1789458226.947677,
+    "latest_scan_stamp": 1789458226.8728828,
+    "accumulated_voxels": 1233172,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7807288114313291,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0076.png"
+  },
+  {
+    "video_second": 77,
+    "source_stamp": 1789458227.947677,
+    "latest_scan_stamp": 1789458227.873112,
+    "accumulated_voxels": 1243750,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.811939009905996,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0077.png"
+  },
+  {
+    "video_second": 78,
+    "source_stamp": 1789458228.947677,
+    "latest_scan_stamp": 1789458228.873155,
+    "accumulated_voxels": 1259784,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7929930788154956,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0078.png"
+  },
+  {
+    "video_second": 79,
+    "source_stamp": 1789458229.947677,
+    "latest_scan_stamp": 1789458229.872839,
+    "accumulated_voxels": 1271058,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8195509417565461,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0079.png"
+  },
+  {
+    "video_second": 80,
+    "source_stamp": 1789458230.947677,
+    "latest_scan_stamp": 1789458230.874691,
+    "accumulated_voxels": 1279156,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8074445352858639,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0080.png"
+  },
+  {
+    "video_second": 81,
+    "source_stamp": 1789458231.947677,
+    "latest_scan_stamp": 1789458231.874723,
+    "accumulated_voxels": 1287621,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.819022315026718,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0081.png"
+  },
+  {
+    "video_second": 82,
+    "source_stamp": 1789458232.947677,
+    "latest_scan_stamp": 1789458232.872731,
+    "accumulated_voxels": 1293497,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8155066418002332,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0082.png"
+  },
+  {
+    "video_second": 83,
+    "source_stamp": 1789458233.947677,
+    "latest_scan_stamp": 1789458233.874602,
+    "accumulated_voxels": 1298699,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8057789409932932,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0083.png"
+  },
+  {
+    "video_second": 84,
+    "source_stamp": 1789458234.947677,
+    "latest_scan_stamp": 1789458234.874349,
+    "accumulated_voxels": 1303236,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7888439182048836,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0084.png"
+  },
+  {
+    "video_second": 85,
+    "source_stamp": 1789458235.947677,
+    "latest_scan_stamp": 1789458235.8748128,
+    "accumulated_voxels": 1308017,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7955909523717339,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0085.png"
+  },
+  {
+    "video_second": 86,
+    "source_stamp": 1789458236.947677,
+    "latest_scan_stamp": 1789458236.8729641,
+    "accumulated_voxels": 1321365,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8694678245108161,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0086.png"
+  },
+  {
+    "video_second": 87,
+    "source_stamp": 1789458237.947677,
+    "latest_scan_stamp": 1789458237.872813,
+    "accumulated_voxels": 1331599,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.8311380846218304,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0087.png"
+  },
+  {
+    "video_second": 88,
+    "source_stamp": 1789458238.947677,
+    "latest_scan_stamp": 1789458238.8729548,
+    "accumulated_voxels": 1342925,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7804641793707991,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0088.png"
+  },
+  {
+    "video_second": 89,
+    "source_stamp": 1789458239.947677,
+    "latest_scan_stamp": 1789458239.8729239,
+    "accumulated_voxels": 1346047,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7841198430162629,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0089.png"
+  },
+  {
+    "video_second": 90,
+    "source_stamp": 1789458240.947677,
+    "latest_scan_stamp": 1789458240.874208,
+    "accumulated_voxels": 1350863,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7837771047501264,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0090.png"
+  },
+  {
+    "video_second": 91,
+    "source_stamp": 1789458241.947677,
+    "latest_scan_stamp": 1789458241.8728309,
+    "accumulated_voxels": 1354110,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7747584046849951,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0091.png"
+  },
+  {
+    "video_second": 92,
+    "source_stamp": 1789458242.947677,
+    "latest_scan_stamp": 1789458242.874101,
+    "accumulated_voxels": 1360975,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7358320081625852,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0092.png"
+  },
+  {
+    "video_second": 93,
+    "source_stamp": 1789458243.947677,
+    "latest_scan_stamp": 1789458243.8742578,
+    "accumulated_voxels": 1379698,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7456673645266666,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0093.png"
+  },
+  {
+    "video_second": 94,
+    "source_stamp": 1789458244.947677,
+    "latest_scan_stamp": 1789458244.8729012,
+    "accumulated_voxels": 1383510,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7304214863723204,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0094.png"
+  },
+  {
+    "video_second": 95,
+    "source_stamp": 1789458245.947677,
+    "latest_scan_stamp": 1789458245.874526,
+    "accumulated_voxels": 1385832,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.730308578113853,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0095.png"
+  },
+  {
+    "video_second": 96,
+    "source_stamp": 1789458246.947677,
+    "latest_scan_stamp": 1789458246.8729699,
+    "accumulated_voxels": 1387599,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7306529407756731,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0096.png"
+  },
+  {
+    "video_second": 97,
+    "source_stamp": 1789458247.5254202,
+    "latest_scan_stamp": 1789458247.4727721,
+    "accumulated_voxels": 1388517,
+    "voxel_m": 0.04,
+    "inflation_radius": 0.7313169635319327,
+    "png": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_lcm_demo/artifacts/four_screen_demo_20260915_final/rviz_frames/0097.png"
+  }
+]
