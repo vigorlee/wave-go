@@ -1,0 +1,12 @@
+{
+  "fastlio": {
+    "returncode": 0,
+    "stdout": "[{\"topic\": \"/cloud_registered\", \"points\": 19665, \"frame\": \"odom\"}]\n",
+    "stderr": ""
+  },
+  "grid": {
+    "returncode": 0,
+    "stdout": "[{\"topic\": \"/map_generator/adaptive_10cm\", \"points\": 97605, \"frame\": \"world\"}, {\"topic\": \"/map_generator/adaptive_20cm\", \"points\": 56302, \"frame\": \"world\"}, {\"topic\": \"/map_generator/adaptive_40cm\", \"points\": 6822, \"frame\": \"world\"}]\n",
+    "stderr": ""
+  }
+}

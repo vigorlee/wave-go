@@ -1,0 +1,11 @@
+.runtime/
+.run/
+workspace/build/
+workspace/devel/
+workspace/logs/
+workspace/.catkin_tools/
+workspace/src/.catkin_tools/
+workspace/src/CMakeLists.txt
+*.bag
+*.db3
+__pycache__/

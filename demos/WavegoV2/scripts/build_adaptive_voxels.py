@@ -1,0 +1,1 @@
+../workspace/src/map_generator/scripts/build_adaptive_voxels.py

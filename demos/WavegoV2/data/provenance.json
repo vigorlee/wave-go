@@ -1,0 +1,8 @@
+{
+  "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/office_rosbag_20260916_01/mapping/map.pcd",
+  "source_kind": "OfficeWorld simulation online LIO map snapshot; not new ROS1 FAST-LIO replay output",
+  "sha256": "fc70a2416f584c9f5b467f9d2fae190801f37ee49dc03929b89d2bddc4f60bed",
+  "points": 292652,
+  "format": "binary XYZ float32 PCD",
+  "original_modified": false
+}

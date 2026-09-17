@@ -1,3 +1,6 @@
+> **V2 建图版本已整理**：新增 FAST-LIO 点云建图与密度自适应三维栅格全景。
+> [V2 完整启动 README](demos/WavegoV2/README.md) · [本机直接启动](demos/WavegoV2/docs/LOCAL_MACHINE.md)
+
 <div align="center">
 
 # WAVE-Go

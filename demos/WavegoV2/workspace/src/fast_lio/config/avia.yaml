@@ -1,0 +1,44 @@
+common:
+    lid_topic: "/livox/lidar_raw"
+    imu_topic: "/livox/imu" # /mavros/imu/data_raw /livox/imu
+    time_sync_en: false # ONLY turn on when external time synchronization is really not possible
+    time_offset_lidar_to_imu:
+        0.0 # Time offset between lidar and IMU calibrated by other algorithms, e.g. LI-Init (can be found in README).
+        # This param will take effect no matter what time_sync_en is. So if the time offset is not known exactly, please set as 0.0
+
+preprocess:
+    lidar_type: 1 # 1 for Livox serials LiDAR, 2 for Velodyne LiDAR, 3 for ouster LiDAR,
+    scan_line: 6
+    blind: 0.5
+
+mapping:
+    acc_cov: 0.1
+    gyr_cov: 0.1
+    b_acc_cov: 0.0001
+    b_gyr_cov: 0.0001
+    fov_degree: 90
+    det_range: 450.0
+    extrinsic_est_en: false # true: enable the online estimation of IMU-LiDAR extrinsic
+    extrinsic_T: [0.025321,-0.004280,0.095340]
+    extrinsic_R: [0.945377,-0.005162,0.325939,0.004884,0.999987,0.001671,-0.325943,0.000012,0.945389]
+    #extrinsic_T: [0.034408, -0.014816, 0.082484]
+    #extrinsic_R: [-0.930756, 0.002238, 0.365326, 0.003894, -0.999855, 0.016118, 0.365306, 0.01639, 0.930623]
+
+publish:
+    path_en: false
+    scan_publish_en: true # false: close all the point cloud output
+    dense_publish_en: true # false: low down the points number in a global-frame point clouds scan.
+    scan_bodyframe_pub_en: true # true: output the point cloud scans in IMU-body-frame
+
+pcd_save:
+    pcd_save_en: false
+    interval:
+        -1 # how many LiDAR frames saved in each pcd file;
+        # -1 : all frames will be saved in ONE pcd file, may lead to memory crash when having too much frames.
+sam:
+    imuAccNoise: 0.1
+    imuGyrNoise: 0.01
+    imuAccBiasN: 0.002
+    imuGyrBiasN: 0.0003
+    preBiasAcc: [0.114482, 0.103048, -0.0471967]
+    preBiasGyro: [-0.00612834, -0.000515684, -0.0168228]

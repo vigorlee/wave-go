@@ -1,0 +1,321 @@
+_______________________________________________________________________________
+Warnings << catkin_tools_prebuild:cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/catkin_tools_prebuild/build.cmake.000.log
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/catkin/cmake/all.cmake:164 (include)
+  /home/unitree/flycar/.noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:4 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/catkin_tools_prebuild; catkin build --get-env catkin_tools_prebuild | catkin env -si  /home/unitree/flycar/.noetic/bin/cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/catkin_tools_prebuild --no-warn-unused-cli -DCATKIN_DEVEL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/devel/.private/catkin_tools_prebuild -DCMAKE_INSTALL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/install -DCATKIN_ENABLE_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPYTHON_EXECUTABLE=/home/unitree/flycar/.noetic/bin/python; cd -
+
+...............................................................................
+_______________________________________________________________________________
+Warnings << livox_ros_driver2:cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/livox_ros_driver2/build.cmake.000.log
+CMake Deprecation Warning at CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Warning (dev) at CMakeLists.txt:26 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/catkin/cmake/all.cmake:164 (include)
+  /home/unitree/flycar/.noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:35 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+/home/unitree/flycar/.noetic/include/apr-1
+apr-1rtcryptpthreaddl
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/livox_ros_driver2; catkin build --get-env livox_ros_driver2 | catkin env -si  /home/unitree/flycar/.noetic/bin/cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2 --no-warn-unused-cli -DCATKIN_DEVEL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/devel/.private/livox_ros_driver2 -DCMAKE_INSTALL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/install -DCATKIN_ENABLE_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPYTHON_EXECUTABLE=/home/unitree/flycar/.noetic/bin/python; cd -
+
+...............................................................................
+_______________________________________________________________________________
+Warnings << map_generator:cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/map_generator/build.cmake.000.log
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/catkin/cmake/all.cmake:164 (include)
+  /home/unitree/flycar/.noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:8 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:121 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:294 (find_boost)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:15 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/Modules/FindFLANN.cmake:45 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  CMake variable FLANN_ROOT is set to:
+
+    /home/unitree/flycar/.noetic
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:253 (find_package)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:298 (find_flann)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:15 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:121 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:294 (find_boost)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:15 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/map_generator; catkin build --get-env map_generator | catkin env -si  /home/unitree/flycar/.noetic/bin/cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/map_generator --no-warn-unused-cli -DCATKIN_DEVEL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/devel/.private/map_generator -DCMAKE_INSTALL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/install -DCATKIN_ENABLE_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPYTHON_EXECUTABLE=/home/unitree/flycar/.noetic/bin/python; cd -
+
+...............................................................................
+_______________________________________________________________________________
+Warnings << livox_ros_driver2:make /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/livox_ros_driver2/build.make.000.log
+In file included from /home/unitree/flycar/.noetic/include/boost/smart_ptr/detail/requires_cxx11.hpp:9,
+                 from /home/unitree/flycar/.noetic/include/boost/smart_ptr/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/boost/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/ros/forwards.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/common.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/ros.h:43,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros1_headers.h:33,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros_headers.h:29,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/driver_node.h:28,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/driver_node.cpp:25:
+/home/unitree/flycar/.noetic/include/boost/bind.hpp:36:1: note: '#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.'
+   36 | BOOST_PRAGMA_MESSAGE(
+      | ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/unitree/flycar/.noetic/include/boost/smart_ptr/detail/requires_cxx11.hpp:9,
+                 from /home/unitree/flycar/.noetic/include/boost/smart_ptr/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/boost/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/ros/forwards.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/common.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/ros.h:43,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros1_headers.h:33,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros_headers.h:29,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/driver_node.h:28,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/lddc.h:30,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/lddc.cpp:25:
+/home/unitree/flycar/.noetic/include/boost/bind.hpp:36:1: note: '#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.'
+   36 | BOOST_PRAGMA_MESSAGE(
+      | ^~~~~~~~~~~~~~~~~~~~
+In file included from /home/unitree/flycar/.noetic/include/boost/smart_ptr/detail/requires_cxx11.hpp:9,
+                 from /home/unitree/flycar/.noetic/include/boost/smart_ptr/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/boost/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/ros/forwards.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/common.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/ros.h:43,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros1_headers.h:33,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/include/ros_headers.h:29,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/livox_ros_driver2/src/livox_ros_driver2.cpp:32:
+/home/unitree/flycar/.noetic/include/boost/bind.hpp:36:1: note: '#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.'
+   36 | BOOST_PRAGMA_MESSAGE(
+      | ^~~~~~~~~~~~~~~~~~~~
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/livox_ros_driver2; catkin build --get-env livox_ros_driver2 | catkin env -si  /home/unitree/flycar/.noetic/bin/make --jobserver-auth=3,4; cd -
+
+...............................................................................
+_______________________________________________________________________________
+Warnings << fast_lio:cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/fast_lio/build.cmake.000.log
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+Current CPU archtecture: x86_64
+Processer number:  32
+core for MP: 3
+CMake Warning (dev) at CMakeLists.txt:46 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/catkin/cmake/python.cmake:4 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/catkin/cmake/all.cmake:164 (include)
+  /home/unitree/flycar/.noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:49 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:121 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:294 (find_boost)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:67 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/Modules/FindFLANN.cmake:45 (find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  CMake variable FLANN_ROOT is set to:
+
+    /home/unitree/flycar/.noetic
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:253 (find_package)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:298 (find_flann)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:67 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:121 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:294 (find_boost)
+  /home/unitree/flycar/.noetic/share/pcl-1.14/PCLConfig.cmake:559 (find_external_library)
+  CMakeLists.txt:67 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /home/unitree/flycar/.noetic/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/lib/cmake/GTSAM/GTSAMConfig.cmake:21 (find_dependency)
+  CMakeLists.txt:68 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at CMakeLists.txt:70 (find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+Eigen:/home/unitree/flycar/.noetic/include/eigen3
+CMake Warning at /home/unitree/flycar/.noetic/share/catkin/cmake/catkin_package.cmake:166 (message):
+  catkin_package() DEPENDS on 'GTSAM' but neither 'GTSAM_INCLUDE_DIRS' nor
+  'GTSAM_LIBRARIES' is defined.
+Call Stack (most recent call first):
+  /home/unitree/flycar/.noetic/share/catkin/cmake/catkin_package.cmake:102 (_catkin_package)
+  CMakeLists.txt:97 (catkin_package)
+
+
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/fast_lio; catkin build --get-env fast_lio | catkin env -si  /home/unitree/flycar/.noetic/bin/cmake /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/fast_lio --no-warn-unused-cli -DCATKIN_DEVEL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/devel/.private/fast_lio -DCMAKE_INSTALL_PREFIX=/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/install -DCATKIN_ENABLE_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPYTHON_EXECUTABLE=/home/unitree/flycar/.noetic/bin/python; cd -
+
+...............................................................................
+_______________________________________________________________________________
+Warnings << fast_lio:make /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs/fast_lio/build.make.000.log
+In file included from /home/unitree/flycar/.noetic/include/boost/smart_ptr/detail/requires_cxx11.hpp:9,
+                 from /home/unitree/flycar/.noetic/include/boost/smart_ptr/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/boost/shared_ptr.hpp:17,
+                 from /home/unitree/flycar/.noetic/include/ros/forwards.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/common.h:37,
+                 from /home/unitree/flycar/.noetic/include/ros/ros.h:43,
+                 from /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src/fast_lio/src/laserMapping.cpp:10:
+/home/unitree/flycar/.noetic/include/boost/bind.hpp:36:1: note: '#pragma message: The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.'
+   36 | BOOST_PRAGMA_MESSAGE(
+      | ^~~~~~~~~~~~~~~~~~~~
+cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build/fast_lio; catkin build --get-env fast_lio | catkin env -si  /home/unitree/flycar/.noetic/bin/make --jobserver-auth=3,4; cd -
+
+...............................................................................
+Initialized new catkin workspace in `/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace`
+--------------------------------------------------------------------------------
+Profile:                     default
+Extending:             [env] /home/unitree/flycar/.deps/install:/home/unitree/flycar/.noetic
+Workspace:                   /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace
+--------------------------------------------------------------------------------
+Build Space:        [exists] /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/build
+Devel Space:        [exists] /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/devel
+Install Space:      [unused] /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/install
+Log Space:         [missing] /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/logs
+Source Space:       [exists] /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/WavegoV2/workspace/src
+DESTDIR:            [unused] None
+--------------------------------------------------------------------------------
+Devel Space Layout:          linked
+Install Space Layout:        None
+--------------------------------------------------------------------------------
+Additional CMake Args:       -DCATKIN_ENABLE_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STANDARD=17 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPYTHON_EXECUTABLE=/home/unitree/flycar/.noetic/bin/python
+Additional Make Args:        -j4
+Additional catkin Make Args: None
+Internal Make Job Server:    True
+Cache Job Environments:      False
+--------------------------------------------------------------------------------
+Buildlisted Packages:        None
+Skiplisted Packages:         None
+--------------------------------------------------------------------------------
+Workspace configuration appears valid.
+
+NOTE: Forcing CMake to run for each package.
+--------------------------------------------------------------------------------
+[build] Found 3 packages in 0.0 seconds.                                       
+[build] Updating package table.                                                
+Starting >>> catkin_tools_prebuild               
+Finished <<< catkin_tools_prebuild                [ 0.6 seconds ]
+Starting >>> livox_ros_driver2                   
+Starting >>> map_generator                       
+Finished <<< livox_ros_driver2                    [ 7.4 seconds ]
+Starting >>> fast_lio                            
+Finished <<< map_generator                        [ 8.6 seconds ]
+Finished <<< fast_lio                             [ 26.4 seconds ]
+[build] Summary: All 4 packages succeeded!
+[build] Ignored: None.
+[build] Warnings: 4 packages succeeded with warnings.
+[build] Abandoned: No packages were abandoned.
+[build] Failed: No packages failed.
+[build] Runtime: 34.4 seconds total.
+[build] Note: Workspace packages have changed, please re-source setup files to use them.
