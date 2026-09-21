@@ -9,7 +9,7 @@ cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy
 bash scripts/show_fresh_semantics.sh
 ```
 
-窗口内可切换 **Graph、语义颜色 + Box、纯点云、融合叠加、HOV-SG 分层、Utonia 特征**。点击 **RGB-D 三模型** 查看新录制图像上的 Depth Anything V2、Grounding DINO 和 SAM2 实际输出。鼠标旋转、滚轮缩放；底部可切换总览／侧视／俯视。
+左侧控制面板可切换 **Graph、语义颜色 + Box、纯点云、融合叠加、HOV-SG 分层、Utonia 特征**。右侧原生 RViz 窗口实时显示所选图层；点击 **RGB-D 三模型** 查看新录制图像上的 Depth Anything V2、Grounding DINO 和 SAM2 实际输出。鼠标在 RViz 窗口中旋转、滚轮缩放；底部可切换总览／侧视／俯视。
 
 默认保留 FAST-LIO 风格的 RViz Z 高度着色。Utonia 多彩特征仅在选择该页时显示。需要之前的蓝金或 Batlow 风格：
 
@@ -20,7 +20,7 @@ bash scripts/show_fresh_semantics.sh --style batlow
 
 旧语义地图入口仍是 `bash scripts/three_view_demo.sh --style fastlio --mode raw`；新旧几何比较入口是 `bash scripts/show_level_comparison.sh`。
 
-新演示使用独立 ROS 1 master `11328`，不驱动机器狗。关闭窗口清理本启动器拥有的节点。新旧数据通过 `SCENE_DATASET_ROOT` 分开，旧入口默认数据不变。
+新演示使用独立 ROS 1 master `11328`，不驱动机器狗。RViz 默认保持原生顶层窗口（`SCENE_NATIVE_RVIZ=1`），避免 Qt/X11 重挂载 Ogre OpenGL 后出现黑屏；关闭启动终端清理本启动器拥有的节点。新旧数据通过 `SCENE_DATASET_ROOT` 分开，旧入口默认数据不变。
 
 ## 实际运行范围
 

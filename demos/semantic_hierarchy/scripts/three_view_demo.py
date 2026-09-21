@@ -20,6 +20,7 @@ from scene_profile import DATA_ROOT,PROFILE,CHINESE
 ROOT=Path(__file__).resolve().parents[1]
 RUNTIME=Path(os.environ.get('SCENE_SESSION_DIR',str(ROOT/'.runtime')))
 RUNTIME.mkdir(parents=True,exist_ok=True)
+NATIVE_RVIZ=os.environ.get('SCENE_NATIVE_RVIZ','1').lower() not in ('0','false','no')
 ap=argparse.ArgumentParser()
 ap.add_argument('--capture',action='store_true')
 ap.add_argument('--record',action='store_true')
@@ -203,8 +204,21 @@ def embed():
     if not statefile.exists():return
     s=json.loads(statefile.read_text())
     if s['pid']!=worker.processId():return
-    native=QWindow.fromWinId(s['window_id']);container=QWidget.createWindowContainer(native,w);canvas.addWidget(container,1)
-    embedded.update(native=native,container=container,window_id=s['window_id']);embedding.stop()
+    native=QWindow.fromWinId(s['window_id'])
+    if NATIVE_RVIZ:
+        # Reparenting the Ogre/OpenGL RViz frame through createWindowContainer
+        # produces an all-black GL surface on this X11 desktop.  Keep RViz as
+        # its native top-level window and use the WAVEGO window for controls.
+        notice=QLabel('RViz 已在独立窗口打开\n可在右侧窗口旋转、缩放和切换显示层')
+        notice.setAlignment(Qt.AlignCenter)
+        notice.setStyleSheet('font-size:20px;color:#607089;background:#f4f7fa;border:1px solid #d9e2ec;')
+        canvas.addWidget(notice,1)
+        native.show()
+        embedded.update(native=native,container=None,window_id=s['window_id'])
+    else:
+        container=QWidget.createWindowContainer(native,w);canvas.addWidget(container,1)
+        embedded.update(native=native,container=container,window_id=s['window_id'])
+    embedding.stop()
     send_camera();choose();seek(slider.value())
 embedding=QTimer();embedding.timeout.connect(embed);embedding.start(150)
 timer=QTimer();timer.timeout.connect(tick);timer.start(200)
@@ -245,7 +259,8 @@ if args.record:
     def record():
         w.raise_();w.activateWindow();choose('raw');send_camera();slider.setValue(0)
         log=(RUNTIME/'three_video.log').open('wb')
-        recording[0]=subprocess.Popen(['/usr/bin/ffmpeg','-y','-loglevel','warning','-f','x11grab','-framerate','12','-draw_mouse','0','-window_id',str(int(w.winId())),'-i',os.environ.get('DISPLAY',':0'),'-c:v','libx264','-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(OUT/'three_representations_demo.mp4')],stdin=subprocess.PIPE,stdout=log,stderr=log)
+        capture_window=int(embedded['window_id']) if NATIVE_RVIZ else int(w.winId())
+        recording[0]=subprocess.Popen(['/usr/bin/ffmpeg','-y','-loglevel','warning','-f','x11grab','-framerate','12','-draw_mouse','0','-window_id',str(capture_window),'-i',os.environ.get('DISPLAY',':0'),'-c:v','libx264','-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(OUT/'three_representations_demo.mp4')],stdin=subprocess.PIPE,stdout=log,stderr=log)
         QTimer.singleShot(1500,toggle)
         QTimer.singleShot(15000,lambda:choose('semantic'))
         QTimer.singleShot(30000,lambda:choose('graph'))

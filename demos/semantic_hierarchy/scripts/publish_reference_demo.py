@@ -17,7 +17,10 @@ from semantic_labels_cn import KIND_ZH
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=DATA_ROOT/'outputs/reference_demo'
-CN=dict(KIND_ZH, floor='楼层地面')
+# Only these graph kinds have metric bounds and are rendered as instances.
+# The building/data-container node is a structural root and has no bounds.
+CN={k:v for k,v in KIND_ZH.items() if k not in ('unknown','building')}
+CN['floor']='楼层地面'
 PALETTE={'stairs':(70,125,225),'ramp':(180,105,210),'cylinder':(230,155,65),
          'wall':(85,170,145),'floor':(100,155,205),'region':(185,155,80),'person':(220,80,120)}
 
@@ -59,8 +62,10 @@ def main():
         indices[n['id']]=ids
         if n['kind'] in ['stairs','ramp','cylinder','person']:
             model_indices[n['id']]=np.flatnonzero(np.all((p>=lo-.06)&(p<=hi+.06),axis=1)&(native_label==n['semantic_label']))
-        annotations.append(dict(**n,label_zh=CN[n['kind']],associated_dense_points=len(ids),
-                                first_observation_s=float(seen[ids[0]]-seen[0]) if len(ids) else None))
+        annotation = dict(n)
+        annotation.update(label_zh=CN[n['kind']], associated_dense_points=len(ids),
+                          first_observation_s=float(seen[ids[0]]-seen[0]) if len(ids) else None)
+        annotations.append(annotation)
     (OUT/'semantic_annotations.json').write_text(json.dumps(annotations,ensure_ascii=False,indent=2))
     hcolors=height_colors(p[:,2])
     papercolors=paper_height_colors(p[:,2])
@@ -167,7 +172,7 @@ def main():
             top=center.copy()
             top[2]=hi[2]+.35
             # All instances have a persistent ID and an explicit candidate label.
-            name={'floor':'楼层*','region':'区域*','wall':'墙面*'}.get(n['kind'],n.get('label_zh',CN.get(n['kind'],n['kind']))+'?') if CHINESE else {'floor':'floor*','region':'region*','wall':'wall*'}.get(n['kind'],n['kind']+'?')
+            name={'floor':'楼层*','region':'区域*','wall':'墙面*'}.get(n['kind'],CN.get(n['kind'],n['kind'])+'?') if CHINESE else {'floor':'floor*','region':'region*','wall':'wall*'}.get(n['kind'],n['kind']+'?')
             labels_mark.append(text('instance_names',i,n['id']+' '+name,top,(25,32,45),.40))
             shapes.append(lines('label_leaders',i,[(center+[0,0,size[2]/2],top)],(90,100,115),.01,.55))
             visible.append(n['id'])
@@ -183,7 +188,7 @@ def main():
                 model_boxes.append(lines('model_object_outline',i,box_edges(native_lo,native_hi),tuple(palette),.035,1.))
                 top=(native_lo+native_hi)/2;top[2]=native_hi[2]+.35
                 label_color=np.minimum(palette.astype(int)+65,245) if dark else (palette*.60).astype(int)
-                model_labels.append(text('model_object_label',i,n['id']+' '+(n.get('label_zh',CN.get(n['kind'],n['kind'])) if CHINESE else n['kind'])+'?',top,tuple(label_color),.42))
+                model_labels.append(text('model_object_label',i,n['id']+' '+(CN.get(n['kind'],n['kind']) if CHINESE else n['kind'])+'?',top,tuple(label_color),.42))
         pubs['instances'].publish(MarkerArray(markers=shapes))
         pubs['labels'].publish(MarkerArray(markers=labels_mark))
         pubs['model_boxes'].publish(MarkerArray(markers=model_boxes))

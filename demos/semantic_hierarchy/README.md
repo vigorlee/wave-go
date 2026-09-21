@@ -1,6 +1,6 @@
 # Wavego 立体语义地图与场景图
 
-**新地图的完整表示入口：[校正地图的 Graph、语义 Box、点云与模型结果](docs/fresh_semantics.md)。** 执行 `bash scripts/show_fresh_semantics.sh`。新记录上已重跑 RGB-D 三模型、HOV-SG 楼层模块与 Utonia 特征，并重新构建 Spark-DSG；原生 RViz 内切换，旧版数据全部保留。本次保存图片，不录制视频。
+**新地图的完整表示入口：[校正地图的 Graph、语义 Box、点云与模型结果](docs/fresh_semantics.md)。** 执行 `bash scripts/show_fresh_semantics.sh`。新记录上已重跑 RGB-D 三模型、HOV-SG 楼层模块与 Utonia 特征，并重新构建 Spark-DSG；控制面板与原生 RViz 分窗口显示，旧版数据全部保留。本次保存图片，不录制视频。
 
 按北京理工大学 2026 年学位论文规范生成的中文论文图副本位于 `outputs/fresh_semantic_20260919/thesis_figures_cn/`，图内文字已汉化，图题置于图下方并居中；英文原图仍保留。
 
@@ -18,7 +18,7 @@ RGB-D 图中的类别框直接来自 Grounding DINO + SAM2 的模型输出；`la
 
 新增：[单地图语义融合、164.7 万点建图回放与模型类别配色](docs/reference_demo.md)。本机运行 `bash scripts/reference_demo.sh`。默认在同一地图叠加语义点云、标签和轨迹；旧双视图可通过 `--layout dual` 查看。
 
-在原有 V2 建图之外新增独立目录：读取 OfficeWorld 的 Go2-W 实际仿真记录，显示彩色语义点云、物体簇、候选楼层／墙面和楼层—区域—物体图。使用本机原生 **RViz + Qt**，不需要网页。
+在原有 V2 建图之外新增独立目录：读取 OfficeWorld 的 Go2-W 实际仿真记录，显示彩色语义点云、物体簇、候选楼层／墙面和楼层—区域—物体图。使用本机原生 **RViz + Qt**，不需要网页。为避免 X11 下 Qt 重挂载 Ogre 导致黑屏，RViz 保持为右侧独立原生窗口，左侧 WAVEGO 面板负责切换表示、视角和回放。
 
 **这是已录制地图的语义后处理演示。还不是 Elevator-LIO、S-Graphs、Hydra、Nav2 全链路在线系统，也没有测量绝对地图精度。**
 
@@ -69,9 +69,11 @@ SCENE_CHINESE=1 bash scripts/three_view_demo.sh --style fastlio --mode combined
 
 中文类别和 Graph 关系的固定映射见 `scripts/semantic_labels_cn.py`；二层多方法地图索引见 `outputs/fresh_semantic_20260919/outputs/two_floor_maps/README.md`。
 
-窗口左侧可切换三维总览、楼梯侧视、俯视和层级图。鼠标拖动旋转，滚轮缩放。`?` 表示预测类别；绿色是地面语义，不是激光雷达扫描线。浅蓝为墙面，蓝色楼梯，紫色坡道，橙色圆柱。灰色保留未分类的测量几何。
+左侧控制面板可切换三维总览、楼梯侧视、俯视和层级图；右侧原生 RViz 窗口中用鼠标拖动旋转、滚轮缩放。`?` 表示预测类别；绿色是地面语义，不是激光雷达扫描线。浅蓝为墙面，蓝色楼梯，紫色坡道，橙色圆柱。灰色保留未分类的测量几何。
 
-ROS 1 使用独立 master `http://127.0.0.1:11323`，不控制机器人，不停止 V2 的其他 master。关闭此启动窗口会清理它自己启动的发布节点及 master。
+如果旧进程留下黑色 RViz 窗口，先关闭本次启动的终端，再重新执行上述命令；启动器会使用独立的 ROS master 和 RViz 进程，不需要手动打开第二个 RViz。
+
+ROS 1 使用独立 master `http://127.0.0.1:11328`，不控制机器人，不停止 V2 的其他 master。关闭此启动窗口会清理它自己启动的发布节点及 master。
 
 环境可覆盖：`SCENE_ROS_SETUP`、`SCENE_ROS_MASTER`、`SCENE_PYTHON`。本机 Noetic 的 source 文件为 `/home/unitree/flycar/tools/setup_noetic.bash`；不要混用 ROS 2 的 Python 环境。
 

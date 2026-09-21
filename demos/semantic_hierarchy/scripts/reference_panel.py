@@ -17,6 +17,7 @@ from academic_palette import HEIGHT_RANGE
 ROOT=Path(__file__).resolve().parents[1]
 RUNTIME=Path(os.environ.get('SCENE_SESSION_DIR',str(ROOT/'.runtime')))
 RUNTIME.mkdir(parents=True,exist_ok=True)
+NATIVE_RVIZ=os.environ.get('SCENE_NATIVE_RVIZ','1').lower() not in ('0','false','no')
 ap=argparse.ArgumentParser();ap.add_argument('--side',choices=['left','right','fused','compare'],required=True)
 ap.add_argument('--style',choices=['fastlio','paper','batlow'],default='paper')
 ap.add_argument('--automated-capture',action='store_true');args=ap.parse_args()
@@ -29,7 +30,12 @@ class CaptureInputFilter(QObject):
 if args.automated_capture:
     capture_filter=CaptureInputFilter();app.installEventFilter(capture_filter)
 frame=rviz.VisualizationFrame()
-frame.setWindowFlags(Qt.FramelessWindowHint)
+# Keep RViz as a normal native top-level window.  On the current X11/Qt stack,
+# reparenting an Ogre/OpenGL RViz frame into ``createWindowContainer`` makes
+# the embedded GL surface black even though the ROS topics are healthy.  The
+# outer demo still provides the controls and synchronizes this window through
+# the camera topic; leaving the native surface intact keeps the point cloud
+# visible and interactive.
 frame.setSplashPath('');frame.initialize()
 config_path=ROOT/('config/three_representations.rviz' if args.side=='compare' else 'config/reference_demo.rviz')
 if args.side=='compare':
@@ -47,7 +53,24 @@ for name,display in displays.items():
               'fused':['Model semantic points','Model unknown context','Model object outlines','Model object labels','Recorded LIO trajectory'],
               'compare':['Graph geometry context','Metric graph','Metric graph labels']}[args.side]
     display.setEnabled(name in selected)
-frame.resize(850,900);frame.show()
+if NATIVE_RVIZ:
+    # A native RViz top-level window keeps Ogre's OpenGL surface alive on X11.
+    # Put it beside the WAVEGO controls when the desktop is wide enough.
+    screen=app.primaryScreen().availableGeometry()
+    # Keep the Ogre viewport below the desktop's very large logical size;
+    # oversized native GL windows can fail to repaint on some drivers.
+    panel_width=max(900,min(1600,screen.width()//2))
+    panel_height=max(700,min(1100,screen.height()-120))
+    native_geometry=(screen.x()+screen.width()-panel_width,screen.y()+60,panel_width,panel_height)
+    frame.setGeometry(*native_geometry)
+else:
+    frame.resize(850,900)
+frame.show()
+if NATIVE_RVIZ:
+    # Some window managers restore the previous RViz placement on show();
+    # apply the side-by-side placement once more after the native window is
+    # mapped so it cannot cover the WAVEGO controls.
+    QTimer.singleShot(250,lambda: frame.setGeometry(*native_geometry))
 (RUNTIME/f'reference_{args.side}_window.json').write_text(json.dumps({'pid':os.getpid(),'window_id':int(frame.winId())}))
 camera_pub=rospy.Publisher('/reference_map/camera',String,queue_size=1,latch=False)
 
