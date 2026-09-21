@@ -1,0 +1,56 @@
+/**:
+  ros__parameters:
+    feature_extract_enable: false
+    point_filter_num: 1
+    max_iteration: 5
+    filter_size_surf: 0.1
+    filter_size_map: 0.1
+    cube_side_length: 1000.0
+    common:
+      lid_topic: /livox/lidar_raw
+      imu_topic: /imu/data_raw
+      time_sync_en: false
+      time_offset_lidar_to_imu: 0.0
+    preprocess:
+      lidar_type: 1
+      scan_line: 6
+      blind: 0.55
+      timestamp_unit: 3
+      scan_rate: 10
+    mapping:
+      acc_cov: 0.1
+      gyr_cov: 0.1
+      b_acc_cov: 0.0001
+      b_gyr_cov: 0.0001
+      fov_degree: 360.0
+      det_range: 35.0
+      extrinsic_est_en: false
+      extrinsic_T:
+      - 0.15568
+      - -0.02329
+      - 0.13366
+      extrinsic_R:
+      - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+      gravity_prior_weight: 30.0
+    publish:
+      path_en: true
+      map_en: false
+      world_points_en: true
+      body_points_en: true
+      archive_raw_map: false
+    pcd2pgm:
+      file_name: map
+      thre_z_min: -0.1
+      thre_z_max: 2.0
+      flag_pass_through: 0
+      map_resolution: 0.05
+      thre_radius: 0.1
+      thres_point_count: 10

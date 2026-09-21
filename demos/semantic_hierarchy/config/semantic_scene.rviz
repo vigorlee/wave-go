@@ -1,0 +1,93 @@
+Panels:
+- Class: rviz/Displays
+  Name: Displays
+- Class: rviz/Views
+  Name: Views
+Visualization Manager:
+  Class: ''
+  Displays:
+  - Class: rviz/PointCloud2
+    Name: Unlabelled measured geometry
+    Enabled: true
+    Topic: /semantic_hierarchy/context
+    Queue Size: 1
+    Style: Points
+    Size (Pixels): 2
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Decay Time: 0
+    Alpha: 0.35
+  - Class: rviz/PointCloud2
+    Name: Semantic points | vision + geometric hypotheses
+    Enabled: true
+    Topic: /semantic_hierarchy/semantic_points
+    Queue Size: 1
+    Style: Points
+    Size (Pixels): 3
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Decay Time: 0
+    Alpha: 1.0
+  - Class: rviz/PointCloud2
+    Name: Full measured cloud | outside display ROI
+    Enabled: false
+    Topic: /semantic_hierarchy/full_cloud
+    Queue Size: 1
+    Style: Points
+    Size (Pixels): 2
+    Color Transformer: RGB8
+    Position Transformer: XYZ
+    Decay Time: 0
+    Alpha: 0.5
+  - Class: rviz/MarkerArray
+    Name: Visual object clusters
+    Enabled: true
+    Marker Topic: /semantic_hierarchy/objects
+    Queue Size: 1
+  - Class: rviz/MarkerArray
+    Name: Floor and wall candidates
+    Enabled: true
+    Marker Topic: /semantic_hierarchy/structures
+    Queue Size: 1
+  - Class: rviz/MarkerArray
+    Name: Recorded LIO trajectory
+    Enabled: true
+    Marker Topic: /semantic_hierarchy/trajectory
+    Queue Size: 1
+  - Class: rviz/MarkerArray
+    Name: Scene graph | schematic layout
+    Enabled: false
+    Marker Topic: /semantic_hierarchy/scene_graph
+    Queue Size: 1
+  Enabled: true
+  Global Options:
+    Background Color: 14; 20; 32
+    Fixed Frame: lio_map
+    Frame Rate: 20
+  Name: root
+  Tools:
+  - Class: rviz/Interact
+  - Class: rviz/MoveCamera
+  - Class: rviz/Select
+  - Class: rviz/FocusCamera
+  - Class: rviz/Measure
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 35.0
+      Pitch: 0.65
+      Yaw: 0.8
+      Target Frame: lio_map
+      Focal Point:
+        X: 8.0
+        Y: 2.0
+        Z: 2.8
+      Near Clip Distance: 0.01
+      Focal Shape Size: 0.05
+Window Geometry:
+  Width: 1600
+  Height: 960
+  X: 20
+  Y: 40
+  Hide Left Dock: false
+  Hide Right Dock: true

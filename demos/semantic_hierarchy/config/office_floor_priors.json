@@ -1,0 +1,8 @@
+{
+  "source": "OfficeWorld scene geometry: build_go2w_office_inline.py, native_transition_landing and native_second_floor_height",
+  "type": "known scene height priors, not estimated by SLAM",
+  "floor0_m": 0.0,
+  "landing_m": 3.215,
+  "floor1_m": 5.51,
+  "calibration_stages": {"stair_alignment": 0.0, "pedestrian_crossing": 0.0, "native_entry_clearance": 0.0, "native_stair_approach": 0.0, "native_half_landing_turn": 3.215, "second_floor_goal": 5.51}
+}

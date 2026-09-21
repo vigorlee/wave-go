@@ -1,0 +1,54 @@
+{
+  "checked_on": "2026-09-19",
+  "repositories": [
+    {
+      "repository": "hku-mars/FAST_LIO",
+      "url": "https://github.com/hku-mars/FAST_LIO",
+      "sha": "7cc4175de6f8ba2edf34bab02a42195b141027e9",
+      "commit_date": "2024-07-23T11:22:17Z",
+      "message": "Support MARSIM simulator."
+    },
+    {
+      "repository": "snt-arg/lidar_situational_graphs",
+      "url": "https://github.com/snt-arg/lidar_situational_graphs",
+      "sha": "35dd3561730af299a0cc2730e3e3ce44a0699c06",
+      "commit_date": "2026-07-06T12:29:37Z",
+      "message": "Change markupsafe from 2.1.5 to 2.0.1"
+    },
+    {
+      "repository": "MIT-SPARK/Hydra",
+      "url": "https://github.com/MIT-SPARK/Hydra",
+      "sha": "2e58a35baea629eee8838409771876acff015daf",
+      "commit_date": "2026-01-14T15:47:11Z",
+      "message": "fix bug with global indices and add sinks to 2d places (#126)"
+    },
+    {
+      "repository": "MIT-SPARK/Khronos",
+      "url": "https://github.com/MIT-SPARK/Khronos",
+      "sha": "63faadde6ed92220e78fb2f6ca86dcc54bb5cf9e",
+      "commit_date": "2025-11-10T19:13:37Z",
+      "message": "turn on first seen timestamps for jackal (#194)"
+    },
+    {
+      "repository": "hovsg/HOV-SG",
+      "url": "https://github.com/hovsg/HOV-SG",
+      "sha": "d6e65a53c8be6faec3f01f00d1644d967f89e605",
+      "commit_date": "2026-01-19T08:58:18Z",
+      "message": "Update README.md by providing the download links for the dataset"
+    },
+    {
+      "repository": "concept-graphs/concept-graphs",
+      "url": "https://github.com/concept-graphs/concept-graphs",
+      "sha": "93277a02bd89171f8121e84203121cf7af9ebb5d",
+      "commit_date": "2025-01-15T16:12:09Z",
+      "message": "Update README.md"
+    },
+    {
+      "repository": "keysg-lab/KeySG",
+      "url": "https://github.com/keysg-lab/KeySG",
+      "sha": "9952b250a1160f37de6b530204038f2efdad7e87",
+      "commit_date": "2026-04-30T10:52:54Z",
+      "message": "Refactor project references to KeySG and update related configuration files"
+    }
+  ]
+}
