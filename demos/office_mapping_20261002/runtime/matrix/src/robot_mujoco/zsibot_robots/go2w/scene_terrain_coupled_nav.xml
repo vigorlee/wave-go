@@ -1,0 +1,71 @@
+<mujoco model="go2w coupled terrain navigation">
+  <include file="go2w.xml" />
+  <statistic center="0 7.5 0.4" extent="9.5" />
+
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72" ambient="0.35 0.35 0.35" specular="0.08 0.08 0.08" />
+    <rgba haze="0.55 0.66 0.78 1" />
+    <global azimuth="-150" elevation="-26" offwidth="1600" offheight="900" />
+    <map znear="0.01" zfar="80" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.62 0.74 0.88" rgb2="0.10 0.14 0.20"
+      width="512" height="3072" />
+    <texture type="2d" name="coupled_ground_texture" builtin="checker" mark="edge"
+      rgb1="0.28 0.32 0.36" rgb2="0.18 0.21 0.24" markrgb="0.72 0.78 0.82"
+      width="300" height="300" />
+    <material name="coupled_ground" texture="coupled_ground_texture" texuniform="true"
+      texrepeat="12 24" reflectance="0.08" />
+    <material name="stair_material" rgba="0.25 0.45 0.67 1" />
+    <material name="ramp_material" rgba="0.22 0.58 0.48 1" />
+    <material name="obstacle_material" rgba="0.92 0.47 0.16 1" />
+    <material name="gate_material" rgba="0.46 0.48 0.52 1" />
+    <material name="dynamic_material" rgba="0.80 0.20 0.22 1" />
+  </asset>
+
+  <worldbody>
+    <light pos="-2 6 10" dir="0 0 -1" directional="true" />
+    <geom name="floor" type="plane" size="0 0 0.04" material="coupled_ground"
+      friction="0.9 0.02 0.01" />
+
+    <!-- Six 10 cm risers: explicit stair-up / stair-down policy segment. -->
+    <geom name="nav_step_1" type="box" pos="0 2.16 0.05" size="1.10 0.18 0.05" material="stair_material" />
+    <geom name="nav_step_2" type="box" pos="0 2.52 0.10" size="1.10 0.18 0.10" material="stair_material" />
+    <geom name="nav_step_3" type="box" pos="0 2.88 0.15" size="1.10 0.18 0.15" material="stair_material" />
+    <geom name="nav_step_4" type="box" pos="0 3.24 0.20" size="1.10 0.18 0.20" material="stair_material" />
+    <geom name="nav_step_5" type="box" pos="0 3.60 0.25" size="1.10 0.18 0.25" material="stair_material" />
+    <geom name="nav_step_6" type="box" pos="0 3.96 0.30" size="1.10 0.18 0.30" material="stair_material" />
+    <geom name="stair_landing" type="box" pos="0 4.70 0.30" size="1.10 0.56 0.30" material="stair_material" />
+
+    <!-- Fifteen-degree ascent and descent ramps with a 0.60 m crest. -->
+    <geom name="ramp_up" type="box" pos="0 6.32 0.30" size="1.10 1.16 0.055"
+      euler="-15 0 0" material="ramp_material" friction="0.95 0.02 0.01" />
+    <geom name="ramp_crest" type="box" pos="0 7.62 0.60" size="1.10 0.34 0.06"
+      material="ramp_material" />
+    <geom name="ramp_down" type="box" pos="0 8.92 0.30" size="1.10 1.16 0.055"
+      euler="15 0 0" material="ramp_material" friction="0.95 0.02 0.01" />
+
+    <!-- Staggered cylinders and boxes force local-corridor switching. -->
+    <geom name="slalom_1" type="cylinder" pos="-0.52 10.75 0.36" size="0.26 0.36" material="obstacle_material" />
+    <geom name="slalom_2" type="cylinder" pos="0.48 11.55 0.42" size="0.30 0.42" material="obstacle_material" />
+    <geom name="slalom_3" type="box" pos="-0.48 12.35 0.34" size="0.34 0.28 0.34" material="obstacle_material" />
+    <geom name="slalom_4" type="box" pos="0.50 13.15 0.28" size="0.30 0.34 0.28" euler="0 0 18" material="obstacle_material" />
+
+    <!-- A 0.82 m gate models a clearance-constrained narrow passage. -->
+    <geom name="gate_left" type="box" pos="-0.76 14.55 0.65" size="0.35 0.30 0.65" material="gate_material" />
+    <geom name="gate_right" type="box" pos="0.76 14.55 0.65" size="0.35 0.30 0.65" material="gate_material" />
+    <geom name="gate_top" type="box" pos="0 14.55 1.40" size="1.11 0.30 0.10" material="gate_material" />
+
+    <!-- A laterally moving obstacle exercises prediction, wait, and replanning. -->
+    <body name="dynamic_crossing_obstacle" pos="0 16.25 0.42">
+      <joint name="dynamic_crossing_slide" type="slide" axis="1 0 0" range="-0.85 0.85" damping="1.5" />
+      <geom name="dynamic_crossing_geom" type="cylinder" size="0.30 0.42" material="dynamic_material" mass="4.0" />
+    </body>
+    <site name="navigation_goal" pos="0 18.0 0.03" size="0.12" rgba="0.20 0.80 0.30 1" />
+  </worldbody>
+
+  <actuator>
+    <position name="dynamic_crossing_position" joint="dynamic_crossing_slide" kp="80" ctrlrange="-0.85 0.85" />
+  </actuator>
+</mujoco>

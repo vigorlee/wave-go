@@ -1,0 +1,49 @@
+/global_compare/planner_server:
+  ros__parameters:
+    use_sim_time: false
+    expected_planner_frequency: 1.0
+    planner_plugins: [NavFnDijkstra, SmacAStar]
+    NavFnDijkstra:
+      plugin: nav2_navfn_planner/NavfnPlanner
+      use_astar: false
+      allow_unknown: false
+      tolerance: 0.05
+      use_final_approach_orientation: true
+    SmacAStar:
+      plugin: nav2_smac_planner/SmacPlanner2D
+      allow_unknown: false
+      tolerance: 0.05
+      downsample_costmap: false
+      max_iterations: 1000000
+      max_on_approach_iterations: 1000
+      max_planning_time: 2.0
+      cost_travel_multiplier: 2.0
+      use_final_approach_orientation: true
+      smoother:
+        max_iterations: 1000
+        w_smooth: 0.3
+        w_data: 0.2
+        tolerance: 1.0e-10
+/global_compare/global_costmap/global_costmap:
+  ros__parameters:
+    use_sim_time: false
+    global_frame: map
+    robot_base_frame: base_link
+    update_frequency: 5.0
+    publish_frequency: 2.0
+    resolution: 0.05
+    robot_radius: 0.28
+    rolling_window: false
+    track_unknown_space: false
+    always_send_full_costmap: true
+    plugins: [static_layer, inflation_layer]
+    static_layer:
+      plugin: nav2_costmap_2d::StaticLayer
+      map_topic: /wavego/planning_layer
+      map_subscribe_transient_local: true
+      subscribe_to_updates: true
+      footprint_clearing_enabled: false
+    inflation_layer:
+      plugin: nav2_costmap_2d::InflationLayer
+      inflation_radius: 0.55
+      cost_scaling_factor: 4.0

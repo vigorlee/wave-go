@@ -1,0 +1,622 @@
+{
+  "Element01": {
+    "name": "office_visual_box_OBS1",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2870.0,
+      "z": 5.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element02": {
+    "name": "office_visual_box2_OBS1",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2170.0,
+      "z": 5.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element03": {
+    "name": "office_visual_box_OBS2",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2850.0,
+      "z": 20.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element04": {
+    "name": "office_visual_box2_OBS2",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2190.0,
+      "z": 20.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element05": {
+    "name": "office_visual_box_OBS3",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2830.0,
+      "z": 35.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element06": {
+    "name": "office_visual_box2_OBS3",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2210.0,
+      "z": 35.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element07": {
+    "name": "office_visual_box_OBS4",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2810.0,
+      "z": 50.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element08": {
+    "name": "office_visual_box2_OBS4",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2230.0,
+      "z": 50.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element09": {
+    "name": "office_visual_box_OBS5",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2790.0,
+      "z": 65.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element10": {
+    "name": "office_visual_box2_OBS5",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2250.0,
+      "z": 65.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element11": {
+    "name": "office_visual_box_OBS6",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2770.0,
+      "z": 80.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element12": {
+    "name": "office_visual_box2_OBS6",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2270.0,
+      "z": 80.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element13": {
+    "name": "office_visual_box_OBS7",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2750.0,
+      "z": 95.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element14": {
+    "name": "office_visual_box2_OBS7",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2290.0,
+      "z": 95.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element15": {
+    "name": "office_visual_box_OBS8",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2730.0,
+      "z": 110.00000000000001
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element16": {
+    "name": "office_visual_box2_OBS8",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2310.0,
+      "z": 110.00000000000001
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element17": {
+    "name": "office_visual_box_OBS9",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2710.0,
+      "z": 125.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element18": {
+    "name": "office_visual_box2_OBS9",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2330.0,
+      "z": 125.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element19": {
+    "name": "office_visual_box_OBS10",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2690.0,
+      "z": 140.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element20": {
+    "name": "office_visual_box2_OBS10",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2350.0,
+      "z": 140.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 1.5,
+      "z": 0.15
+    }
+  },
+  "Element21": {
+    "name": "office_visual_box2_OBS11",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": -1110.0,
+      "y": 2520.0,
+      "z": 155.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 3.0,
+      "y": 3.5,
+      "z": 0.15
+    }
+  },
+  "Element22": {
+    "name": "office_visual_Cylinder37",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": -1170.0,
+      "y": 2705.0,
+      "z": 177.5
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.26,
+      "y": 0.26,
+      "z": 0.6
+    }
+  },
+  "Element23": {
+    "name": "office_visual_extended_slalom_cylinder_1",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": -122.0,
+      "y": 2595.0,
+      "z": 34.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.32,
+      "y": 0.32,
+      "z": 0.68
+    }
+  },
+  "Element24": {
+    "name": "office_visual_extended_slalom_cylinder_2",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": 42.0,
+      "y": 2529.0,
+      "z": 34.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.32,
+      "y": 0.32,
+      "z": 0.68
+    }
+  },
+  "Element25": {
+    "name": "office_visual_extended_slalom_cylinder_3",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": -122.0,
+      "y": 2463.0,
+      "z": 34.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.32,
+      "y": 0.32,
+      "z": 0.68
+    }
+  },
+  "Element26": {
+    "name": "office_visual_extended_slalom_cylinder_4",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": 42.0,
+      "y": 2397.0,
+      "z": 34.0
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.32,
+      "y": 0.32,
+      "z": 0.68
+    }
+  },
+  "Element27": {
+    "name": "office_visual_extended_ramp_up",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": 960.0,
+      "y": 2870.0,
+      "z": 20.375799999999998
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 10.000000275052232
+    },
+    "scale": {
+      "x": 2.2,
+      "y": 2.4,
+      "z": 0.05
+    }
+  },
+  "Element28": {
+    "name": "office_visual_extended_ramp_crest",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": 960.0,
+      "y": 2720.0,
+      "z": 39.6756
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 2.2,
+      "y": 0.66,
+      "z": 0.08
+    }
+  },
+  "Element29": {
+    "name": "office_visual_extended_ramp_down",
+    "type": "static",
+    "model": "cube1",
+    "position": {
+      "x": 960.0,
+      "y": 2570.0,
+      "z": 20.375799999999998
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": -10.000000275052232
+    },
+    "scale": {
+      "x": 2.2,
+      "y": 2.4,
+      "z": 0.05
+    }
+  },
+  "Element30": {
+    "name": "office_visual_Cylinder39",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": 954.9999999999998,
+      "y": 2855.0,
+      "z": 55.56100000000001
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.26,
+      "y": 0.26,
+      "z": 0.6
+    }
+  },
+  "Element31": {
+    "name": "office_visual_Cylinder41",
+    "type": "static",
+    "model": "cylinder1",
+    "position": {
+      "x": 965.0,
+      "y": 2565.0,
+      "z": 52.035
+    },
+    "rotation": {
+      "pitch": -0.0,
+      "yaw": 0.0,
+      "roll": 0.0
+    },
+    "scale": {
+      "x": 0.26,
+      "y": 0.26,
+      "z": 0.6
+    }
+  }
+}

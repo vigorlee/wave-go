@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "route_id": "corner_remaining",
+      "description": "Continue from the north gallery after all original terrain has already been crossed. Go north of the measured occupied patch at (6,32.8), return through the gallery, and reach the east corner.",
+      "task_examples": [
+        "Cross ALL original obstacles, stairs and ramps, then reach the farthest east corner."
+      ],
+      "stages": [
+        {
+          "stage_id": "north_gallery_detour_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 5.7,
+            "y": 34.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "north_gallery_detour_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.5,
+            "y": 34.2,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "cross_north_gallery",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.5,
+            "y": 32.5,
+            "yaw_rad": 0.0
+          }
+        },
+        {
+          "stage_id": "enter_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 31.0,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "traverse_east_corridor",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 26.5,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "navigate_to_farthest_endpoint",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 18.0,
+            "y": 22.8,
+            "yaw_rad": -1.5707963267948966
+          }
+        }
+      ]
+    }
+  ]
+}

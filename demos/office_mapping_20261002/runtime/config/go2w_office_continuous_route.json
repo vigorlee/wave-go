@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "route_id": "officeworld_migrated_course",
+      "description": "Intact Yard stair pair, cylinders and ramp pair translated into OfficeWorld rooms; one continuous Nav2 goal.",
+      "task_examples": [
+        "Continuous original stairs, slalom and ramp course"
+      ],
+      "stages": [
+        {
+          "stage_id": "climb_to_upper_landing",
+          "profile": "stair_up",
+          "navigation_mode": "up",
+          "goal": {
+            "frame_id": "map",
+            "x": -3.2,
+            "y": -1.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "descend_far_staircase",
+          "profile": "stair_down",
+          "navigation_mode": "down",
+          "goal": {
+            "frame_id": "map",
+            "x": -3.4,
+            "y": 4.2,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "stair_exit_turn",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -1.25,
+            "y": 3.65,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "west_door_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": -0.95,
+            "y": 1.0,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "office_room_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 1.0,
+            "y": 1.0,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "slalom_west_approach",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 5.3,
+            "y": 1.0,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_entry_turn",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 5.3,
+            "y": -2.7,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "slalom_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.2,
+            "y": -2.7,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_pair_1",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.2,
+            "y": -1.5,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_pair_2",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.2,
+            "y": -0.8,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "slalom_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 7.2,
+            "y": 0.9,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "office_corridor_turn",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 8.85,
+            "y": 0.9,
+            "yaw_rad": -1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "office_corridor_entry",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 8.85,
+            "y": -3.9,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "office_corridor_center",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 12.0,
+            "y": -4.4,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "ramp_approach_outer",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 15.3,
+            "y": -5.95,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "ramp_approach_turn",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.2,
+            "y": -5.95,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_up_entry",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.2,
+            "y": -5.25,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_align_right",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.9,
+            "y": -4.7,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_up_crest",
+          "profile": "slope_up",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.98,
+            "y": -3.1,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_down_entry",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.98,
+            "y": -2.35,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "ramp_down_exit",
+          "profile": "slope_down",
+          "navigation_mode": "slope",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.2,
+            "y": -0.25,
+            "yaw_rad": 1.5707963267948966
+          }
+        },
+        {
+          "stage_id": "office_far_room_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 17.2,
+            "y": 1.0,
+            "yaw_rad": 0
+          }
+        },
+        {
+          "stage_id": "course_exit",
+          "profile": "generic",
+          "navigation_mode": "avoid",
+          "goal": {
+            "frame_id": "map",
+            "x": 19.0,
+            "y": 1.0,
+            "yaw_rad": 0
+          }
+        }
+      ]
+    }
+  ]
+}

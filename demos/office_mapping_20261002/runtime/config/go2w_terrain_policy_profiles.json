@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "selector": {
+    "maximum_observation_age_s": 0.5,
+    "minimum_localization_confidence": 0.55,
+    "stair_probability_threshold": 0.65,
+    "slope_enter_deg": 7.0,
+    "slope_exit_deg": 4.0,
+    "narrow_clearance_m": 0.75,
+    "complexity_threshold": 0.60,
+    "dynamic_time_to_collision_s": 1.8
+  },
+  "profiles": {
+    "rolling": {
+      "locomotion_mode": "wheel",
+      "max_forward_speed_mps": 0.45,
+      "max_yaw_rate_rps": 0.80,
+      "max_acceleration_mps2": 0.60,
+      "body_height_m": 0.33,
+      "body_pitch_deg": 0.0,
+      "minimum_clearance_m": 0.55
+    },
+    "slope_up": {
+      "locomotion_mode": "wheel_step",
+      "max_forward_speed_mps": 0.20,
+      "max_yaw_rate_rps": 0.45,
+      "max_acceleration_mps2": 0.25,
+      "body_height_m": 0.35,
+      "body_pitch_deg": 8.0,
+      "minimum_clearance_m": 0.70
+    },
+    "slope_down": {
+      "locomotion_mode": "wheel_step",
+      "max_forward_speed_mps": 0.16,
+      "max_yaw_rate_rps": 0.38,
+      "max_acceleration_mps2": 0.18,
+      "body_height_m": 0.34,
+      "body_pitch_deg": -6.0,
+      "minimum_clearance_m": 0.72
+    },
+    "stair_up": {
+      "locomotion_mode": "step",
+      "max_forward_speed_mps": 0.10,
+      "max_yaw_rate_rps": 0.25,
+      "max_acceleration_mps2": 0.12,
+      "body_height_m": 0.38,
+      "body_pitch_deg": 10.0,
+      "minimum_clearance_m": 0.80
+    },
+    "stair_down": {
+      "locomotion_mode": "step",
+      "max_forward_speed_mps": 0.08,
+      "max_yaw_rate_rps": 0.20,
+      "max_acceleration_mps2": 0.10,
+      "body_height_m": 0.36,
+      "body_pitch_deg": -8.0,
+      "minimum_clearance_m": 0.85
+    },
+    "complex_obstacle": {
+      "locomotion_mode": "wheel_step",
+      "max_forward_speed_mps": 0.14,
+      "max_yaw_rate_rps": 0.55,
+      "max_acceleration_mps2": 0.18,
+      "body_height_m": 0.35,
+      "body_pitch_deg": 0.0,
+      "minimum_clearance_m": 0.82
+    },
+    "narrow_passage": {
+      "locomotion_mode": "wheel",
+      "max_forward_speed_mps": 0.12,
+      "max_yaw_rate_rps": 0.32,
+      "max_acceleration_mps2": 0.15,
+      "body_height_m": 0.33,
+      "body_pitch_deg": 0.0,
+      "minimum_clearance_m": 0.45
+    },
+    "dynamic_wait": {
+      "locomotion_mode": "hold",
+      "max_forward_speed_mps": 0.0,
+      "max_yaw_rate_rps": 0.0,
+      "max_acceleration_mps2": 0.10,
+      "body_height_m": 0.33,
+      "body_pitch_deg": 0.0,
+      "minimum_clearance_m": 0.90
+    },
+    "safe_stop": {
+      "locomotion_mode": "hold",
+      "max_forward_speed_mps": 0.0,
+      "max_yaw_rate_rps": 0.0,
+      "max_acceleration_mps2": 0.10,
+      "body_height_m": 0.33,
+      "body_pitch_deg": 0.0,
+      "minimum_clearance_m": 0.90
+    }
+  }
+}

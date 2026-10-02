@@ -18,6 +18,7 @@ demos/go2w-cosmos-extended-navigation/artifacts/
 demos/go2w-cosmos-extended-navigation/evidence/*.mp4
 
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *.so
 *.o
@@ -39,3 +40,12 @@ __pycache__/
 # Wavegov1 contains a curated source/config overlay, not runtime binaries.
 !/demos/Wavegov1/runtime/matrix/
 !/demos/Wavegov1/runtime/genisom_roamerx_open/
+
+# Curated October mapping source overlay; never include its build/runtime state.
+!/demos/office_mapping_20261002/runtime/matrix/
+!/demos/office_mapping_20261002/runtime/genisom_roamerx_open/
+!/demos/office_mapping_20261002/runtime/artifacts/
+/demos/office_mapping_20261002/runtime/artifacts/*
+!/demos/office_mapping_20261002/runtime/artifacts/global_compare_20261001/
+/demos/office_mapping_20261002/runtime/artifacts/global_compare_20261001/*
+!/demos/office_mapping_20261002/runtime/artifacts/global_compare_20261001/plans/

@@ -1,0 +1,14 @@
+{
+  "cloud": {
+    "points": 2410731,
+    "frame": "lio_map"
+  },
+  "graph": {
+    "markers": 2,
+    "nodes": 5
+  },
+  "semantic": {
+    "points": 19454,
+    "frame": "lio_map"
+  }
+}

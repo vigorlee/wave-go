@@ -172,7 +172,7 @@ def main():
             top=center.copy()
             top[2]=hi[2]+.35
             # All instances have a persistent ID and an explicit candidate label.
-            name={'floor':'楼层*','region':'区域*','wall':'墙面*'}.get(n['kind'],CN.get(n['kind'],n['kind'])+'?') if CHINESE else {'floor':'floor*','region':'region*','wall':'wall*'}.get(n['kind'],n['kind']+'?')
+            name={'floor':'楼层*','region':'区域*','wall':'墙面*'}.get(n['kind'],CN.get(n['kind'],n['kind'])) if CHINESE else {'floor':'floor*','region':'region*','wall':'wall*'}.get(n['kind'],n['kind'])
             labels_mark.append(text('instance_names',i,n['id']+' '+name,top,(25,32,45),.40))
             shapes.append(lines('label_leaders',i,[(center+[0,0,size[2]/2],top)],(90,100,115),.01,.55))
             visible.append(n['id'])
@@ -188,7 +188,7 @@ def main():
                 model_boxes.append(lines('model_object_outline',i,box_edges(native_lo,native_hi),tuple(palette),.035,1.))
                 top=(native_lo+native_hi)/2;top[2]=native_hi[2]+.35
                 label_color=np.minimum(palette.astype(int)+65,245) if dark else (palette*.60).astype(int)
-                model_labels.append(text('model_object_label',i,n['id']+' '+(CN.get(n['kind'],n['kind']) if CHINESE else n['kind'])+'?',top,tuple(label_color),.42))
+                model_labels.append(text('model_object_label',i,n['id']+' '+(CN.get(n['kind'],n['kind']) if CHINESE else n['kind']),top,tuple(label_color),.42))
         pubs['instances'].publish(MarkerArray(markers=shapes))
         pubs['labels'].publish(MarkerArray(markers=labels_mark))
         pubs['model_boxes'].publish(MarkerArray(markers=model_boxes))

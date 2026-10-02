@@ -1,0 +1,128 @@
+{
+  "verified_label_anchors": [
+    {
+      "text": "O0 楼梯",
+      "position": [
+        12.748897686004637,
+        2.49402116894722,
+        5.089943981170653
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O1 楼梯",
+      "position": [
+        13.2189692401886,
+        6.244505395889282,
+        5.532925930023193
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O2 楼梯",
+      "position": [
+        1.881520127058029,
+        -0.5596981534361839,
+        1.4568122577667237
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O3 楼梯",
+      "position": [
+        8.41011121749878,
+        9.200332870483399,
+        4.878295879364013
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O4 坡道",
+      "position": [
+        13.676535320281982,
+        2.933721001148224,
+        3.341566905975342
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O5 圆柱障碍物",
+      "position": [
+        2.8942170333862305,
+        -0.6659683853387832,
+        2.156923747062683
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O6 圆柱障碍物",
+      "position": [
+        6.524111924171448,
+        -0.6395016196370125,
+        1.3708851766586307
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    },
+    {
+      "text": "O7 圆柱障碍物",
+      "position": [
+        9.523731422424316,
+        -0.6588476121425628,
+        1.3061261773109436
+      ],
+      "source": "model_object_label",
+      "frame": "lio_map"
+    }
+  ],
+  "views": [
+    {
+      "mode": "graph",
+      "points": 1858378,
+      "labels": 16,
+      "non_black_fraction": 0.18384996155324876
+    },
+    {
+      "mode": "semantic",
+      "points": 1858378,
+      "labels": 8,
+      "non_black_fraction": 0.18249831795463284
+    },
+    {
+      "mode": "raw",
+      "points": 1858378,
+      "labels": 0,
+      "non_black_fraction": 0.1779195501730104
+    },
+    {
+      "mode": "combined",
+      "points": 1858378,
+      "labels": 8,
+      "non_black_fraction": 0.1830551951172626
+    },
+    {
+      "mode": "combined",
+      "points": 1858378,
+      "labels": 8,
+      "non_black_fraction": 0.16894523740868897
+    },
+    {
+      "mode": "hovsg",
+      "points": 1858378,
+      "labels": 0,
+      "non_black_fraction": 0.1779195501730104
+    },
+    {
+      "mode": "utonia",
+      "points": 1858378,
+      "labels": 0,
+      "non_black_fraction": 0.1779195501730104
+    }
+  ]
+}

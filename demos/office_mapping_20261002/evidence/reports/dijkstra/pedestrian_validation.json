@@ -1,0 +1,80 @@
+{
+  "verified_count": 2,
+  "actual_mesh": "SK_Survival_Character",
+  "actual_class": "BP_Crown_Traj_1_C",
+  "before_cm": {
+    "BP_Crown_Traj_1_C_2147481967": [
+      -1170.0,
+      2639.271173,
+      104.0
+    ],
+    "BP_Crown_Traj_1_C_2147481961": [
+      -1200.0,
+      2065.193116,
+      104.0
+    ]
+  },
+  "after_cm": {
+    "BP_Crown_Traj_1_C_2147481967": [
+      -1170.0,
+      2642.604588,
+      104.0
+    ],
+    "BP_Crown_Traj_1_C_2147481961": [
+      -1200.0,
+      2112.437676,
+      104.0
+    ]
+  },
+  "samples_cm": [
+    {
+      "BP_Crown_Traj_1_C_2147481967": [
+        -1170.0,
+        2639.271173,
+        104.0
+      ],
+      "BP_Crown_Traj_1_C_2147481961": [
+        -1200.0,
+        2065.193116,
+        104.0
+      ]
+    },
+    {
+      "BP_Crown_Traj_1_C_2147481967": [
+        -1170.0,
+        2574.993198,
+        104.0
+      ],
+      "BP_Crown_Traj_1_C_2147481961": [
+        -1200.0,
+        2040.43746,
+        104.0
+      ]
+    },
+    {
+      "BP_Crown_Traj_1_C_2147481967": [
+        -1170.0,
+        2642.604588,
+        104.0
+      ],
+      "BP_Crown_Traj_1_C_2147481961": [
+        -1200.0,
+        2112.437676,
+        104.0
+      ]
+    }
+  ],
+  "observed_displacement_m": {
+    "BP_Crown_Traj_1_C_2147481967": 0.6761139000000003,
+    "BP_Crown_Traj_1_C_2147481961": 0.7200021599999991
+  },
+  "start_waypoint_indices": {
+    "BP_Crown_Traj_1_C_2147481967": 8,
+    "BP_Crown_Traj_1_C_2147481961": 95
+  },
+  "end_waypoint_indices": {
+    "BP_Crown_Traj_1_C_2147481967": 12,
+    "BP_Crown_Traj_1_C_2147481961": 100
+  },
+  "raw_logs": "[2026.10.01-11.56.59:881][524]LogROS2Node: Warning: [ROS2NodeComponent.cpp@86, virtual void UROS2NodeComponent::TickComponent(float, ELevelTick, FActorComponentTickFunction *)] [ROS2NodeComponent] ROS2 Node is not initialized yet. Please initialize Node.\n[2026.10.01-11.57.01:818][553]0) SkeletalMeshComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.CharacterMesh0.SkeletalMesh = /Script/Engine.SkeletalMesh'/Game/Fab/Survival_Character/Meshes/SK_Survival_Character.SK_Survival_Character'\n[2026.10.01-11.57.01:818][553]1) SkeletalMeshComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.CharacterMesh0.SkeletalMesh = /Script/Engine.SkeletalMesh'/Game/Fab/Survival_Character/Meshes/SK_Survival_Character.SK_Survival_Character'\n[2026.10.01-11.57.04:756][597]0) BP_Crown_Traj_1_C /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.Traj_Index = 8\n[2026.10.01-11.57.04:756][597]1) BP_Crown_Traj_1_C /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.Traj_Index = 95\n[2026.10.01-11.57.04:884][599]LogROS2Node: Warning: [ROS2NodeComponent.cpp@86, virtual void UROS2NodeComponent::TickComponent(float, ELevelTick, FActorComponentTickFunction *)] [ROS2NodeComponent] ROS2 Node is not initialized yet. Please initialize Node.\n[2026.10.01-11.57.08:301][650]0) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.PlayerStart_0.CollisionCapsule.RelativeLocation = (X=-1002.330216,Y=2409.446607,Z=100.000000)\n[2026.10.01-11.57.08:301][650]1) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.CollisionCylinder.RelativeLocation = (X=-1170.000000,Y=2639.271173,Z=104.000000)\n[2026.10.01-11.57.08:301][650]2) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.CollisionCylinder.RelativeLocation = (X=-1200.000000,Y=2065.193116,Z=104.000000)\n[2026.10.01-11.57.09:892][674]LogROS2Node: Warning: [ROS2NodeComponent.cpp@86, virtual void UROS2NodeComponent::TickComponent(float, ELevelTick, FActorComponentTickFunction *)] [ROS2NodeComponent] ROS2 Node is not initialized yet. Please initialize Node.\n[2026.10.01-11.57.12:562][714]0) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.PlayerStart_0.CollisionCapsule.RelativeLocation = (X=-1002.330216,Y=2409.446607,Z=100.000000)\n[2026.10.01-11.57.12:562][714]1) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.CollisionCylinder.RelativeLocation = (X=-1170.000000,Y=2574.993198,Z=104.000000)\n[2026.10.01-11.57.12:562][714]2) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.CollisionCylinder.RelativeLocation = (X=-1200.000000,Y=2040.437460,Z=104.000000)\n[2026.10.01-11.57.14:910][749]LogROS2Node: Warning: [ROS2NodeComponent.cpp@86, virtual void UROS2NodeComponent::TickComponent(float, ELevelTick, FActorComponentTickFunction *)] [ROS2NodeComponent] ROS2 Node is not initialized yet. Please initialize Node.\n[2026.10.01-11.57.17:296][785]0) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.PlayerStart_0.CollisionCapsule.RelativeLocation = (X=-1002.330216,Y=2409.446607,Z=100.000000)\n[2026.10.01-11.57.17:296][785]1) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.CollisionCylinder.RelativeLocation = (X=-1170.000000,Y=2642.604588,Z=104.000000)\n[2026.10.01-11.57.17:296][785]2) CapsuleComponent /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.CollisionCylinder.RelativeLocation = (X=-1200.000000,Y=2112.437676,Z=104.000000)\n[2026.10.01-11.57.19:896][824]LogROS2Node: Warning: [ROS2NodeComponent.cpp@86, virtual void UROS2NodeComponent::TickComponent(float, ELevelTick, FActorComponentTickFunction *)] [ROS2NodeComponent] ROS2 Node is not initialized yet. Please initialize Node.\n[2026.10.01-11.57.20:361][831]0) BP_Crown_Traj_1_C /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481967.Traj_Index = 12\n[2026.10.01-11.57.20:361][831]1) BP_Crown_Traj_1_C /Game/Maps/OfficeWorld.OfficeWorld:PersistentLevel.BP_Crown_Traj_1_C_2147481961.Traj_Index = 100\n"
+}

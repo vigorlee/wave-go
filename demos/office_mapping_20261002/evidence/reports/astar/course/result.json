@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "state": "succeeded",
+  "completed_stages": 12,
+  "total_stages": 12,
+  "last_event": {
+    "time": 1790856297.3746169,
+    "state": "succeeded",
+    "stage_index": 11,
+    "stage_id": "second_floor_goal",
+    "completed_stages": 12,
+    "robot_pose": {
+      "x": -2.9317370908279545,
+      "y": 0.5607047130010746,
+      "z": 5.92690240499344,
+      "roll": 0.007041976944044543,
+      "pitch": 0.04655623616625992,
+      "yaw": 0.40866848782066667
+    },
+    "planner": "SmacAStar",
+    "reason": ""
+  },
+  "controller": "Nav2 path sample tracking + existing RL terrain locomotion",
+  "planner": "SmacAStar",
+  "pedestrian_guard": "Current LiDAR geometric clusters with stop/yield and prediction; not neural class labels",
+  "yield_count": 3,
+  "minimum_candidate_center_distance_m": 0.8881186925783425
+}

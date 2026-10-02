@@ -1,0 +1,10 @@
+{
+  "source": "original September 16 ROS bag LiDAR+IMU; true robot_slam ikd-Tree output",
+  "frames": 90,
+  "points": 567242,
+  "max_points": 567242,
+  "frame": "lio_map",
+  "bag_exit": 0,
+  "elapsed_limit_sec": 125,
+  "pcd_written": false
+}

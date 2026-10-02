@@ -1,0 +1,3061 @@
+{
+  "snapshot_date": "2026-10-02",
+  "source_root": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916",
+  "source_base_branch": "wavego",
+  "source_base_commit": "ea5b1f2",
+  "copied_at": "2026-10-02T15:21:27.790194+08:00",
+  "adaptations": [
+    "runtime/scripts/global_compare/dense_capture.py imports the adjacent bundled adaptive_core.py instead of an absolute home-directory path."
+  ],
+  "files": [
+    {
+      "path": "runtime/README_ALL_OBSTACLES_CORNER_CN.md",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/README_ALL_OBSTACLES_CORNER_CN.md",
+      "sha256": "fa3e8f07950313607eebc2d8c8f8dd4e4a51e9e834d4f911b4cb5ebb0306bf9b",
+      "bytes": 4284,
+      "kind": "runtime",
+      "packaged_sha256": "fa3e8f07950313607eebc2d8c8f8dd4e4a51e9e834d4f911b4cb5ebb0306bf9b"
+    },
+    {
+      "path": "runtime/README_ONLINE_EXPLORATION_CN.md",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/README_ONLINE_EXPLORATION_CN.md",
+      "sha256": "901f19e2c7f9edadc06073e0e3d0771af6ee0618d7df6ca6338c3a084954149a",
+      "bytes": 6288,
+      "kind": "runtime",
+      "packaged_sha256": "901f19e2c7f9edadc06073e0e3d0771af6ee0618d7df6ca6338c3a084954149a"
+    },
+    {
+      "path": "runtime/README_SEMANTIC_V1_CN.md",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/README_SEMANTIC_V1_CN.md",
+      "sha256": "a1fe9fa0f817cb040dd4e3c6c19e55af20d2133759080043d4c640a71961f525",
+      "bytes": 6709,
+      "kind": "runtime",
+      "packaged_sha256": "a1fe9fa0f817cb040dd4e3c6c19e55af20d2133759080043d4c640a71961f525"
+    },
+    {
+      "path": "runtime/README_WAVEGOV1_CN.md",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/README_WAVEGOV1_CN.md",
+      "sha256": "9b5c7c0cfae0d9efa1270be0bd68743682156d2a9f63280657bf5252f236e04f",
+      "bytes": 11073,
+      "kind": "runtime",
+      "packaged_sha256": "9b5c7c0cfae0d9efa1270be0bd68743682156d2a9f63280657bf5252f236e04f"
+    },
+    {
+      "path": "runtime/artifacts/global_compare_20261001/plans/routes.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/plans/routes.json",
+      "sha256": "1101eec21ec142e18930e4c4dc89774e2e618d0d19cc25335b0fbf199d099386",
+      "bytes": 394039,
+      "kind": "runtime",
+      "packaged_sha256": "1101eec21ec142e18930e4c4dc89774e2e618d0d19cc25335b0fbf199d099386"
+    },
+    {
+      "path": "runtime/config/cosmos_vln_routes.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/cosmos_vln_routes.json",
+      "sha256": "aa7b081648520ffae61a6800210132737911f60e1991021266e13f9518c666a4",
+      "bytes": 12030,
+      "kind": "runtime",
+      "packaged_sha256": "aa7b081648520ffae61a6800210132737911f60e1991021266e13f9518c666a4"
+    },
+    {
+      "path": "runtime/config/global_compare/lio_map_review_20261002.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/lio_map_review_20261002.rviz",
+      "sha256": "3ea1343a2e8997411ce0ad26684081276df4ae050d9312c6d24e58c091d38a63",
+      "bytes": 8238,
+      "kind": "runtime",
+      "packaged_sha256": "3ea1343a2e8997411ce0ad26684081276df4ae050d9312c6d24e58c091d38a63"
+    },
+    {
+      "path": "runtime/config/global_compare/lio_map_spectral_side_20261002.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/lio_map_spectral_side_20261002.rviz",
+      "sha256": "b71026c85c4bcdd16ee807d348b112fc127b25224b6e1e848ba2d324e256c343",
+      "bytes": 8239,
+      "kind": "runtime",
+      "packaged_sha256": "b71026c85c4bcdd16ee807d348b112fc127b25224b6e1e848ba2d324e256c343"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/00_stair_alignment.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/00_stair_alignment.npy",
+      "sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/00_stair_alignment.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/00_stair_alignment.png",
+      "sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a",
+      "bytes": 299,
+      "kind": "runtime",
+      "packaged_sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/01_large_stair_crest.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/01_large_stair_crest.npy",
+      "sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/01_large_stair_crest.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/01_large_stair_crest.png",
+      "sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a",
+      "bytes": 299,
+      "kind": "runtime",
+      "packaged_sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/02_large_stair_exit.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/02_large_stair_exit.npy",
+      "sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "006fa141d9430e194fa41729286ae66c5aca4d51fe8ba40f5d4e05131a15eb79"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/02_large_stair_exit.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/02_large_stair_exit.png",
+      "sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a",
+      "bytes": 299,
+      "kind": "runtime",
+      "packaged_sha256": "33eb85b3338ceb429c68de226735df884bd3da1d7d6e5d29fea16d1403d2c32a"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/03_ramp_crest.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/03_ramp_crest.npy",
+      "sha256": "6b9b808114f91544e57f67f77a624f3b7393aba081a42f80478e14a23c036c34",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "6b9b808114f91544e57f67f77a624f3b7393aba081a42f80478e14a23c036c34"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/03_ramp_crest.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/03_ramp_crest.png",
+      "sha256": "1c752abe12989bda90a16bbc38a065280bf9ec5765ecdc8dc0492b6c983d84d5",
+      "bytes": 296,
+      "kind": "runtime",
+      "packaged_sha256": "1c752abe12989bda90a16bbc38a065280bf9ec5765ecdc8dc0492b6c983d84d5"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/04_ramp_exit.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/04_ramp_exit.npy",
+      "sha256": "6b9b808114f91544e57f67f77a624f3b7393aba081a42f80478e14a23c036c34",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "6b9b808114f91544e57f67f77a624f3b7393aba081a42f80478e14a23c036c34"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/04_ramp_exit.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/04_ramp_exit.png",
+      "sha256": "1c752abe12989bda90a16bbc38a065280bf9ec5765ecdc8dc0492b6c983d84d5",
+      "bytes": 296,
+      "kind": "runtime",
+      "packaged_sha256": "1c752abe12989bda90a16bbc38a065280bf9ec5765ecdc8dc0492b6c983d84d5"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/05_pedestrian_crossing.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/05_pedestrian_crossing.npy",
+      "sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/05_pedestrian_crossing.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/05_pedestrian_crossing.png",
+      "sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def",
+      "bytes": 424,
+      "kind": "runtime",
+      "packaged_sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/06_native_entry_clearance.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/06_native_entry_clearance.npy",
+      "sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/06_native_entry_clearance.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/06_native_entry_clearance.png",
+      "sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def",
+      "bytes": 424,
+      "kind": "runtime",
+      "packaged_sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/07_native_stair_approach.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/07_native_stair_approach.npy",
+      "sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "1c444ac76f2e3df3b6e91eb7cbb4b0b9f4f95b512ecb07218b7ab378843ebcfc"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/07_native_stair_approach.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/07_native_stair_approach.png",
+      "sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def",
+      "bytes": 424,
+      "kind": "runtime",
+      "packaged_sha256": "f8de904b484fa44ace84415771078a4febf102760336f05d10d75d7a2f1e6def"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/08_native_lower_landing.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/08_native_lower_landing.npy",
+      "sha256": "4b23a9f7b962a704ade3641f6ffbd30b4350ee674f603754946cf92128905078",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "4b23a9f7b962a704ade3641f6ffbd30b4350ee674f603754946cf92128905078"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/08_native_lower_landing.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/08_native_lower_landing.png",
+      "sha256": "1c50d04f56ae733aa337632b6ce79f40aff7aca551e51ca54cbc9397c019e2b2",
+      "bytes": 478,
+      "kind": "runtime",
+      "packaged_sha256": "1c50d04f56ae733aa337632b6ce79f40aff7aca551e51ca54cbc9397c019e2b2"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/09_native_half_landing_turn.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/09_native_half_landing_turn.npy",
+      "sha256": "33e819f2e6f3a269496b83381e67409908ecd2b3fa6176526d7e8813152495c3",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "33e819f2e6f3a269496b83381e67409908ecd2b3fa6176526d7e8813152495c3"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/09_native_half_landing_turn.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/09_native_half_landing_turn.png",
+      "sha256": "1ebf5872a1e8d71a30b373edfb445144ffe71334ea8c25cbc9600af0b03c02fe",
+      "bytes": 241,
+      "kind": "runtime",
+      "packaged_sha256": "1ebf5872a1e8d71a30b373edfb445144ffe71334ea8c25cbc9600af0b03c02fe"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/10_native_upper_exit.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/10_native_upper_exit.npy",
+      "sha256": "f1f2dc65774e43d6768522e10a5957c1f5801afcc2b49c65bdb768903af1bbcf",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "f1f2dc65774e43d6768522e10a5957c1f5801afcc2b49c65bdb768903af1bbcf"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/10_native_upper_exit.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/10_native_upper_exit.png",
+      "sha256": "ea280d3f1142fb8e019b83212b959e4611e6d2b6a674c12cff2f7276ecb55a86",
+      "bytes": 422,
+      "kind": "runtime",
+      "packaged_sha256": "ea280d3f1142fb8e019b83212b959e4611e6d2b6a674c12cff2f7276ecb55a86"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/11_second_floor_goal.npy",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/11_second_floor_goal.npy",
+      "sha256": "ed5166bcc97e6df52df502b1dfc3e2d924036d5777d3fbf0c09296bcfa6e3f1b",
+      "bytes": 86528,
+      "kind": "runtime",
+      "packaged_sha256": "ed5166bcc97e6df52df502b1dfc3e2d924036d5777d3fbf0c09296bcfa6e3f1b"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/11_second_floor_goal.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/11_second_floor_goal.png",
+      "sha256": "c519d665d4abeda6163ec71d8818a4da478dcacfed9038f8b93bb702971a9458",
+      "bytes": 289,
+      "kind": "runtime",
+      "packaged_sha256": "c519d665d4abeda6163ec71d8818a4da478dcacfed9038f8b93bb702971a9458"
+    },
+    {
+      "path": "runtime/config/global_compare/maps/contract.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/maps/contract.json",
+      "sha256": "148a1b9e4c63c59ab54b5ace67caac34b58fb04f76d4c45c68ce5a7eb55a911f",
+      "bytes": 2131,
+      "kind": "runtime",
+      "packaged_sha256": "148a1b9e4c63c59ab54b5ace67caac34b58fb04f76d4c45c68ce5a7eb55a911f"
+    },
+    {
+      "path": "runtime/config/global_compare/office_demo.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/office_demo.rviz",
+      "sha256": "53084b76fe9337099f3cc11f7a0ec0e6385e6213fc3d382d0efb8663838191bf",
+      "bytes": 12642,
+      "kind": "runtime",
+      "packaged_sha256": "53084b76fe9337099f3cc11f7a0ec0e6385e6213fc3d382d0efb8663838191bf"
+    },
+    {
+      "path": "runtime/config/global_compare/pedestrians.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/pedestrians.json",
+      "sha256": "f37505a512b45a7c1bee187b13e3f387b054dff389bb3423d0e15f191ef67626",
+      "bytes": 749,
+      "kind": "runtime",
+      "packaged_sha256": "f37505a512b45a7c1bee187b13e3f387b054dff389bb3423d0e15f191ef67626"
+    },
+    {
+      "path": "runtime/config/global_compare/planners.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/global_compare/planners.yaml",
+      "sha256": "2fe46962d40c2f298bd4be03a532d264787234ef7fb3a8d9f22b3f9600a9ccbd",
+      "bytes": 1491,
+      "kind": "runtime",
+      "packaged_sha256": "2fe46962d40c2f298bd4be03a532d264787234ef7fb3a8d9f22b3f9600a9ccbd"
+    },
+    {
+      "path": "runtime/config/go2w_all_obstacles_corner.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_all_obstacles_corner.json",
+      "sha256": "e4bc4fa3f3068c17eb6acf8b524c0e4452bcedef2fcdaef764f1c873e23eb960",
+      "bytes": 5943,
+      "kind": "runtime",
+      "packaged_sha256": "e4bc4fa3f3068c17eb6acf8b524c0e4452bcedef2fcdaef764f1c873e23eb960"
+    },
+    {
+      "path": "runtime/config/go2w_anything_navigation.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_anything_navigation.rviz",
+      "sha256": "fd0a9a71d879fbd08086b8ceac7a064b2fce25d6d578c472f80f390a4c60d3e2",
+      "bytes": 15061,
+      "kind": "runtime",
+      "packaged_sha256": "fd0a9a71d879fbd08086b8ceac7a064b2fce25d6d578c472f80f390a4c60d3e2"
+    },
+    {
+      "path": "runtime/config/go2w_continuous_nav.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_continuous_nav.xml",
+      "sha256": "94c9388d53ae812bdc6d061beb4365b8ed3135617cc7dc6482997359e4763b43",
+      "bytes": 2052,
+      "kind": "runtime",
+      "packaged_sha256": "94c9388d53ae812bdc6d061beb4365b8ed3135617cc7dc6482997359e4763b43"
+    },
+    {
+      "path": "runtime/config/go2w_corner_mapping.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_corner_mapping.rviz",
+      "sha256": "e95ed3bcd2dd8edf7b1e5a0273fa4a647a8785463863e94420e025b3e1b8b911",
+      "bytes": 6284,
+      "kind": "runtime",
+      "packaged_sha256": "e95ed3bcd2dd8edf7b1e5a0273fa4a647a8785463863e94420e025b3e1b8b911"
+    },
+    {
+      "path": "runtime/config/go2w_corner_remaining.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_corner_remaining.json",
+      "sha256": "5cd53354571a66ffc3229dacdc0b17d4986eb2aaac5753df18a6e786a1c36596",
+      "bytes": 2178,
+      "kind": "runtime",
+      "packaged_sha256": "5cd53354571a66ffc3229dacdc0b17d4986eb2aaac5753df18a6e786a1c36596"
+    },
+    {
+      "path": "runtime/config/go2w_exploration_nav.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_exploration_nav.yaml",
+      "sha256": "8389f7568c9cf9ff46dc5648413e27fc1df2c66d8934a5b15816c0e050b751ff",
+      "bytes": 10071,
+      "kind": "runtime",
+      "packaged_sha256": "8389f7568c9cf9ff46dc5648413e27fc1df2c66d8934a5b15816c0e050b751ff"
+    },
+    {
+      "path": "runtime/config/go2w_extended_navigation.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_extended_navigation.rviz",
+      "sha256": "c04a778820623f4a8272b5dde662cd7ea662b5c37d17c612426c1f24ac13ab18",
+      "bytes": 11792,
+      "kind": "runtime",
+      "packaged_sha256": "c04a778820623f4a8272b5dde662cd7ea662b5c37d17c612426c1f24ac13ab18"
+    },
+    {
+      "path": "runtime/config/go2w_mapping_sidecar.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_mapping_sidecar.yaml",
+      "sha256": "47891a0be3f9a15c86e0c721a8e695b2c6664785d6ef2ec0ea95fc2df1f76e2c",
+      "bytes": 1138,
+      "kind": "runtime",
+      "packaged_sha256": "47891a0be3f9a15c86e0c721a8e695b2c6664785d6ef2ec0ea95fc2df1f76e2c"
+    },
+    {
+      "path": "runtime/config/go2w_office_avoid.pgm",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_avoid.pgm",
+      "sha256": "079e709489679c55a02497d39e43c7f73797318ccb0b447f413b1a3ff872f24b",
+      "bytes": 332605,
+      "kind": "runtime",
+      "packaged_sha256": "079e709489679c55a02497d39e43c7f73797318ccb0b447f413b1a3ff872f24b"
+    },
+    {
+      "path": "runtime/config/go2w_office_avoid.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_avoid.yaml",
+      "sha256": "266aa2a8ca2e3102086ee8062e2886700022833f1b268ccda68356197b692e81",
+      "bytes": 124,
+      "kind": "runtime",
+      "packaged_sha256": "266aa2a8ca2e3102086ee8062e2886700022833f1b268ccda68356197b692e81"
+    },
+    {
+      "path": "runtime/config/go2w_office_continuous_route.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_continuous_route.json",
+      "sha256": "c3e6a8100dccd37263b9d1208895fbe25c857e214d3b59fe052f54288892c543",
+      "bytes": 6748,
+      "kind": "runtime",
+      "packaged_sha256": "c3e6a8100dccd37263b9d1208895fbe25c857e214d3b59fe052f54288892c543"
+    },
+    {
+      "path": "runtime/config/go2w_office_course.pgm",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_course.pgm",
+      "sha256": "e78f53efe18258abeec2eccaeaa3a098d0dc2bf987a262581af0f6f4fc4df684",
+      "bytes": 332603,
+      "kind": "runtime",
+      "packaged_sha256": "e78f53efe18258abeec2eccaeaa3a098d0dc2bf987a262581af0f6f4fc4df684"
+    },
+    {
+      "path": "runtime/config/go2w_office_course.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_course.yaml",
+      "sha256": "8be49ea92f9e399b54a8aa1e698352a24e7804de0dfd23901d072fe7325e1b47",
+      "bytes": 125,
+      "kind": "runtime",
+      "packaged_sha256": "8be49ea92f9e399b54a8aa1e698352a24e7804de0dfd23901d072fe7325e1b47"
+    },
+    {
+      "path": "runtime/config/go2w_office_course_manifest.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_course_manifest.json",
+      "sha256": "e6089585edefd21b99d98174a3e581f3fa579be913fb9fa1eac7981e10d52c08",
+      "bytes": 4990,
+      "kind": "runtime",
+      "packaged_sha256": "e6089585edefd21b99d98174a3e581f3fa579be913fb9fa1eac7981e10d52c08"
+    },
+    {
+      "path": "runtime/config/go2w_office_inline_manifest.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_office_inline_manifest.json",
+      "sha256": "19f0e2576cdd55799e78e1d084dd08dea1c17a7b0c1f3a42883bb09d94ecd507",
+      "bytes": 2116,
+      "kind": "runtime",
+      "packaged_sha256": "19f0e2576cdd55799e78e1d084dd08dea1c17a7b0c1f3a42883bb09d94ecd507"
+    },
+    {
+      "path": "runtime/config/go2w_online_mapping.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_online_mapping.rviz",
+      "sha256": "8ed9ef94589420358b65e66bd8d7bee4b6966213141106e74f694c02cff89983",
+      "bytes": 6276,
+      "kind": "runtime",
+      "packaged_sha256": "8ed9ef94589420358b65e66bd8d7bee4b6966213141106e74f694c02cff89983"
+    },
+    {
+      "path": "runtime/config/go2w_online_slam.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_online_slam.yaml",
+      "sha256": "9a986636079691d8c033115325da49b88dab26ab192e08b48fe1ae01877274cb",
+      "bytes": 1128,
+      "kind": "runtime",
+      "packaged_sha256": "9a986636079691d8c033115325da49b88dab26ab192e08b48fe1ae01877274cb"
+    },
+    {
+      "path": "runtime/config/go2w_semantic_map.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_semantic_map.rviz",
+      "sha256": "210e5ad075f492538df57ffb635e223ca65267ca04b9529a96887d87437a73cc",
+      "bytes": 6741,
+      "kind": "runtime",
+      "packaged_sha256": "210e5ad075f492538df57ffb635e223ca65267ca04b9529a96887d87437a73cc"
+    },
+    {
+      "path": "runtime/config/go2w_semantic_navigation.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_semantic_navigation.rviz",
+      "sha256": "2307187c897560394bb242ecff71280666d204cffaf96fec0c4a5f21a76cc5db",
+      "bytes": 13312,
+      "kind": "runtime",
+      "packaged_sha256": "2307187c897560394bb242ecff71280666d204cffaf96fec0c4a5f21a76cc5db"
+    },
+    {
+      "path": "runtime/config/go2w_terrain_policy_profiles.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_terrain_policy_profiles.json",
+      "sha256": "bc76462af71a95a41c3cf9b5200b130890d5a34fc14348f3d2dc806dd1fa0c26",
+      "bytes": 2689,
+      "kind": "runtime",
+      "packaged_sha256": "bc76462af71a95a41c3cf9b5200b130890d5a34fc14348f3d2dc806dd1fa0c26"
+    },
+    {
+      "path": "runtime/config/go2w_wavegov1_route.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/go2w_wavegov1_route.json",
+      "sha256": "39321dc408f97cd47c0185abc487eb8927695eeab87ca95282ca3cfb7a4f783a",
+      "bytes": 3503,
+      "kind": "runtime",
+      "packaged_sha256": "39321dc408f97cd47c0185abc487eb8927695eeab87ca95282ca3cfb7a4f783a"
+    },
+    {
+      "path": "runtime/config/office_course_avoid_geometry.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/office_course_avoid_geometry.xml",
+      "sha256": "bcc379f61fa8be463d2834821673a1fcb7377447fec547eec6ec3d7bb72ba194",
+      "bytes": 15069,
+      "kind": "runtime",
+      "packaged_sha256": "bcc379f61fa8be463d2834821673a1fcb7377447fec547eec6ec3d7bb72ba194"
+    },
+    {
+      "path": "runtime/config/office_course_map_geometry.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/office_course_map_geometry.xml",
+      "sha256": "0392cbe2d4bfe05201692d4677167d176e7b6252a3b38fa002f299bebdc81af2",
+      "bytes": 12288,
+      "kind": "runtime",
+      "packaged_sha256": "0392cbe2d4bfe05201692d4677167d176e7b6252a3b38fa002f299bebdc81af2"
+    },
+    {
+      "path": "runtime/config/office_demo.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/office_demo.rviz",
+      "sha256": "dd6a321c6b61a07f2cf8fdde84ee97ee99d58a11ab34d14fb7f6377162dfdd93",
+      "bytes": 6535,
+      "kind": "runtime",
+      "packaged_sha256": "dd6a321c6b61a07f2cf8fdde84ee97ee99d58a11ab34d14fb7f6377162dfdd93"
+    },
+    {
+      "path": "runtime/config/office_lio_dense.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/config/office_lio_dense.yaml",
+      "sha256": "ab95de0a92fd0c42f50bbc3e41ad4729630f99ffb809f5a8875058d65cb2349f",
+      "bytes": 1160,
+      "kind": "runtime",
+      "packaged_sha256": "ab95de0a92fd0c42f50bbc3e41ad4729630f99ffb809f5a8875058d65cb2349f"
+    },
+    {
+      "path": "runtime/controllers/go2w_lcm_bridge/CMakeLists.txt",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/controllers/go2w_lcm_bridge/CMakeLists.txt",
+      "sha256": "84feb57aa52b506cce13d2232b9b13db89723772499e7a40ca61236adeffdcd9",
+      "bytes": 734,
+      "kind": "runtime",
+      "packaged_sha256": "84feb57aa52b506cce13d2232b9b13db89723772499e7a40ca61236adeffdcd9"
+    },
+    {
+      "path": "runtime/controllers/go2w_lcm_bridge/src/main.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/controllers/go2w_lcm_bridge/src/main.cpp",
+      "sha256": "88c289e4a90129ebfcb412809495cfccc46383139f70a649d41904b8f0f09ec7",
+      "bytes": 11443,
+      "kind": "runtime",
+      "packaged_sha256": "88c289e4a90129ebfcb412809495cfccc46383139f70a649d41904b8f0f09ec7"
+    },
+    {
+      "path": "runtime/controllers/go2w_rl_bridge/CMakeLists.txt",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/controllers/go2w_rl_bridge/CMakeLists.txt",
+      "sha256": "bd006b8f0fb5203c0fdb855c5040e22c05d80ce88397c7a4fff615e09f4bf6ec",
+      "bytes": 1409,
+      "kind": "runtime",
+      "packaged_sha256": "bd006b8f0fb5203c0fdb855c5040e22c05d80ce88397c7a4fff615e09f4bf6ec"
+    },
+    {
+      "path": "runtime/controllers/go2w_rl_bridge/src/main.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/controllers/go2w_rl_bridge/src/main.cpp",
+      "sha256": "b0a1c560c085b377953e7fa0efaea5f3ea4b06ce11adcd2cecf7dce60d9096a5",
+      "bytes": 62719,
+      "kind": "runtime",
+      "packaged_sha256": "b0a1c560c085b377953e7fa0efaea5f3ea4b06ce11adcd2cecf7dce60d9096a5"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/LICENSE",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/LICENSE",
+      "sha256": "c0cc52d6bdaf4f5d3d0b21d6a2c16629e77d6ca3d67646fd6b91dde99b734e3a",
+      "bytes": 1493,
+      "kind": "runtime",
+      "packaged_sha256": "c0cc52d6bdaf4f5d3d0b21d6a2c16629e77d6ca3d67646fd6b91dde99b734e3a"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/build.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/build.sh",
+      "sha256": "70c6b89356a187008cd4386094718fcd0d547242166ada4a55f55e35c8972ce3",
+      "bytes": 1892,
+      "kind": "runtime",
+      "packaged_sha256": "70c6b89356a187008cd4386094718fcd0d547242166ada4a55f55e35c8972ce3"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/map/map.pgm",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/map/map.pgm",
+      "sha256": "ca3b73dfd2b66050b580e2e4aefc6cb2ff3596049690eff39c818d48389e53ac",
+      "bytes": 418669,
+      "kind": "runtime",
+      "packaged_sha256": "ca3b73dfd2b66050b580e2e4aefc6cb2ff3596049690eff39c818d48389e53ac"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/map/map.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/map/map.yaml",
+      "sha256": "968247224a31d7ccd1d9951f705f26d78787d28c293e4671b9bee3ff2bac3457",
+      "bytes": 115,
+      "kind": "runtime",
+      "packaged_sha256": "968247224a31d7ccd1d9951f705f26d78787d28c293e4671b9bee3ff2bac3457"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/script/bash/start_navigation.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/script/bash/start_navigation.sh",
+      "sha256": "1a44f9daea6367d7128d23709308dbeea941584c99c430a5e9f4b3963766640c",
+      "bytes": 5000,
+      "kind": "runtime",
+      "packaged_sha256": "1a44f9daea6367d7128d23709308dbeea941584c99c430a5e9f4b3963766640c"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/navigation/src/robot_navigo/launch/navigation_launch.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/navigation/src/robot_navigo/launch/navigation_launch.py",
+      "sha256": "a7bead0e6eaa5082bd93645ee12595ce18aaf8ff7881a2b50259764ee17315a5",
+      "bytes": 12380,
+      "kind": "runtime",
+      "packaged_sha256": "a7bead0e6eaa5082bd93645ee12595ce18aaf8ff7881a2b50259764ee17315a5"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/navigation/src/robot_navigo/params/navigo_params.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/navigation/src/robot_navigo/params/navigo_params.yaml",
+      "sha256": "2e2281a323b00dbdad88a3791ec190d3c547c6f17ec3ca8583b07f6e6a7ef3c6",
+      "bytes": 10827,
+      "kind": "runtime",
+      "packaged_sha256": "2e2281a323b00dbdad88a3791ec190d3c547c6f17ec3ca8583b07f6e6a7ef3c6"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/navigation/src/robot_navigo/rviz/rviz2_config.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/navigation/src/robot_navigo/rviz/rviz2_config.rviz",
+      "sha256": "52b3caee92dde3d0e9e6e0bd582897a311467703476569b8aea4ce677d8b2a94",
+      "bytes": 11392,
+      "kind": "runtime",
+      "packaged_sha256": "52b3caee92dde3d0e9e6e0bd582897a311467703476569b8aea4ce677d8b2a94"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/CMakeLists.txt",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/CMakeLists.txt",
+      "sha256": "51a0acccc49a0485de71b8b3dda97b33ba8c8427021a100af4a7410adb1ab336",
+      "bytes": 2264,
+      "kind": "runtime",
+      "packaged_sha256": "51a0acccc49a0485de71b8b3dda97b33ba8c8427021a100af4a7410adb1ab336"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/README.md",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/README.md",
+      "sha256": "e4a9f1034e7b3b456e65fffcffa8d5bd4e0c916989db323f13274536e8d2ba79",
+      "bytes": 4698,
+      "kind": "runtime",
+      "packaged_sha256": "e4a9f1034e7b3b456e65fffcffa8d5bd4e0c916989db323f13274536e8d2ba79"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/config/config.yaml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/config/config.yaml",
+      "sha256": "924f5f7ff6b3e938994976a1d8b6fcbc2ed5393aff67248f9ffd91e5c6432ebd",
+      "bytes": 1651,
+      "kind": "runtime",
+      "packaged_sha256": "924f5f7ff6b3e938994976a1d8b6fcbc2ed5393aff67248f9ffd91e5c6432ebd"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common/const_value.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common/const_value.h",
+      "sha256": "4dec01e3d297a0438883485f99841d38c8e30ce4f6884677490e318519531ca9",
+      "bytes": 1703,
+      "kind": "runtime",
+      "packaged_sha256": "4dec01e3d297a0438883485f99841d38c8e30ce4f6884677490e318519531ca9"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common/custom_type.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common/custom_type.h",
+      "sha256": "3fe9129bfe99459d95728efcdc4d0e4cccbb407b69f171de1180ad844c5d7d14",
+      "bytes": 5524,
+      "kind": "runtime",
+      "packaged_sha256": "3fe9129bfe99459d95728efcdc4d0e4cccbb407b69f171de1180ad844c5d7d14"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common/math.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common/math.h",
+      "sha256": "4aa4d5ee18a52cd74de39020f36d4ac8f3040acd5fcf91ea70aac9580f832bc7",
+      "bytes": 3802,
+      "kind": "runtime",
+      "packaged_sha256": "4aa4d5ee18a52cd74de39020f36d4ac8f3040acd5fcf91ea70aac9580f832bc7"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common/state_mode.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common/state_mode.h",
+      "sha256": "13c63cece232a4241651a9dee5cee55a95692df941fb64fed5aa8c48fd8fded7",
+      "bytes": 738,
+      "kind": "runtime",
+      "packaged_sha256": "13c63cece232a4241651a9dee5cee55a95692df941fb64fed5aa8c48fd8fded7"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common/types.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common/types.h",
+      "sha256": "2d9d30e5f9cdc3d08776501d4e69e557c63c58aae8a4c91aa75b2be9537238cf",
+      "bytes": 2622,
+      "kind": "runtime",
+      "packaged_sha256": "2d9d30e5f9cdc3d08776501d4e69e557c63c58aae8a4c91aa75b2be9537238cf"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/common.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/common.h",
+      "sha256": "cc6112e3c72fd8a2dc5bedde58121ae10de795613ebf562a28a6d9a6c6a68e57",
+      "bytes": 323,
+      "kind": "runtime",
+      "packaged_sha256": "cc6112e3c72fd8a2dc5bedde58121ae10de795613ebf562a28a6d9a6c6a68e57"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/ikd_tree/ikd_tree.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/ikd_tree/ikd_tree.h",
+      "sha256": "97cb7152f23c0f5dc1585e26b5f96df790237eb0945bec212e1fbed3fac535dc",
+      "bytes": 10161,
+      "kind": "runtime",
+      "packaged_sha256": "97cb7152f23c0f5dc1585e26b5f96df790237eb0945bec212e1fbed3fac535dc"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mapping_alg.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mapping_alg.h",
+      "sha256": "ff684fed66897c5b205b7230164b76dc6ee440cb865893b61986229b5143ebbe",
+      "bytes": 8820,
+      "kind": "runtime",
+      "packaged_sha256": "ff684fed66897c5b205b7230164b76dc6ee440cb865893b61986229b5143ebbe"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/esekfom/esekfom.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/esekfom/esekfom.hpp",
+      "sha256": "76ace8927dd9a5a659f1b52a1e400c47f3168dcd56d071cf29a0893544559825",
+      "bytes": 88688,
+      "kind": "runtime",
+      "packaged_sha256": "76ace8927dd9a5a659f1b52a1e400c47f3168dcd56d071cf29a0893544559825"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/esekfom/util.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/esekfom/util.hpp",
+      "sha256": "b36f2ae3fd6a79f4d5f725554b17b5d67dcaa8d8f810693a5962fd07129e92fd",
+      "bytes": 1023,
+      "kind": "runtime",
+      "packaged_sha256": "b36f2ae3fd6a79f4d5f725554b17b5d67dcaa8d8f810693a5962fd07129e92fd"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/build_manifold.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/build_manifold.hpp",
+      "sha256": "8d6850744f2427d685bc5386f2f528accf34d93019c4187eb22ef0aa2b78862f",
+      "bytes": 16103,
+      "kind": "runtime",
+      "packaged_sha256": "8d6850744f2427d685bc5386f2f528accf34d93019c4187eb22ef0aa2b78862f"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/SubManifold.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/SubManifold.hpp",
+      "sha256": "4e6233e71da375e24262ca704fc66b82db5a1558892f0435bd104c0d27a598ec",
+      "bytes": 685,
+      "kind": "runtime",
+      "packaged_sha256": "4e6233e71da375e24262ca704fc66b82db5a1558892f0435bd104c0d27a598ec"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/mtkmath.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/mtkmath.hpp",
+      "sha256": "7cafb350667a9093b1275ee9c4a3a85310a2e11423bec6f1001f0876f47b0ee1",
+      "bytes": 6881,
+      "kind": "runtime",
+      "packaged_sha256": "7cafb350667a9093b1275ee9c4a3a85310a2e11423bec6f1001f0876f47b0ee1"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/vectview.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/src/vectview.hpp",
+      "sha256": "4d95e0d4de8e946421a76e67bf5671200e798c8d413954e781525c0f2becdb2c",
+      "bytes": 4617,
+      "kind": "runtime",
+      "packaged_sha256": "4d95e0d4de8e946421a76e67bf5671200e798c8d413954e781525c0f2becdb2c"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/startIdx.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/startIdx.hpp",
+      "sha256": "3a18282c60e0f4139a91ddf6b1ac274313a2c172fa9e14fd75878cf7e7558d20",
+      "bytes": 7867,
+      "kind": "runtime",
+      "packaged_sha256": "3a18282c60e0f4139a91ddf6b1ac274313a2c172fa9e14fd75878cf7e7558d20"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/S2.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/S2.hpp",
+      "sha256": "cd3090761400c99e5e527872696d0dad6cd71e76ea0559acfa3f0af5fc23f7e6",
+      "bytes": 8678,
+      "kind": "runtime",
+      "packaged_sha256": "cd3090761400c99e5e527872696d0dad6cd71e76ea0559acfa3f0af5fc23f7e6"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/SOn.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/SOn.hpp",
+      "sha256": "118bc59095ba5024868ac1171e63558530bd5760c57498c62706c066f7522ed8",
+      "bytes": 6636,
+      "kind": "runtime",
+      "packaged_sha256": "118bc59095ba5024868ac1171e63558530bd5760c57498c62706c066f7522ed8"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/vect.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/vect.hpp",
+      "sha256": "d3bc96f6db639ca7ba2cf816c259a783d10b329e93210a20bb1a9a6503e5a982",
+      "bytes": 13187,
+      "kind": "runtime",
+      "packaged_sha256": "d3bc96f6db639ca7ba2cf816c259a783d10b329e93210a20bb1a9a6503e5a982"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/wrapped_cv_mat.hpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/mtk_iekf/mtk/types/wrapped_cv_mat.hpp",
+      "sha256": "e78850d56adcd36342c884eab331f072108fa53806739edcd305ff63425e2c9a",
+      "bytes": 2042,
+      "kind": "runtime",
+      "packaged_sha256": "e78850d56adcd36342c884eab331f072108fa53806739edcd305ff63425e2c9a"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/pcd2grid.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/pcd2grid.h",
+      "sha256": "2d9e770e6e439ee6366a36c78854a02e229ba64036076492c9a6e50ae6661c2a",
+      "bytes": 1556,
+      "kind": "runtime",
+      "packaged_sha256": "2d9e770e6e439ee6366a36c78854a02e229ba64036076492c9a6e50ae6661c2a"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/process/imu_process.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/process/imu_process.h",
+      "sha256": "5a9b867c683a69b834287fa882ecb63bfb6a03ae915f23ce0be37da06575abb9",
+      "bytes": 2850,
+      "kind": "runtime",
+      "packaged_sha256": "5a9b867c683a69b834287fa882ecb63bfb6a03ae915f23ce0be37da06575abb9"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/process/lidar_process.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/process/lidar_process.h",
+      "sha256": "b73ec8b76b59c78b47f77006b4a38a46eaca678036c8d43dc428a9c2aa2a5b49",
+      "bytes": 3412,
+      "kind": "runtime",
+      "packaged_sha256": "b73ec8b76b59c78b47f77006b4a38a46eaca678036c8d43dc428a9c2aa2a5b49"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/so3_math.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/so3_math.h",
+      "sha256": "905299e851c62e561af37310a5b88484e34b2923cc428bb8b64be14aacec5d90",
+      "bytes": 3256,
+      "kind": "runtime",
+      "packaged_sha256": "905299e851c62e561af37310a5b88484e34b2923cc428bb8b64be14aacec5d90"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/include/use_ikfom.h",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/include/use_ikfom.h",
+      "sha256": "6c4fb500dd3f45b2d5bc9f7612a5d56dcd2d68b075adafce03d195b46f04c70f",
+      "bytes": 3275,
+      "kind": "runtime",
+      "packaged_sha256": "6c4fb500dd3f45b2d5bc9f7612a5d56dcd2d68b075adafce03d195b46f04c70f"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/launch/slam.launch.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/launch/slam.launch.py",
+      "sha256": "47a2a2d241a1843c885a69c80df4e496a53e16f8412d09da9a97633fa60e9002",
+      "bytes": 835,
+      "kind": "runtime",
+      "packaged_sha256": "47a2a2d241a1843c885a69c80df4e496a53e16f8412d09da9a97633fa60e9002"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/package.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/package.xml",
+      "sha256": "5206168231778d5c5149b0d715aa7c4184392028bce9e1f5beff72f38e19cae6",
+      "bytes": 745,
+      "kind": "runtime",
+      "packaged_sha256": "5206168231778d5c5149b0d715aa7c4184392028bce9e1f5beff72f38e19cae6"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/rviz/mapping.rviz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/rviz/mapping.rviz",
+      "sha256": "d38e7dd23526aa0e8721c85fc32e3c9a2c69a8bf49a8822021354ec166acde6c",
+      "bytes": 9372,
+      "kind": "runtime",
+      "packaged_sha256": "d38e7dd23526aa0e8721c85fc32e3c9a2c69a8bf49a8822021354ec166acde6c"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/script/run_slam.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/script/run_slam.sh",
+      "sha256": "031d60a0a0335a1e801124183ab9e82dc7f965d59d8fb95e633a4c11150df074",
+      "bytes": 174,
+      "kind": "runtime",
+      "packaged_sha256": "031d60a0a0335a1e801124183ab9e82dc7f965d59d8fb95e633a4c11150df074"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/script/save_map.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/script/save_map.sh",
+      "sha256": "5f0a8bea1da43b0b5878171465d05b45309dc0ff252a65fe0b7ff04701c346ca",
+      "bytes": 190,
+      "kind": "runtime",
+      "packaged_sha256": "5f0a8bea1da43b0b5878171465d05b45309dc0ff252a65fe0b7ff04701c346ca"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/script/start_mapping.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/script/start_mapping.sh",
+      "sha256": "c90fb9e0d037d654f88d2774b4d5f838f96f8b975d88f3d9812aa2805014dd53",
+      "bytes": 229,
+      "kind": "runtime",
+      "packaged_sha256": "c90fb9e0d037d654f88d2774b4d5f838f96f8b975d88f3d9812aa2805014dd53"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/common/math.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/common/math.cpp",
+      "sha256": "708b13edd89c542182e36d1a92116e8337f3ebedd6e233ef6d1b3d3d12dda265",
+      "bytes": 488,
+      "kind": "runtime",
+      "packaged_sha256": "708b13edd89c542182e36d1a92116e8337f3ebedd6e233ef6d1b3d3d12dda265"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/ikd_tree/ikd_tree.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/ikd_tree/ikd_tree.cpp",
+      "sha256": "2007571c7645fc2b5682bfc85165b8a1185188d115ab2d4f141b8cf5bdeca4f3",
+      "bytes": 71411,
+      "kind": "runtime",
+      "packaged_sha256": "2007571c7645fc2b5682bfc85165b8a1185188d115ab2d4f141b8cf5bdeca4f3"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/mapping_alg.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/mapping_alg.cpp",
+      "sha256": "93aacb6a723a5f3a60017e35b8e80840a36a5357407cfdd539a97da0c37b527c",
+      "bytes": 36706,
+      "kind": "runtime",
+      "packaged_sha256": "93aacb6a723a5f3a60017e35b8e80840a36a5357407cfdd539a97da0c37b527c"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/pcd2grid.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/pcd2grid.cpp",
+      "sha256": "3953ba008d58e8ce429d2f708036aa5e962d06b4d1938cbcb2b571ebeb42d23c",
+      "bytes": 6434,
+      "kind": "runtime",
+      "packaged_sha256": "3953ba008d58e8ce429d2f708036aa5e962d06b4d1938cbcb2b571ebeb42d23c"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/process/imu_process.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/process/imu_process.cpp",
+      "sha256": "10dd371c30acc1ddfcee2ac7d326cdcde85cf31a2d54029cb249578453774906",
+      "bytes": 10704,
+      "kind": "runtime",
+      "packaged_sha256": "10dd371c30acc1ddfcee2ac7d326cdcde85cf31a2d54029cb249578453774906"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/process/lidar_process.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/process/lidar_process.cpp",
+      "sha256": "58b9a2b7923a1adcfdb742504da833b86dd35524e618efef920b073857ee0bc1",
+      "bytes": 16339,
+      "kind": "runtime",
+      "packaged_sha256": "58b9a2b7923a1adcfdb742504da833b86dd35524e618efef920b073857ee0bc1"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/src/use_ikfom.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/src/use_ikfom.cpp",
+      "sha256": "267dea1b443958e7f48319a82d6eb77e626413eae1bd1d7435ac0a162a2eda2a",
+      "bytes": 4185,
+      "kind": "runtime",
+      "packaged_sha256": "267dea1b443958e7f48319a82d6eb77e626413eae1bd1d7435ac0a162a2eda2a"
+    },
+    {
+      "path": "runtime/genisom_roamerx_open/src/slam/src/test/mapping_demo.cpp",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/genisom_roamerx_open/src/slam/src/test/mapping_demo.cpp",
+      "sha256": "71fcc69f85670ed0cc33643b10f53b9159297af86d3db73966bc31ecbb22602b",
+      "bytes": 835,
+      "kind": "runtime",
+      "packaged_sha256": "71fcc69f85670ed0cc33643b10f53b9159297af86d3db73966bc31ecbb22602b"
+    },
+    {
+      "path": "runtime/matrix/LICENSE",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/LICENSE",
+      "sha256": "c0cc52d6bdaf4f5d3d0b21d6a2c16629e77d6ca3d67646fd6b91dde99b734e3a",
+      "bytes": 1493,
+      "kind": "runtime",
+      "packaged_sha256": "c0cc52d6bdaf4f5d3d0b21d6a2c16629e77d6ca3d67646fd6b91dde99b734e3a"
+    },
+    {
+      "path": "runtime/matrix/config/config.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/config/config.json",
+      "sha256": "6a701485113fa74020963a91314ed01df4e6109bb8a0c16dde5057902cbb2655",
+      "bytes": 1648,
+      "kind": "runtime",
+      "packaged_sha256": "6a701485113fa74020963a91314ed01df4e6109bb8a0c16dde5057902cbb2655"
+    },
+    {
+      "path": "runtime/matrix/scene/scene_go2w_extended_nav.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scene/scene_go2w_extended_nav.json",
+      "sha256": "e288328cf6b801c9ec32a19d657fdc58029e24929224d19e465baa214c217f34",
+      "bytes": 4131,
+      "kind": "runtime",
+      "packaged_sha256": "e288328cf6b801c9ec32a19d657fdc58029e24929224d19e465baa214c217f34"
+    },
+    {
+      "path": "runtime/matrix/scene/scene_go2w_global_compare.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scene/scene_go2w_global_compare.json",
+      "sha256": "fcae7ade79824e868eb57ab4a02c502729918da6f034e2be8aa729c2f34d0973",
+      "bytes": 200413,
+      "kind": "runtime",
+      "packaged_sha256": "fcae7ade79824e868eb57ab4a02c502729918da6f034e2be8aa729c2f34d0973"
+    },
+    {
+      "path": "runtime/matrix/scene/scene_go2w_office_course.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scene/scene_go2w_office_course.json",
+      "sha256": "730d9cd98613b36f0ace46c4e63828bd458f06b8e41a275a935aadd5ae4bda4f",
+      "bytes": 10652,
+      "kind": "runtime",
+      "packaged_sha256": "730d9cd98613b36f0ace46c4e63828bd458f06b8e41a275a935aadd5ae4bda4f"
+    },
+    {
+      "path": "runtime/matrix/scene/scene_go2w_office_inline.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scene/scene_go2w_office_inline.json",
+      "sha256": "c6be8691bed6fc354fe9c12934f3e8f1c162fc0ee170855d0785d4d914263689",
+      "bytes": 22398,
+      "kind": "runtime",
+      "packaged_sha256": "c6be8691bed6fc354fe9c12934f3e8f1c162fc0ee170855d0785d4d914263689"
+    },
+    {
+      "path": "runtime/matrix/scene/scene_go2w_static_course.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scene/scene_go2w_static_course.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "bytes": 3,
+      "kind": "runtime",
+      "packaged_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "path": "runtime/matrix/scripts/run_roamerx_lite_link.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scripts/run_roamerx_lite_link.sh",
+      "sha256": "5397b3fbe9e101ffd5de8b3d35a7a705431d6f5e3c09c79001f5f41fbe6a7d99",
+      "bytes": 15768,
+      "kind": "runtime",
+      "packaged_sha256": "5397b3fbe9e101ffd5de8b3d35a7a705431d6f5e3c09c79001f5f41fbe6a7d99"
+    },
+    {
+      "path": "runtime/matrix/scripts/run_sim.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/scripts/run_sim.sh",
+      "sha256": "9c26bbd2e9526091dc84ae2dbb98535b7c1ec859edc6ba81458b7dda120a3a71",
+      "bytes": 30640,
+      "kind": "runtime",
+      "packaged_sha256": "9c26bbd2e9526091dc84ae2dbb98535b7c1ec859edc6ba81458b7dda120a3a71"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/3dgs.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/3dgs.xml",
+      "sha256": "d278a2c9754eefdd5a3c1bfd1f2d1fa3a4bcf32a08b72a492b07b12ef42c088f",
+      "bytes": 2800,
+      "kind": "runtime",
+      "packaged_sha256": "d278a2c9754eefdd5a3c1bfd1f2d1fa3a4bcf32a08b72a492b07b12ef42c088f"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/g1_12dof_proxy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/g1_12dof_proxy.xml",
+      "sha256": "4a82002baeadd940f1a0d6f99e1257480ea4da552124855d425c4db4b671af4c",
+      "bytes": 19384,
+      "kind": "runtime",
+      "packaged_sha256": "4a82002baeadd940f1a0d6f99e1257480ea4da552124855d425c4db4b671af4c"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/g1_oil_upper_proxy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/g1_oil_upper_proxy.xml",
+      "sha256": "0dcc627f72fe0ab15e57aa3bb4b446f3d88e10f13c8e3d290fb585a1ad31f5a2",
+      "bytes": 27317,
+      "kind": "runtime",
+      "packaged_sha256": "0dcc627f72fe0ab15e57aa3bb4b446f3d88e10f13c8e3d290fb585a1ad31f5a2"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/go2w.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/go2w.xml",
+      "sha256": "1a9f35f33366ea22c4ae282e1c54244a25d40d4338f81857b6236f2e77edffb2",
+      "bytes": 19168,
+      "kind": "runtime",
+      "packaged_sha256": "1a9f35f33366ea22c4ae282e1c54244a25d40d4338f81857b6236f2e77edffb2"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/go2w_nezha2_stairs_carrier.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/go2w_nezha2_stairs_carrier.xml",
+      "sha256": "a7c613c1e049d654ea3ceba47eb220f7f220a668576de0ba9a69b80680f1c2d1",
+      "bytes": 19207,
+      "kind": "runtime",
+      "packaged_sha256": "a7c613c1e049d654ea3ceba47eb220f7f220a668576de0ba9a69b80680f1c2d1"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/oli_HU_D04_01_proxy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/oli_HU_D04_01_proxy.xml",
+      "sha256": "9032640765d3976ede66f89f073dd17e93952524bd961c920f424067d571acce",
+      "bytes": 29623,
+      "kind": "runtime",
+      "packaged_sha256": "9032640765d3976ede66f89f073dd17e93952524bd961c920f424067d571acce"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene.xml",
+      "sha256": "0f4a68777a01698006fb2f8d7ee9d7323d254270c5f181b6b810debdba39b94f",
+      "bytes": 1474,
+      "kind": "runtime",
+      "packaged_sha256": "0f4a68777a01698006fb2f8d7ee9d7323d254270c5f181b6b810debdba39b94f"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain.xml",
+      "sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c",
+      "bytes": 36944,
+      "kind": "runtime",
+      "packaged_sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_apart.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_apart.xml",
+      "sha256": "b2469b3e8f7cc3254e63c447e8706de7086c316cb115582339b350f2e8b98c58",
+      "bytes": 8777,
+      "kind": "runtime",
+      "packaged_sha256": "b2469b3e8f7cc3254e63c447e8706de7086c316cb115582339b350f2e8b98c58"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_apart2.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_apart2.xml",
+      "sha256": "89878784d039675fa923c6240064579ef02a99afc9e6f02ec0a554e86cbb29ac",
+      "bytes": 13548,
+      "kind": "runtime",
+      "packaged_sha256": "89878784d039675fa923c6240064579ef02a99afc9e6f02ec0a554e86cbb29ac"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_cali.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_cali.xml",
+      "sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5",
+      "bytes": 1032,
+      "kind": "runtime",
+      "packaged_sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_cozy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_cozy.xml",
+      "sha256": "867eca7fa6fe496e01e419b4d2ef8fc5de307b9d4a822f0f0db247371403ad95",
+      "bytes": 5455,
+      "kind": "runtime",
+      "packaged_sha256": "867eca7fa6fe496e01e419b4d2ef8fc5de307b9d4a822f0f0db247371403ad95"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_crowd.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_crowd.xml",
+      "sha256": "98ea104404da1ce5f90e1a0103597894261db334ba3665fb3658c00cf29e206d",
+      "bytes": 18576,
+      "kind": "runtime",
+      "packaged_sha256": "98ea104404da1ce5f90e1a0103597894261db334ba3665fb3658c00cf29e206d"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_custom.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_custom.xml",
+      "sha256": "243eb6cc489b24a58eb114e7324d93b978b7146cc2faed88bfca10a1e2448be2",
+      "bytes": 12453,
+      "kind": "runtime",
+      "packaged_sha256": "243eb6cc489b24a58eb114e7324d93b978b7146cc2faed88bfca10a1e2448be2"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_flat.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_flat.xml",
+      "sha256": "7e1842ddeac8a9e466c5b356dd1fea9c743c743f07e159a2627827a7b9bc3811",
+      "bytes": 32337,
+      "kind": "runtime",
+      "packaged_sha256": "7e1842ddeac8a9e466c5b356dd1fea9c743c743f07e159a2627827a7b9bc3811"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_flat25.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_flat25.xml",
+      "sha256": "f32151339fc2f925a541b66c3b37e9a5a31c40781643002efabafce109dadd58",
+      "bytes": 42080,
+      "kind": "runtime",
+      "packaged_sha256": "f32151339fc2f925a541b66c3b37e9a5a31c40781643002efabafce109dadd58"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_house.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_house.xml",
+      "sha256": "47b8a865eeef18c946061d840bda20b178c23ccf2dc63a7eaafae4961ac1fcd7",
+      "bytes": 13120,
+      "kind": "runtime",
+      "packaged_sha256": "47b8a865eeef18c946061d840bda20b178c23ccf2dc63a7eaafae4961ac1fcd7"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_meet.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_meet.xml",
+      "sha256": "0eb74db27eb6399d56b8fd7bd2b1bfdd9e9430e77b97e22e54aa89bded024081",
+      "bytes": 9068,
+      "kind": "runtime",
+      "packaged_sha256": "0eb74db27eb6399d56b8fd7bd2b1bfdd9e9430e77b97e22e54aa89bded024081"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_moon_dynamic.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_moon_dynamic.xml",
+      "sha256": "eb8fd614d98ce464e80c80d3161ecc18bbd132993b962a5b89f8c202ca0bf0de",
+      "bytes": 61586,
+      "kind": "runtime",
+      "packaged_sha256": "eb8fd614d98ce464e80c80d3161ecc18bbd132993b962a5b89f8c202ca0bf0de"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office.xml",
+      "sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c",
+      "bytes": 36944,
+      "kind": "runtime",
+      "packaged_sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office_course.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office_course.xml",
+      "sha256": "9a767720bb5bf8032350046277359a235f77f6ebd1feecdba400da184438fc80",
+      "bytes": 32470,
+      "kind": "runtime",
+      "packaged_sha256": "9a767720bb5bf8032350046277359a235f77f6ebd1feecdba400da184438fc80"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office_inline.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office_inline.xml",
+      "sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c",
+      "bytes": 36944,
+      "kind": "runtime",
+      "packaged_sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_oli_flat.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_oli_flat.xml",
+      "sha256": "cf4f6204157bfe13f720f856dbd3aab7e3378b0866636fd981a498d589657693",
+      "bytes": 1026,
+      "kind": "runtime",
+      "packaged_sha256": "cf4f6204157bfe13f720f856dbd3aab7e3378b0866636fd981a498d589657693"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_rw.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_rw.xml",
+      "sha256": "c9975ae79eb1afd8d12f8e0587d769e42e40f682dde3f8f873ee7dc982014d4e",
+      "bytes": 7500,
+      "kind": "runtime",
+      "packaged_sha256": "c9975ae79eb1afd8d12f8e0587d769e42e40f682dde3f8f873ee7dc982014d4e"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_sloped.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_sloped.xml",
+      "sha256": "ab9ae26fe2e5b633cc66019d71b4dfd835517faeea11b2f0eed00a8c95b4fa12",
+      "bytes": 39608,
+      "kind": "runtime",
+      "packaged_sha256": "ab9ae26fe2e5b633cc66019d71b4dfd835517faeea11b2f0eed00a8c95b4fa12"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_sloped25.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_sloped25.xml",
+      "sha256": "b7086561a89b0f80d54bc7e2e08e57798ef49750fe7a2ce04561c6dc1bfea917",
+      "bytes": 46248,
+      "kind": "runtime",
+      "packaged_sha256": "b7086561a89b0f80d54bc7e2e08e57798ef49750fe7a2ce04561c6dc1bfea917"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_t10.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_t10.xml",
+      "sha256": "fec5331fb950dc3efe9786395c01f4278b315b5914f8eb67e7ad56c05f9d86b2",
+      "bytes": 110963,
+      "kind": "runtime",
+      "packaged_sha256": "fec5331fb950dc3efe9786395c01f4278b315b5914f8eb67e7ad56c05f9d86b2"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_venice.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_venice.xml",
+      "sha256": "bea76c64193c6455f3ea58acea549079fe014cbcedc94f64ea32e6c067afec70",
+      "bytes": 163836,
+      "kind": "runtime",
+      "packaged_sha256": "bea76c64193c6455f3ea58acea549079fe014cbcedc94f64ea32e6c067afec70"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_wh.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_wh.xml",
+      "sha256": "a34068a612e8641e0bccc9acf7ebce740313d4223ed421a6d942006eda00ad3a",
+      "bytes": 27223,
+      "kind": "runtime",
+      "packaged_sha256": "a34068a612e8641e0bccc9acf7ebce740313d4223ed421a6d942006eda00ad3a"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard.xml",
+      "sha256": "8a87fe3b4c6790e61cebaf43c1645269268b43da76816002e8ad7defb04083ab",
+      "bytes": 17219,
+      "kind": "runtime",
+      "packaged_sha256": "8a87fe3b4c6790e61cebaf43c1645269268b43da76816002e8ad7defb04083ab"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_extended_nav.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_extended_nav.xml",
+      "sha256": "e3e7db5b3a270f3aa09867437b6490c97834e7fc21af18ab87044c53e4b34716",
+      "bytes": 18550,
+      "kind": "runtime",
+      "packaged_sha256": "e3e7db5b3a270f3aa09867437b6490c97834e7fc21af18ab87044c53e4b34716"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_g1_oil_upper_proxy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_g1_oil_upper_proxy.xml",
+      "sha256": "fc945960e63f8025963c3d355859e59a07c8db3bd5405fab057549702dfa9c1c",
+      "bytes": 8593,
+      "kind": "runtime",
+      "packaged_sha256": "fc945960e63f8025963c3d355859e59a07c8db3bd5405fab057549702dfa9c1c"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_g1_proxy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_g1_proxy.xml",
+      "sha256": "4db7e06f9f9310db1f4b94ddaea9f82b62bafca126b5126ffdd83047a73f8f54",
+      "bytes": 26018,
+      "kind": "runtime",
+      "packaged_sha256": "4db7e06f9f9310db1f4b94ddaea9f82b62bafca126b5126ffdd83047a73f8f54"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_go2w.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_go2w.xml",
+      "sha256": "a3ae56f1f4a6a92c15119ca0c914474dddd5d2c55cad6730dda3cad2e68ec180",
+      "bytes": 8580,
+      "kind": "runtime",
+      "packaged_sha256": "a3ae56f1f4a6a92c15119ca0c914474dddd5d2c55cad6730dda3cad2e68ec180"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_mid360_course.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_mid360_course.xml",
+      "sha256": "8a87fe3b4c6790e61cebaf43c1645269268b43da76816002e8ad7defb04083ab",
+      "bytes": 17219,
+      "kind": "runtime",
+      "packaged_sha256": "8a87fe3b4c6790e61cebaf43c1645269268b43da76816002e8ad7defb04083ab"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_native_people.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_yard_native_people.xml",
+      "sha256": "98ea104404da1ce5f90e1a0103597894261db334ba3665fb3658c00cf29e206d",
+      "bytes": 18576,
+      "kind": "runtime",
+      "packaged_sha256": "98ea104404da1ce5f90e1a0103597894261db334ba3665fb3658c00cf29e206d"
+    },
+    {
+      "path": "runtime/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_zombie.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_zombie.xml",
+      "sha256": "70a55483abb80502fd0d13c4742159ac611dac19e376af37fa488131eed1ff1f",
+      "bytes": 110598,
+      "kind": "runtime",
+      "packaged_sha256": "70a55483abb80502fd0d13c4742159ac611dac19e376af37fa488131eed1ff1f"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/3dgs.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/3dgs.xml",
+      "sha256": "d278a2c9754eefdd5a3c1bfd1f2d1fa3a4bcf32a08b72a492b07b12ef42c088f",
+      "bytes": 2800,
+      "kind": "runtime",
+      "packaged_sha256": "d278a2c9754eefdd5a3c1bfd1f2d1fa3a4bcf32a08b72a492b07b12ef42c088f"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/go2w.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/go2w.xml",
+      "sha256": "408c973658268c9e3fbf2a64f968c8b7d516f9a35d33979c6617a502d7253d35",
+      "bytes": 19228,
+      "kind": "runtime",
+      "packaged_sha256": "408c973658268c9e3fbf2a64f968c8b7d516f9a35d33979c6617a502d7253d35"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene.xml",
+      "sha256": "0f4a68777a01698006fb2f8d7ee9d7323d254270c5f181b6b810debdba39b94f",
+      "bytes": 1474,
+      "kind": "runtime",
+      "packaged_sha256": "0f4a68777a01698006fb2f8d7ee9d7323d254270c5f181b6b810debdba39b94f"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain.xml",
+      "sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5",
+      "bytes": 1032,
+      "kind": "runtime",
+      "packaged_sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_apart.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_apart.xml",
+      "sha256": "b2469b3e8f7cc3254e63c447e8706de7086c316cb115582339b350f2e8b98c58",
+      "bytes": 8777,
+      "kind": "runtime",
+      "packaged_sha256": "b2469b3e8f7cc3254e63c447e8706de7086c316cb115582339b350f2e8b98c58"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_apart2.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_apart2.xml",
+      "sha256": "89878784d039675fa923c6240064579ef02a99afc9e6f02ec0a554e86cbb29ac",
+      "bytes": 13548,
+      "kind": "runtime",
+      "packaged_sha256": "89878784d039675fa923c6240064579ef02a99afc9e6f02ec0a554e86cbb29ac"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_cali.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_cali.xml",
+      "sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5",
+      "bytes": 1032,
+      "kind": "runtime",
+      "packaged_sha256": "f02d67a12a32abf67677f47e16c3138aa9e105d972ef5c51f965a3bf50849ca5"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_coupled_nav.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_coupled_nav.xml",
+      "sha256": "1876f729d45fd86bfe4efa17b5374d8d308b43d497537a372f86757a38344c7c",
+      "bytes": 4290,
+      "kind": "runtime",
+      "packaged_sha256": "1876f729d45fd86bfe4efa17b5374d8d308b43d497537a372f86757a38344c7c"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_cozy.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_cozy.xml",
+      "sha256": "867eca7fa6fe496e01e419b4d2ef8fc5de307b9d4a822f0f0db247371403ad95",
+      "bytes": 5455,
+      "kind": "runtime",
+      "packaged_sha256": "867eca7fa6fe496e01e419b4d2ef8fc5de307b9d4a822f0f0db247371403ad95"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_crowd.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_crowd.xml",
+      "sha256": "469feafe2392f2ff5a48b114fd24547953afc3e8c9d1259a3cdaf8e0718af8c2",
+      "bytes": 14389,
+      "kind": "runtime",
+      "packaged_sha256": "469feafe2392f2ff5a48b114fd24547953afc3e8c9d1259a3cdaf8e0718af8c2"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_custom.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_custom.xml",
+      "sha256": "243eb6cc489b24a58eb114e7324d93b978b7146cc2faed88bfca10a1e2448be2",
+      "bytes": 12453,
+      "kind": "runtime",
+      "packaged_sha256": "243eb6cc489b24a58eb114e7324d93b978b7146cc2faed88bfca10a1e2448be2"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_flat.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_flat.xml",
+      "sha256": "7e1842ddeac8a9e466c5b356dd1fea9c743c743f07e159a2627827a7b9bc3811",
+      "bytes": 32337,
+      "kind": "runtime",
+      "packaged_sha256": "7e1842ddeac8a9e466c5b356dd1fea9c743c743f07e159a2627827a7b9bc3811"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_flat25.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_flat25.xml",
+      "sha256": "f32151339fc2f925a541b66c3b37e9a5a31c40781643002efabafce109dadd58",
+      "bytes": 42080,
+      "kind": "runtime",
+      "packaged_sha256": "f32151339fc2f925a541b66c3b37e9a5a31c40781643002efabafce109dadd58"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_house.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_house.xml",
+      "sha256": "47b8a865eeef18c946061d840bda20b178c23ccf2dc63a7eaafae4961ac1fcd7",
+      "bytes": 13120,
+      "kind": "runtime",
+      "packaged_sha256": "47b8a865eeef18c946061d840bda20b178c23ccf2dc63a7eaafae4961ac1fcd7"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_meet.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_meet.xml",
+      "sha256": "0eb74db27eb6399d56b8fd7bd2b1bfdd9e9430e77b97e22e54aa89bded024081",
+      "bytes": 9068,
+      "kind": "runtime",
+      "packaged_sha256": "0eb74db27eb6399d56b8fd7bd2b1bfdd9e9430e77b97e22e54aa89bded024081"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_moon_dynamic.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_moon_dynamic.xml",
+      "sha256": "eb8fd614d98ce464e80c80d3161ecc18bbd132993b962a5b89f8c202ca0bf0de",
+      "bytes": 61586,
+      "kind": "runtime",
+      "packaged_sha256": "eb8fd614d98ce464e80c80d3161ecc18bbd132993b962a5b89f8c202ca0bf0de"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office.xml",
+      "sha256": "4de6311b1b723345c9ac68169317b42a8da492647b7fcbf653fdae5ac68a232d",
+      "bytes": 25229,
+      "kind": "runtime",
+      "packaged_sha256": "4de6311b1b723345c9ac68169317b42a8da492647b7fcbf653fdae5ac68a232d"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_course.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_course.xml",
+      "sha256": "baf889b5a2523dc938e72c6a27151c707853b419267a0696f33d751503d230f0",
+      "bytes": 32470,
+      "kind": "runtime",
+      "packaged_sha256": "baf889b5a2523dc938e72c6a27151c707853b419267a0696f33d751503d230f0"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_inline.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_inline.xml",
+      "sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c",
+      "bytes": 36944,
+      "kind": "runtime",
+      "packaged_sha256": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_ramp_rl.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_ramp_rl.xml",
+      "sha256": "91cfa31fd89d3092abe6c0de69196b5d9908807aa899cc2e4ce30796fbf465eb",
+      "bytes": 2099,
+      "kind": "runtime",
+      "packaged_sha256": "91cfa31fd89d3092abe6c0de69196b5d9908807aa899cc2e4ce30796fbf465eb"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_rw.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_rw.xml",
+      "sha256": "c9975ae79eb1afd8d12f8e0587d769e42e40f682dde3f8f873ee7dc982014d4e",
+      "bytes": 7500,
+      "kind": "runtime",
+      "packaged_sha256": "c9975ae79eb1afd8d12f8e0587d769e42e40f682dde3f8f873ee7dc982014d4e"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_sloped.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_sloped.xml",
+      "sha256": "ab9ae26fe2e5b633cc66019d71b4dfd835517faeea11b2f0eed00a8c95b4fa12",
+      "bytes": 39608,
+      "kind": "runtime",
+      "packaged_sha256": "ab9ae26fe2e5b633cc66019d71b4dfd835517faeea11b2f0eed00a8c95b4fa12"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_sloped25.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_sloped25.xml",
+      "sha256": "b7086561a89b0f80d54bc7e2e08e57798ef49750fe7a2ce04561c6dc1bfea917",
+      "bytes": 46248,
+      "kind": "runtime",
+      "packaged_sha256": "b7086561a89b0f80d54bc7e2e08e57798ef49750fe7a2ce04561c6dc1bfea917"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_stairs_rl.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_stairs_rl.xml",
+      "sha256": "6b1152e9ac6f267d38fab8c18599b2481955aa3c05c3444c832752f237a36ac2",
+      "bytes": 2120,
+      "kind": "runtime",
+      "packaged_sha256": "6b1152e9ac6f267d38fab8c18599b2481955aa3c05c3444c832752f237a36ac2"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_t10.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_t10.xml",
+      "sha256": "fec5331fb950dc3efe9786395c01f4278b315b5914f8eb67e7ad56c05f9d86b2",
+      "bytes": 110963,
+      "kind": "runtime",
+      "packaged_sha256": "fec5331fb950dc3efe9786395c01f4278b315b5914f8eb67e7ad56c05f9d86b2"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_venice.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_venice.xml",
+      "sha256": "bea76c64193c6455f3ea58acea549079fe014cbcedc94f64ea32e6c067afec70",
+      "bytes": 163836,
+      "kind": "runtime",
+      "packaged_sha256": "bea76c64193c6455f3ea58acea549079fe014cbcedc94f64ea32e6c067afec70"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_wh.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_wh.xml",
+      "sha256": "a34068a612e8641e0bccc9acf7ebce740313d4223ed421a6d942006eda00ad3a",
+      "bytes": 27223,
+      "kind": "runtime",
+      "packaged_sha256": "a34068a612e8641e0bccc9acf7ebce740313d4223ed421a6d942006eda00ad3a"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard.xml",
+      "sha256": "a3ae56f1f4a6a92c15119ca0c914474dddd5d2c55cad6730dda3cad2e68ec180",
+      "bytes": 8580,
+      "kind": "runtime",
+      "packaged_sha256": "a3ae56f1f4a6a92c15119ca0c914474dddd5d2c55cad6730dda3cad2e68ec180"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_extended_nav.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_extended_nav.xml",
+      "sha256": "5d6a5487f5b203d8db70e1f2dd54e33f589b9869a0fac6840f05836eda4c473a",
+      "bytes": 20348,
+      "kind": "runtime",
+      "packaged_sha256": "5d6a5487f5b203d8db70e1f2dd54e33f589b9869a0fac6840f05836eda4c473a"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_mid360_course.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_yard_mid360_course.xml",
+      "sha256": "282426b6743bc116bb666b09dd2f9d731d094b0e638ad7786a37e6b09f159841",
+      "bytes": 17219,
+      "kind": "runtime",
+      "packaged_sha256": "282426b6743bc116bb666b09dd2f9d731d094b0e638ad7786a37e6b09f159841"
+    },
+    {
+      "path": "runtime/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_zombie.xml",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_zombie.xml",
+      "sha256": "70a55483abb80502fd0d13c4742159ac611dac19e376af37fa488131eed1ff1f",
+      "bytes": 110598,
+      "kind": "runtime",
+      "packaged_sha256": "70a55483abb80502fd0d13c4742159ac611dac19e376af37fa488131eed1ff1f"
+    },
+    {
+      "path": "runtime/models/anything/manifest.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/models/anything/manifest.json",
+      "sha256": "10fa78ea67ab016c2fe528c9e1f76cd8e75625ee966a5a89946aa017fae7c159",
+      "bytes": 671,
+      "kind": "runtime",
+      "packaged_sha256": "10fa78ea67ab016c2fe528c9e1f76cd8e75625ee966a5a89946aa017fae7c159"
+    },
+    {
+      "path": "runtime/scripts/audit_go2w_clearance.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/audit_go2w_clearance.py",
+      "sha256": "0af15adc8af7232084af6c464daa74bcf3078f4d3d1e87969e4d233f7ebf4e41",
+      "bytes": 2103,
+      "kind": "runtime",
+      "packaged_sha256": "0af15adc8af7232084af6c464daa74bcf3078f4d3d1e87969e4d233f7ebf4e41"
+    },
+    {
+      "path": "runtime/scripts/audit_go2w_lidar_ground.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/audit_go2w_lidar_ground.py",
+      "sha256": "a02ba55269c75a331b887028c44ad55d0b484f24f1db51091aadbe3542aa68cf",
+      "bytes": 2697,
+      "kind": "runtime",
+      "packaged_sha256": "a02ba55269c75a331b887028c44ad55d0b484f24f1db51091aadbe3542aa68cf"
+    },
+    {
+      "path": "runtime/scripts/build_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_demo.sh",
+      "sha256": "a8749d1de83d51e15c0b8bd8aa1ea65dd67bba16a12a9fc4e5efdde24223c664",
+      "bytes": 1954,
+      "kind": "runtime",
+      "packaged_sha256": "a8749d1de83d51e15c0b8bd8aa1ea65dd67bba16a12a9fc4e5efdde24223c664"
+    },
+    {
+      "path": "runtime/scripts/build_g1_office_navigation_assets.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_g1_office_navigation_assets.py",
+      "sha256": "28da46c54af472d1231c1e10ecb2de3ae367c59d5772285b0c4461293d75a7c1",
+      "bytes": 2333,
+      "kind": "runtime",
+      "packaged_sha256": "28da46c54af472d1231c1e10ecb2de3ae367c59d5772285b0c4461293d75a7c1"
+    },
+    {
+      "path": "runtime/scripts/build_go2w_office_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_go2w_office_course.py",
+      "sha256": "e385ec5f6edbc1bf11dc66b892e11006803c55120c55806061b1832f3b6f3e17",
+      "bytes": 5844,
+      "kind": "runtime",
+      "packaged_sha256": "e385ec5f6edbc1bf11dc66b892e11006803c55120c55806061b1832f3b6f3e17"
+    },
+    {
+      "path": "runtime/scripts/build_go2w_office_inline.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_go2w_office_inline.py",
+      "sha256": "fac743008968ca6b6f3b748ed1961e34cae791a054bd45b5305fcb4413f2682b",
+      "bytes": 3898,
+      "kind": "runtime",
+      "packaged_sha256": "fac743008968ca6b6f3b748ed1961e34cae791a054bd45b5305fcb4413f2682b"
+    },
+    {
+      "path": "runtime/scripts/build_inline_bridge.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_inline_bridge.py",
+      "sha256": "f4956b670c02aec5afcdf2f5fcff03f8356bfe7e72e0cc8d258b192d11aba0c6",
+      "bytes": 955,
+      "kind": "runtime",
+      "packaged_sha256": "f4956b670c02aec5afcdf2f5fcff03f8356bfe7e72e0cc8d258b192d11aba0c6"
+    },
+    {
+      "path": "runtime/scripts/build_nezha2_office_navigation_assets.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/build_nezha2_office_navigation_assets.py",
+      "sha256": "0331176d5907ef0578cd62931257a1aa39fa63412e472f309760fa0ee9c0449f",
+      "bytes": 2204,
+      "kind": "runtime",
+      "packaged_sha256": "0331176d5907ef0578cd62931257a1aa39fa63412e472f309760fa0ee9c0449f"
+    },
+    {
+      "path": "runtime/scripts/capture_go2w_semantic_cloud.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/capture_go2w_semantic_cloud.py",
+      "sha256": "c8fb01db5bc3907f7797974006fa82fe6f5ef1a58ba26dfedbf90d907ee2b9a2",
+      "bytes": 12114,
+      "kind": "runtime",
+      "packaged_sha256": "c8fb01db5bc3907f7797974006fa82fe6f5ef1a58ba26dfedbf90d907ee2b9a2"
+    },
+    {
+      "path": "runtime/scripts/capture_mid360_semantics.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/capture_mid360_semantics.py",
+      "sha256": "d316c6c88a1180ef56dda3d7cfe5c0228059fde30a04937342a10b66c5299310",
+      "bytes": 1902,
+      "kind": "runtime",
+      "packaged_sha256": "d316c6c88a1180ef56dda3d7cfe5c0228059fde30a04937342a10b66c5299310"
+    },
+    {
+      "path": "runtime/scripts/check_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/check_demo.sh",
+      "sha256": "46fc899f9b5fae746fbc872c79856802ab227544365a9dda4ef12efb3e299791",
+      "bytes": 1751,
+      "kind": "runtime",
+      "packaged_sha256": "46fc899f9b5fae746fbc872c79856802ab227544365a9dda4ef12efb3e299791"
+    },
+    {
+      "path": "runtime/scripts/cosmos_vln_bridge.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/cosmos_vln_bridge.py",
+      "sha256": "e6b90b01069c15e9cfe20b79f7bd7efd80009617d6708a342c92b9f5083098f3",
+      "bytes": 14742,
+      "kind": "runtime",
+      "packaged_sha256": "e6b90b01069c15e9cfe20b79f7bd7efd80009617d6708a342c92b9f5083098f3"
+    },
+    {
+      "path": "runtime/scripts/cosmos_vln_mission.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/cosmos_vln_mission.py",
+      "sha256": "9d653f49405ad290ca88d94cf9aca6ae24c122a36c6896dd7385dedccebab092",
+      "bytes": 75042,
+      "kind": "runtime",
+      "packaged_sha256": "9d653f49405ad290ca88d94cf9aca6ae24c122a36c6896dd7385dedccebab092"
+    },
+    {
+      "path": "runtime/scripts/cosmos_vln_protocol.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/cosmos_vln_protocol.py",
+      "sha256": "b92d3debd8fea98ffe0f6333a97024e4e2b74fe4dbcf1afdf834f2976a40a108",
+      "bytes": 10660,
+      "kind": "runtime",
+      "packaged_sha256": "b92d3debd8fea98ffe0f6333a97024e4e2b74fe4dbcf1afdf834f2976a40a108"
+    },
+    {
+      "path": "runtime/scripts/finalize_office_demo.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/finalize_office_demo.py",
+      "sha256": "6ccb9765cbedc8c46c60d005b0c2b3c8f67471c50737b42918b25a851c28bd82",
+      "bytes": 2753,
+      "kind": "runtime",
+      "packaged_sha256": "6ccb9765cbedc8c46c60d005b0c2b3c8f67471c50737b42918b25a851c28bd82"
+    },
+    {
+      "path": "runtime/scripts/finalize_office_inline_demo.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/finalize_office_inline_demo.py",
+      "sha256": "5342042a03686e458d5ed70504def1c05508f4047c2460185e0870707057b6d1",
+      "bytes": 2908,
+      "kind": "runtime",
+      "packaged_sha256": "5342042a03686e458d5ed70504def1c05508f4047c2460185e0870707057b6d1"
+    },
+    {
+      "path": "runtime/scripts/generate_go2w_native_people_scene.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/generate_go2w_native_people_scene.py",
+      "sha256": "a22478365ae257d341fb7613d9ecb56586d940273b07f5d8dff00b7ccc1e2d70",
+      "bytes": 697,
+      "kind": "runtime",
+      "packaged_sha256": "a22478365ae257d341fb7613d9ecb56586d940273b07f5d8dff00b7ccc1e2d70"
+    },
+    {
+      "path": "runtime/scripts/generate_go2w_terrain_figures.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/generate_go2w_terrain_figures.py",
+      "sha256": "5c24f80ff9d0d5e589a4bfdc5a8db144cf1ed0731a94ab851c475f1e6c0d08a6",
+      "bytes": 8174,
+      "kind": "runtime",
+      "packaged_sha256": "5c24f80ff9d0d5e589a4bfdc5a8db144cf1ed0731a94ab851c475f1e6c0d08a6"
+    },
+    {
+      "path": "runtime/scripts/global_compare/audit_take.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/audit_take.py",
+      "sha256": "9626f39d8c442c95309f879ae88a9479181786c5a740a446a6dc1f3f3a6a6002",
+      "bytes": 3903,
+      "kind": "runtime",
+      "packaged_sha256": "9626f39d8c442c95309f879ae88a9479181786c5a740a446a6dc1f3f3a6a6002"
+    },
+    {
+      "path": "runtime/scripts/global_compare/cleanup_debug_artifacts.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/cleanup_debug_artifacts.py",
+      "sha256": "9ccbf99d18dcc11b7de97e32b1fde5344b55bbf780e6ec666df21788c8ecdc15",
+      "bytes": 2890,
+      "kind": "runtime",
+      "packaged_sha256": "9ccbf99d18dcc11b7de97e32b1fde5344b55bbf780e6ec666df21788c8ecdc15"
+    },
+    {
+      "path": "runtime/scripts/global_compare/dense_capture.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/dense_capture.py",
+      "sha256": "b802fcc5049c1223c3fa377a7a33a6462384e0f42ceb54ff6956eaf36daaba0a",
+      "bytes": 11962,
+      "kind": "runtime",
+      "packaged_sha256": "59cb95559d72a954e80dff20457fdac25d1ef96bb899597bc556a33dc572e1f5"
+    },
+    {
+      "path": "runtime/scripts/global_compare/follow_route.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/follow_route.py",
+      "sha256": "cc86bce31c593455d63670d28b80cdf39cf82c77c4542eb706a8441086ee4b89",
+      "bytes": 12725,
+      "kind": "runtime",
+      "packaged_sha256": "cc86bce31c593455d63670d28b80cdf39cf82c77c4542eb706a8441086ee4b89"
+    },
+    {
+      "path": "runtime/scripts/global_compare/lio_map_review.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/lio_map_review.py",
+      "sha256": "9d75fa7df6912d511942cc72f5cd60c912d478b1effd097c10545fd5bbf577da",
+      "bytes": 15755,
+      "kind": "runtime",
+      "packaged_sha256": "9d75fa7df6912d511942cc72f5cd60c912d478b1effd097c10545fd5bbf577da"
+    },
+    {
+      "path": "runtime/scripts/global_compare/maps.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/maps.py",
+      "sha256": "9dbf55b414fde1debe55718d6d1eefd44bcea9db73baea58156ccce02ad1c50b",
+      "bytes": 3482,
+      "kind": "runtime",
+      "packaged_sha256": "9dbf55b414fde1debe55718d6d1eefd44bcea9db73baea58156ccce02ad1c50b"
+    },
+    {
+      "path": "runtime/scripts/global_compare/package_demo.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/package_demo.py",
+      "sha256": "9026326840e048171e8b7bb18799d6b9dff0e0425c53096b36d1d1eeffddc07a",
+      "bytes": 3513,
+      "kind": "runtime",
+      "packaged_sha256": "9026326840e048171e8b7bb18799d6b9dff0e0425c53096b36d1d1eeffddc07a"
+    },
+    {
+      "path": "runtime/scripts/global_compare/plan_routes.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/plan_routes.py",
+      "sha256": "bbe6b3c81e30ce1332169b6f423bbc14a361da7a45ba3c7ba811bdcf74910c89",
+      "bytes": 4388,
+      "kind": "runtime",
+      "packaged_sha256": "bbe6b3c81e30ce1332169b6f423bbc14a361da7a45ba3c7ba811bdcf74910c89"
+    },
+    {
+      "path": "runtime/scripts/global_compare/record_four_screen.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/record_four_screen.py",
+      "sha256": "6fd4411bc756c195219d87e05dc34cb480fefc6b146fd051bb1073200dafdd8d",
+      "bytes": 3093,
+      "kind": "runtime",
+      "packaged_sha256": "6fd4411bc756c195219d87e05dc34cb480fefc6b146fd051bb1073200dafdd8d"
+    },
+    {
+      "path": "runtime/scripts/global_compare/render_native_ikd.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/render_native_ikd.py",
+      "sha256": "d11e33c20dda312172932ceee5e65c09f9ca24427b81ee6bdcc9ce092a37dfd9",
+      "bytes": 2003,
+      "kind": "runtime",
+      "packaged_sha256": "d11e33c20dda312172932ceee5e65c09f9ca24427b81ee6bdcc9ce092a37dfd9"
+    },
+    {
+      "path": "runtime/scripts/global_compare/start_planners.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/start_planners.sh",
+      "sha256": "b6275bdd87adf962040b1998ea82a81086236d089a8e777051afacbdd4c145bd",
+      "bytes": 736,
+      "kind": "runtime",
+      "packaged_sha256": "b6275bdd87adf962040b1998ea82a81086236d089a8e777051afacbdd4c145bd"
+    },
+    {
+      "path": "runtime/scripts/global_compare/ue_console.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/ue_console.py",
+      "sha256": "4c7b9457d3405b82cb57332a095f73977459e9b0d9928d85c821de5a6ea80b2b",
+      "bytes": 2525,
+      "kind": "runtime",
+      "packaged_sha256": "4c7b9457d3405b82cb57332a095f73977459e9b0d9928d85c821de5a6ea80b2b"
+    },
+    {
+      "path": "runtime/scripts/global_compare/validate_pedestrians.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/validate_pedestrians.py",
+      "sha256": "f4c3b0c95cc5c47763db6c3ec9e1318cbc48a829aafe11f79b03fd329b75f6eb",
+      "bytes": 2455,
+      "kind": "runtime",
+      "packaged_sha256": "f4c3b0c95cc5c47763db6c3ec9e1318cbc48a829aafe11f79b03fd329b75f6eb"
+    },
+    {
+      "path": "runtime/scripts/global_compare/visualize_routes.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/global_compare/visualize_routes.py",
+      "sha256": "9171f6bfb2d80ef5e8f93e4d1d36a8e0159a50adb1b147c78ad417eb7da39c1e",
+      "bytes": 3783,
+      "kind": "runtime",
+      "packaged_sha256": "9171f6bfb2d80ef5e8f93e4d1d36a8e0159a50adb1b147c78ad417eb7da39c1e"
+    },
+    {
+      "path": "runtime/scripts/go2w_anything_image_view.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_anything_image_view.py",
+      "sha256": "00032f07b626605b7a6e14f3a9a9b4f9aee9e05a60b33f62619ceacb7c5624b3",
+      "bytes": 3191,
+      "kind": "runtime",
+      "packaged_sha256": "00032f07b626605b7a6e14f3a9a9b4f9aee9e05a60b33f62619ceacb7c5624b3"
+    },
+    {
+      "path": "runtime/scripts/go2w_anything_live.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_anything_live.py",
+      "sha256": "8e425a811e3dd1b1dd642b552b9a1ea904487db9ff36e5a4263a3778c010f22c",
+      "bytes": 8972,
+      "kind": "runtime",
+      "packaged_sha256": "8e425a811e3dd1b1dd642b552b9a1ea904487db9ff36e5a4263a3778c010f22c"
+    },
+    {
+      "path": "runtime/scripts/go2w_anything_models.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_anything_models.py",
+      "sha256": "43788870862bfdfa48c3bccafda6e08493e3cc608c5800b3285db974c1bc63f5",
+      "bytes": 6066,
+      "kind": "runtime",
+      "packaged_sha256": "43788870862bfdfa48c3bccafda6e08493e3cc608c5800b3285db974c1bc63f5"
+    },
+    {
+      "path": "runtime/scripts/go2w_continuous_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_continuous_course.py",
+      "sha256": "0725ad7b4042a6f3079d90796d8461465db234e757029ea0c34c5ac000ad3366",
+      "bytes": 10526,
+      "kind": "runtime",
+      "packaged_sha256": "0725ad7b4042a6f3079d90796d8461465db234e757029ea0c34c5ac000ad3366"
+    },
+    {
+      "path": "runtime/scripts/go2w_cosmos_frontier.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_cosmos_frontier.py",
+      "sha256": "47fbe55184d2c9dd44435505770e2a9fa70fc4f7f444867394be34b7a69caf63",
+      "bytes": 3971,
+      "kind": "runtime",
+      "packaged_sha256": "47fbe55184d2c9dd44435505770e2a9fa70fc4f7f444867394be34b7a69caf63"
+    },
+    {
+      "path": "runtime/scripts/go2w_dense_depth.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_dense_depth.py",
+      "sha256": "ad2270e2b0e9e120156cd732adb97164a6ce3107f0bc6099777202f59851471c",
+      "bytes": 3331,
+      "kind": "runtime",
+      "packaged_sha256": "ad2270e2b0e9e120156cd732adb97164a6ce3107f0bc6099777202f59851471c"
+    },
+    {
+      "path": "runtime/scripts/go2w_detection_filter.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_detection_filter.py",
+      "sha256": "3677a757d9f4e797f95db435ff05fca90cb57b5a6666e7c4a2512d96f13839bc",
+      "bytes": 2327,
+      "kind": "runtime",
+      "packaged_sha256": "3677a757d9f4e797f95db435ff05fca90cb57b5a6666e7c4a2512d96f13839bc"
+    },
+    {
+      "path": "runtime/scripts/go2w_dynamic_yield.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_dynamic_yield.py",
+      "sha256": "0556f34f655319aae38c30d3df2386077d087dc05ef38afb9bc565ff5394a2d6",
+      "bytes": 2224,
+      "kind": "runtime",
+      "packaged_sha256": "0556f34f655319aae38c30d3df2386077d087dc05ef38afb9bc565ff5394a2d6"
+    },
+    {
+      "path": "runtime/scripts/go2w_exploration.launch.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_exploration.launch.py",
+      "sha256": "46b3e973d9ccffe9cbf2b040806be242102bdc23dc4e72dfc0721c3dd28ce6f7",
+      "bytes": 2331,
+      "kind": "runtime",
+      "packaged_sha256": "46b3e973d9ccffe9cbf2b040806be242102bdc23dc4e72dfc0721c3dd28ce6f7"
+    },
+    {
+      "path": "runtime/scripts/go2w_frontier_grid.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_frontier_grid.py",
+      "sha256": "2721f1498bf4abc5229977da6f4d2a67c5d9a5f5dbe19fc54727c69f341b52aa",
+      "bytes": 6471,
+      "kind": "runtime",
+      "packaged_sha256": "2721f1498bf4abc5229977da6f4d2a67c5d9a5f5dbe19fc54727c69f341b52aa"
+    },
+    {
+      "path": "runtime/scripts/go2w_lidar_mount.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_lidar_mount.py",
+      "sha256": "29fa2ac5136f5b56dd17094caf476914f1580e1a3ea853bfe255ea0b08ece4bf",
+      "bytes": 482,
+      "kind": "runtime",
+      "packaged_sha256": "29fa2ac5136f5b56dd17094caf476914f1580e1a3ea853bfe255ea0b08ece4bf"
+    },
+    {
+      "path": "runtime/scripts/go2w_live_perception.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_live_perception.py",
+      "sha256": "f9002146a0f46aa076f2214b90972346c26a9dcb30c1b5f41d1629bcc674ba0e",
+      "bytes": 9165,
+      "kind": "runtime",
+      "packaged_sha256": "f9002146a0f46aa076f2214b90972346c26a9dcb30c1b5f41d1629bcc674ba0e"
+    },
+    {
+      "path": "runtime/scripts/go2w_manual_control.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_manual_control.py",
+      "sha256": "63293f96f309236936616ad77db3f300bfe13863954e7017736581f479bcd170",
+      "bytes": 7691,
+      "kind": "runtime",
+      "packaged_sha256": "63293f96f309236936616ad77db3f300bfe13863954e7017736581f479bcd170"
+    },
+    {
+      "path": "runtime/scripts/go2w_mapping_sidecar.launch.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_mapping_sidecar.launch.py",
+      "sha256": "8d25238ef31ad45cd3de63f2add1080c412f42c6812111ed76a0a6cfe5c24ec2",
+      "bytes": 1158,
+      "kind": "runtime",
+      "packaged_sha256": "8d25238ef31ad45cd3de63f2add1080c412f42c6812111ed76a0a6cfe5c24ec2"
+    },
+    {
+      "path": "runtime/scripts/go2w_mid360_semantics.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_mid360_semantics.py",
+      "sha256": "cfbbcb917c0bb9d89f855444acab1784e5de51699bd0fa92bc1ad4b7183b1769",
+      "bytes": 891,
+      "kind": "runtime",
+      "packaged_sha256": "cfbbcb917c0bb9d89f855444acab1784e5de51699bd0fa92bc1ad4b7183b1769"
+    },
+    {
+      "path": "runtime/scripts/go2w_mujoco_state_relay.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_mujoco_state_relay.py",
+      "sha256": "20df40aea678d763e2a2a49fde32661c6f83caa1c3edd6643df94c4405dc0abe",
+      "bytes": 5053,
+      "kind": "runtime",
+      "packaged_sha256": "20df40aea678d763e2a2a49fde32661c6f83caa1c3edd6643df94c4405dc0abe"
+    },
+    {
+      "path": "runtime/scripts/go2w_office_continuous_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_office_continuous_course.py",
+      "sha256": "02811239e58feb9596f78d12958a3ad48255d7a5004782e1030f3b18e8d12d90",
+      "bytes": 2470,
+      "kind": "runtime",
+      "packaged_sha256": "02811239e58feb9596f78d12958a3ad48255d7a5004782e1030f3b18e8d12d90"
+    },
+    {
+      "path": "runtime/scripts/go2w_office_inline_run.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_office_inline_run.py",
+      "sha256": "480872b848483f2d3302e0c33560aac70e2a7c93e5575ec13a7b106ccd340c95",
+      "bytes": 6896,
+      "kind": "runtime",
+      "packaged_sha256": "480872b848483f2d3302e0c33560aac70e2a7c93e5575ec13a7b106ccd340c95"
+    },
+    {
+      "path": "runtime/scripts/go2w_online_exploration.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_online_exploration.py",
+      "sha256": "97cc3344a18e36598e4c657059c7957c9c229bc9aa2a2c882771d573e4514683",
+      "bytes": 18383,
+      "kind": "runtime",
+      "packaged_sha256": "97cc3344a18e36598e4c657059c7957c9c229bc9aa2a2c882771d573e4514683"
+    },
+    {
+      "path": "runtime/scripts/go2w_semantic_geometry.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_semantic_geometry.py",
+      "sha256": "fd2c9c365d51f82d49254289abfcf850138edf47ae15ef146798c45219e990be",
+      "bytes": 2116,
+      "kind": "runtime",
+      "packaged_sha256": "fd2c9c365d51f82d49254289abfcf850138edf47ae15ef146798c45219e990be"
+    },
+    {
+      "path": "runtime/scripts/go2w_semantic_map.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_semantic_map.py",
+      "sha256": "fa8879b202043b575c3e556e434a828815446ad1b1099128c106dc09a954821b",
+      "bytes": 8753,
+      "kind": "runtime",
+      "packaged_sha256": "fa8879b202043b575c3e556e434a828815446ad1b1099128c106dc09a954821b"
+    },
+    {
+      "path": "runtime/scripts/go2w_semantic_map_core.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_semantic_map_core.py",
+      "sha256": "f495b1c3466146b7709f025f6cbf73472ba5fbb1926f396916c77e46a85950a4",
+      "bytes": 5640,
+      "kind": "runtime",
+      "packaged_sha256": "f495b1c3466146b7709f025f6cbf73472ba5fbb1926f396916c77e46a85950a4"
+    },
+    {
+      "path": "runtime/scripts/go2w_state_tee.c",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_state_tee.c",
+      "sha256": "23c8968ad289c5ef4489e2018eccf8c6ec807810e9bdc792292ab052e144339b",
+      "bytes": 1588,
+      "kind": "runtime",
+      "packaged_sha256": "23c8968ad289c5ef4489e2018eccf8c6ec807810e9bdc792292ab052e144339b"
+    },
+    {
+      "path": "runtime/scripts/go2w_terrain_policy.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_terrain_policy.py",
+      "sha256": "25d1022396861bd0a916cfabade2d0453d5b4766fcad8d3783a747ea7e21580d",
+      "bytes": 7132,
+      "kind": "runtime",
+      "packaged_sha256": "25d1022396861bd0a916cfabade2d0453d5b4766fcad8d3783a747ea7e21580d"
+    },
+    {
+      "path": "runtime/scripts/go2w_world_obstacle_cloud.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/go2w_world_obstacle_cloud.py",
+      "sha256": "fb4c314ffce6c892046afb989438a5bb430090c27c1708bf9a8bc6334abbeb10",
+      "bytes": 19445,
+      "kind": "runtime",
+      "packaged_sha256": "fb4c314ffce6c892046afb989438a5bb430090c27c1708bf9a8bc6334abbeb10"
+    },
+    {
+      "path": "runtime/scripts/inspect_go2w_obstacle_cells.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/inspect_go2w_obstacle_cells.py",
+      "sha256": "c243f3c303dd46a5eae6c7a8f1706ab1144c60b8b9fe9f4c74920cd9dd5fbbe6",
+      "bytes": 6624,
+      "kind": "runtime",
+      "packaged_sha256": "c243f3c303dd46a5eae6c7a8f1706ab1144c60b8b9fe9f4c74920cd9dd5fbbe6"
+    },
+    {
+      "path": "runtime/scripts/office_inline_physics_view.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_inline_physics_view.py",
+      "sha256": "48e4d49defbd3a96d11d90c4f5395a71175a1173987ef6b9feced5381d7b8502",
+      "bytes": 1933,
+      "kind": "runtime",
+      "packaged_sha256": "48e4d49defbd3a96d11d90c4f5395a71175a1173987ef6b9feced5381d7b8502"
+    },
+    {
+      "path": "runtime/scripts/office_live/dense_mapping.launch.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_live/dense_mapping.launch.py",
+      "sha256": "ef39be3287d6754f3f4a4e54f0193e8088e373ad8460941745a449d4393dbb63",
+      "bytes": 1193,
+      "kind": "runtime",
+      "packaged_sha256": "ef39be3287d6754f3f4a4e54f0193e8088e373ad8460941745a449d4393dbb63"
+    },
+    {
+      "path": "runtime/scripts/office_live/export_dense.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_live/export_dense.py",
+      "sha256": "ecf7701b6150424909b1118a9c4eb27818d1cebff200f7ff5bbce64b13b5cc45",
+      "bytes": 1609,
+      "kind": "runtime",
+      "packaged_sha256": "ecf7701b6150424909b1118a9c4eb27818d1cebff200f7ff5bbce64b13b5cc45"
+    },
+    {
+      "path": "runtime/scripts/office_live/live_capture.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_live/live_capture.py",
+      "sha256": "cff344efa3bd69715144f3664b1c3046bd17ffc0ab83adb5f9d2338e15b7ac88",
+      "bytes": 7671,
+      "kind": "runtime",
+      "packaged_sha256": "cff344efa3bd69715144f3664b1c3046bd17ffc0ab83adb5f9d2338e15b7ac88"
+    },
+    {
+      "path": "runtime/scripts/office_live/semantic_compact.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_live/semantic_compact.py",
+      "sha256": "bd30f3cc52014e1b028b21a05564fd2b47839b6bfc79a338d1013f9e11dc736a",
+      "bytes": 8993,
+      "kind": "runtime",
+      "packaged_sha256": "bd30f3cc52014e1b028b21a05564fd2b47839b6bfc79a338d1013f9e11dc736a"
+    },
+    {
+      "path": "runtime/scripts/office_physics_view.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_physics_view.py",
+      "sha256": "432a1a1e4c6e42b0fcf8b53cbae608062f191cb965c5904f74d0d5b81973b924",
+      "bytes": 1548,
+      "kind": "runtime",
+      "packaged_sha256": "432a1a1e4c6e42b0fcf8b53cbae608062f191cb965c5904f74d0d5b81973b924"
+    },
+    {
+      "path": "runtime/scripts/office_ue_console.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/office_ue_console.py",
+      "sha256": "064b8bd4fdb7846c4e96c1b56e97f418d578671227c556118fe54b39f3add19e",
+      "bytes": 1150,
+      "kind": "runtime",
+      "packaged_sha256": "064b8bd4fdb7846c4e96c1b56e97f418d578671227c556118fe54b39f3add19e"
+    },
+    {
+      "path": "runtime/scripts/record_go2w_anything_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_go2w_anything_demo.sh",
+      "sha256": "218e21c5634e0f31197852b1969760a6fd96c45822b83ffd0d6dd37130574893",
+      "bytes": 1061,
+      "kind": "runtime",
+      "packaged_sha256": "218e21c5634e0f31197852b1969760a6fd96c45822b83ffd0d6dd37130574893"
+    },
+    {
+      "path": "runtime/scripts/record_go2w_dense_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_go2w_dense_demo.sh",
+      "sha256": "c0563b28be030e5970397f33cf95ec134caeabe557bf204583899139de21b28a",
+      "bytes": 2769,
+      "kind": "runtime",
+      "packaged_sha256": "c0563b28be030e5970397f33cf95ec134caeabe557bf204583899139de21b28a"
+    },
+    {
+      "path": "runtime/scripts/record_go2w_semantic_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_go2w_semantic_demo.sh",
+      "sha256": "d2a7ce03d79b2536d1f6176d8c0a7cbbfd48b68ec5e3b61ee7a18888aea32ea8",
+      "bytes": 112,
+      "kind": "runtime",
+      "packaged_sha256": "d2a7ce03d79b2536d1f6176d8c0a7cbbfd48b68ec5e3b61ee7a18888aea32ea8"
+    },
+    {
+      "path": "runtime/scripts/record_office_four_screen.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_office_four_screen.py",
+      "sha256": "2ac47c7aa4244e4cf38f3637a53baf431920ffea5eb627d91e169bf7b5c0e5e9",
+      "bytes": 2936,
+      "kind": "runtime",
+      "packaged_sha256": "2ac47c7aa4244e4cf38f3637a53baf431920ffea5eb627d91e169bf7b5c0e5e9"
+    },
+    {
+      "path": "runtime/scripts/record_office_global_take.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_office_global_take.sh",
+      "sha256": "4ed679c3e959bd91ee1aaa8203bc6f50dc2cc473beb0be1357c2b2b5661a7c2d",
+      "bytes": 3802,
+      "kind": "runtime",
+      "packaged_sha256": "4ed679c3e959bd91ee1aaa8203bc6f50dc2cc473beb0be1357c2b2b5661a7c2d"
+    },
+    {
+      "path": "runtime/scripts/record_office_inline_take.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_office_inline_take.sh",
+      "sha256": "809aa79cee183cb8bc7a2f824adfbd2ce7aff77abece70cfd1ffa92e68a6b36b",
+      "bytes": 2725,
+      "kind": "runtime",
+      "packaged_sha256": "809aa79cee183cb8bc7a2f824adfbd2ce7aff77abece70cfd1ffa92e68a6b36b"
+    },
+    {
+      "path": "runtime/scripts/record_office_rosbag.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_office_rosbag.py",
+      "sha256": "9e40ffc73fe1e38ad4e437ef8021e068f947df2406e0ba78f9d6af31632438a6",
+      "bytes": 1751,
+      "kind": "runtime",
+      "packaged_sha256": "9e40ffc73fe1e38ad4e437ef8021e068f947df2406e0ba78f9d6af31632438a6"
+    },
+    {
+      "path": "runtime/scripts/record_office_take.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/record_office_take.sh",
+      "sha256": "0c135601b72d18451a24856e3ed6f5149be2b1059b73951ad46d68a0acc472b0",
+      "bytes": 2434,
+      "kind": "runtime",
+      "packaged_sha256": "0c135601b72d18451a24856e3ed6f5149be2b1059b73951ad46d68a0acc472b0"
+    },
+    {
+      "path": "runtime/scripts/recover_go2w_simulation.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/recover_go2w_simulation.sh",
+      "sha256": "b9613b8aabd1103f5bba163c71aae704312668e3fdc8d9a37fd21b11c0403481",
+      "bytes": 647,
+      "kind": "runtime",
+      "packaged_sha256": "b9613b8aabd1103f5bba163c71aae704312668e3fdc8d9a37fd21b11c0403481"
+    },
+    {
+      "path": "runtime/scripts/render_go2w_coupled_scene.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/render_go2w_coupled_scene.py",
+      "sha256": "e3a690bdcc16004cd6ed46e13c370c6b4be71abdefef30a5fcdd66a93b90e8bb",
+      "bytes": 1949,
+      "kind": "runtime",
+      "packaged_sha256": "e3a690bdcc16004cd6ed46e13c370c6b4be71abdefef30a5fcdd66a93b90e8bb"
+    },
+    {
+      "path": "runtime/scripts/render_go2w_semantic_evidence.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/render_go2w_semantic_evidence.py",
+      "sha256": "332527db8a24ac98e0022de5fb0caff2a4ded2c8e6d41af6b6cfa106d932f1ad",
+      "bytes": 9074,
+      "kind": "runtime",
+      "packaged_sha256": "332527db8a24ac98e0022de5fb0caff2a4ded2c8e6d41af6b6cfa106d932f1ad"
+    },
+    {
+      "path": "runtime/scripts/run_go2w_anything_service.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_go2w_anything_service.sh",
+      "sha256": "d734b16e5bfad2243a67ea10f377049da9045671fee27e73dabb75bafdddccc0",
+      "bytes": 364,
+      "kind": "runtime",
+      "packaged_sha256": "d734b16e5bfad2243a67ea10f377049da9045671fee27e73dabb75bafdddccc0"
+    },
+    {
+      "path": "runtime/scripts/run_go2w_climb_live.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_go2w_climb_live.py",
+      "sha256": "8dcee591771a6b18937d96d7e64a4f7554d0ae7648fdef1f8226f265a83b5d9d",
+      "bytes": 3347,
+      "kind": "runtime",
+      "packaged_sha256": "8dcee591771a6b18937d96d7e64a4f7554d0ae7648fdef1f8226f265a83b5d9d"
+    },
+    {
+      "path": "runtime/scripts/run_go2w_dense_observers.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_go2w_dense_observers.sh",
+      "sha256": "0581b7bb541eb4f306decf8b944888631f876cb8741c5976e391c4f6a8c77663",
+      "bytes": 654,
+      "kind": "runtime",
+      "packaged_sha256": "0581b7bb541eb4f306decf8b944888631f876cb8741c5976e391c4f6a8c77663"
+    },
+    {
+      "path": "runtime/scripts/run_go2w_multimap_sim_capture.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_go2w_multimap_sim_capture.py",
+      "sha256": "aa4df4feb269d9bc2d7de3b10970246ab82dddfaed2f89945fa9a1b15ee63947",
+      "bytes": 9655,
+      "kind": "runtime",
+      "packaged_sha256": "aa4df4feb269d9bc2d7de3b10970246ab82dddfaed2f89945fa9a1b15ee63947"
+    },
+    {
+      "path": "runtime/scripts/run_go2w_straight_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_go2w_straight_course.py",
+      "sha256": "da9e19d0b2d204900b30aac59f09ab67b3109ed082c4cc8262fd4dfdf96fa3eb",
+      "bytes": 3845,
+      "kind": "runtime",
+      "packaged_sha256": "da9e19d0b2d204900b30aac59f09ab67b3109ed082c4cc8262fd4dfdf96fa3eb"
+    },
+    {
+      "path": "runtime/scripts/run_nezha2_office_scan_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_nezha2_office_scan_demo.sh",
+      "sha256": "9b7078b1f690cb249e4aac4e716210a5bb20aaa51da467994f0444379b4729d2",
+      "bytes": 1869,
+      "kind": "runtime",
+      "packaged_sha256": "9b7078b1f690cb249e4aac4e716210a5bb20aaa51da467994f0444379b4729d2"
+    },
+    {
+      "path": "runtime/scripts/run_office_sensor_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/run_office_sensor_demo.sh",
+      "sha256": "c3d411ea2d72c33d5e69ee4f4006b28efc718cd4ecc5652d6129b36593b371d1",
+      "bytes": 2004,
+      "kind": "runtime",
+      "packaged_sha256": "c3d411ea2d72c33d5e69ee4f4006b28efc718cd4ecc5652d6129b36593b371d1"
+    },
+    {
+      "path": "runtime/scripts/set_go2w_nav_mode.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/set_go2w_nav_mode.py",
+      "sha256": "b3652c3abd64d16c82ff6f646ebb8088c4d95dec38be9d42f4992c56b3a332f6",
+      "bytes": 8643,
+      "kind": "runtime",
+      "packaged_sha256": "b3652c3abd64d16c82ff6f646ebb8088c4d95dec38be9d42f4992c56b3a332f6"
+    },
+    {
+      "path": "runtime/scripts/set_go2w_nav_mode.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/set_go2w_nav_mode.sh",
+      "sha256": "7529d314a86b9789e351fc7c559ca49a2e92e9c81037029a2115acd4474cc312",
+      "bytes": 614,
+      "kind": "runtime",
+      "packaged_sha256": "7529d314a86b9789e351fc7c559ca49a2e92e9c81037029a2115acd4474cc312"
+    },
+    {
+      "path": "runtime/scripts/show_go2w_four_windows.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/show_go2w_four_windows.sh",
+      "sha256": "969579b1a49f4cf9b4fe7b1964d3a285149f967ec8b8a1481833039d4d3e48f5",
+      "bytes": 1731,
+      "kind": "runtime",
+      "packaged_sha256": "969579b1a49f4cf9b4fe7b1964d3a285149f967ec8b8a1481833039d4d3e48f5"
+    },
+    {
+      "path": "runtime/scripts/start_cosmos_vln_bridge.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_cosmos_vln_bridge.sh",
+      "sha256": "d2ee515b949e11996bca81357ebf7c153273e5f26d07c65c7b5662e4393c01a1",
+      "bytes": 1750,
+      "kind": "runtime",
+      "packaged_sha256": "d2ee515b949e11996bca81357ebf7c153273e5f26d07c65c7b5662e4393c01a1"
+    },
+    {
+      "path": "runtime/scripts/start_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_demo.sh",
+      "sha256": "1e7895f0a1327c6d457dbdfe2ac03e3b984c5eb9a76b2b89ef7a3b5402efa620",
+      "bytes": 10629,
+      "kind": "runtime",
+      "packaged_sha256": "1e7895f0a1327c6d457dbdfe2ac03e3b984c5eb9a76b2b89ef7a3b5402efa620"
+    },
+    {
+      "path": "runtime/scripts/start_g1_office_navigation.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_g1_office_navigation.sh",
+      "sha256": "dec43955376dd56ea7e967dc19dba767dc5812da7a4daa4526c1b0828a1fad31",
+      "bytes": 1232,
+      "kind": "runtime",
+      "packaged_sha256": "dec43955376dd56ea7e967dc19dba767dc5812da7a4daa4526c1b0828a1fad31"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_all_obstacles_corner.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_all_obstacles_corner.sh",
+      "sha256": "812a3af7552e55159c95577ee7465da7cd8179e979f8ea2861003e74dae6cafe",
+      "bytes": 2702,
+      "kind": "runtime",
+      "packaged_sha256": "812a3af7552e55159c95577ee7465da7cd8179e979f8ea2861003e74dae6cafe"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_anything_preview.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_anything_preview.sh",
+      "sha256": "a53e88e5ebd023910064089592ee77968baf6b00172892f4a019a72976b4c41f",
+      "bytes": 2970,
+      "kind": "runtime",
+      "packaged_sha256": "a53e88e5ebd023910064089592ee77968baf6b00172892f4a019a72976b4c41f"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_cosmos_mapping.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_cosmos_mapping.sh",
+      "sha256": "6d299c4ea1b8aa72490daecba0158655f335baed40b433d416a5b9e065effc7f",
+      "bytes": 184,
+      "kind": "runtime",
+      "packaged_sha256": "6d299c4ea1b8aa72490daecba0158655f335baed40b433d416a5b9e065effc7f"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_cosmos_vln.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_cosmos_vln.sh",
+      "sha256": "93d87891948eed22691285cf5dbb12aa3cb4d0edc0792ced159a138072e2c436",
+      "bytes": 957,
+      "kind": "runtime",
+      "packaged_sha256": "93d87891948eed22691285cf5dbb12aa3cb4d0edc0792ced159a138072e2c436"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_exploration.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_exploration.sh",
+      "sha256": "a88a0801d44bd6c3b3a253106844858c9c0682d0f611c766f07d421d69547bb9",
+      "bytes": 1148,
+      "kind": "runtime",
+      "packaged_sha256": "a88a0801d44bd6c3b3a253106844858c9c0682d0f611c766f07d421d69547bb9"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_global_compare_world.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_global_compare_world.sh",
+      "sha256": "57166fc356d29fab47c7529068c37e4372236596972f176b6dcae206142da95d",
+      "bytes": 1356,
+      "kind": "runtime",
+      "packaged_sha256": "57166fc356d29fab47c7529068c37e4372236596972f176b6dcae206142da95d"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_interactive.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_interactive.sh",
+      "sha256": "bfa40753881e63bd0037b88921033f8ee0ceedb818212b3edf2369cbcca478f3",
+      "bytes": 397,
+      "kind": "runtime",
+      "packaged_sha256": "bfa40753881e63bd0037b88921033f8ee0ceedb818212b3edf2369cbcca478f3"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_manual.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_manual.sh",
+      "sha256": "36cd455c35985e71c1a01d48c8173f6ccc117e98237b4bcbaf8f1b768dd4a641",
+      "bytes": 312,
+      "kind": "runtime",
+      "packaged_sha256": "36cd455c35985e71c1a01d48c8173f6ccc117e98237b4bcbaf8f1b768dd4a641"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_native_people.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_native_people.sh",
+      "sha256": "4d94a0f7ca51cea61ef2ebf0fd10df21db431e797339944a4743147c4f81415a",
+      "bytes": 644,
+      "kind": "runtime",
+      "packaged_sha256": "4d94a0f7ca51cea61ef2ebf0fd10df21db431e797339944a4743147c4f81415a"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_office_course.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_office_course.sh",
+      "sha256": "2834fe746a9af45f6d44a295fe34204b8bbfee8b538baad62e8fa0acc8639574",
+      "bytes": 1608,
+      "kind": "runtime",
+      "packaged_sha256": "2834fe746a9af45f6d44a295fe34204b8bbfee8b538baad62e8fa0acc8639574"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_office_inline.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_office_inline.sh",
+      "sha256": "765e2f0fe7c14e37d66b7f8e76b826e1667897a5622cb1cfe05fc947ab514f74",
+      "bytes": 1336,
+      "kind": "runtime",
+      "packaged_sha256": "765e2f0fe7c14e37d66b7f8e76b826e1667897a5622cb1cfe05fc947ab514f74"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_office_people.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_office_people.sh",
+      "sha256": "b2d45a5fac39fe3b731ce64a5d14259f6e964d53bb7774d8eb5ec7e95e002499",
+      "bytes": 1016,
+      "kind": "runtime",
+      "packaged_sha256": "b2d45a5fac39fe3b731ce64a5d14259f6e964d53bb7774d8eb5ec7e95e002499"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_semantic_node.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_semantic_node.sh",
+      "sha256": "2019d80c6d8913c85a1f9e86a0eb44f5b86c28b4d9171b41c44c83976dba5fe5",
+      "bytes": 754,
+      "kind": "runtime",
+      "packaged_sha256": "2019d80c6d8913c85a1f9e86a0eb44f5b86c28b4d9171b41c44c83976dba5fe5"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_semantic_v1.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_semantic_v1.sh",
+      "sha256": "125e17cb56c1a27f8e7b30ea2565f11c019d0ed23d5bb0528d4552cfdf94118f",
+      "bytes": 459,
+      "kind": "runtime",
+      "packaged_sha256": "125e17cb56c1a27f8e7b30ea2565f11c019d0ed23d5bb0528d4552cfdf94118f"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_systemd.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_systemd.sh",
+      "sha256": "74e01009e7adaf5c345b265294f7b74ad67020bf9832c8fd1d0a74a144c156e8",
+      "bytes": 3350,
+      "kind": "runtime",
+      "packaged_sha256": "74e01009e7adaf5c345b265294f7b74ad67020bf9832c8fd1d0a74a144c156e8"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_three_scenes_live.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_three_scenes_live.sh",
+      "sha256": "e5988ebab92f175e8fe3ee3ce5a61f289a638bb985c63bd2a64f8000081fb483",
+      "bytes": 2313,
+      "kind": "runtime",
+      "packaged_sha256": "e5988ebab92f175e8fe3ee3ce5a61f289a638bb985c63bd2a64f8000081fb483"
+    },
+    {
+      "path": "runtime/scripts/start_go2w_wavegov1.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_go2w_wavegov1.sh",
+      "sha256": "79300ad4a884c8081512f8f707d7a8b5200041030375f7cc7ad209614b8eaec0",
+      "bytes": 1600,
+      "kind": "runtime",
+      "packaged_sha256": "79300ad4a884c8081512f8f707d7a8b5200041030375f7cc7ad209614b8eaec0"
+    },
+    {
+      "path": "runtime/scripts/start_nezha2_matrix_office_scan_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_nezha2_matrix_office_scan_demo.sh",
+      "sha256": "567d0127b076c19dc946ddcbf4e0eaf6e939b67c2c44c4d738ab35a5fcbf731c",
+      "bytes": 2419,
+      "kind": "runtime",
+      "packaged_sha256": "567d0127b076c19dc946ddcbf4e0eaf6e939b67c2c44c4d738ab35a5fcbf731c"
+    },
+    {
+      "path": "runtime/scripts/start_office_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_office_demo.sh",
+      "sha256": "7f72ddb8eed529e1ff8d5ee112f8d592baa2dfb38046e3b514eea5884c41d48b",
+      "bytes": 2461,
+      "kind": "runtime",
+      "packaged_sha256": "7f72ddb8eed529e1ff8d5ee112f8d592baa2dfb38046e3b514eea5884c41d48b"
+    },
+    {
+      "path": "runtime/scripts/start_office_global_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_office_global_demo.sh",
+      "sha256": "e75fe175235d4891c2dee31eb3f957d10ac8d368218ebf29eac68e9894898697",
+      "bytes": 3471,
+      "kind": "runtime",
+      "packaged_sha256": "e75fe175235d4891c2dee31eb3f957d10ac8d368218ebf29eac68e9894898697"
+    },
+    {
+      "path": "runtime/scripts/start_office_inline_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/start_office_inline_demo.sh",
+      "sha256": "3f08e828d45aa29db32f71ead8019a06931ad3c4b45bc6145a905c5ec64d422f",
+      "bytes": 2566,
+      "kind": "runtime",
+      "packaged_sha256": "3f08e828d45aa29db32f71ead8019a06931ad3c4b45bc6145a905c5ec64d422f"
+    },
+    {
+      "path": "runtime/scripts/stop_cosmos_vln_bridge.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/stop_cosmos_vln_bridge.sh",
+      "sha256": "4df83dd7009e25057d9aa1a4b0546a4b74c5f92ad57ee87d14ce9009608f21dd",
+      "bytes": 567,
+      "kind": "runtime",
+      "packaged_sha256": "4df83dd7009e25057d9aa1a4b0546a4b74c5f92ad57ee87d14ce9009608f21dd"
+    },
+    {
+      "path": "runtime/scripts/stop_cosmos_vln_visualization.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/stop_cosmos_vln_visualization.sh",
+      "sha256": "296b13f68b024ae3e13f3a9558afaa668121574b474eaa61cf8fdb4c975fc3c6",
+      "bytes": 735,
+      "kind": "runtime",
+      "packaged_sha256": "296b13f68b024ae3e13f3a9558afaa668121574b474eaa61cf8fdb4c975fc3c6"
+    },
+    {
+      "path": "runtime/scripts/stop_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/stop_demo.sh",
+      "sha256": "bb7fc0a8fe7288f906010113c4735925339c27a7ad34f388ce2a7e0b48df6b8b",
+      "bytes": 2028,
+      "kind": "runtime",
+      "packaged_sha256": "bb7fc0a8fe7288f906010113c4735925339c27a7ad34f388ce2a7e0b48df6b8b"
+    },
+    {
+      "path": "runtime/scripts/stop_go2w_dense_demo.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/stop_go2w_dense_demo.sh",
+      "sha256": "ed1c007fdf5555cc367e44c61d883700503d72cd33ab0554befab1360630c104",
+      "bytes": 790,
+      "kind": "runtime",
+      "packaged_sha256": "ed1c007fdf5555cc367e44c61d883700503d72cd33ab0554befab1360630c104"
+    },
+    {
+      "path": "runtime/scripts/stop_go2w_systemd.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/stop_go2w_systemd.sh",
+      "sha256": "dce4fb194fbd731f22dd500237e040663eaacde80f7793c0a004a52d910c7fab",
+      "bytes": 272,
+      "kind": "runtime",
+      "packaged_sha256": "dce4fb194fbd731f22dd500237e040663eaacde80f7793c0a004a52d910c7fab"
+    },
+    {
+      "path": "runtime/scripts/sync_go2w_extended_ue_scene.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/sync_go2w_extended_ue_scene.py",
+      "sha256": "321257908e7457014fe34842522cabb5ac8d9e30c7fe56d1e8a550fae6e6c6cf",
+      "bytes": 1541,
+      "kind": "runtime",
+      "packaged_sha256": "321257908e7457014fe34842522cabb5ac8d9e30c7fe56d1e8a550fae6e6c6cf"
+    },
+    {
+      "path": "runtime/scripts/test_go2w_ramp_clearance.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/test_go2w_ramp_clearance.py",
+      "sha256": "2964d13f0bceb27827b42bdd196dfd7d4ff62bcee6dce066a1ea0634afe8da10",
+      "bytes": 2474,
+      "kind": "runtime",
+      "packaged_sha256": "2964d13f0bceb27827b42bdd196dfd7d4ff62bcee6dce066a1ea0634afe8da10"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_anything.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_anything.py",
+      "sha256": "4c66c8a8b0a8cf873a12e23be74e126b654e6e389cb09530ad0d2b21ed1c3731",
+      "bytes": 2251,
+      "kind": "runtime",
+      "packaged_sha256": "4c66c8a8b0a8cf873a12e23be74e126b654e6e389cb09530ad0d2b21ed1c3731"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_dense_evidence.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_dense_evidence.py",
+      "sha256": "12fff1f0700268007fa152925715f236df963c82513da0180b98cf3627c5f199",
+      "bytes": 2578,
+      "kind": "runtime",
+      "packaged_sha256": "12fff1f0700268007fa152925715f236df963c82513da0180b98cf3627c5f199"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_extended_route.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_extended_route.py",
+      "sha256": "3ea4407a7bdda5dae88cf12612efab429d1d255302d2bf7c34ba8e622adacfc3",
+      "bytes": 6943,
+      "kind": "runtime",
+      "packaged_sha256": "3ea4407a7bdda5dae88cf12612efab429d1d255302d2bf7c34ba8e622adacfc3"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_extended_world.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_extended_world.py",
+      "sha256": "33148d8c4e01036e576545a42c9272743b9f5140bf09822e46d1b3246ef96e49",
+      "bytes": 20226,
+      "kind": "runtime",
+      "packaged_sha256": "33148d8c4e01036e576545a42c9272743b9f5140bf09822e46d1b3246ef96e49"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_far_route.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_far_route.py",
+      "sha256": "81ac2db19db8d3aded94115a7073f5e2386af6e107a15471c66f635aefd5f6be",
+      "bytes": 7742,
+      "kind": "runtime",
+      "packaged_sha256": "81ac2db19db8d3aded94115a7073f5e2386af6e107a15471c66f635aefd5f6be"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_local_avoidance.sh",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_local_avoidance.sh",
+      "sha256": "0492b0c7235ed5ab42b4590d65f12744f40965b5851ed388d835faf577825279",
+      "bytes": 2439,
+      "kind": "runtime",
+      "packaged_sha256": "0492b0c7235ed5ab42b4590d65f12744f40965b5851ed388d835faf577825279"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_office.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_office.py",
+      "sha256": "33eff62295542b4c35baa9b674e47b47f8b1a8f7bfbda067ec3014150175b365",
+      "bytes": 608,
+      "kind": "runtime",
+      "packaged_sha256": "33eff62295542b4c35baa9b674e47b47f8b1a8f7bfbda067ec3014150175b365"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_office_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_office_course.py",
+      "sha256": "8dedfe5e83809ef58a5c57582847c7049e0bf5adf7f2a4ed9786f43775938ccc",
+      "bytes": 713,
+      "kind": "runtime",
+      "packaged_sha256": "8dedfe5e83809ef58a5c57582847c7049e0bf5adf7f2a4ed9786f43775938ccc"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_office_inline.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_office_inline.py",
+      "sha256": "f2397cb0ed70de267ebfb549786685c232e641189aa92baff6e2b0bc0aa26076",
+      "bytes": 342,
+      "kind": "runtime",
+      "packaged_sha256": "f2397cb0ed70de267ebfb549786685c232e641189aa92baff6e2b0bc0aa26076"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_office_inline_ue.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_office_inline_ue.py",
+      "sha256": "99e9d56fc91f3f84678596754ce784776ee86cfeec4be96e721369330ff233c9",
+      "bytes": 1636,
+      "kind": "runtime",
+      "packaged_sha256": "99e9d56fc91f3f84678596754ce784776ee86cfeec4be96e721369330ff233c9"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_office_ue_actors.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_office_ue_actors.py",
+      "sha256": "d2f630d5bb9af35d8b6e7f23139bf858228f615e224d92da2212c83a612f3a4d",
+      "bytes": 1636,
+      "kind": "runtime",
+      "packaged_sha256": "d2f630d5bb9af35d8b6e7f23139bf858228f615e224d92da2212c83a612f3a4d"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_physical_ramp.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_physical_ramp.py",
+      "sha256": "590cf331b0593643b990c88fa012fb09afd60a64afeeebd4f6c36d5e151c805c",
+      "bytes": 7127,
+      "kind": "runtime",
+      "packaged_sha256": "590cf331b0593643b990c88fa012fb09afd60a64afeeebd4f6c36d5e151c805c"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_three_scenes.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_three_scenes.py",
+      "sha256": "796cd210dc65eb05593908ef1f2e6f0af48b57b20ebee7fc5ed678012c5c1f31",
+      "bytes": 727,
+      "kind": "runtime",
+      "packaged_sha256": "796cd210dc65eb05593908ef1f2e6f0af48b57b20ebee7fc5ed678012c5c1f31"
+    },
+    {
+      "path": "runtime/scripts/validate_go2w_world.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_go2w_world.py",
+      "sha256": "747d2127183b2e33fe648e61e314c3258bf976538dee377eb0d7a6632aab4b50",
+      "bytes": 3740,
+      "kind": "runtime",
+      "packaged_sha256": "747d2127183b2e33fe648e61e314c3258bf976538dee377eb0d7a6632aab4b50"
+    },
+    {
+      "path": "runtime/scripts/validate_office_rosbag.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/scripts/validate_office_rosbag.py",
+      "sha256": "fb06938680f61543df7b2fdf81c5df8297027aefcec94120839e402e8d3bf6e3",
+      "bytes": 2372,
+      "kind": "runtime",
+      "packaged_sha256": "fb06938680f61543df7b2fdf81c5df8297027aefcec94120839e402e8d3bf6e3"
+    },
+    {
+      "path": "runtime/tests/test_all_obstacles_corner.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_all_obstacles_corner.py",
+      "sha256": "f40485638ee83c952f0e0cf953359dd9a2f3addd5a02e5d292b87fecb18d4a76",
+      "bytes": 976,
+      "kind": "runtime",
+      "packaged_sha256": "f40485638ee83c952f0e0cf953359dd9a2f3addd5a02e5d292b87fecb18d4a76"
+    },
+    {
+      "path": "runtime/tests/test_anything_projection.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_anything_projection.py",
+      "sha256": "dc2668a11d9676234d6a4519be62d9e69dffffdce5738f1693b2977128148a43",
+      "bytes": 1194,
+      "kind": "runtime",
+      "packaged_sha256": "dc2668a11d9676234d6a4519be62d9e69dffffdce5738f1693b2977128148a43"
+    },
+    {
+      "path": "runtime/tests/test_cosmos_frontier.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_cosmos_frontier.py",
+      "sha256": "6546596139534c993afec403f8a337d5c6e789882c794136df352cefc81fff1c",
+      "bytes": 1742,
+      "kind": "runtime",
+      "packaged_sha256": "6546596139534c993afec403f8a337d5c6e789882c794136df352cefc81fff1c"
+    },
+    {
+      "path": "runtime/tests/test_cosmos_vln_mission.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_cosmos_vln_mission.py",
+      "sha256": "caf2d53382e97702f9ca9525a16ae29e8f1fe5cb07a32e9a9bf19f05bb1de586",
+      "bytes": 10847,
+      "kind": "runtime",
+      "packaged_sha256": "caf2d53382e97702f9ca9525a16ae29e8f1fe5cb07a32e9a9bf19f05bb1de586"
+    },
+    {
+      "path": "runtime/tests/test_cosmos_vln_protocol.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_cosmos_vln_protocol.py",
+      "sha256": "ecd4974fd3f95c100f5dc82b09f8bb6ba7f8afe22df4979a44b55aa4b348d66f",
+      "bytes": 13627,
+      "kind": "runtime",
+      "packaged_sha256": "ecd4974fd3f95c100f5dc82b09f8bb6ba7f8afe22df4979a44b55aa4b348d66f"
+    },
+    {
+      "path": "runtime/tests/test_dense_depth.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_dense_depth.py",
+      "sha256": "38794387f20e06c5f94cbc7dc7f3cb11376fd4908a8ea1a25e32589ccadda5b3",
+      "bytes": 726,
+      "kind": "runtime",
+      "packaged_sha256": "38794387f20e06c5f94cbc7dc7f3cb11376fd4908a8ea1a25e32589ccadda5b3"
+    },
+    {
+      "path": "runtime/tests/test_detection_filter.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_detection_filter.py",
+      "sha256": "949ec9d78de8e0fe317093a49f69f272bc8325847ec93cc02aeb4659ab63e68b",
+      "bytes": 1221,
+      "kind": "runtime",
+      "packaged_sha256": "949ec9d78de8e0fe317093a49f69f272bc8325847ec93cc02aeb4659ab63e68b"
+    },
+    {
+      "path": "runtime/tests/test_dynamic_yield.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_dynamic_yield.py",
+      "sha256": "fb23bd85066fa3ef6b38ca2a3c503ee3cd31cf8b10546844df7b31c3ce51b467",
+      "bytes": 1913,
+      "kind": "runtime",
+      "packaged_sha256": "fb23bd85066fa3ef6b38ca2a3c503ee3cd31cf8b10546844df7b31c3ce51b467"
+    },
+    {
+      "path": "runtime/tests/test_frontier_grid.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_frontier_grid.py",
+      "sha256": "fd070cf9aee60db5f036a73e8893bdd21f7861dab6470ce15bde7d03a6774805",
+      "bytes": 4081,
+      "kind": "runtime",
+      "packaged_sha256": "fd070cf9aee60db5f036a73e8893bdd21f7861dab6470ce15bde7d03a6774805"
+    },
+    {
+      "path": "runtime/tests/test_go2w_terrain_policy.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_go2w_terrain_policy.py",
+      "sha256": "8e328ca5635c0c8734212ed2dee9cd0646afa130ea50e6cf601260712ff0666c",
+      "bytes": 3498,
+      "kind": "runtime",
+      "packaged_sha256": "8e328ca5635c0c8734212ed2dee9cd0646afa130ea50e6cf601260712ff0666c"
+    },
+    {
+      "path": "runtime/tests/test_lidar_mount.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_lidar_mount.py",
+      "sha256": "0270b813d2b50de45c32b267b8885c3e4b8b34e044785589d7bd279e257c6f63",
+      "bytes": 427,
+      "kind": "runtime",
+      "packaged_sha256": "0270b813d2b50de45c32b267b8885c3e4b8b34e044785589d7bd279e257c6f63"
+    },
+    {
+      "path": "runtime/tests/test_live_perception.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_live_perception.py",
+      "sha256": "6032ed1c3b29a37cd7711733b0cebb8fa6651aca03c42d39f39318034cb5dc9f",
+      "bytes": 1423,
+      "kind": "runtime",
+      "packaged_sha256": "6032ed1c3b29a37cd7711733b0cebb8fa6651aca03c42d39f39318034cb5dc9f"
+    },
+    {
+      "path": "runtime/tests/test_manual_control.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_manual_control.py",
+      "sha256": "d4e1101ab7bd5134ba1b8caa838bd1a623bf804fe7a135dcdc82719cf1daff2b",
+      "bytes": 1250,
+      "kind": "runtime",
+      "packaged_sha256": "d4e1101ab7bd5134ba1b8caa838bd1a623bf804fe7a135dcdc82719cf1daff2b"
+    },
+    {
+      "path": "runtime/tests/test_mid360_semantics.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_mid360_semantics.py",
+      "sha256": "d26ee8c4658943d366e8e7ae79e80fe75212f26e79a0998c1208ab01b24cba6c",
+      "bytes": 685,
+      "kind": "runtime",
+      "packaged_sha256": "d26ee8c4658943d366e8e7ae79e80fe75212f26e79a0998c1208ab01b24cba6c"
+    },
+    {
+      "path": "runtime/tests/test_mujoco_state_relay.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_mujoco_state_relay.py",
+      "sha256": "74ff2ba1aa93d5942ba97b7b3795652486520f95651a751fe6206f6b89ce7862",
+      "bytes": 2128,
+      "kind": "runtime",
+      "packaged_sha256": "74ff2ba1aa93d5942ba97b7b3795652486520f95651a751fe6206f6b89ce7862"
+    },
+    {
+      "path": "runtime/tests/test_office_inline.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_office_inline.py",
+      "sha256": "da844c43643b8ca8b679aa4f247805f90e22ec60f0f3d2126837c2c35c44caf1",
+      "bytes": 1109,
+      "kind": "runtime",
+      "packaged_sha256": "da844c43643b8ca8b679aa4f247805f90e22ec60f0f3d2126837c2c35c44caf1"
+    },
+    {
+      "path": "runtime/tests/test_office_migration.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_office_migration.py",
+      "sha256": "d24a0193bf02a29bc713030cf2f512c6f81916b53452ae95ef40411843807100",
+      "bytes": 3359,
+      "kind": "runtime",
+      "packaged_sha256": "d24a0193bf02a29bc713030cf2f512c6f81916b53452ae95ef40411843807100"
+    },
+    {
+      "path": "runtime/tests/test_semantic_geometry.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_semantic_geometry.py",
+      "sha256": "aecfa024f755695ea4582d41fcb2a86c532fb8a019f8cd33539073a54b6f0588",
+      "bytes": 1185,
+      "kind": "runtime",
+      "packaged_sha256": "aecfa024f755695ea4582d41fcb2a86c532fb8a019f8cd33539073a54b6f0588"
+    },
+    {
+      "path": "runtime/tests/test_semantic_map_core.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_semantic_map_core.py",
+      "sha256": "4527257e231cec8c9b0dfeb3cbd2662653f6f140932f2ccd221c46d88f499ee2",
+      "bytes": 1581,
+      "kind": "runtime",
+      "packaged_sha256": "4527257e231cec8c9b0dfeb3cbd2662653f6f140932f2ccd221c46d88f499ee2"
+    },
+    {
+      "path": "runtime/tests/test_straight_course.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_straight_course.py",
+      "sha256": "24d3b166d425c174699fa90bf2986470171e99e1b6e67540e8c705894265eff0",
+      "bytes": 574,
+      "kind": "runtime",
+      "packaged_sha256": "24d3b166d425c174699fa90bf2986470171e99e1b6e67540e8c705894265eff0"
+    },
+    {
+      "path": "runtime/tests/test_wavegov1_route.py",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/tests/test_wavegov1_route.py",
+      "sha256": "479ec213bfad2e2f84858a833fc3d46dfbfdcc3ee73e37426965859f36dc85bb",
+      "bytes": 2915,
+      "kind": "runtime",
+      "packaged_sha256": "479ec213bfad2e2f84858a833fc3d46dfbfdcc3ee73e37426965859f36dc85bb"
+    },
+    {
+      "path": "runtime/scripts/global_compare/adaptive_core.py",
+      "source": "/home/unitree/semantic_map_preview/adaptive_inflation/adaptive_core.py",
+      "sha256": "323749fd0dcf37d2ab6f07b2cce3ebdc946997a5014d814c9508eefffb7a2650",
+      "bytes": 6810,
+      "kind": "runtime_external_helper",
+      "packaged_sha256": "323749fd0dcf37d2ab6f07b2cce3ebdc946997a5014d814c9508eefffb7a2650"
+    },
+    {
+      "path": "docs/adaptive_inflation_source.md",
+      "source": "/home/unitree/semantic_map_preview/adaptive_inflation/README.md",
+      "sha256": "bca3f86571311efa30a93d5a9aeb8c976e3d768da787addc76ae1591b6bd04ff",
+      "bytes": 7558,
+      "kind": "source_note",
+      "packaged_sha256": "bca3f86571311efa30a93d5a9aeb8c976e3d768da787addc76ae1591b6bd04ff"
+    },
+    {
+      "path": "data/smac/capture/go2w_live_dense_3cm.npz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/capture/go2w_live_dense_3cm.npz",
+      "sha256": "bd1c86fe053dc52112023b2d005f35b8f7b4187cbd4c848d4bbfa09509615fe1",
+      "bytes": 34445834,
+      "kind": "replay_data",
+      "packaged_sha256": "bd1c86fe053dc52112023b2d005f35b8f7b4187cbd4c848d4bbfa09509615fe1"
+    },
+    {
+      "path": "data/smac/capture/lio_trajectory.jsonl",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/capture/lio_trajectory.jsonl",
+      "sha256": "3d2077f1bccea6f39a7339986952be5434152ae5bb9d4fde85356dc309b5627a",
+      "bytes": 322464,
+      "kind": "replay_data",
+      "packaged_sha256": "3d2077f1bccea6f39a7339986952be5434152ae5bb9d4fde85356dc309b5627a"
+    },
+    {
+      "path": "data/smac/frame_alignment.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/frame_alignment.json",
+      "sha256": "ff68009528cf4953f7c3882c4c24ed814fe8cf69b5a0ffe1f74c9653dbe3f542",
+      "bytes": 574,
+      "kind": "replay_data",
+      "packaged_sha256": "ff68009528cf4953f7c3882c4c24ed814fe8cf69b5a0ffe1f74c9653dbe3f542"
+    },
+    {
+      "path": "data/smac/semantic/semantic_map.npz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/semantic/semantic_map.npz",
+      "sha256": "8bf7bc6bb384fd1dcb21ad73e644eacab81cf9e76ebaf05d2b75f7146da0264e",
+      "bytes": 1802388,
+      "kind": "replay_data",
+      "packaged_sha256": "8bf7bc6bb384fd1dcb21ad73e644eacab81cf9e76ebaf05d2b75f7146da0264e"
+    },
+    {
+      "path": "data/native_ikd/native_ikd_map.npz",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/native_bag_replay/native_ikd_map.npz",
+      "sha256": "1a76819e8cd07d431fb10598cce759b35d3f882eab9ed734433fb1daf9f5ef53",
+      "bytes": 6030061,
+      "kind": "independent_older_bag_map",
+      "packaged_sha256": "1a76819e8cd07d431fb10598cce759b35d3f882eab9ed734433fb1daf9f5ef53"
+    },
+    {
+      "path": "evidence/reports/native_ikd_result.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/native_bag_replay/result.json",
+      "sha256": "01e5df8c3ac413936fdbb72ff6ef4c1c4fcd064ea792e1bf959566020114ba2e",
+      "bytes": 241,
+      "kind": "validation",
+      "packaged_sha256": "01e5df8c3ac413936fdbb72ff6ef4c1c4fcd064ea792e1bf959566020114ba2e"
+    },
+    {
+      "path": "evidence/mapping/native_ikd_map.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/native_bag_replay/native_ikd_map.png",
+      "sha256": "9b7544991c667f476bf1f4ae4a61766dee9e7c49fa7b5abba7e87d2924b6abce",
+      "bytes": 647350,
+      "kind": "original_image",
+      "packaged_sha256": "9b7544991c667f476bf1f4ae4a61766dee9e7c49fa7b5abba7e87d2924b6abce"
+    },
+    {
+      "path": "evidence/simulation/rviz_dense_map.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/rviz_dense_map.png",
+      "sha256": "dd49852f4a39a2c9721b2a8ee6dfc6540829331908e71a9c37ed8fece87d778c",
+      "bytes": 299238,
+      "kind": "original_image",
+      "packaged_sha256": "dd49852f4a39a2c9721b2a8ee6dfc6540829331908e71a9c37ed8fece87d778c"
+    },
+    {
+      "path": "evidence/simulation/astar_goal.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/astar_goal.png",
+      "sha256": "cba4787f224ea275de3ebe8943033934d0b348e14d86b0cd859020c84118a835",
+      "bytes": 1340150,
+      "kind": "original_image",
+      "packaged_sha256": "cba4787f224ea275de3ebe8943033934d0b348e14d86b0cd859020c84118a835"
+    },
+    {
+      "path": "evidence/simulation/dijkstra_stairs.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/dijkstra_stairs.png",
+      "sha256": "ee7c8d1235994d3c71808f4cf8177f225c735643f201a5746be0fe529d4e2fe0",
+      "bytes": 1561060,
+      "kind": "original_image",
+      "packaged_sha256": "ee7c8d1235994d3c71808f4cf8177f225c735643f201a5746be0fe529d4e2fe0"
+    },
+    {
+      "path": "evidence/simulation/dijkstra_pedestrians.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/dijkstra_pedestrians.png",
+      "sha256": "6c72459ebab9b4fc45cec95fd7e88009b4e3742da142b08d5b9547c18249514d",
+      "bytes": 1480919,
+      "kind": "original_image",
+      "packaged_sha256": "6c72459ebab9b4fc45cec95fd7e88009b4e3742da142b08d5b9547c18249514d"
+    },
+    {
+      "path": "evidence/simulation/astar_stairs.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/astar_stairs.png",
+      "sha256": "7cbd9573111821a9504fbe854284a13a04704ca640a82c874cac411793ea6275",
+      "bytes": 1538468,
+      "kind": "original_image",
+      "packaged_sha256": "7cbd9573111821a9504fbe854284a13a04704ca640a82c874cac411793ea6275"
+    },
+    {
+      "path": "evidence/simulation/astar_pedestrians.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/astar_pedestrians.png",
+      "sha256": "a43cf43587a34689218746a6b5c43f886c16b419e04e7c8827e63fc9bdea1b51",
+      "bytes": 1479909,
+      "kind": "original_image",
+      "packaged_sha256": "a43cf43587a34689218746a6b5c43f886c16b419e04e7c8827e63fc9bdea1b51"
+    },
+    {
+      "path": "evidence/simulation/dijkstra_goal.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/dijkstra_goal.png",
+      "sha256": "1e2cc0bcd47714ef9997735cbc4d6ee0e6c64b54a13196da8eb8dc79a24e4909",
+      "bytes": 1367425,
+      "kind": "original_image",
+      "packaged_sha256": "1e2cc0bcd47714ef9997735cbc4d6ee0e6c64b54a13196da8eb8dc79a24e4909"
+    },
+    {
+      "path": "evidence/reports/demo_manifest.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_compare_20261001/demo_final/demo_manifest.json",
+      "sha256": "eeea0e654a0c311cb1eca66c964e2e9416ec5c3cb5b9057f37de8d520dfece48",
+      "bytes": 8800,
+      "kind": "historical_record",
+      "packaged_sha256": "eeea0e654a0c311cb1eca66c964e2e9416ec5c3cb5b9057f37de8d520dfece48"
+    },
+    {
+      "path": "evidence/mapping/lio_map_three_views.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/lio_map_three_views.png",
+      "sha256": "d4106a7fb829889be8d21df5aa214fc4520a9cc94949e1e7b299ba989937c43a",
+      "bytes": 2357490,
+      "kind": "original_image",
+      "packaged_sha256": "d4106a7fb829889be8d21df5aa214fc4520a9cc94949e1e7b299ba989937c43a"
+    },
+    {
+      "path": "evidence/mapping/rviz_lio_review.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/rviz_lio_review.png",
+      "sha256": "8767ab78bd5b418ad0acb96134f6bb432069a0ded74bd3b55b574d52f91651c4",
+      "bytes": 410616,
+      "kind": "original_image",
+      "packaged_sha256": "8767ab78bd5b418ad0acb96134f6bb432069a0ded74bd3b55b574d52f91651c4"
+    },
+    {
+      "path": "evidence/mapping/rviz_spectral_side.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/lio_map_review_20261002/rviz_spectral_side.png",
+      "sha256": "ca32be1487225c101fd25bd13c7207f9191c1834cf63f507f5e2ffd86413c159",
+      "bytes": 338787,
+      "kind": "original_image",
+      "packaged_sha256": "ca32be1487225c101fd25bd13c7207f9191c1834cf63f507f5e2ffd86413c159"
+    },
+    {
+      "path": "evidence/reports/dijkstra/verification.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_navfn_final2_20261001/verification.json",
+      "sha256": "cbed8e5fa44e4edd0fe5a38b7524a5464542902dfc7b9902becf5c64abb44a14",
+      "bytes": 2088,
+      "kind": "historical_record",
+      "packaged_sha256": "cbed8e5fa44e4edd0fe5a38b7524a5464542902dfc7b9902becf5c64abb44a14"
+    },
+    {
+      "path": "evidence/reports/dijkstra/course/result.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_navfn_final2_20261001/course/result.json",
+      "sha256": "320085b2546afd08edbf45fcf9d397b9f779792df6c297eb8a6c2ddd619836f4",
+      "bytes": 835,
+      "kind": "historical_record",
+      "packaged_sha256": "320085b2546afd08edbf45fcf9d397b9f779792df6c297eb8a6c2ddd619836f4"
+    },
+    {
+      "path": "evidence/reports/dijkstra/pedestrian_validation.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_navfn_final2_20261001/pedestrian_validation.json",
+      "sha256": "9e7e2b2a60416b5fc935cb18b7230d4664acbbc45d784c4ce80cb1076117361c",
+      "bytes": 5847,
+      "kind": "historical_record",
+      "packaged_sha256": "9e7e2b2a60416b5fc935cb18b7230d4664acbbc45d784c4ce80cb1076117361c"
+    },
+    {
+      "path": "evidence/reports/dijkstra/capture/capture_complete.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_navfn_final2_20261001/capture/capture_complete.json",
+      "sha256": "5e0832fa39e7a1334614eb5f3df0c47f09e03bf8db76ed9b6d08a1ea271fa4d5",
+      "bytes": 433,
+      "kind": "historical_record",
+      "packaged_sha256": "5e0832fa39e7a1334614eb5f3df0c47f09e03bf8db76ed9b6d08a1ea271fa4d5"
+    },
+    {
+      "path": "evidence/reports/dijkstra/run_configuration/sha256.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_navfn_final2_20261001/run_configuration/sha256.json",
+      "sha256": "b8df6b439e69777bef39fd48cb8366d1cccf98791d06aae8aef0dd420f0c11a0",
+      "bytes": 2040,
+      "kind": "historical_record",
+      "packaged_sha256": "b8df6b439e69777bef39fd48cb8366d1cccf98791d06aae8aef0dd420f0c11a0"
+    },
+    {
+      "path": "evidence/reports/astar/verification.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/verification.json",
+      "sha256": "ca5a7ba99d5d5dafb3086553f5757a02c59877051214a5b9a09ae530aed59d15",
+      "bytes": 2086,
+      "kind": "historical_record",
+      "packaged_sha256": "ca5a7ba99d5d5dafb3086553f5757a02c59877051214a5b9a09ae530aed59d15"
+    },
+    {
+      "path": "evidence/reports/astar/course/result.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/course/result.json",
+      "sha256": "bab9fa90ea8e22d1fe136b6a6ad4de2bfae97ee8eef37225f10abf270b555903",
+      "bytes": 829,
+      "kind": "historical_record",
+      "packaged_sha256": "bab9fa90ea8e22d1fe136b6a6ad4de2bfae97ee8eef37225f10abf270b555903"
+    },
+    {
+      "path": "evidence/reports/astar/pedestrian_validation.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/pedestrian_validation.json",
+      "sha256": "a4e289f8539ebc2613dec3aa952a2a11cbd0c50eb2cffe873f42c31b72fc4374",
+      "bytes": 5334,
+      "kind": "historical_record",
+      "packaged_sha256": "a4e289f8539ebc2613dec3aa952a2a11cbd0c50eb2cffe873f42c31b72fc4374"
+    },
+    {
+      "path": "evidence/reports/astar/capture/capture_complete.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/capture/capture_complete.json",
+      "sha256": "1526a287589e59e05c1bd6bf00394ec9c10186eebc7ccbb083630fc4adf70667",
+      "bytes": 436,
+      "kind": "historical_record",
+      "packaged_sha256": "1526a287589e59e05c1bd6bf00394ec9c10186eebc7ccbb083630fc4adf70667"
+    },
+    {
+      "path": "evidence/reports/astar/run_configuration/sha256.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/global_smac_final2_20261001/run_configuration/sha256.json",
+      "sha256": "b8df6b439e69777bef39fd48cb8366d1cccf98791d06aae8aef0dd420f0c11a0",
+      "bytes": 2040,
+      "kind": "historical_record",
+      "packaged_sha256": "b8df6b439e69777bef39fd48cb8366d1cccf98791d06aae8aef0dd420f0c11a0"
+    },
+    {
+      "path": "evidence/semantic_20260923/01_graph.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/01_graph.png",
+      "sha256": "c6a08e91105e6069f374690bb90ac372ae49df9ac05feb09de0d2892ea719fe6",
+      "bytes": 1029863,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "c6a08e91105e6069f374690bb90ac372ae49df9ac05feb09de0d2892ea719fe6"
+    },
+    {
+      "path": "evidence/semantic_20260923/02_semantic_boxes.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/02_semantic_boxes.png",
+      "sha256": "6365914de56778d398ed11307ffd469dfb0edc0a29ee3b612f72243038663d80",
+      "bytes": 878377,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "6365914de56778d398ed11307ffd469dfb0edc0a29ee3b612f72243038663d80"
+    },
+    {
+      "path": "evidence/semantic_20260923/03_raw_cloud.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/03_raw_cloud.png",
+      "sha256": "ed142f378e2480c0d45fb9346180a2bfb9fbbfc4399486d776779e237a0871bf",
+      "bytes": 894612,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "ed142f378e2480c0d45fb9346180a2bfb9fbbfc4399486d776779e237a0871bf"
+    },
+    {
+      "path": "evidence/semantic_20260923/04_combined.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/04_combined.png",
+      "sha256": "f522851271f27082d580b59ef348b2a3485cac2b77b4814d78b8bbb27b151071",
+      "bytes": 893404,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "f522851271f27082d580b59ef348b2a3485cac2b77b4814d78b8bbb27b151071"
+    },
+    {
+      "path": "evidence/semantic_20260923/08_chinese_boxes_no_question.png",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/08_chinese_boxes_no_question.png",
+      "sha256": "30ba73520e6f33394aede25fc17ede70a412c14b16a91b6707f31ca4e6ceadb8",
+      "bytes": 1666319,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "30ba73520e6f33394aede25fc17ede70a412c14b16a91b6707f31ca4e6ceadb8"
+    },
+    {
+      "path": "evidence/semantic_20260923/validation.json",
+      "source": "/home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy/outputs/integrated_labels_20260923/validation.json",
+      "sha256": "146a216e4a795c2084425126e4f72fad34224039d60d3153f324a1ea2c735c8d",
+      "bytes": 2688,
+      "kind": "earlier_semantic_view",
+      "packaged_sha256": "146a216e4a795c2084425126e4f72fad34224039d60d3153f324a1ea2c735c8d"
+    }
+  ],
+  "snapshot_freeze_time": "2026-10-02T15:36:46.006462+08:00"
+}

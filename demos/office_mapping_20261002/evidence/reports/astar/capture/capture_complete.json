@@ -1,0 +1,15 @@
+{
+  "scans": 1677,
+  "points": 31531952,
+  "first_stamp": 1790856136.1158242,
+  "last_stamp": 1790856303.717796,
+  "voxel_m": 0.03,
+  "preview_drops": 344,
+  "source": "/wavego/slam/registered_points",
+  "frame_alias": "native LIO map published as lio_map by existing mapping sidecar; no simulator ground-truth pose",
+  "adaptive_radius_range": [
+    0.43870529469047365,
+    1.1403376819397228
+  ],
+  "contains_dynamic_history": true
+}

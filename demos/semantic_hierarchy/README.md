@@ -1,6 +1,16 @@
 # Wavego 立体语义地图与场景图
 
-**新地图的完整表示入口：[校正地图的 Graph、语义 Box、点云与模型结果](docs/fresh_semantics.md)。** 执行 `bash scripts/show_fresh_semantics.sh`。新记录上已重跑 RGB-D 三模型、HOV-SG 楼层模块与 Utonia 特征，并重新构建 Spark-DSG；控制面板与原生 RViz 分窗口显示，旧版数据全部保留。本次保存图片，不录制视频。
+**2026-10-02 发布索引：[最新 OfficeWorld 在线建图源码与仿真证据](../office_mapping_20261002/README.md)。** 本目录继续保存此前中文单窗口、多种地图表示及实测点云后处理代码。最新实时工程与本目录校正地图使用不同记录，数据来源分别说明。
+
+新增资料：[923 LAZ 导入](docs/imported_923.md) · [两份实测图去顶](docs/imported_20260926.md) · [Z≤5 m 特征、楼梯与局部拼接](docs/z5_feature_detection.md)。这些入口需要本机对应输入，原始实测数据不随源码上传。
+
+**最新实测点云：[Z ≤ 5 m 左右楼梯、二楼长廊及 Graph 可视化](docs/z5_feature_detection.md)。** 运行 `bash scripts/show_z5_features.sh stitched` 可在同一原生窗口查看左右两组“一楼楼梯 → 中间平台 → 二楼楼梯 → 二楼长廊”，切换纯点云、语义颜色、Box、Graph；长廊按 `12` 实测点着色约 46 m，左侧一楼段由 `MT` 局部配准到 `12` 的实测点补全。`12` 单独扫描原本完整的是右侧楼梯，不应误称左侧。原始点云和旧版输出均保留；[同一次 Go2-W 上楼试跑的四阶段图](outputs/imported_12_20260926/z5_features/mujoco_stair_proxy/live_frames/stair_trial_four_stages.png)及测试边界见文档。
+
+**2026-09-26 两份新点云：[分别去顶后的 RGB／高度点云、几何 Box 与 Graph](docs/imported_20260926.md)。** `bash scripts/show_roofless_import.sh 12` 和 `bash scripts/show_roofless_import.sh mt` 分别打开交互演示；两套完整去顶 PCD、原始 PCD 和多视角截图均保存在各自输出目录。原文件没有语义分类，Box 与 Graph 是几何候选。
+
+**923 LAZ 新点云效果：** [单窗口 RGB／高度点云、几何 Box 与 Graph](docs/imported_923.md)，启动 `bash scripts/show_imported_923.sh`。这是新文件的几何处理结果，节点为连通簇；源文件没有语义分类和坐标系声明。
+
+**新地图的完整表示入口：[校正地图的 Graph、语义 Box、点云与模型结果](docs/fresh_semantics.md)。** 执行 `bash scripts/show_fresh_semantics.sh`。新记录上已重跑 RGB-D 三模型、HOV-SG 楼层模块与 Utonia 特征，并重新构建 Spark-DSG；控制面板与地图在同一个窗口显示，Box 默认显示编号和中文类别。旧版数据全部保留，本次保存图片、不录制视频。
 
 按北京理工大学 2026 年学位论文规范生成的中文论文图副本位于 `outputs/fresh_semantic_20260919/thesis_figures_cn/`，图内文字已汉化，图题置于图下方并居中；英文原图仍保留。
 
@@ -18,11 +28,11 @@ RGB-D 图中的类别框直接来自 Grounding DINO + SAM2 的模型输出；`la
 
 新增：[单地图语义融合、164.7 万点建图回放与模型类别配色](docs/reference_demo.md)。本机运行 `bash scripts/reference_demo.sh`。默认在同一地图叠加语义点云、标签和轨迹；旧双视图可通过 `--layout dual` 查看。
 
-在原有 V2 建图之外新增独立目录：读取 OfficeWorld 的 Go2-W 实际仿真记录，显示彩色语义点云、物体簇、候选楼层／墙面和楼层—区域—物体图。使用本机原生 **RViz + Qt**，不需要网页。为避免 X11 下 Qt 重挂载 Ogre 导致黑屏，RViz 保持为右侧独立原生窗口，左侧 WAVEGO 面板负责切换表示、视角和回放。
+在原有 V2 建图之外新增独立目录：读取 OfficeWorld 的 Go2-W 实际仿真记录，显示彩色语义点云、物体簇、候选楼层／墙面和楼层—区域—物体图。使用本机原生 **RViz + Qt**。渲染控件直接在 WAVEGO 主窗口内创建，切换表示、视角和回放都在同一窗口完成。
 
 **这是已录制地图的语义后处理演示。还不是 Elevator-LIO、S-Graphs、Hydra、Nav2 全链路在线系统，也没有测量绝对地图精度。**
 
-![原生 RViz 演示](outputs/screenshots/05_native_demo.png)
+![中文单窗口地图演示](../office_mapping_20261002/evidence/semantic_20260923/04_combined.png)
 
 ## 本机启动
 
@@ -69,9 +79,9 @@ SCENE_CHINESE=1 bash scripts/three_view_demo.sh --style fastlio --mode combined
 
 中文类别和 Graph 关系的固定映射见 `scripts/semantic_labels_cn.py`；二层多方法地图索引见 `outputs/fresh_semantic_20260919/outputs/two_floor_maps/README.md`。
 
-左侧控制面板可切换三维总览、楼梯侧视、俯视和层级图；右侧原生 RViz 窗口中用鼠标拖动旋转、滚轮缩放。`?` 表示预测类别；绿色是地面语义，不是激光雷达扫描线。浅蓝为墙面，蓝色楼梯，紫色坡道，橙色圆柱。灰色保留未分类的测量几何。
+在同一个窗口中切换三维总览、楼梯侧视、俯视和层级图；地图区域支持鼠标拖动旋转、滚轮缩放。底部“类别标签”控制 Box / Graph 标签，名称显示为 `O0 楼梯`、`O4 坡道` 等，不带问号。标签仍来自模型预测，编号、类别和原始置信度保持不变。绿色为地面，浅蓝为墙面，蓝色楼梯，紫色坡道，橙色圆柱。
 
-如果旧进程留下黑色 RViz 窗口，先关闭本次启动的终端，再重新执行上述命令；启动器会使用独立的 ROS master 和 RViz 进程，不需要手动打开第二个 RViz。
+如果旧进程留下黑色 RViz 窗口，关闭旧演示后重新执行上述命令。默认 `SCENE_NATIVE_RVIZ=0`，由同一进程直接创建内嵌渲染控件，避免跨进程重挂载 OpenGL 窗口。首次启动会自动编译中文标签组件，详情见启动说明。
 
 ROS 1 使用独立 master `http://127.0.0.1:11328`，不控制机器人，不停止 V2 的其他 master。关闭此启动窗口会清理它自己启动的发布节点及 master。
 

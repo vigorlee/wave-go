@@ -25,7 +25,6 @@ def graph_markers(scene, visible, dark=False):
         if kind != 'wall':
             title = n['id'] + ' ' + (n.get('kind_zh', CN_KIND.get(kind,kind)) if CHINESE else kind)
             if kind in ['floor', 'region']: title += '*'
-            elif kind != 'building': title += '?'
             labels.append(text('metric_graph_labels', i, title, pos + [0, 0, .5], (225,231,240) if dark else (38,47,66), .37))
     for i, edge in enumerate(scene['edges']):
         if edge['source'] not in nodes or edge['target'] not in nodes:

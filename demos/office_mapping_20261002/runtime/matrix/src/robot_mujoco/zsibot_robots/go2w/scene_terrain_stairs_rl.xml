@@ -1,0 +1,43 @@
+<mujoco model="go2w rl stair benchmark">
+  <include file="go2w.xml" />
+  <statistic center="2.0 0 0.35" extent="3.2" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-125" elevation="-22" />
+    <map znear="0.01" zfar="50" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.35 0.5 0.65" rgb2="0.05 0.07 0.09"
+      width="512" height="3072" />
+    <texture type="2d" name="rl_ground" builtin="checker" mark="edge" rgb1="0.22 0.25 0.27"
+      rgb2="0.12 0.14 0.15" markrgb="0.7 0.7 0.7" width="300" height="300" />
+    <material name="rl_ground" texture="rl_ground" texuniform="true" texrepeat="8 8" />
+    <material name="rl_step" rgba="0.32 0.46 0.54 1" specular="0.15" shininess="0.25" />
+    <material name="rl_top" rgba="0.38 0.52 0.38 1" specular="0.1" shininess="0.2" />
+  </asset>
+
+  <worldbody>
+    <light pos="2 0 5" dir="0 0 -1" directional="true" />
+    <geom name="floor" type="plane" size="0 0 0.02" material="rl_ground"
+      friction="0.8 0.02 0.01" />
+
+    <!-- DreamWaQ trains on 0.31 m stair treads. This benchmark starts at x=1.20 m. -->
+    <geom name="step_1" type="box" pos="1.355 0 0.05" size="0.155 1.0 0.05"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="step_2" type="box" pos="1.665 0 0.10" size="0.155 1.0 0.10"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="step_3" type="box" pos="1.975 0 0.15" size="0.155 1.0 0.15"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="step_4" type="box" pos="2.285 0 0.20" size="0.155 1.0 0.20"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="step_5" type="box" pos="2.595 0 0.25" size="0.155 1.0 0.25"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="step_6" type="box" pos="2.905 0 0.30" size="0.155 1.0 0.30"
+      material="rl_step" friction="0.8 0.02 0.01" />
+    <geom name="top_platform" type="box" pos="4.10 0 0.30" size="1.04 1.0 0.30"
+      material="rl_top" friction="0.8 0.02 0.01" />
+  </worldbody>
+</mujoco>

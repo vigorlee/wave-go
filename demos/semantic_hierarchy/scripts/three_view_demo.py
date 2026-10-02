@@ -6,6 +6,7 @@ import os
 import subprocess
 import sys
 import time
+import signal
 from pathlib import Path
 
 import rospy
@@ -20,7 +21,7 @@ from scene_profile import DATA_ROOT,PROFILE,CHINESE
 ROOT=Path(__file__).resolve().parents[1]
 RUNTIME=Path(os.environ.get('SCENE_SESSION_DIR',str(ROOT/'.runtime')))
 RUNTIME.mkdir(parents=True,exist_ok=True)
-NATIVE_RVIZ=os.environ.get('SCENE_NATIVE_RVIZ','1').lower() not in ('0','false','no')
+NATIVE_RVIZ=os.environ.get('SCENE_NATIVE_RVIZ','0').lower() not in ('0','false','no')
 ap=argparse.ArgumentParser()
 ap.add_argument('--capture',action='store_true')
 ap.add_argument('--record',action='store_true')
@@ -30,7 +31,7 @@ ap.add_argument('--show-features',action='store_true')
 ap.add_argument('--capture-compare',action='store_true')
 ap.add_argument('--mode',choices=['graph','semantic','raw','combined','hovsg','utonia'],default='raw')
 args=ap.parse_args()
-OUT=DATA_ROOT/'outputs/fastlio_comparison'/(args.style+('_cn' if CHINESE else ''))
+OUT=Path(os.environ.get('SCENE_CAPTURE_DIR', str(DATA_ROOT/'outputs/fastlio_comparison'/(args.style+('_cn' if CHINESE else '')))))
 OUT.mkdir(exist_ok=True,parents=True)
 auto_capture=args.capture or args.record or args.capture_hovsg or args.capture_compare
 rospy.init_node('wavego_three_view',anonymous=True,disable_signals=True)
@@ -75,7 +76,9 @@ if args.mode not in titles:ap.error('Requested method result is not prepared')
 mode=[args.mode]
 for key,title in titles.items():
     b=QPushButton(title);b.setCheckable(True);group.addButton(b);tabs.addWidget(b);buttons[key]=b
-model_panels=sorted((DATA_ROOT/'outputs/rgbd_models/panels').glob('frame_*.png'))
+model_panel_dir=DATA_ROOT/'outputs/rgbd_models'/('panels_cn' if CHINESE else 'panels')
+if not model_panel_dir.exists():model_panel_dir=DATA_ROOT/'outputs/rgbd_models/panels'
+model_panels=sorted(model_panel_dir.glob('frame_*.png'))
 if model_panels:
     model_button=QPushButton('RGB-D 三模型');tabs.addWidget(model_button)
     def open_models():
@@ -86,7 +89,7 @@ if model_panels:
             frame=int(p.stem.split('_')[-1]);meta=json.loads((DATA_ROOT/f'outputs/rgbd_models/frames/{frame:04d}.json').read_text())
             select.addItem(f'{meta["frame"]["stamp"]-report["first_stamp"]:.1f} s  /  {len(meta["objects"])} 个候选目标',str(p))
         select.currentIndexChanged.connect(lambda _:pic.setPixmap(QPixmap(select.currentData()).scaled(1080,754,Qt.KeepAspectRatio,Qt.SmoothTransformation)))
-        select.setCurrentIndex(min(2,len(model_panels)-1));dialog.resize(1140,870);dialog.show()
+        select.setCurrentIndex(min(2,len(model_panels)-1));select.currentIndexChanged.emit(select.currentIndex());dialog.resize(1140,870);dialog.show()
     model_button.clicked.connect(open_models)
 tabs.addStretch();outer.addLayout(tabs)
 body=QHBoxLayout();sidebar=QWidget();sidebar.setFixedWidth(258);left=QVBoxLayout(sidebar);left.setContentsMargins(0,10,14,0)
@@ -117,22 +120,22 @@ graph_legend=QLabel('<b>场景图结构</b><br><span style="color:#715697">●</
 left.addWidget(graph_legend)
 left.addStretch()
 state=QLabel('正在载入记录…');state.setWordWrap(True);left.addWidget(state)
-left.addWidget(QLabel(('模型预测与结构候选分开显示<br>'+('行人仅作历史观测，不进行动态追踪' if counts['person'] else '本记录没有可靠行人检测')) if CHINESE else ('“?” 模型预测　“*” 结构候选<br>'+('行人：历史观测，非动态追踪' if counts['person'] else '本记录没有有效行人标签'))))
+left.addWidget(QLabel(('模型预测与结构候选分开显示<br>'+('行人仅作历史观测，不进行动态追踪' if counts['person'] else '本记录没有可靠行人检测')) if CHINESE else ('类别来自模型预测；“*” 为结构候选<br>'+('行人：历史观测，非动态追踪' if counts['person'] else '本记录没有有效行人标签'))))
 body.addWidget(sidebar)
 holder=QWidget();canvas=QVBoxLayout(holder);canvas.setContentsMargins(0,0,0,0)
 viewtitle=QLabel();viewtitle.setStyleSheet('padding:9px;background:#f4f7fa;font-size:16px;font-weight:600;');canvas.addWidget(viewtitle)
 body.addWidget(holder,1);outer.addLayout(body,1)
+map_view=None
+if not NATIVE_RVIZ:
+    from embedded_map import EmbeddedMap
+    map_view=EmbeddedMap(holder,canvas,RUNTIME,args.style)
 footer=QLabel(source_caption)
 footer.setStyleSheet('font-size:12px;color:#63728a;');outer.addWidget(footer)
 controls=QHBoxLayout();play=QPushButton('▶ 回放');controls.addWidget(play)
 slider=QSlider(Qt.Horizontal);slider.setRange(0,int(duration*10));slider.setValue(slider.maximum());controls.addWidget(slider,1)
 clock=QLabel();controls.addWidget(clock)
 speed=QComboBox();speed.addItems(['1×','2×','4×','8×']);speed.setCurrentIndex(2);controls.addWidget(speed)
-labels=QCheckBox('标签');labels.setChecked(not CHINESE);controls.addWidget(labels)
-if auto_capture and CHINESE:
-    # Chinese glyphs are not reliably rasterized by RViz's Ogre text overlay;
-    # publication captures use the Chinese legend and clean boxes instead.
-    labels.setChecked(False)
+labels=QCheckBox('类别标签');labels.setChecked(True);controls.addWidget(labels)
 path=QCheckBox('轨迹');controls.addWidget(path)
 height=QCheckBox('按高度着色');height.setChecked(True);controls.addWidget(height)
 outer.addLayout(controls)
@@ -166,7 +169,9 @@ def choose(key=None):
     play.setEnabled(not static);slider.setEnabled(not static)
     shown_title=titles[key]+'  /  统一地图坐标 · 米' if CHINESE else titles[key]+'  /  lio_map · metres'
     viewtitle.setText(shown_title)
-    mode_pub.publish(String(data=json.dumps(dict(mode=key,style=args.style,labels=labels.isChecked(),trajectory=path.isChecked(),height=height.isChecked()))))
+    options=dict(mode=key,style=args.style,labels=labels.isChecked(),trajectory=path.isChecked(),height=height.isChecked())
+    mode_pub.publish(String(data=json.dumps(options)))
+    if map_view:map_view.choose(options)
 
 for key,b in buttons.items():b.clicked.connect(lambda _,k=key:choose(k))
 for control in [labels,path,height]:control.toggled.connect(lambda _:choose())
@@ -194,33 +199,31 @@ def update_status(raw):
     state.setText(f'<b>已累积 {s["points"]:,} 点</b><br>{len(scene["nodes"])} 节点 / {len(scene["edges"])} 条关系（完整图）')
 bridge.status.connect(update_status)
 rospy.Subscriber('/reference_map/status',String,lambda m:bridge.status.emit(m.data),queue_size=1)
-worker=QProcess(w);worker.setStandardOutputFile(str(RUNTIME/'three_panel.log'));worker.setProcessChannelMode(QProcess.MergedChannels)
-statefile=RUNTIME/'reference_compare_window.json';statefile.unlink(missing_ok=True)
-worker_args=[str(ROOT/'scripts/reference_panel.py'),'--side','compare','--style',args.style]
-if auto_capture:worker_args.append('--automated-capture')
-worker.start(sys.executable,worker_args)
+worker=None
 embedded={}
-def embed():
-    if not statefile.exists():return
-    s=json.loads(statefile.read_text())
-    if s['pid']!=worker.processId():return
-    native=QWindow.fromWinId(s['window_id'])
-    if NATIVE_RVIZ:
-        # Reparenting the Ogre/OpenGL RViz frame through createWindowContainer
-        # produces an all-black GL surface on this X11 desktop.  Keep RViz as
-        # its native top-level window and use the WAVEGO window for controls.
+if NATIVE_RVIZ:
+    worker=QProcess(w);worker.setStandardOutputFile(str(RUNTIME/'three_panel.log'));worker.setProcessChannelMode(QProcess.MergedChannels)
+    statefile=RUNTIME/'reference_compare_window.json';statefile.unlink(missing_ok=True)
+    worker_args=[str(ROOT/'scripts/reference_panel.py'),'--side','compare','--style',args.style]
+    if auto_capture:worker_args.append('--automated-capture')
+    worker.start(sys.executable,worker_args)
+    def embed():
+        if not statefile.exists():return
+        s=json.loads(statefile.read_text())
+        if s['pid']!=worker.processId():return
+        native=QWindow.fromWinId(s['window_id'])
+        # Optional diagnostic fallback; the default constructs EmbeddedMap above.
         notice=QLabel('RViz 已在独立窗口打开\n可在右侧窗口旋转、缩放和切换显示层')
         notice.setAlignment(Qt.AlignCenter)
         notice.setStyleSheet('font-size:20px;color:#607089;background:#f4f7fa;border:1px solid #d9e2ec;')
         canvas.addWidget(notice,1)
         native.show()
         embedded.update(native=native,container=None,window_id=s['window_id'])
-    else:
-        container=QWidget.createWindowContainer(native,w);canvas.addWidget(container,1)
-        embedded.update(native=native,container=container,window_id=s['window_id'])
-    embedding.stop()
-    send_camera();choose();seek(slider.value())
-embedding=QTimer();embedding.timeout.connect(embed);embedding.start(150)
+        embedding.stop()
+        send_camera();choose();seek(slider.value())
+    embedding=QTimer();embedding.timeout.connect(embed);embedding.start(150)
+else:
+    embedded['window_id']=int(map_view.frame.winId())
 timer=QTimer();timer.timeout.connect(tick);timer.start(200)
 w.resize(2040,1140);w.move(15,20);w.show();choose();seek(slider.value());send_camera()
 ((RUNTIME if args.record else OUT)/'viewer_window.json').write_text(json.dumps({'window_id':int(w.winId())}))
@@ -231,6 +234,8 @@ def capture(name):
     screen.grabWindow(embedded['window_id']).save(str(OUT/(name+'_map.png')))
     audit={'camera':json.loads((RUNTIME/'reference_compare_camera.json').read_text()),
            'display':json.loads((RUNTIME/'comparison_display_state.json').read_text()),'status':latest[0]}
+    if map_view:
+        audit['labels']=json.loads((RUNTIME/'visible_labels.json').read_text())
     (OUT/(name+'.json')).write_text(json.dumps(audit,indent=2))
     print('CAPTURE',name,flush=True)
 
@@ -277,7 +282,11 @@ if args.record:
             else:QTimer.singleShot(82000,finish)
         else:QTimer.singleShot(68000,finish)
     QTimer.singleShot(7000,record)
+signal.signal(signal.SIGINT,lambda *_:app.quit())
+signal.signal(signal.SIGTERM,lambda *_:app.quit())
 app.exec_()
-worker.terminate();worker.waitForFinished(3000)
+if map_view:map_view.close()
+if worker:
+    worker.terminate();worker.waitForFinished(3000)
 if recording[0] and recording[0].poll() is None:
     recording[0].communicate(b'q',timeout=10)

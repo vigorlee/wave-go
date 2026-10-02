@@ -9,6 +9,9 @@ export DISPLAY="${DISPLAY:-:0}"
 export XAUTHORITY="${XAUTHORITY:-/run/user/1000/gdm/Xauthority}"
 export QT_QPA_PLATFORM_PLUGIN_PATH="${CONDA_PREFIX}/plugins"
 mkdir -p "$SCENE_RUN"
+if [[ "${SCENE_NATIVE_RVIZ,,}" =~ ^(0|false|no|)$ ]]; then
+  bash "$SCENE_ROOT/scripts/build_chinese_labels.sh"
+fi
 for artifact in mapping_replay.npz model_semantics.npz replay_report.json; do
   if [[ ! -s "$SCENE_DATA/outputs/reference_demo/$artifact" ]]; then
     echo "Missing $artifact; follow docs/three_representations.md to prepare inputs." >&2

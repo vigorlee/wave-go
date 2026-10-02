@@ -1,0 +1,20 @@
+{
+  "scripts/global_compare/follow_route.py": "cc86bce31c593455d63670d28b80cdf39cf82c77c4542eb706a8441086ee4b89",
+  "scripts/global_compare/dense_capture.py": "823a6d6c4234cec76425b2b9752606cb0ba922201454bc3ca5f65206efcaa6a1",
+  "scripts/global_compare/validate_pedestrians.py": "f4c3b0c95cc5c47763db6c3ec9e1318cbc48a829aafe11f79b03fd329b75f6eb",
+  "scripts/start_office_global_demo.sh": "fac6e3d8cd57e83fe0b4ff418de525bb437a9caa80da7a08ff90b03ec33b2b81",
+  "scripts/start_go2w_global_compare_world.sh": "57166fc356d29fab47c7529068c37e4372236596972f176b6dcae206142da95d",
+  "config/global_compare/pedestrians.json": "f37505a512b45a7c1bee187b13e3f387b054dff389bb3423d0e15f191ef67626",
+  "config/global_compare/office_demo.rviz": "7fdede5e2332af052b0b4756c2a649af63e7a9f66e87ee8bd2a406d71f5278f5",
+  "matrix/scene/scene_go2w_global_compare.json": "fcae7ade79824e868eb57ab4a02c502729918da6f034e2be8aa729c2f34d0973",
+  "config/office_lio_dense.yaml": "3e7d9937d0f656f68ee7eb4c6379cda59bf1bb0c0742aade3aca22ab8a5520de",
+  "matrix/config/config.json": "6a701485113fa74020963a91314ed01df4e6109bb8a0c16dde5057902cbb2655",
+  "artifacts/global_compare_20261001/plans/routes.json": "1101eec21ec142e18930e4c4dc89774e2e618d0d19cc25335b0fbf199d099386",
+  "install/bin/go2w_rl_bridge": "7fc02de94cc78f6777b5c519b428309baf6aacc433f116a6a58dba2740722096",
+  "scripts/global_compare/maps.py": "9dbf55b414fde1debe55718d6d1eefd44bcea9db73baea58156ccce02ad1c50b",
+  "scripts/global_compare/plan_routes.py": "bbe6b3c81e30ce1332169b6f423bbc14a361da7a45ba3c7ba811bdcf74910c89",
+  "scripts/global_compare/visualize_routes.py": "9171f6bfb2d80ef5e8f93e4d1d36a8e0159a50adb1b147c78ad417eb7da39c1e",
+  "config/global_compare/planners.yaml": "2fe46962d40c2f298bd4be03a532d264787234ef7fb3a8d9f22b3f9600a9ccbd",
+  "matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_inline.xml": "34e84141949d8310a50afe13fc87058ec78059e11da5c9ec11b0d8b3aeed667c",
+  "controllers/go2w_rl_bridge/src/main.cpp": "b0a1c560c085b377953e7fa0efaea5f3ea4b06ce11adcd2cecf7dce60d9096a5"
+}

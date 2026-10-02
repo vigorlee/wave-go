@@ -1,0 +1,27 @@
+{
+  "pdf": "/home/unitree/\u4e0b\u8f7d/MATRiX\u516c\u5f00\u8bfe.pdf",
+  "pdf_page": 17,
+  "avoid": false,
+  "coordinate_units": "cm in UE; m in this file",
+  "people": [
+    {
+      "name": "office_nav_pedestrian_1",
+      "x": -4.1,
+      "y_start": -3.0,
+      "y_end": -0.65,
+      "speed_mps": 0.5
+    },
+    {
+      "name": "office_nav_pedestrian_2",
+      "x": -4.4,
+      "y_start": 4.2,
+      "y_end": 2.75,
+      "speed_mps": 0.4
+    }
+  ],
+  "native_max_walk_speed_cm_s": 100,
+  "native_waypoint_distance_threshold_cm": 15,
+  "explicit_waypoints_per_person": 1000,
+  "velocity_note": "JSON values are normalized native movement input; 100 cm/s native cap gives nominal 0.5/0.4 m/s away from endpoints.",
+  "waypoint_root_height_cm": 104
+}

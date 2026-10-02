@@ -1,0 +1,43 @@
+<mujoco model="go2w continuous ramp navigation">
+  <include file="go2w.xml" />
+  <statistic center="0 3.6 0.35" extent="7.5" />
+
+  <visual>
+    <headlight diffuse="0.72 0.72 0.72" ambient="0.35 0.35 0.35" specular="0.08 0.08 0.08" />
+    <rgba haze="0.55 0.66 0.78 1" />
+    <global azimuth="145" elevation="-25" offwidth="1600" offheight="900" />
+    <map znear="0.01" zfar="60" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.62 0.74 0.88" rgb2="0.10 0.14 0.20"
+      width="512" height="3072" />
+    <texture type="2d" name="ramp_ground_texture" builtin="checker" mark="edge"
+      rgb1="0.28 0.32 0.36" rgb2="0.18 0.21 0.24" markrgb="0.72 0.78 0.82"
+      width="300" height="300" />
+    <material name="ramp_ground" texture="ramp_ground_texture" texuniform="true"
+      texrepeat="10 16" reflectance="0.08" />
+    <material name="ramp_surface" rgba="0.22 0.58 0.48 1" />
+    <material name="edge_marker" rgba="0.95 0.72 0.16 1" />
+  </asset>
+
+  <worldbody>
+    <light pos="-2 4 9" dir="0 0 -1" directional="true" />
+    <geom name="floor" type="plane" size="0 0 0.04" material="ramp_ground"
+      friction="0.95 0.02 0.01" />
+
+    <!-- Continuous 15-degree ascent, 0.60 m crest, and 15-degree descent. -->
+    <geom name="ramp_up" type="box" pos="0 2.20 0.30" size="1.10 1.16 0.04"
+      euler="0.261799 0 0" material="ramp_surface" friction="1.05 0.02 0.01" />
+    <geom name="ramp_crest" type="box" pos="0 3.66 0.60" size="1.10 0.34 0.04"
+      material="ramp_surface" friction="1.05 0.02 0.01" />
+    <geom name="ramp_down" type="box" pos="0 5.12 0.30" size="1.10 1.16 0.04"
+      euler="-0.261799 0 0" material="ramp_surface" friction="1.05 0.02 0.01" />
+
+    <geom name="left_marker" type="box" pos="-1.30 3.66 0.08" size="0.06 2.70 0.08"
+      material="edge_marker" contype="0" conaffinity="0" />
+    <geom name="right_marker" type="box" pos="1.30 3.66 0.08" size="0.06 2.70 0.08"
+      material="edge_marker" contype="0" conaffinity="0" />
+    <site name="navigation_goal" pos="0 7.0 0.03" size="0.12" rgba="0.20 0.80 0.30 1" />
+  </worldbody>
+</mujoco>

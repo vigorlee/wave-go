@@ -9,7 +9,9 @@ cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/semantic_hierarchy
 bash scripts/show_fresh_semantics.sh
 ```
 
-左侧控制面板可切换 **Graph、语义颜色 + Box、纯点云、融合叠加、HOV-SG 分层、Utonia 特征**。右侧原生 RViz 窗口实时显示所选图层；点击 **RGB-D 三模型** 查看新录制图像上的 Depth Anything V2、Grounding DINO 和 SAM2 实际输出。鼠标在 RViz 窗口中旋转、滚轮缩放；底部可切换总览／侧视／俯视。
+同一个窗口内可切换 **Graph、语义颜色 + Box、纯点云、融合叠加、HOV-SG 分层、Utonia 特征**，地图直接显示在面板右侧。点击 **RGB-D 三模型** 查看新录制图像上的 Depth Anything V2、Grounding DINO 和 SAM2 实际输出。鼠标在地图区域旋转、滚轮缩放；底部可切换总览／侧视／俯视。
+
+**Box 中文标签默认开启**：显示 `O0 楼梯`、`O4 坡道`、`O5 圆柱障碍物` 等编号与类别，不再加问号。“类别标签”可统一开关；Graph 页显示对应节点名称。融合页使用物体标签，避免与 Graph 节点标签重复。文字取自原 ROS Marker，中文字体由 Qt 栅格化后贴到三维场景；字号随视距调整，标签相互避让，引线仍指向原地图锚点。此项只修改显示，不改变点云、Box、模型置信度或 Graph 坐标。
 
 默认保留 FAST-LIO 风格的 RViz Z 高度着色。Utonia 多彩特征仅在选择该页时显示。需要之前的蓝金或 Batlow 风格：
 
@@ -20,7 +22,18 @@ bash scripts/show_fresh_semantics.sh --style batlow
 
 旧语义地图入口仍是 `bash scripts/three_view_demo.sh --style fastlio --mode raw`；新旧几何比较入口是 `bash scripts/show_level_comparison.sh`。
 
-新演示使用独立 ROS 1 master `11328`，不驱动机器狗。RViz 默认保持原生顶层窗口（`SCENE_NATIVE_RVIZ=1`），避免 Qt/X11 重挂载 Ogre OpenGL 后出现黑屏；关闭启动终端清理本启动器拥有的节点。新旧数据通过 `SCENE_DATASET_ROOT` 分开，旧入口默认数据不变。
+新演示使用独立 ROS 1 master `11328`，不驱动机器狗。默认 `SCENE_NATIVE_RVIZ=0`：RViz 控件与 Qt 主面板处于同一进程，创建时即使用最终父窗口，不再跨进程重挂载 Ogre/OpenGL。关闭窗口清理本启动器拥有的节点。新旧数据通过 `SCENE_DATASET_ROOT` 分开，旧入口默认数据不变。
+
+首次启动自动执行 `scripts/build_chinese_labels.sh`，将 `native/chinese_labels.cpp` 编译到 `.runtime/native/`。需要当前 Noetic 环境中的 RViz、Qt5/Ogre 开发库，以及 `g++`、`pkg-config`、Noto Sans CJK SC 字体；本机已具备。诊断时可用 `SCENE_NATIVE_RVIZ=1` 回到独立窗口，但集成中文标签只用于默认单窗口入口。
+
+另存截图而不覆盖之前图片：
+
+```bash
+SCENE_CAPTURE_DIR="$PWD/outputs/integrated_labels_20260923" \
+  bash scripts/show_fresh_semantics.sh --capture
+```
+
+每张截图同时保存相机、启用图层、累积点数以及实际标签与原地图锚点的 JSON。`SCENE_SESSION_DIR/visible_labels.json` 可核对当前显示文字。
 
 ## 实际运行范围
 

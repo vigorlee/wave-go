@@ -1,0 +1,80 @@
+{
+  "planner": "SmacAStar",
+  "navigation_passed": true,
+  "completed_stages": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "all_12_in_order": true,
+  "duration_s": 156.63696479797363,
+  "final_pose": {
+    "time": "1790856297.3716865",
+    "x": "-2.9317370908279545",
+    "y": "0.5607047130010746",
+    "z": "5.92690240499344",
+    "roll": "0.007041976944044543",
+    "pitch": "0.04655623616625992",
+    "yaw": "0.40866848782066667"
+  },
+  "measured_travel_m": 38.50675643514003,
+  "maximum_adjacent_odom_jump_m": 0.1781057043998558,
+  "yield_count": 3,
+  "clear_count": 3,
+  "waiting_intervals": [
+    {
+      "start": 1790856186.972916,
+      "end": 1790856189.8228517,
+      "duration_s": 2.84993577003479,
+      "settled_xy_span_m": 0.044906016692579286
+    },
+    {
+      "start": 1790856205.7730103,
+      "end": 1790856207.6728253,
+      "duration_s": 1.8998150825500488,
+      "settled_xy_span_m": 0.003020982598910383
+    },
+    {
+      "start": 1790856216.1729558,
+      "end": 1790856219.6229882,
+      "duration_s": 3.4500324726104736,
+      "settled_xy_span_m": 0.014283609731541105
+    }
+  ],
+  "cross_track_median_m": 0.13431420361847046,
+  "cross_track_p95_m": 0.3432808570824649,
+  "minimum_measured_candidate_center_distance_m": 0.8881186925783425,
+  "video_metadata": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1920,
+        "height": 1080,
+        "r_frame_rate": "20/1"
+      }
+    ],
+    "format": {
+      "duration": "164.700000"
+    }
+  },
+  "video_full_decode_ok": true,
+  "video_decode_messages": "",
+  "limitation": "Obstacle candidates are geometric LiDAR clusters. Center distance is not a calibrated mesh-to-mesh clearance.",
+  "lio_position_check": {
+    "samples": 1564,
+    "median_m": 0.3321910087420092,
+    "p95_m": 0.47752651643643945,
+    "final_m": 0.3914286898076008,
+    "method": "Initial rigid alignment only; interpolate simulator odometry at LIO timestamps. Includes timestamp/latency effects; not a surveyed map accuracy evaluation."
+  }
+}

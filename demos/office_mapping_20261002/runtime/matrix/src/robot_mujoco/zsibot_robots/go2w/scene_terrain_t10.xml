@@ -1,0 +1,900 @@
+<mujoco model="go2w scene">
+  <include file="go2w.xml" />
+
+  <statistic center="0 0 0.1" extent="0.8" />
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+    <map znear="0.01" zfar="100"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+    <mesh name="curb1" file="curb1.stl"/>
+    <mesh name="curb2" file="curb2.stl"/>
+    <mesh name="curb3" file="curb3.stl"/>
+    <mesh name="curb4" file="curb4.stl"/>
+    <mesh name="curb5" file="curb5.stl"/>
+    <mesh name="curb6" file="curb6.stl"/>
+    <mesh name="curb7" file="curb7.stl"/>
+    <mesh name="curb8" file="curb8.stl"/>
+    <mesh name="curb9" file="curb9.stl"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.01" type="plane" material="groundplane" />
+    <geom name="curb1" type="mesh" mesh="curb1" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb2" type="mesh" mesh="curb2" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb3" type="mesh" mesh="curb3" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb4" type="mesh" mesh="curb4" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb5" type="mesh" mesh="curb5" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb6" type="mesh" mesh="curb6" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb7" type="mesh" mesh="curb7" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb8" type="mesh" mesh="curb8" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+    <geom name="curb9" type="mesh" mesh="curb9" pos="0 10 0" euler="0 0 0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube" type="box" size="125.0 0.05 1.5" pos="0.9 72.6 1.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube2" type="box" size="125.0 0.05 1.5" pos="0.9 -125.7 1.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube3" type="box" size="125.0 0.05 1.5" pos="104.4 -21.6 1.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube4" type="box" size="125.0 0.05 1.5" pos="-109.0 -21.6 1.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube5" type="box" size="16.0 0.05 0.5" pos="-78.1 -28.75 0.5" quat="0.99999 0.0 0.0 0.004363" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube6" type="box" size="20.0 0.05 0.5" pos="-93.8 -48.95 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube7" type="box" size="1.5 0.05 0.5" pos="-93.78 -70.45 0.5" quat="0.71325 0.0 0.0 -0.700909" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube8" type="box" size="1.5 0.05 0.5" pos="-93.55 -73.45 0.5" quat="0.75471 0.0 0.0 -0.656059" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube9" type="box" size="1.5 0.05 0.5" pos="-93.05 -76.39 0.5" quat="0.766044 0.0 0.0 -0.642788" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube10" type="box" size="1.5 0.05 0.5" pos="-92.55 -79.36 0.5" quat="0.766044 0.0 0.0 -0.642788" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube11" type="box" size="1.5 0.05 0.5" pos="-92.05 -82.32 0.5" quat="0.766044 0.0 0.0 -0.642788" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube12" type="box" size="1.5 0.05 0.5" pos="-91.38 -85.23 0.5" quat="0.793353 0.0 0.0 -0.608761" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube13" type="box" size="1.5 0.05 0.5" pos="-90.28 -87.98 0.5" quat="0.866025 0.0 0.0 -0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube14" type="box" size="1.5 0.05 0.5" pos="-88.78 -90.58 0.5" quat="0.866025 0.0 0.0 -0.5" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube15" type="box" size="1.5 0.05 0.5" pos="-87.37 -93.18 0.5" quat="0.848048 0.0 0.0 -0.529919" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube16" type="box" size="1.5 0.05 0.5" pos="-86.02 -95.8 0.5" quat="0.857167 0.0 0.0 -0.515038" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube17" type="box" size="1.5 0.05 0.5" pos="-84.61 -98.45 0.5" quat="0.857167 0.0 0.0 -0.515038" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube18" type="box" size="0.5 0.05 0.5" pos="-83.65 -100.19 0.5" quat="0.857167 0.0 0.0 -0.515038" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube19" type="box" size="0.25 0.05 0.5" pos="-83.3 -100.87 0.5" quat="0.857167 0.0 0.0 -0.515038" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube20" type="box" size="0.25 0.05 0.5" pos="-83.02 -101.24 0.5" quat="0.939693 0.0 0.0 -0.34202" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube21" type="box" size="5.0 0.05 0.5" pos="-78.84 -104.34 0.5" quat="0.948324 0.0 0.0 -0.317305" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube22" type="box" size="4.5 0.05 0.5" pos="-70.44 -108.44 0.5" quat="0.993572 0.0 0.0 -0.113203" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube23" type="box" size="1.5 0.05 0.5" pos="-64.74 -108.74 0.5" quat="0.97237 0.0 0.0 0.233445" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube24" type="box" size="1.0 0.05 0.5" pos="-62.84 -107.24 0.5" quat="0.882948 0.0 0.0 0.469472" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube25" type="box" size="39.0 0.05 0.5" pos="-62.14 -67.41 0.5" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder"  type="cylinder" size="0.2 0.5" pos="-57.07 -31.3 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder2"  type="cylinder" size="0.2 0.5" pos="-57.07 -51.3 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder3"  type="cylinder" size="0.2 0.5" pos="-57.07 -71.3 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder4"  type="cylinder" size="0.2 0.5" pos="-57.07 -91.3 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder5"  type="cylinder" size="0.2 0.5" pos="-66.4 -114.79 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder6"  type="cylinder" size="0.2 0.5" pos="-83.1 -107.36 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder7"  type="cylinder" size="0.2 0.5" pos="-93.73 -92.36 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder8"  type="cylinder" size="0.2 0.5" pos="-99.13 -72.26 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder9"  type="cylinder" size="0.2 0.5" pos="-99.22 -52.21 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder10"  type="cylinder" size="0.2 0.5" pos="-99.06 -32.23 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder11"  type="cylinder" size="0.2 0.5" pos="-85.89 -23.14 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder12"  type="cylinder" size="0.2 0.5" pos="-65.9 -23.34 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder13"  type="cylinder" size="0.2 0.5" pos="-69.98 2.25 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder14"  type="cylinder" size="0.2 0.5" pos="-87.48 2.25 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder15"  type="cylinder" size="0.2 0.5" pos="-98.08 8.8 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder16"  type="cylinder" size="0.2 0.5" pos="-98.08 18.83 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder17"  type="cylinder" size="0.2 0.5" pos="-98.48 22.83 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder18"  type="cylinder" size="0.2 0.5" pos="-97.37 38.82 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder19"  type="cylinder" size="0.2 0.5" pos="-91.85 51.97 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder20"  type="cylinder" size="0.2 0.5" pos="-81.43 61.17 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder21"  type="cylinder" size="0.2 0.5" pos="-66.09 63.27 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder22"  type="cylinder" size="0.2 0.5" pos="-57.61 32.71 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder23"  type="cylinder" size="0.2 0.5" pos="-57.61 12.71 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube26" type="box" size="4.3 4.3 1.0" pos="-72.73 20.52 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube27" type="box" size="4.3 4.3 1.0" pos="-83.73 28.66 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube28" type="box" size="4.3 4.3 1.0" pos="-72.77 40.67 0.5" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube29" type="box" size="12.5 0.05 1.0" pos="-12.37 54.47 1.0" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube30" type="box" size="1.0 0.05 1.0" pos="-24.67 53.47 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube31" type="box" size="3.0 0.05 1.0" pos="-27.57 52.98 1.0" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube32" type="box" size="17.5 0.05 1.0" pos="-30.67 35.47 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube33" type="box" size="1.0 0.05 1.0" pos="-29.67 17.97 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube34" type="box" size="3.0 0.05 1.0" pos="-29.67 14.87 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube35" type="box" size="15.5 0.05 1.0" pos="-14.17 11.97 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube36" type="box" size="18.0 0.05 1.0" pos="1.33 29.97 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube37" type="box" size="1.0 0.05 1.0" pos="0.43 48.07 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube38" type="box" size="3.5 0.05 1.0" pos="0.26 50.87 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube39" type="box" size="0.1 0.1 1.0" pos="-30.87 35.56 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube40" type="box" size="0.2 0.25 1.0" pos="-30.97 30.44 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube41" type="box" size="0.65 0.65 1.0" pos="-31.16 22.07 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder24"  type="cylinder" size="0.2 0.5" pos="-36.33 24.28 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder25"  type="cylinder" size="0.2 0.5" pos="-36.93 26.28 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder26"  type="cylinder" size="0.2 0.5" pos="-36.32 44.34 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder27"  type="cylinder" size="0.15 0.5" pos="-29.9 13.6 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder28"  type="cylinder" size="0.2 0.5" pos="-34.33 4.1 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder29"  type="cylinder" size="0.2 0.5" pos="-27.83 4.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder30"  type="cylinder" size="0.2 0.5" pos="-15.83 4.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder31"  type="cylinder" size="0.2 0.5" pos="-16.98 2.36 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder32"  type="cylinder" size="0.2 0.5" pos="-8.08 2.3 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder33"  type="cylinder" size="0.2 0.5" pos="-3.84 4.0 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder34"  type="cylinder" size="0.2 0.5" pos="3.05 2.3 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder35"  type="cylinder" size="0.2 0.5" pos="8.16 3.98 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder36"  type="cylinder" size="0.2 0.5" pos="20.16 3.98 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder37"  type="cylinder" size="0.2 0.5" pos="22.02 2.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder38"  type="cylinder" size="0.2 0.5" pos="32.17 3.96 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder39"  type="cylinder" size="0.2 0.5" pos="44.17 3.96 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder40"  type="cylinder" size="0.2 0.5" pos="43.03 2.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder41"  type="cylinder" size="0.2 0.5" pos="63.03 2.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder42"  type="cylinder" size="0.2 0.5" pos="84.27 2.32 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder43"  type="cylinder" size="0.2 0.5" pos="90.65 3.76 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder44"  type="cylinder" size="0.2 0.5" pos="92.85 5.9 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder45"  type="cylinder" size="0.2 0.5" pos="94.73 25.31 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder46"  type="cylinder" size="0.2 0.5" pos="90.88 47.67 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder47"  type="cylinder" size="0.2 0.5" pos="73.08 61.57 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder48"  type="cylinder" size="0.25 0.5" pos="62.96 61.36 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder49"  type="cylinder" size="0.25 0.5" pos="44.61 61.21 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder50"  type="cylinder" size="0.25 0.5" pos="29.81 61.21 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder51"  type="cylinder" size="0.2 0.5" pos="35.61 62.31 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder52"  type="cylinder" size="0.2 0.5" pos="26.91 62.6 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder53"  type="cylinder" size="0.25 0.5" pos="15.02 61.27 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder54"  type="cylinder" size="0.2 0.5" pos="13.04 62.31 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder55"  type="cylinder" size="0.2 0.5" pos="0.51 52.38 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder56"  type="cylinder" size="0.25 0.5" pos="0.22 61.31 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder57"  type="cylinder" size="0.2 0.5" pos="-6.95 62.63 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder58"  type="cylinder" size="0.25 0.5" pos="-14.58 61.37 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder59"  type="cylinder" size="0.2 0.5" pos="-26.95 62.86 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder60"  type="cylinder" size="0.25 0.5" pos="-29.38 61.4 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder61"  type="cylinder" size="0.15 0.5" pos="-29.08 53.26 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube42" type="box" size="0.65 0.5 0.15" pos="-5.64 54.67 0.25" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube43" type="box" size="0.65 0.5 0.25" pos="-5.64 53.87 0.55" quat="1.0 0.0 0.0 0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube44" type="box" size="12.5 0.05 1.0" pos="9.73 33.79 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube45" type="box" size="14.75 0.05 1.0" pos="24.52 21.31 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube46" type="box" size="12.5 0.05 1.0" pos="39.35 33.79 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube47" type="box" size="14.75 0.05 1.0" pos="24.52 46.11 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube48" type="box" size="20.0 0.05 1.0" pos="44.01 31.85 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube49" type="box" size="10.0 0.05 1.0" pos="53.96 11.92 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube50" type="box" size="20.0 0.05 1.0" pos="63.88 31.85 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube51" type="box" size="10.0 0.05 1.0" pos="53.96 51.78 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder62"  type="cylinder" size="12.5 1.0" pos="74.83 41.14 0.9" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube52" type="box" size="58.0 0.05 1.0" pos="27.78 -9.47 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube53" type="box" size="58.0 0.05 1.0" pos="27.78 -12.07 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder63"  type="cylinder" size="0.2 0.5" pos="76.37 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder64"  type="cylinder" size="0.25 0.5" pos="83.85 -10.55 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder65"  type="cylinder" size="0.25 0.5" pos="67.68 -10.54 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder66"  type="cylinder" size="0.25 0.5" pos="51.54 -10.54 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder67"  type="cylinder" size="0.25 0.5" pos="35.39 -10.5 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder68"  type="cylinder" size="0.25 0.5" pos="19.25 -10.5 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder69"  type="cylinder" size="0.25 0.5" pos="3.12 -10.5 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder70"  type="cylinder" size="0.25 0.5" pos="-13.03 -10.5 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder71"  type="cylinder" size="0.25 0.5" pos="-29.18 -10.46 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder72"  type="cylinder" size="0.2 0.5" pos="53.94 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder73"  type="cylinder" size="0.2 0.5" pos="33.86 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder74"  type="cylinder" size="0.2 0.5" pos="14.43 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder75"  type="cylinder" size="0.2 0.5" pos="-6.5 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder76"  type="cylinder" size="0.2 0.5" pos="-18.4 -10.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder77"  type="cylinder" size="0.2 0.5" pos="79.31 -23.55 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder78"  type="cylinder" size="0.2 0.5" pos="80.83 -24.75 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder79"  type="cylinder" size="0.2 0.5" pos="68.58 -24.71 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder80"  type="cylinder" size="0.2 0.5" pos="67.57 -23.47 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder81"  type="cylinder" size="0.2 0.5" pos="60.67 -23.47 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder82"  type="cylinder" size="0.2 0.5" pos="56.32 -24.69 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube55" type="box" size="15.0 0.05 1.0" pos="72.5 -31.08 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube56" type="box" size="0.35 0.35 1.0" pos="85.2 -30.86 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube57" type="box" size="0.275 0.35 1.0" pos="82.74 -30.87 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube58" type="box" size="1.05 0.35 1.0" pos="79.61 -30.81 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube59" type="box" size="1.0 0.35 1.0" pos="69.64 -30.79 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube60" type="box" size="0.275 0.35 1.0" pos="72.74 -30.9 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube61" type="box" size="1.0 0.35 1.0" pos="65.84 -30.79 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube62" type="box" size="0.275 0.35 1.0" pos="62.76 -30.9 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube63" type="box" size="0.4 0.35 1.0" pos="60.25 -30.9 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube64" type="box" size="0.8 0.8 1.0" pos="57.27 -31.34 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube65" type="box" size="5.0 0.05 1.0" pos="57.0 -36.78 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube66" type="box" size="0.5 1.0 1.0" pos="56.83 -34.94 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube67" type="box" size="0.5 1.0 1.0" pos="56.83 -38.7 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube68" type="box" size="0.8 0.75 1.0" pos="57.27 -42.34 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube69" type="box" size="0.8 0.8 1.0" pos="88.269999 -42.3 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube70" type="box" size="5.0 0.05 1.0" pos="88.47 -36.9 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube71" type="box" size="0.5 1.0 1.0" pos="88.71 -38.72 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube72" type="box" size="0.5 1.0 1.0" pos="88.71 -34.93 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube73" type="box" size="0.8 0.75 1.0" pos="88.21 -31.27 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube74" type="box" size="15.0 0.05 1.0" pos="72.5 -42.54 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube75" type="box" size="1.0 0.35 1.0" pos="75.87 -30.79 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube78" type="box" size="1.05 0.35 1.0" pos="84.6 -42.81 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube80" type="box" size="0.275 0.35 1.0" pos="77.71 -42.8 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube84" type="box" size="1.0 0.35 1.0" pos="80.81 -42.84 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube85" type="box" size="1.0 0.35 1.0" pos="74.61 -42.84 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube86" type="box" size="1.6 0.35 1.0" pos="70.21 -42.84 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube87" type="box" size="1.0 0.35 1.0" pos="65.86 -42.84 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube81" type="box" size="0.275 0.35 1.0" pos="62.73 -42.8 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube82" type="box" size="0.35 0.35 1.0" pos="60.23 -43.1 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder83"  type="cylinder" size="0.2 0.5" pos="55.02 -50.83 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder84"  type="cylinder" size="0.2 0.5" pos="54.85 -49.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder85"  type="cylinder" size="0.2 0.5" pos="62.75 -49.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder86"  type="cylinder" size="0.2 0.5" pos="65.05 -51.13 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder87"  type="cylinder" size="0.2 0.5" pos="71.4 -50.83 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder88"  type="cylinder" size="0.2 0.5" pos="70.63 -49.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder89"  type="cylinder" size="0.2 0.5" pos="78.53 -49.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder90"  type="cylinder" size="0.2 0.5" pos="86.41 -49.34 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder91"  type="cylinder" size="0.2 0.5" pos="88.64 -50.83 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder92"  type="cylinder" size="0.2 0.5" pos="94.45 -37.16 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder93"  type="cylinder" size="0.2 0.5" pos="94.45 -31.86 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder94"  type="cylinder" size="0.2 0.5" pos="93.46 -30.71 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube77" type="box" size="8.0 0.1 1.0" pos="-31.5 -78.47 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube83" type="box" size="8.0 0.1 1.0" pos="82.95 -78.47 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube92" type="box" size="8.0 0.15 1.0" pos="-31.83 -101.75 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube93" type="box" size="2.0 0.2 1.0" pos="-32.18 -102.05 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube94" type="box" size="1.75 0.2 1.0" pos="-32.58 -102.05 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube95" type="box" size="1.5 0.2 1.0" pos="-32.98 -102.05 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube96" type="box" size="1.0 0.2 1.0" pos="-33.23 -102.05 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube97" type="box" size="3.0 0.1 1.0" pos="-28.89 -106.94 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube98" type="box" size="5.0 0.1 1.0" pos="-3.19 -109.75 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube102" type="box" size="8.0 0.15 1.0" pos="75.88 -102.2 1.0" quat="0.71325 0.0 0.0 0.700909" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube103" type="box" size="2.0 0.2 1.0" pos="76.32 -102.05 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube104" type="box" size="1.75 0.2 1.0" pos="76.72 -102.05 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube105" type="box" size="1.5 0.2 1.0" pos="77.12 -102.05 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube106" type="box" size="1.0 0.2 1.0" pos="77.37 -102.05 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder95"  type="cylinder" size="0.2 0.5" pos="87.84 -65.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder96"  type="cylinder" size="0.2 0.5" pos="79.37 -65.07 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder97"  type="cylinder" size="0.2 0.5" pos="43.77 -64.97 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder98"  type="cylinder" size="0.2 0.5" pos="-15.42 -64.83 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder99"  type="cylinder" size="0.2 0.5" pos="81.77 -66.04 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder100"  type="cylinder" size="0.2 0.5" pos="70.14 -66.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder101"  type="cylinder" size="0.2 0.5" pos="68.15 -65.34 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder102"  type="cylinder" size="0.2 0.5" pos="56.9 -65.36 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder103"  type="cylinder" size="0.2 0.5" pos="58.47 -66.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder104"  type="cylinder" size="0.2 0.5" pos="46.83 -66.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder105"  type="cylinder" size="0.2 0.5" pos="35.18 -66.03 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder106"  type="cylinder" size="0.2 0.5" pos="37.49 -65.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder107"  type="cylinder" size="0.2 0.5" pos="23.55 -66.01 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder108"  type="cylinder" size="0.2 0.5" pos="21.6 -65.35 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder109"  type="cylinder" size="0.2 0.5" pos="11.9 -66.01 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder110"  type="cylinder" size="0.2 0.5" pos="2.7 -65.35 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder111"  type="cylinder" size="0.2 0.5" pos="0.25 -65.99 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder112"  type="cylinder" size="0.2 0.5" pos="-11.4 -65.99 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder113"  type="cylinder" size="0.2 0.5" pos="-13.51 -65.35 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder114"  type="cylinder" size="0.2 0.5" pos="-23.03 -65.98 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder115"  type="cylinder" size="0.2 0.5" pos="-28.15 -65.34 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder116"  type="cylinder" size="0.2 0.5" pos="-33.85 -67.73 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder117"  type="cylinder" size="0.2 0.5" pos="-35.93 -75.69 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder118"  type="cylinder" size="0.2 0.5" pos="-36.64 -78.71 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder119"  type="cylinder" size="0.2 0.5" pos="-35.94 -91.65 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder120"  type="cylinder" size="0.2 0.5" pos="-36.56 -100.81 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder121"  type="cylinder" size="0.2 0.5" pos="-35.95 -102.97 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder122"  type="cylinder" size="0.2 0.5" pos="-34.52 -113.33 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder123"  type="cylinder" size="0.2 0.5" pos="-29.55 -114.43 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder124"  type="cylinder" size="0.2 0.5" pos="-26.2 -115.26 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder125"  type="cylinder" size="0.2 0.5" pos="-23.93 -114.99 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder126"  type="cylinder" size="0.2 0.5" pos="-10.9 -114.43 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder127"  type="cylinder" size="0.2 0.5" pos="-1.11 -115.16 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder128"  type="cylinder" size="0.2 0.5" pos="7.73 -114.42 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder129"  type="cylinder" size="0.2 0.5" pos="26.38 -114.45 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder130"  type="cylinder" size="0.2 0.5" pos="28.87 -115.75 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder131"  type="cylinder" size="0.2 0.5" pos="45.03 -114.47 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder132"  type="cylinder" size="0.2 0.5" pos="48.87 -115.61 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder133"  type="cylinder" size="0.2 0.5" pos="63.68 -114.5 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder134"  type="cylinder" size="0.2 0.5" pos="68.88 -115.35 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder135"  type="cylinder" size="0.2 0.5" pos="85.05 -106.68 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder136"  type="cylinder" size="0.2 0.5" pos="90.25 -98.08 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder137"  type="cylinder" size="0.2 0.5" pos="91.22 -94.29 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder138"  type="cylinder" size="0.2 0.5" pos="81.9 -96.29 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder139"  type="cylinder" size="0.2 0.5" pos="94.02 -79.76 0.4" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube107" type="box" size="7.45 0.05 1.0" pos="29.32 -36.58 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube108" type="box" size="1.5 0.05 1.0" pos="-0.48 -42.45 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube109" type="box" size="2.0 0.15 1.0" pos="-0.22 -39.14 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube110" type="box" size="4.0 0.05 1.0" pos="-0.44 -33.21 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube111" type="box" size="1.525 1.0 1.0" pos="1.04 -30.12 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube112" type="box" size="8.15 1.0 1.0" pos="14.42 -30.17 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube113" type="box" size="2.0 1.0 1.0" pos="4.44 -31.53 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube114" type="box" size="2.0 1.0 1.0" pos="24.44 -31.53 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube115" type="box" size="1.5 1.0 1.0" pos="27.79 -30.13 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder140"  type="cylinder" size="0.2 0.5" pos="-35.97 -30.37 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder141"  type="cylinder" size="0.2 0.5" pos="-36.65 -37.19 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder142"  type="cylinder" size="0.2 0.5" pos="-35.95 -40.02 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder143"  type="cylinder" size="0.2 0.5" pos="-29.29 -50.82 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder144"  type="cylinder" size="0.2 0.5" pos="-25.6 -49.89 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder145"  type="cylinder" size="0.2 0.5" pos="-17.83 -49.89 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder146"  type="cylinder" size="0.2 0.5" pos="-10.09 -49.89 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder147"  type="cylinder" size="0.2 0.5" pos="-13.95 -50.83 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder148"  type="cylinder" size="0.2 0.5" pos="-8.32 -51.05 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder149"  type="cylinder" size="0.2 0.5" pos="-2.32 -49.89 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder150"  type="cylinder" size="0.2 0.5" pos="0.76 -50.82 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder151"  type="cylinder" size="0.2 0.5" pos="5.43 -49.88 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder152"  type="cylinder" size="0.2 0.5" pos="13.19 -49.88 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder153"  type="cylinder" size="0.2 0.5" pos="15.29 -50.85 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder154"  type="cylinder" size="0.2 0.5" pos="20.95 -49.89 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder155"  type="cylinder" size="0.2 0.5" pos="28.69 -49.87 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder156"  type="cylinder" size="0.2 0.5" pos="27.67 -50.81 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder157"  type="cylinder" size="0.2 0.5" pos="34.31 -40.3 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder158"  type="cylinder" size="0.2 0.5" pos="34.86 -37.23 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder159"  type="cylinder" size="0.2 0.5" pos="34.21 -31.08 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder160"  type="cylinder" size="0.2 0.5" pos="26.84 -24.76 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder161"  type="cylinder" size="0.2 0.5" pos="24.6 -23.56 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder162"  type="cylinder" size="0.2 0.5" pos="20.7 -23.53 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder163"  type="cylinder" size="0.2 0.5" pos="16.88 -24.74 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder164"  type="cylinder" size="0.2 0.5" pos="6.88 -24.72 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder165"  type="cylinder" size="0.2 0.5" pos="0.7 -23.5 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder166"  type="cylinder" size="0.2 0.5" pos="-3.1 -24.73 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder167"  type="cylinder" size="0.2 0.5" pos="-13.07 -24.73 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder168"  type="cylinder" size="0.2 0.5" pos="-17.54 -23.52 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder169"  type="cylinder" size="0.2 0.5" pos="-19.3 -23.52 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder170"  type="cylinder" size="0.2 0.5" pos="-23.05 -24.69 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube116" type="box" size="12.3 0.05 1.0" pos="-17.64 -29.22 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube117" type="box" size="7.6 1.0 1.0" pos="-12.94 -43.06 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube118" type="box" size="2.6 1.0 1.0" pos="-27.34 -43.06 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube119" type="box" size="2.6 0.05 1.0" pos="-22.64 -42.67 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder171"  type="cylinder" size="1.0 0.5" pos="-22.63 -42.59 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder172"  type="cylinder" size="1.0 0.5" pos="-28.76 -36.56 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube120" type="box" size="2.6 1.0 1.0" pos="-29.04 -41.26 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube121" type="box" size="2.6 1.0 1.0" pos="-29.04 -31.88 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube122" type="box" size="2.6 1.0 1.0" pos="-27.78 -36.58 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cylinder173"  type="cylinder" size="1.0 0.5" pos="-6.61 -36.56 0.3" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube123" type="box" size="2.6 1.0 1.0" pos="-6.26 -31.88 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube124" type="box" size="1.75 1.0 1.0" pos="-6.26 -40.42 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube125" type="box" size="2.5 1.0 1.0" pos="-7.49 -36.62 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube126" type="box" size="2.0 0.1 1.0" pos="-23.99 -109.63 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube127" type="box" size="1.5 0.1 1.0" pos="-26.01 -108.33 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube128" type="box" size="0.25 0.3 1.0" pos="-31.4 -107.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube129" type="box" size="1.25 0.1 1.0" pos="-27.29 -109.7 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube130" type="box" size="0.75 0.1 1.0" pos="-31.09 -109.7 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube131" type="box" size="3.0 0.1 1.0" pos="-17.09 -106.94 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube132" type="box" size="2.0 0.1 1.0" pos="-12.19 -109.63 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube133" type="box" size="1.5 0.1 1.0" pos="-14.21 -108.33 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube134" type="box" size="0.25 0.3 1.0" pos="-19.6 -107.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube135" type="box" size="1.25 0.1 1.0" pos="-15.49 -109.7 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube136" type="box" size="0.75 0.1 1.0" pos="-19.29 -109.7 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube137" type="box" size="1.5 0.15 2.0" pos="-22.02 -108.28 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube138" type="box" size="1.5 0.2 2.0" pos="-20.15 -108.28 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube139" type="box" size="0.5 0.85 0.1" pos="-21.12 -109.24 0.28" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube140" type="box" size="0.5 0.85 0.1" pos="-21.12 -108.95 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube141" type="box" size="0.5 0.85 0.1" pos="-21.11 -108.67 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube142" type="box" size="0.5 0.85 0.1" pos="-21.12 -108.37 0.85" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube143" type="box" size="0.5 0.85 0.1" pos="-21.12 -108.11 1.04" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube144" type="box" size="0.5 0.85 0.1" pos="-21.11 -107.84 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube145" type="box" size="0.5 0.85 0.1" pos="-21.11 -107.54 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube146" type="box" size="1.0 1.5 0.1" pos="-21.11 -106.78 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube147" type="box" size="0.5 1.5 1.0" pos="-21.11 -106.28 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube148" type="box" size="1.5 0.2 2.0" pos="-10.32 -108.38 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube149" type="box" size="1.5 0.2 2.0" pos="-8.4 -108.38 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube150" type="box" size="0.5 0.85 0.15" pos="-9.42 -109.3 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube151" type="box" size="0.5 0.85 0.1" pos="-9.41 -108.74 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube152" type="box" size="0.5 0.85 0.1" pos="-9.39 -108.46 0.85" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube153" type="box" size="0.5 0.85 0.1" pos="-9.37 -108.18 1.04" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube154" type="box" size="0.5 0.85 0.1" pos="-9.41 -107.91 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube155" type="box" size="0.5 0.85 0.1" pos="-9.4 -107.63 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube156" type="box" size="1.0 1.5 0.1" pos="-9.41 -106.83 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube157" type="box" size="0.5 1.5 1.0" pos="-9.41 -106.34 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube158" type="box" size="0.5 0.85 0.1" pos="-9.41 -109.02 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube159" type="box" size="1.5 0.2 2.0" pos="1.76 -108.44 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube160" type="box" size="1.5 0.2 2.0" pos="3.89 -108.44 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube161" type="box" size="0.5 1.0 0.15" pos="2.8 -109.38 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube162" type="box" size="0.5 1.0 0.1" pos="2.79 -108.82 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube163" type="box" size="0.5 1.0 0.1" pos="2.81 -108.55 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube164" type="box" size="0.5 1.0 0.1" pos="2.83 -108.28 1.05" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube165" type="box" size="0.5 1.0 0.1" pos="2.79 -108.0 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube166" type="box" size="0.5 1.0 0.1" pos="2.8 -107.7 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube167" type="box" size="1.0 1.5 0.1" pos="2.79 -106.93 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube168" type="box" size="0.5 1.0 0.1" pos="2.79 -109.11 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube169" type="box" size="0.5 1.5 1.0" pos="2.89 -106.34 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube170" type="box" size="1.5 0.2 2.0" pos="13.95 -108.64 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube171" type="box" size="1.5 0.2 2.0" pos="15.86 -108.64 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube172" type="box" size="0.5 1.0 0.15" pos="14.9 -109.57 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube173" type="box" size="0.5 1.0 0.1" pos="14.89 -109.0 0.68" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube174" type="box" size="0.5 1.0 0.1" pos="14.91 -108.72 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube175" type="box" size="0.5 1.0 0.1" pos="14.93 -108.45 1.04" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube176" type="box" size="0.5 1.0 0.1" pos="14.89 -108.17 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube177" type="box" size="0.5 1.0 0.1" pos="14.9 -107.9 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube178" type="box" size="1.0 1.0 0.1" pos="14.89 -107.1 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube179" type="box" size="0.5 1.0 0.1" pos="14.89 -109.29 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube180" type="box" size="0.5 1.0 1.0" pos="14.99 -106.54 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube181" type="box" size="1.5 0.2 2.0" pos="25.73 -108.74 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube182" type="box" size="1.5 0.2 2.0" pos="27.96 -108.74 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube183" type="box" size="0.5 1.0 0.15" pos="26.8 -109.68 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube184" type="box" size="0.5 1.0 0.1" pos="26.79 -109.12 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube185" type="box" size="0.5 1.0 0.1" pos="26.81 -108.85 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube186" type="box" size="0.5 1.0 0.1" pos="26.83 -108.57 1.05" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube187" type="box" size="0.5 1.0 0.1" pos="26.79 -108.29 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube188" type="box" size="0.5 1.0 0.1" pos="26.8 -108.0 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube189" type="box" size="1.0 1.5 0.1" pos="26.79 -107.21 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube190" type="box" size="0.5 1.0 0.1" pos="26.79 -109.4 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube191" type="box" size="0.5 1.5 1.0" pos="26.89 -106.64 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube192" type="box" size="1.5 0.2 2.0" pos="31.83 -108.74 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube193" type="box" size="1.5 0.2 2.0" pos="33.72 -108.74 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube194" type="box" size="0.5 1.0 0.15" pos="32.8 -109.67 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube195" type="box" size="0.5 1.0 0.1" pos="32.79 -109.1 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube196" type="box" size="0.5 1.0 0.1" pos="32.81 -108.83 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube197" type="box" size="0.5 1.0 0.1" pos="32.83 -108.56 1.05" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube198" type="box" size="0.5 1.0 0.1" pos="32.79 -108.28 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube199" type="box" size="0.5 1.0 0.1" pos="32.8 -108.0 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube200" type="box" size="1.0 1.0 0.1" pos="32.79 -107.22 1.62" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube201" type="box" size="0.5 1.0 0.1" pos="32.79 -109.39 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube202" type="box" size="0.5 1.0 1.0" pos="32.89 -106.64 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube203" type="box" size="1.5 0.2 2.0" pos="49.73 -108.84 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube204" type="box" size="1.5 0.2 2.0" pos="51.65 -108.84 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube205" type="box" size="0.5 1.0 0.15" pos="50.8 -109.78 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube206" type="box" size="0.5 1.0 0.1" pos="50.79 -109.22 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube207" type="box" size="0.5 1.0 0.1" pos="50.81 -108.95 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube208" type="box" size="0.5 1.0 0.1" pos="50.83 -108.68 1.05" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube209" type="box" size="0.5 1.0 0.1" pos="50.79 -108.4 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube210" type="box" size="0.5 1.0 0.1" pos="50.8 -108.12 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube211" type="box" size="1.0 1.0 0.1" pos="50.59 -107.34 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube212" type="box" size="0.5 1.0 0.1" pos="50.79 -109.51 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube213" type="box" size="0.5 1.0 1.0" pos="50.89 -106.74 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube214" type="box" size="1.5 0.2 2.0" pos="55.6 -108.94 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube215" type="box" size="1.5 0.2 2.0" pos="57.82 -108.94 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube216" type="box" size="0.5 1.0 0.15" pos="56.68 -109.78 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube217" type="box" size="0.5 1.0 0.1" pos="56.73 -109.24 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube218" type="box" size="0.5 1.0 0.1" pos="56.72 -108.96 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube219" type="box" size="0.5 1.0 0.1" pos="56.72 -108.68 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube220" type="box" size="0.5 1.0 0.1" pos="56.79 -108.4 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube221" type="box" size="0.5 1.0 0.1" pos="56.8 -108.11 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube222" type="box" size="1.0 1.5 0.1" pos="56.79 -107.34 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube223" type="box" size="0.5 1.0 0.1" pos="56.79 -109.51 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube224" type="box" size="0.5 1.5 1.0" pos="56.89 -106.65 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube225" type="box" size="3.0 0.1 1.0" pos="19.01 -107.24 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube226" type="box" size="1.5 0.1 1.0" pos="21.89 -108.63 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube227" type="box" size="0.25 0.3 1.0" pos="16.5 -107.62 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube228" type="box" size="3.25 0.1 1.0" pos="22.54 -110.0 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube229" type="box" size="0.75 0.1 1.0" pos="16.81 -110.0 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube230" type="box" size="3.0 0.1 1.0" pos="36.81 -107.34 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube231" type="box" size="1.5 0.1 1.0" pos="39.69 -108.73 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube232" type="box" size="0.25 0.3 1.0" pos="34.3 -107.72 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube233" type="box" size="6.25 0.1 1.0" pos="43.45 -110.1 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube234" type="box" size="0.75 0.1 1.0" pos="34.61 -110.1 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube235" type="box" size="3.0 0.1 1.0" pos="60.91 -107.44 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube236" type="box" size="1.5 0.1 1.0" pos="63.79 -108.83 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube237" type="box" size="0.25 0.3 1.0" pos="58.4 -107.82 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube238" type="box" size="1.25 0.1 1.0" pos="62.51 -110.2 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube239" type="box" size="0.75 0.1 1.0" pos="58.71 -110.2 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube240" type="box" size="3.0 0.1 1.0" pos="73.01 -107.44 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube241" type="box" size="1.5 0.1 1.0" pos="75.89 -108.83 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube242" type="box" size="0.25 0.3 1.0" pos="70.5 -107.82 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube243" type="box" size="1.25 0.1 1.0" pos="74.61 -110.2 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube244" type="box" size="0.75 0.1 1.0" pos="70.81 -110.2 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube99" type="box" size="5.0 0.1 1.0" pos="9.01 -109.75 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube245" type="box" size="0.5 1.5 1.0" pos="14.89 -106.58 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube246" type="box" size="0.5 1.5 1.0" pos="32.79 -106.67 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube247" type="box" size="2.0 0.1 1.0" pos="29.91 -110.06 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube248" type="box" size="0.5 1.0 1.0" pos="50.59 -106.8 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube249" type="box" size="2.0 0.1 1.0" pos="53.61 -110.19 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube250" type="box" size="3.15 0.1 1.0" pos="66.91 -110.26 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube251" type="box" size="1.5 0.1 1.0" pos="69.99 -108.83 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube252" type="box" size="3.0 0.1 1.0" pos="72.97 -97.0 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube253" type="box" size="1.5 0.1 1.0" pos="70.09 -95.63 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube254" type="box" size="0.25 0.3 1.0" pos="75.48 -96.6 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube255" type="box" size="1.25 0.1 1.0" pos="71.37 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube256" type="box" size="0.75 0.1 1.0" pos="75.17 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube257" type="box" size="1.5 0.1 1.0" pos="75.99 -95.63 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube258" type="box" size="3.0 0.1 1.0" pos="60.87 -97.0 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube259" type="box" size="1.5 0.1 1.0" pos="58.06 -95.63 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube260" type="box" size="0.25 0.3 1.0" pos="63.38 -96.6 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube261" type="box" size="1.25 0.1 1.0" pos="59.27 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube262" type="box" size="0.75 0.1 1.0" pos="63.07 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube263" type="box" size="3.0 0.1 1.0" pos="36.87 -96.86 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube264" type="box" size="1.5 0.1 1.0" pos="34.02 -95.45 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube265" type="box" size="0.25 0.3 1.0" pos="39.38 -96.47 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube266" type="box" size="1.25 0.1 1.0" pos="35.27 -94.09 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube267" type="box" size="0.75 0.1 1.0" pos="39.07 -94.09 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube268" type="box" size="3.0 0.1 1.0" pos="18.97 -96.82 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube269" type="box" size="1.5 0.1 1.0" pos="16.12 -95.63 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube270" type="box" size="0.25 0.3 1.0" pos="21.48 -96.4 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube271" type="box" size="1.25 0.1 1.0" pos="17.41 -94.01 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube272" type="box" size="0.75 0.1 1.0" pos="21.17 -94.01 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube273" type="box" size="3.0 0.1 1.0" pos="-17.03 -96.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube274" type="box" size="1.5 0.1 1.0" pos="-19.91 -95.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube275" type="box" size="0.25 0.3 1.0" pos="-14.52 -96.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube276" type="box" size="1.25 0.1 1.0" pos="-18.63 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube277" type="box" size="0.75 0.1 1.0" pos="-14.83 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube278" type="box" size="3.0 0.1 1.0" pos="-28.83 -96.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube279" type="box" size="1.5 0.1 1.0" pos="-25.91 -95.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube280" type="box" size="0.25 0.3 1.0" pos="-26.32 -96.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube281" type="box" size="1.25 0.1 1.0" pos="-30.43 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube282" type="box" size="1.0 0.1 1.0" pos="-26.39 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube283" type="box" size="1.5 0.1 1.0" pos="-14.11 -95.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube284" type="box" size="1.5 0.1 1.0" pos="21.89 -95.43 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube285" type="box" size="1.5 0.1 1.0" pos="39.8 -95.46 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube286" type="box" size="1.5 0.1 1.0" pos="63.79 -95.63 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube287" type="box" size="1.5 0.2 2.0" pos="54.23 -95.57 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube288" type="box" size="1.5 0.2 2.0" pos="51.95 -95.56 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube289" type="box" size="0.5 1.0 0.15" pos="53.1 -94.62 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube290" type="box" size="0.5 1.0 0.1" pos="53.05 -95.17 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube291" type="box" size="0.5 1.0 0.1" pos="53.06 -95.44 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube292" type="box" size="0.5 1.0 0.1" pos="53.06 -95.72 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube293" type="box" size="0.5 1.0 0.1" pos="52.99 -96.0 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube294" type="box" size="0.5 1.0 0.1" pos="52.98 -96.29 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube295" type="box" size="1.0 1.5 0.1" pos="53.1 -97.08 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube296" type="box" size="0.5 1.0 0.1" pos="52.99 -94.89 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube297" type="box" size="0.5 1.5 1.0" pos="53.09 -97.75 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube298" type="box" size="1.5 0.2 2.0" pos="48.17 -95.57 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube299" type="box" size="1.5 0.2 2.0" pos="46.27 -95.54 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube300" type="box" size="0.5 1.0 0.15" pos="47.2 -94.62 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube301" type="box" size="0.5 1.0 0.1" pos="47.15 -95.16 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube302" type="box" size="0.5 1.0 0.1" pos="47.16 -95.44 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube303" type="box" size="0.5 1.0 0.1" pos="47.16 -95.72 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube304" type="box" size="0.5 1.0 0.1" pos="47.09 -96.0 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube305" type="box" size="0.5 1.0 0.1" pos="47.08 -96.29 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube306" type="box" size="1.0 1.0 0.1" pos="47.19 -97.06 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube307" type="box" size="0.5 1.0 0.1" pos="47.09 -94.89 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube308" type="box" size="0.5 1.5 1.0" pos="47.28 -97.6 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube309" type="box" size="1.5 0.2 2.0" pos="30.26 -95.45 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube310" type="box" size="1.5 0.2 2.0" pos="28.33 -95.44 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube311" type="box" size="0.5 1.0 0.15" pos="29.3 -94.5 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube312" type="box" size="0.5 1.0 0.1" pos="29.25 -95.05 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube313" type="box" size="0.5 1.0 0.1" pos="29.26 -95.32 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube314" type="box" size="0.5 1.0 0.1" pos="29.26 -95.6 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube315" type="box" size="0.5 1.0 0.1" pos="29.19 -95.87 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube316" type="box" size="0.5 1.0 0.1" pos="29.18 -96.16 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube317" type="box" size="1.0 1.0 0.1" pos="29.39 -96.95 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube318" type="box" size="0.5 1.0 0.1" pos="29.19 -94.76 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube319" type="box" size="0.5 1.5 1.0" pos="29.23 -97.45 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube320" type="box" size="1.5 0.2 2.0" pos="24.33 -95.45 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube321" type="box" size="1.5 0.2 2.0" pos="22.16 -95.45 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube322" type="box" size="0.5 1.0 0.15" pos="23.3 -94.52 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube323" type="box" size="0.5 1.0 0.1" pos="23.25 -95.06 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube324" type="box" size="0.5 1.0 0.1" pos="23.26 -95.34 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube325" type="box" size="0.5 1.0 0.1" pos="23.26 -95.62 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube326" type="box" size="0.5 1.0 0.1" pos="23.19 -95.9 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube327" type="box" size="0.5 1.0 0.1" pos="23.3 -96.18 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube328" type="box" size="1.0 1.5 0.1" pos="23.2 -96.95 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube329" type="box" size="0.5 1.0 0.1" pos="23.19 -94.79 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube330" type="box" size="0.5 1.5 1.0" pos="23.26 -97.63 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube331" type="box" size="1.5 0.2 2.0" pos="12.38 -95.34 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube332" type="box" size="1.5 0.2 2.0" pos="10.48 -95.3 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube333" type="box" size="0.5 1.0 0.15" pos="11.48 -94.38 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube334" type="box" size="0.5 1.0 0.1" pos="11.44 -94.95 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube335" type="box" size="0.5 1.0 0.1" pos="11.49 -95.21 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube336" type="box" size="0.5 1.0 0.1" pos="11.47 -95.51 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube337" type="box" size="0.5 1.0 0.1" pos="11.43 -95.77 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube338" type="box" size="0.5 1.0 0.1" pos="11.42 -96.05 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube339" type="box" size="1.0 1.0 0.1" pos="11.45 -96.84 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube340" type="box" size="0.5 1.0 0.1" pos="11.51 -94.66 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube341" type="box" size="0.5 1.5 1.0" pos="11.52 -97.35 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube342" type="box" size="1.5 0.2 2.0" pos="0.28 -95.16 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube343" type="box" size="1.5 0.2 2.0" pos="-1.94 -95.16 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube344" type="box" size="0.5 1.0 0.15" pos="-0.76 -94.22 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube345" type="box" size="0.5 1.0 0.1" pos="-0.85 -94.77 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube346" type="box" size="0.5 1.0 0.1" pos="-0.84 -95.06 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube347" type="box" size="0.5 1.0 0.1" pos="-0.84 -95.33 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube348" type="box" size="0.5 1.0 0.1" pos="-0.91 -95.61 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube349" type="box" size="0.5 1.0 0.1" pos="-0.92 -95.88 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube350" type="box" size="1.0 1.5 0.1" pos="-0.91 -96.67 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube351" type="box" size="0.5 1.0 0.1" pos="-0.78 -94.49 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube352" type="box" size="0.5 1.5 1.0" pos="-0.82 -97.18 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube353" type="box" size="1.5 0.2 2.0" pos="-11.88 -95.07 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube354" type="box" size="1.5 0.2 2.0" pos="-13.8 -95.08 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube355" type="box" size="0.5 1.0 0.15" pos="-12.9 -94.12 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube356" type="box" size="0.5 1.0 0.1" pos="-12.8 -94.69 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube357" type="box" size="0.5 1.0 0.1" pos="-12.76 -94.96 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube358" type="box" size="0.5 1.0 0.1" pos="-12.79 -95.24 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube359" type="box" size="0.5 1.0 0.1" pos="-12.79 -95.5 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube360" type="box" size="0.5 1.0 0.1" pos="-12.83 -95.79 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube361" type="box" size="1.0 1.0 0.1" pos="-12.83 -96.58 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube362" type="box" size="0.5 1.0 0.1" pos="-13.01 -94.39 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube363" type="box" size="0.5 1.5 1.0" pos="-12.84 -97.1 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube364" type="box" size="1.5 0.2 2.0" pos="-23.64 -94.98 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube365" type="box" size="1.5 0.2 2.0" pos="-25.54 -95.01 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube366" type="box" size="0.5 1.0 0.15" pos="-24.5 -94.04 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube367" type="box" size="0.5 1.0 0.1" pos="-24.57 -94.6 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube368" type="box" size="0.5 1.0 0.1" pos="-24.53 -94.89 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube369" type="box" size="0.5 1.0 0.1" pos="-24.49 -95.17 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube370" type="box" size="0.5 1.0 0.1" pos="-24.61 -95.44 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube371" type="box" size="0.5 1.0 0.1" pos="-24.59 -95.72 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube372" type="box" size="1.0 1.0 0.1" pos="-24.6 -96.51 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube373" type="box" size="0.5 1.0 0.1" pos="-24.61 -94.32 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube374" type="box" size="0.5 1.5 1.0" pos="-24.5 -97.01 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube375" type="box" size="1.5 0.2 2.0" pos="-27.8 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube376" type="box" size="1.5 0.2 2.0" pos="-25.9 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube377" type="box" size="0.5 1.0 0.15" pos="-26.92 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube378" type="box" size="0.5 1.0 0.1" pos="-26.87 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube379" type="box" size="0.5 1.0 0.1" pos="-26.88 -85.35 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube380" type="box" size="0.5 1.0 0.1" pos="-26.88 -85.07 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube381" type="box" size="0.5 1.0 0.1" pos="-26.81 -84.79 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube382" type="box" size="0.5 1.0 0.1" pos="-26.8 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube383" type="box" size="0.5 1.0 0.1" pos="-26.81 -84.24 1.6" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube384" type="box" size="0.5 1.0 0.1" pos="-26.81 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube385" type="box" size="0.5 1.5 1.0" pos="-26.71 -83.22 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube386" type="box" size="1.5 0.2 2.0" pos="-21.86 -85.34 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube387" type="box" size="1.5 0.2 2.0" pos="-19.68 -85.34 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube388" type="box" size="0.5 1.0 0.15" pos="-20.82 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube389" type="box" size="0.5 1.0 0.1" pos="-20.77 -85.64 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube390" type="box" size="0.5 1.0 0.1" pos="-20.78 -85.36 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube391" type="box" size="0.5 1.0 0.1" pos="-20.78 -85.08 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube392" type="box" size="0.5 1.0 0.1" pos="-20.71 -84.8 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube393" type="box" size="0.5 1.0 0.1" pos="-20.7 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube394" type="box" size="1.0 1.0 0.1" pos="-20.81 -83.74 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube395" type="box" size="0.5 1.0 0.1" pos="-20.71 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube396" type="box" size="0.5 1.5 1.0" pos="-20.71 -83.09 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube397" type="box" size="1.5 0.2 2.0" pos="-3.7 -85.24 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube398" type="box" size="1.5 0.2 2.0" pos="-1.48 -85.25 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube399" type="box" size="0.5 1.0 0.15" pos="-2.62 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube400" type="box" size="0.5 1.0 0.1" pos="-2.57 -85.64 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube401" type="box" size="0.5 1.0 0.1" pos="-2.58 -85.36 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube402" type="box" size="0.5 1.0 0.1" pos="-2.58 -85.08 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube403" type="box" size="0.5 1.0 0.1" pos="-2.51 -84.8 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube404" type="box" size="0.5 1.0 0.1" pos="-2.5 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube405" type="box" size="1.0 1.5 0.1" pos="-2.51 -83.74 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube406" type="box" size="0.5 1.0 0.1" pos="-2.51 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube407" type="box" size="0.5 1.5 1.0" pos="-2.41 -83.05 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube408" type="box" size="1.5 0.2 2.0" pos="2.41 -85.34 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube409" type="box" size="1.5 0.2 2.0" pos="4.31 -85.34 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube410" type="box" size="0.5 1.0 0.15" pos="3.38 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube411" type="box" size="0.5 1.0 0.1" pos="3.43 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube412" type="box" size="0.5 1.0 0.1" pos="3.42 -85.35 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube413" type="box" size="0.5 1.0 0.1" pos="3.42 -85.07 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube414" type="box" size="0.5 1.0 0.1" pos="3.49 -84.79 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube415" type="box" size="0.5 1.0 0.1" pos="3.5 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube416" type="box" size="0.5 1.0 0.1" pos="3.29 -84.23 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube417" type="box" size="0.5 1.0 0.1" pos="3.49 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube418" type="box" size="0.5 1.5 1.0" pos="3.3 -83.2 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube419" type="box" size="1.5 0.2 2.0" pos="20.49 -85.26 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube420" type="box" size="1.5 0.2 2.0" pos="22.39 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube421" type="box" size="0.5 1.0 0.15" pos="21.48 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube422" type="box" size="0.5 1.0 0.1" pos="21.53 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube423" type="box" size="0.5 1.0 0.1" pos="21.52 -85.35 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube424" type="box" size="0.5 1.0 0.1" pos="21.52 -85.07 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube425" type="box" size="0.5 1.0 0.1" pos="21.59 -84.78 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube426" type="box" size="0.5 1.0 0.1" pos="21.6 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube427" type="box" size="1.0 1.0 0.1" pos="21.39 -83.72 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube428" type="box" size="0.5 1.0 0.1" pos="21.59 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube429" type="box" size="0.5 1.5 1.0" pos="21.42 -83.22 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube430" type="box" size="1.5 0.2 2.0" pos="26.44 -85.21 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube431" type="box" size="1.5 0.3 2.0" pos="28.8 -85.24 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube432" type="box" size="0.5 1.0 0.15" pos="27.48 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube433" type="box" size="0.5 1.0 0.1" pos="27.53 -85.64 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube434" type="box" size="0.5 1.0 0.1" pos="27.52 -85.36 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube435" type="box" size="0.5 1.0 0.1" pos="27.52 -85.08 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube436" type="box" size="0.5 1.0 0.1" pos="27.59 -84.8 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube437" type="box" size="0.5 1.0 0.1" pos="27.6 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube438" type="box" size="1.0 1.5 0.1" pos="27.59 -83.74 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube439" type="box" size="0.5 1.0 0.1" pos="27.59 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube440" type="box" size="0.5 1.5 1.0" pos="27.69 -83.07 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube441" type="box" size="1.5 0.2 2.0" pos="38.56 -85.22 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube442" type="box" size="1.5 0.2 2.0" pos="40.45 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube443" type="box" size="0.5 1.0 0.15" pos="39.58 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube444" type="box" size="0.5 1.0 0.1" pos="39.5 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube445" type="box" size="0.5 1.0 0.1" pos="39.52 -85.34 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube446" type="box" size="0.5 1.0 0.1" pos="39.52 -85.06 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube447" type="box" size="0.5 1.0 0.1" pos="39.54 -84.78 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube448" type="box" size="0.5 1.0 0.1" pos="39.54 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube449" type="box" size="1.0 1.0 0.1" pos="39.5 -83.73 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube450" type="box" size="0.5 1.0 0.1" pos="39.69 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube451" type="box" size="0.5 1.5 1.0" pos="39.48 -83.2 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube452" type="box" size="1.5 0.2 2.0" pos="50.49 -85.24 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube453" type="box" size="1.5 0.2 2.0" pos="52.75 -85.34 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube454" type="box" size="0.5 1.0 0.15" pos="51.58 -86.19 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube455" type="box" size="0.5 1.0 0.1" pos="51.63 -85.64 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube456" type="box" size="0.5 1.0 0.1" pos="51.62 -85.36 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube457" type="box" size="0.5 1.0 0.1" pos="51.62 -85.08 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube458" type="box" size="0.5 1.0 0.1" pos="51.69 -84.8 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube459" type="box" size="0.5 1.0 0.1" pos="51.62 -84.52 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube460" type="box" size="1.0 1.5 0.1" pos="51.6 -83.73 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube461" type="box" size="0.5 1.0 0.1" pos="51.69 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube462" type="box" size="0.5 1.5 1.0" pos="51.59 -83.22 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube463" type="box" size="1.5 0.2 2.0" pos="62.74 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube464" type="box" size="1.5 0.3 2.0" pos="64.75 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube465" type="box" size="0.5 1.0 0.15" pos="63.68 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube466" type="box" size="0.5 1.0 0.1" pos="63.66 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube467" type="box" size="0.5 1.0 0.1" pos="63.72 -85.34 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube468" type="box" size="0.5 1.0 0.1" pos="63.72 -85.07 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube469" type="box" size="0.5 1.0 0.1" pos="63.69 -84.79 1.23" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube470" type="box" size="0.5 1.0 0.1" pos="63.7 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube471" type="box" size="1.0 1.0 0.1" pos="63.79 -83.72 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube472" type="box" size="0.5 1.0 0.1" pos="63.79 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube473" type="box" size="0.5 1.5 1.0" pos="63.72 -83.21 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube474" type="box" size="1.5 0.2 2.0" pos="74.77 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube475" type="box" size="1.5 0.2 2.0" pos="76.69 -85.23 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube476" type="box" size="0.5 1.0 0.15" pos="75.68 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube477" type="box" size="0.5 1.0 0.1" pos="75.73 -85.63 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube478" type="box" size="0.5 1.0 0.1" pos="75.72 -85.35 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube479" type="box" size="0.5 1.0 0.1" pos="75.72 -85.07 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube480" type="box" size="0.5 1.0 0.1" pos="75.69 -84.79 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube481" type="box" size="0.5 1.0 0.1" pos="75.8 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube482" type="box" size="1.0 1.0 0.1" pos="75.74 -83.73 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube483" type="box" size="0.5 1.0 0.1" pos="75.79 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube484" type="box" size="0.5 1.5 1.0" pos="75.73 -83.22 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube485" type="box" size="1.5 0.2 2.0" pos="80.74 -85.24 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube486" type="box" size="1.5 0.15 2.0" pos="82.89 -85.25 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube487" type="box" size="0.5 1.0 0.15" pos="81.78 -86.18 0.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube488" type="box" size="0.5 1.0 0.1" pos="81.83 -85.64 0.67" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube489" type="box" size="0.5 1.0 0.1" pos="81.82 -85.36 0.86" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube490" type="box" size="0.5 1.0 0.1" pos="81.82 -85.08 1.06" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube491" type="box" size="0.5 1.0 0.1" pos="81.89 -84.8 1.24" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube492" type="box" size="0.5 1.0 0.1" pos="81.9 -84.51 1.42" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube493" type="box" size="1.0 1.0 0.1" pos="81.86 -83.73 1.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube494" type="box" size="0.5 1.0 0.1" pos="81.89 -85.91 0.48" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube495" type="box" size="0.5 1.5 1.0" pos="81.49 -83.05 2.61" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube496" type="box" size="1.5 0.2 2.0" pos="79.37 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube497" type="box" size="1.5 0.2 2.0" pos="77.08 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube498" type="box" size="0.5 1.0 0.15" pos="78.3 -71.01 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube499" type="box" size="0.5 1.0 0.1" pos="78.25 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube500" type="box" size="0.5 1.0 0.1" pos="78.26 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube501" type="box" size="0.5 1.0 0.1" pos="78.26 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube502" type="box" size="0.5 1.0 0.1" pos="78.19 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube503" type="box" size="0.5 1.0 0.1" pos="78.18 -72.68 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube504" type="box" size="1.0 1.5 0.1" pos="78.19 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube505" type="box" size="0.5 1.0 0.1" pos="78.19 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube506" type="box" size="0.5 1.5 1.0" pos="78.24 -74.09 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube507" type="box" size="1.5 0.2 2.0" pos="73.2 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube508" type="box" size="1.5 0.3 2.0" pos="71.2 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube509" type="box" size="0.5 1.0 0.15" pos="72.3 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube510" type="box" size="0.5 1.0 0.1" pos="72.25 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube511" type="box" size="0.5 1.0 0.1" pos="72.26 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube512" type="box" size="0.5 1.0 0.1" pos="72.26 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube513" type="box" size="0.5 1.0 0.1" pos="72.29 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube514" type="box" size="0.5 1.0 0.1" pos="72.31 -72.67 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube515" type="box" size="1.0 1.0 0.1" pos="72.44 -73.45 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube516" type="box" size="0.5 1.0 0.1" pos="72.19 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube517" type="box" size="0.5 1.5 1.0" pos="72.33 -73.98 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube518" type="box" size="1.5 0.2 2.0" pos="61.18 -71.94 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube519" type="box" size="1.5 0.2 2.0" pos="59.26 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube520" type="box" size="0.5 1.0 0.15" pos="60.2 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube521" type="box" size="0.5 1.0 0.1" pos="60.15 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube522" type="box" size="0.5 1.0 0.1" pos="60.16 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube523" type="box" size="0.5 1.0 0.1" pos="60.16 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube524" type="box" size="0.5 1.0 0.1" pos="60.09 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube525" type="box" size="0.5 1.0 0.1" pos="60.08 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube526" type="box" size="1.0 1.0 0.1" pos="60.27 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube527" type="box" size="0.5 1.0 0.1" pos="60.09 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube528" type="box" size="0.5 1.5 1.0" pos="60.15 -73.99 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube529" type="box" size="1.5 0.2 2.0" pos="49.12 -71.97 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube530" type="box" size="1.5 0.2 2.0" pos="46.94 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube531" type="box" size="0.5 1.0 0.15" pos="48.1 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube532" type="box" size="0.5 1.0 0.1" pos="48.05 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube533" type="box" size="0.5 1.0 0.1" pos="48.06 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube534" type="box" size="0.5 1.0 0.1" pos="48.06 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube535" type="box" size="0.5 1.0 0.1" pos="47.99 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube536" type="box" size="0.5 1.0 0.1" pos="47.98 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube537" type="box" size="1.0 1.0 0.1" pos="47.99 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube538" type="box" size="0.5 1.0 0.1" pos="47.99 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube539" type="box" size="0.5 1.5 1.0" pos="47.89 -74.15 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube540" type="box" size="1.5 0.2 2.0" pos="36.98 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube541" type="box" size="1.5 0.3 2.0" pos="34.98 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube542" type="box" size="0.5 1.0 0.15" pos="36.1 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube543" type="box" size="0.5 1.0 0.1" pos="36.05 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube544" type="box" size="0.5 1.0 0.1" pos="36.06 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube545" type="box" size="0.5 1.0 0.1" pos="36.06 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube546" type="box" size="0.5 1.0 0.1" pos="35.99 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube547" type="box" size="0.5 1.0 0.1" pos="35.98 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube548" type="box" size="1.0 1.0 0.1" pos="36.08 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube549" type="box" size="0.5 1.0 0.1" pos="35.99 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube550" type="box" size="0.5 1.5 1.0" pos="36.05 -73.98 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube551" type="box" size="1.5 0.2 2.0" pos="25.04 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube552" type="box" size="1.5 0.2 2.0" pos="22.81 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube553" type="box" size="0.5 1.0 0.15" pos="24.0 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube554" type="box" size="0.5 1.0 0.1" pos="23.95 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube555" type="box" size="0.5 1.0 0.1" pos="23.96 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube556" type="box" size="0.5 1.0 0.1" pos="23.96 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube557" type="box" size="0.5 1.0 0.1" pos="23.89 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube558" type="box" size="0.5 1.0 0.1" pos="23.88 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube559" type="box" size="1.0 1.5 0.1" pos="23.89 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube560" type="box" size="0.5 1.0 0.1" pos="23.89 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube561" type="box" size="0.5 1.5 1.0" pos="23.79 -74.15 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube562" type="box" size="1.5 0.2 2.0" pos="18.93 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube563" type="box" size="1.5 0.35 2.0" pos="16.87 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube564" type="box" size="0.5 1.0 0.15" pos="18.0 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube565" type="box" size="0.5 1.0 0.1" pos="17.95 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube566" type="box" size="0.5 1.0 0.1" pos="17.96 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube567" type="box" size="0.5 1.0 0.1" pos="17.96 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube568" type="box" size="0.5 1.0 0.1" pos="17.89 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube569" type="box" size="0.5 1.0 0.1" pos="17.88 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube570" type="box" size="1.0 1.5 0.1" pos="17.89 -73.45 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube571" type="box" size="0.5 1.0 0.1" pos="17.89 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube572" type="box" size="0.5 1.5 1.0" pos="17.97 -73.96 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube573" type="box" size="1.5 0.2 2.0" pos="0.85 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube574" type="box" size="1.5 0.2 2.0" pos="-1.08 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube575" type="box" size="0.5 1.0 0.15" pos="-0.1 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube576" type="box" size="0.5 1.0 0.1" pos="-0.15 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube577" type="box" size="0.5 1.0 0.1" pos="-0.14 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube578" type="box" size="0.5 1.0 0.1" pos="-0.14 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube579" type="box" size="0.5 1.0 0.1" pos="-0.21 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube580" type="box" size="0.5 1.0 0.1" pos="-0.22 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube581" type="box" size="1.0 1.0 0.1" pos="-0.08 -73.45 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube582" type="box" size="0.5 1.0 0.1" pos="-0.21 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube583" type="box" size="0.5 1.5 1.0" pos="-0.15 -73.98 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube584" type="box" size="1.5 0.2 2.0" pos="-5.07 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube585" type="box" size="1.5 0.2 2.0" pos="-7.37 -71.97 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube586" type="box" size="0.5 1.0 0.15" pos="-6.2 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube587" type="box" size="0.5 1.0 0.1" pos="-6.25 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube588" type="box" size="0.5 1.0 0.1" pos="-6.24 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube589" type="box" size="0.5 1.0 0.1" pos="-6.24 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube590" type="box" size="0.5 1.0 0.1" pos="-6.31 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube591" type="box" size="0.5 1.0 0.1" pos="-6.32 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube592" type="box" size="1.0 1.5 0.1" pos="-6.31 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube593" type="box" size="0.5 1.0 0.1" pos="-6.31 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube594" type="box" size="0.5 1.5 1.0" pos="-6.21 -74.15 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube595" type="box" size="1.5 0.2 2.0" pos="-23.22 -71.96 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube596" type="box" size="1.5 0.2 2.0" pos="-25.53 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube597" type="box" size="0.5 1.0 0.15" pos="-24.3 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube598" type="box" size="0.5 1.0 0.1" pos="-24.35 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube599" type="box" size="0.5 1.0 0.1" pos="-24.34 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube600" type="box" size="0.5 1.0 0.1" pos="-24.34 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube601" type="box" size="0.5 1.0 0.1" pos="-24.41 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube602" type="box" size="0.5 1.0 0.1" pos="-24.42 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube603" type="box" size="1.0 1.5 0.1" pos="-24.41 -73.46 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube604" type="box" size="0.5 1.0 0.1" pos="-24.41 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube605" type="box" size="0.5 1.5 1.0" pos="-24.51 -74.15 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube606" type="box" size="1.5 0.2 2.0" pos="-29.37 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube607" type="box" size="1.5 0.15 2.0" pos="-31.25 -71.95 2.1" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube608" type="box" size="0.5 1.0 0.15" pos="-30.1 -71.02 0.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube609" type="box" size="0.5 1.0 0.1" pos="-30.15 -71.56 0.67" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube610" type="box" size="0.5 1.0 0.1" pos="-30.14 -71.84 0.86" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube611" type="box" size="0.5 1.0 0.1" pos="-30.14 -72.12 1.06" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube612" type="box" size="0.5 1.0 0.1" pos="-30.21 -72.4 1.24" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube613" type="box" size="0.5 1.0 0.1" pos="-30.22 -72.69 1.42" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube614" type="box" size="0.5 1.0 0.1" pos="-30.31 -72.95 1.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube615" type="box" size="0.5 1.0 0.1" pos="-30.21 -71.29 0.48" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube616" type="box" size="0.5 1.5 1.0" pos="-30.31 -73.97 2.61" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube617" type="box" size="3.0 0.1 1.0" pos="-10.45 -83.92 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube618" type="box" size="1.5 0.1 1.0" pos="-7.57 -85.29 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube619" type="box" size="0.25 0.3 1.0" pos="-12.96 -84.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube620" type="box" size="1.25 0.1 1.0" pos="-8.85 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube621" type="box" size="0.75 0.1 1.0" pos="-12.65 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube622" type="box" size="1.5 0.2 2.0" pos="-13.44 -85.46 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube623" type="box" size="3.0 0.1 1.0" pos="13.65 -83.92 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube624" type="box" size="1.5 0.1 1.0" pos="16.53 -85.29 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube625" type="box" size="0.25 0.3 1.0" pos="11.19 -84.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube626" type="box" size="1.25 0.1 1.0" pos="15.25 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube627" type="box" size="0.75 0.1 1.0" pos="11.45 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube628" type="box" size="1.5 0.2 2.0" pos="10.66 -85.46 2.1" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube629" type="box" size="3.0 0.1 1.0" pos="31.75 -83.92 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube630" type="box" size="1.5 0.1 1.0" pos="34.63 -85.29 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube631" type="box" size="0.25 0.3 1.0" pos="29.26 -84.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube632" type="box" size="1.25 0.1 1.0" pos="33.35 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube633" type="box" size="0.75 0.1 1.0" pos="29.55 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube635" type="box" size="3.0 0.1 1.0" pos="67.95 -83.92 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube636" type="box" size="1.5 0.1 1.0" pos="70.83 -85.29 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube637" type="box" size="0.25 0.3 1.0" pos="65.44 -84.32 1.0" quat="0.707107 0.0 0.0 0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube638" type="box" size="1.25 0.1 1.0" pos="69.55 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube639" type="box" size="0.75 0.1 1.0" pos="65.75 -86.71 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube641" type="box" size="3.0 0.1 1.0" pos="67.97 -73.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube642" type="box" size="1.5 0.1 1.0" pos="65.09 -72.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube643" type="box" size="0.25 0.3 1.0" pos="70.48 -73.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube644" type="box" size="1.25 0.1 1.0" pos="66.37 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube645" type="box" size="0.75 0.1 1.0" pos="70.17 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube647" type="box" size="3.0 0.1 1.0" pos="31.77 -73.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube648" type="box" size="1.5 0.1 1.0" pos="28.89 -72.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube649" type="box" size="0.25 0.3 1.0" pos="34.28 -73.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube650" type="box" size="1.25 0.1 1.0" pos="30.17 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube651" type="box" size="0.75 0.1 1.0" pos="33.97 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube653" type="box" size="3.0 0.1 1.0" pos="13.67 -73.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube654" type="box" size="1.5 0.1 1.0" pos="10.79 -72.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube655" type="box" size="0.25 0.3 1.0" pos="16.18 -73.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube656" type="box" size="1.25 0.1 1.0" pos="12.07 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube657" type="box" size="0.75 0.1 1.0" pos="15.87 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube659" type="box" size="3.0 0.1 1.0" pos="-10.43 -73.5 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube660" type="box" size="1.5 0.1 1.0" pos="-13.31 -72.13 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube661" type="box" size="0.25 0.3 1.0" pos="-7.92 -73.1 1.0" quat="0.707107 0.0 0.0 -0.707107" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube662" type="box" size="1.25 0.1 1.0" pos="-12.03 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube663" type="box" size="0.75 0.1 1.0" pos="-8.23 -70.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube646" type="box" size="1.75 0.1 1.0" pos="81.17 -70.61 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube652" type="box" size="2.0 0.1 1.0" pos="75.17 -70.61 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube658" type="box" size="2.0 0.1 1.0" pos="63.07 -70.61 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube664" type="box" size="5.0 0.1 1.0" pos="54.09 -70.61 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube665" type="box" size="5.0 0.1 1.0" pos="41.87 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube666" type="box" size="2.0 0.1 1.0" pos="26.97 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube667" type="box" size="2.0 0.1 1.0" pos="20.97 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube668" type="box" size="5.0 0.1 1.0" pos="5.78 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube669" type="box" size="2.0 0.1 1.0" pos="-2.93 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube670" type="box" size="5.0 0.1 1.0" pos="-18.33 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube671" type="box" size="2.0 0.1 1.0" pos="-27.43 -70.68 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube634" type="box" size="2.0 0.1 1.0" pos="-29.63 -86.61 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube640" type="box" size="2.0 0.1 1.0" pos="-23.93 -86.61 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube672" type="box" size="3.0 0.1 1.0" pos="-16.63 -86.69 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube673" type="box" size="2.0 0.1 1.0" pos="-5.63 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube674" type="box" size="2.0 0.1 1.0" pos="0.47 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube675" type="box" size="3.25 0.1 1.0" pos="7.56 -86.73 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube676" type="box" size="2.0 0.1 1.0" pos="18.56 -86.58 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube677" type="box" size="2.0 0.1 1.0" pos="24.48 -86.58 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube678" type="box" size="2.0 0.1 1.0" pos="36.58 -86.58 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube679" type="box" size="5.0 0.1 1.0" pos="45.58 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube680" type="box" size="5.0 0.1 1.0" pos="57.78 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube681" type="box" size="2.0 0.1 1.0" pos="72.78 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube682" type="box" size="2.0 0.1 1.0" pos="78.78 -86.59 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube683" type="box" size="2.0 0.1 1.0" pos="-21.63 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube684" type="box" size="5.0 0.1 1.0" pos="-6.83 -93.71 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube685" type="box" size="5.0 0.1 1.0" pos="5.37 -93.76 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube686" type="box" size="2.0 0.1 1.0" pos="14.27 -94.01 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube687" type="box" size="2.0 0.1 1.0" pos="26.27 -94.01 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube688" type="box" size="2.0 0.1 1.0" pos="32.17 -94.01 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube689" type="box" size="3.5 0.1 1.0" pos="67.07 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube690" type="box" size="2.0 0.1 1.0" pos="56.07 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube691" type="box" size="2.0 0.1 1.0" pos="50.07 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube692" type="box" size="3.5 0.1 1.0" pos="42.87 -94.21 1.0" quat="0.0 0.0 0.0 1.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube54" type="box" size="3.5 0.3 1.0" pos="12.22 1.02 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube79" type="box" size="2.35 1.0 1.0" pos="32.21 0.21 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+<geom name="ps_Cube76" type="box" size="3.5 0.3 1.0" pos="12.22 -1.88 1.0" quat="1.0 0.0 0.0 -0.0" rgba="0.8 0.2 0.2 1"/>
+    </worldbody>
+</mujoco>

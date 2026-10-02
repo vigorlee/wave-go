@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "state": "succeeded",
+  "completed_stages": 12,
+  "total_stages": 12,
+  "last_event": {
+    "time": 1790856017.656057,
+    "state": "succeeded",
+    "stage_index": 11,
+    "stage_id": "second_floor_goal",
+    "completed_stages": 12,
+    "robot_pose": {
+      "x": -2.944810165606441,
+      "y": 0.6137551784209044,
+      "z": 5.921804890282329,
+      "roll": 0.02809942211132153,
+      "pitch": 0.07287669479032366,
+      "yaw": 0.26898822147687407
+    },
+    "planner": "NavFnDijkstra",
+    "reason": ""
+  },
+  "controller": "Nav2 path sample tracking + existing RL terrain locomotion",
+  "planner": "NavFnDijkstra",
+  "pedestrian_guard": "Current LiDAR geometric clusters with stop/yield and prediction; not neural class labels",
+  "yield_count": 3,
+  "minimum_candidate_center_distance_m": 0.8919410481750041
+}
