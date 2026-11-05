@@ -48,7 +48,7 @@ stop_domain_zenohd() {
   while read -r pid; do
     [[ -n "${pid}" ]] || continue
     if tr '\0' '\n' <"/proc/${pid}/environ" 2>/dev/null | \
-       grep -Fxq "ROS_DOMAIN_ID=${ROS_DOMAIN_ID}"; then
+       grep -Fxq "ROS_DOMAIN_ID=${GO2W_ZENOH_ROUTER_DOMAIN_ID:-${ROS_DOMAIN_ID}}"; then
       kill -KILL "${pid}" 2>/dev/null || true
     fi
   done < <(pgrep -x rmw_zenohd 2>/dev/null || true)

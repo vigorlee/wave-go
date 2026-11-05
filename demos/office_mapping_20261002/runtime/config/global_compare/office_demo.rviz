@@ -1,16 +1,16 @@
 Panels:
 - Class: rviz_common/Displays
+  Help Height: 138
   Name: Displays
   Property Tree Widget:
     Expanded:
     - /Global Options1
-    - /LIO optional architectural cutaway1
     Splitter Ratio: 0.5
-  Tree Height: 650
+  Tree Height: 618
 Visualization Manager:
   Class: ''
   Displays:
-  - Alpha: 0.98
+  - Alpha: 0.9
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -22,7 +22,7 @@ Visualization Manager:
     Color: 255; 255; 255
     Color Transformer: RGB8
     Decay Time: 0
-    Enabled: false
+    Enabled: true
     Invert Rainbow: false
     Max Color: 255; 255; 255
     Max Intensity: 4096
@@ -32,7 +32,7 @@ Visualization Manager:
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 2
-    Size (m): 0.032
+    Size (m): 0.03200000151991844
     Style: Points
     Topic:
       Depth: 1
@@ -43,8 +43,8 @@ Visualization Manager:
       Value: /wavego/live_dense/points
     Use Fixed Frame: true
     Use rainbow: true
-    Value: false
-  - Alpha: 1.0
+    Value: true
+  - Alpha: 1
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -66,7 +66,7 @@ Visualization Manager:
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 2
-    Size (m): 0.032
+    Size (m): 0.03200000151991844
     Style: Points
     Topic:
       Depth: 1
@@ -78,7 +78,7 @@ Visualization Manager:
     Use Fixed Frame: true
     Use rainbow: true
     Value: false
-  - Alpha: 0.98
+  - Alpha: 0.9800000190734863
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -90,7 +90,7 @@ Visualization Manager:
     Color: 255; 255; 255
     Color Transformer: RGB8
     Decay Time: 0
-    Enabled: true
+    Enabled: false
     Invert Rainbow: false
     Max Color: 255; 255; 255
     Max Intensity: 4096
@@ -100,7 +100,7 @@ Visualization Manager:
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 2
-    Size (m): 0.032
+    Size (m): 0.03200000151991844
     Style: Points
     Topic:
       Depth: 1
@@ -111,8 +111,8 @@ Visualization Manager:
       Value: /wavego/live_dense/cutaway
     Use Fixed Frame: true
     Use rainbow: true
-    Value: true
-  - Alpha: 1.0
+    Value: false
+  - Alpha: 0.55
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -123,7 +123,7 @@ Visualization Manager:
     Class: rviz_default_plugins/PointCloud2
     Color: 255; 177; 71
     Color Transformer: RGB8
-    Decay Time: 0
+    Decay Time: 0.25
     Enabled: false
     Invert Rainbow: false
     Max Color: 255; 255; 255
@@ -133,8 +133,8 @@ Visualization Manager:
     Name: 4 Current registered scan
     Position Transformer: XYZ
     Selectable: true
-    Size (Pixels): 3
-    Size (m): 0.032
+    Size (Pixels): 1
+    Size (m): 0.03200000151991844
     Style: Points
     Topic:
       Depth: 1
@@ -146,7 +146,7 @@ Visualization Manager:
     Use Fixed Frame: true
     Use rainbow: true
     Value: false
-  - Alpha: 0.88
+  - Alpha: 0.8799999952316284
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -168,7 +168,7 @@ Visualization Manager:
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 1
-    Size (m): 0.032
+    Size (m): 0.03200000151991844
     Style: Points
     Topic:
       Depth: 1
@@ -181,17 +181,18 @@ Visualization Manager:
     Use rainbow: true
     Value: false
   - Class: rviz_default_plugins/MarkerArray
-    Enabled: true
+    Enabled: false
     Name: 6 Measured LIO trajectory graph
-    Namespaces: {}
+    Namespaces:
+      measured_lio_keyframe_edges: true
+      measured_lio_keyframes: true
     Topic:
       Depth: 1
       Durability Policy: Transient Local
-      Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
       Value: /wavego/live_dense/graph
-    Value: true
+    Value: false
   - Alpha: 0.5
     Cell Size: 1
     Class: rviz_default_plugins/Grid
@@ -210,7 +211,7 @@ Visualization Manager:
     Plane Cell Count: 10
     Reference Frame: <Fixed Frame>
     Value: false
-  - Alpha: 0.85
+  - Alpha: 0.4
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
       Max Value: 10
@@ -231,7 +232,7 @@ Visualization Manager:
     Name: Semantic 3D map
     Position Transformer: XYZ
     Selectable: true
-    Size (Pixels): 3
+    Size (Pixels): 2
     Size (m): 0.054999999701976776
     Style: Points
     Topic:
@@ -243,7 +244,7 @@ Visualization Manager:
       Value: /wavego/semantic/map
     Use Fixed Frame: true
     Use rainbow: true
-    Value: false
+    Value: true
   - Alpha: 1
     Buffer Length: 1
     Class: rviz_default_plugins/Path
@@ -254,7 +255,7 @@ Visualization Manager:
     Length: 0.30000001192092896
     Line Style: Billboards
     Line Width: 0.05000000074505806
-    Name: Actual LIO trajectory
+    Name: Actual LIO body trajectory
     Offset:
       X: 0
       Y: 0
@@ -284,7 +285,7 @@ Visualization Manager:
       History Policy: Keep Last
       Reliability Policy: Reliable
       Value: /wavego/semantic/objects
-    Value: false
+    Value: true
   - Alpha: 1
     Autocompute Intensity Bounds: true
     Autocompute Value Bounds:
@@ -297,13 +298,13 @@ Visualization Manager:
     Color: 255; 160; 40
     Color Transformer: RGB8
     Decay Time: 0
-    Enabled: true
+    Enabled: false
     Invert Rainbow: false
     Max Color: 255; 255; 255
     Max Intensity: 4096
     Min Color: 0; 0; 0
     Min Intensity: 0
-    Name: Live semantic obstacles
+    Name: Live semantic scan (optional)
     Position Transformer: XYZ
     Selectable: true
     Size (Pixels): 3
@@ -323,8 +324,10 @@ Visualization Manager:
     Enabled: true
     Name: Live adaptive inflation
     Namespaces:
-      live_adaptive_cells: false
-      live_readout: false
+      live_adaptive_cells: true
+      live_readout: true
+      robot_adaptive_radius: true
+      live_hard_cells: true
     Topic:
       Depth: 1
       Durability Policy: Volatile
@@ -336,12 +339,12 @@ Visualization Manager:
     Buffer Length: 1
     Class: rviz_default_plugins/Path
     Color: 45; 185; 255
-    Enabled: true
+    Enabled: false
     Head Diameter: 0.30000001192092896
     Head Length: 0.20000000298023224
     Length: 0.30000001192092896
     Line Style: Billboards
-    Line Width: 0.07
+    Line Width: 0.035
     Name: NavFn Dijkstra - global
     Offset:
       X: 0
@@ -358,18 +361,18 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /wavego/global/NavFnDijkstra
-    Value: true
+      Value: /wavego/visual/paths/NavFnDijkstra
+    Value: false
   - Alpha: 1
     Buffer Length: 1
     Class: rviz_default_plugins/Path
     Color: 245; 65; 195
-    Enabled: true
+    Enabled: false
     Head Diameter: 0.30000001192092896
     Head Length: 0.20000000298023224
     Length: 0.30000001192092896
     Line Style: Billboards
-    Line Width: 0.07
+    Line Width: 0.035
     Name: Smac A star - global
     Offset:
       X: 0
@@ -386,18 +389,18 @@ Visualization Manager:
       Filter size: 10
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /wavego/global/SmacAStar
-    Value: true
+      Value: /wavego/visual/paths/SmacAStar
+    Value: false
   - Alpha: 1
     Buffer Length: 1
     Class: rviz_default_plugins/Path
     Color: 255; 220; 110
-    Enabled: true
+    Enabled: false
     Head Diameter: 0.30000001192092896
     Head Length: 0.20000000298023224
     Length: 0.30000001192092896
     Line Style: Billboards
-    Line Width: 0.055
+    Line Width: 0.054999999701976776
     Name: Robot measured trajectory
     Offset:
       X: 0
@@ -415,17 +418,49 @@ Visualization Manager:
       History Policy: Keep Last
       Reliability Policy: Reliable
       Value: /go2w/course/trail
+    Value: false
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: true
+    Name: Recognized room plates and goal association
+    Namespaces: {}
+    Topic:
+      Depth: 10
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /wavego/door_target/markers
     Value: true
   - Class: rviz_default_plugins/MarkerArray
     Enabled: true
     Name: Navigation status and dynamic clusters
-    Namespaces: {}
+    Namespaces:
+      measured_dynamic: true
+      dynamic_guard_radius: true
+      dynamic_velocity_prediction: true
+      dynamic_labels: true
+      status: true
+      navigation_lookahead: true
+      navigation_rollout_samples: true
+      navigation_sampling_heads: true
     Topic:
       Depth: 5
       Durability Policy: Volatile
       History Policy: Keep Last
       Reliability Policy: Reliable
-      Value: /wavego/global/markers
+      Value: /wavego/visual/navigation_markers
+    Value: true
+  - Class: rviz_default_plugins/MarkerArray
+    Enabled: true
+    Name: Plans on observed terrain
+    Namespaces:
+      observed_plan_NavFnDijkstra: true
+      observed_plan_SmacAStar: true
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /wavego/visual/mapped_routes
     Value: true
   Enabled: true
   Global Options:
@@ -473,7 +508,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 26.0
+      Distance: 32
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -488,15 +523,18 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.95
+      Pitch: 0.46
       Target Frame: lio_map
       Value: Orbit (rviz)
-      Yaw: 0.8
+      Yaw: 0.88
     Saved: null
 Window Geometry:
-  Height: 850
-  Hide Left Dock: false
+  Displays:
+    collapsed: false
+  Height: 1022
+  Hide Left Dock: true
   Hide Right Dock: false
-  Width: 1700
-  X: 2100
-  Y: 80
+  QMainWindow State: 000000ff00000000fd0000000100000000000001f700000362fc0200000001fb000000100044006900730070006c006100790073000000006e000003620000018200ffffff000005990000036200000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1948
+  X: 2078
+  Y: 60

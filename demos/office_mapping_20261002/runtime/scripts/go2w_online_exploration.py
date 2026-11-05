@@ -48,7 +48,8 @@ class OnlineExploration(rclpy.node.Node):
         self.scan_pub=self.create_publisher(PointCloud2,'/livox/lidar',qos_profile_sensor_data)
         self.odom_pub=self.create_publisher(Odometry,'/wavego/navigation/odom',20)
         self.tf=TransformBroadcaster(self);self.action=ActionClient(self,NavigateToPose,'/navigate_to_pose')
-        self.create_subscription(PointCloud2,'/livox/lidar_raw',self.raw,qos_profile_sensor_data)
+        if os.environ.get('GO2W_EXTERNAL_LIDAR_RELAY') != '1':
+            self.create_subscription(PointCloud2,'/livox/lidar_raw',self.raw,qos_profile_sensor_data)
         self.create_subscription(PointCloud2,'/wavego/slam/registered_points',self.register,qos_profile_sensor_data)
         self.create_subscription(Odometry,'/wavego/slam/odom',self.odometry,qos_profile_sensor_data)
         self.create_timer(.5,self.tick);self.create_timer(5.,self.save)

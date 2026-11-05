@@ -103,7 +103,7 @@ stop_domain_zenohd() {
   while read -r pid; do
     [[ -n "${pid}" ]] || continue
     if tr '\0' '\n' <"/proc/${pid}/environ" 2>/dev/null | \
-       grep -Fxq "ROS_DOMAIN_ID=${ROS_DOMAIN_ID}"; then
+       grep -Fxq "ROS_DOMAIN_ID=${GO2W_ZENOH_ROUTER_DOMAIN_ID:-${ROS_DOMAIN_ID}}"; then
       kill -KILL "${pid}" 2>/dev/null || true
     fi
   done < <(pgrep -x rmw_zenohd 2>/dev/null || true)
@@ -192,7 +192,7 @@ ln -sfn ../go2w "${MATRIX_DIR}/src/robot_mujoco/zsibot_robots/xgw/go2w_lcm"
 
 stop_domain_zenohd
 ros2 daemon stop >/dev/null 2>&1 || true
-start_tracked zenohd ros2 run rmw_zenoh_cpp rmw_zenohd
+start_tracked zenohd env ROS_DOMAIN_ID="${GO2W_ZENOH_ROUTER_DOMAIN_ID:-${ROS_DOMAIN_ID}}" ros2 run rmw_zenoh_cpp rmw_zenohd
 sleep 2
 if ! pid_alive "${RUN_DIR}/zenohd.pid"; then
   echo "[ERROR] rmw_zenohd failed to start. See ${LOG_DIR}/zenohd.log." >&2

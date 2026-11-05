@@ -3,8 +3,8 @@ import re
 import time
 import numpy as np
 
-CLASSES = {'stairs':1, 'ramp':2, 'cylinder':3, 'person':4, 'wall':5, 'floor':6}
-THRESHOLDS = {1:.32, 2:.36, 3:.48, 4:.48, 5:.40, 6:.38, 7:.40}
+CLASSES = {'stairs':1, 'ramp':2, 'cylinder':3, 'person':4, 'wall':5, 'floor':6, 'door':8, 'doorway':8}
+THRESHOLDS = {1:.32, 2:.36, 3:.48, 4:.48, 5:.40, 6:.38, 7:.40, 8:.40}
 
 def classify(text):
     found = {value for key,value in CLASSES.items() if re.search(r'\b'+key+r'\b', str(text).lower())}
@@ -17,14 +17,15 @@ def iou(a,b):
     return float(intersection/max(1e-9,np.maximum(0,a[2:]-a[:2]).prod()+np.maximum(0,b[2:]-b[:2]).prod()-intersection))
 
 class DetectionFilter:
-    def __init__(self, temporal=False):
+    def __init__(self, temporal=False, max_confirmation_gap=1.):
         self.temporal=temporal
+        self.max_confirmation_gap=float(max_confirmation_gap)
         self.previous=[]
         self.last_time=None
 
     def select(self, boxes, scores, names, shape, now=None):
         now=time.monotonic() if now is None else now
-        if self.last_time is None or now-self.last_time>1.: self.previous=[]
+        if self.last_time is None or now-self.last_time>self.max_confirmation_gap: self.previous=[]
         h,w=shape[:2];selected=[];audit=[];current=[]
         for index in np.argsort(-np.asarray(scores)):
             box=np.asarray(boxes[index],float);score=float(scores[index]);label=classify(names[index]);reason=None

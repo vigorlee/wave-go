@@ -9,6 +9,176 @@
 
 #include "mapping_alg.h"
 
+#include <Eigen/Eigenvalues>
+#include <array>
+#include <cerrno>
+#include <chrono>
+#include <cstdio>
+#include <cstdlib>
+#include <limits>
+#include <optional>
+#include <stdexcept>
+#include <sstream>
+
+void office_lio_prediction_trace_set_enabled(bool enabled) noexcept;
+std::array<double, 23> office_lio_prediction_trace_snapshot() noexcept;
+
+// Optional observation-only trace. No filter parameters or estimator state are
+// changed, and expensive copies/statistics run only when the environment enables it.
+namespace
+{
+    struct OfficeLioStateObservation
+    {
+        std::array<double, 19> values;
+        template <typename State>
+        explicit OfficeLioStateObservation(const State& state)
+        {
+            for (int i = 0; i < 3; ++i)
+            {
+                values[i] = state.pos[i];
+                values[3 + i] = state.vel[i];
+                values[6 + i] = state.ba[i];
+                values[9 + i] = state.bg[i];
+                values[12 + i] = state.grav[i];
+            }
+            for (int i = 0; i < 4; ++i)
+                values[15 + i] = state.rot.coeffs()[i];
+        }
+    };
+
+    struct OfficeLioNormalStatistics
+    {
+        size_t count = 0;
+        Eigen::Matrix3d gram = Eigen::Matrix3d::Zero();
+        Eigen::Vector3d eigenvalues = Eigen::Vector3d::Constant(std::numeric_limits<double>::quiet_NaN());
+        double signed_mean = std::numeric_limits<double>::quiet_NaN();
+        double absolute_mean = std::numeric_limits<double>::quiet_NaN();
+        double rms = std::numeric_limits<double>::quiet_NaN();
+        double p50 = std::numeric_limits<double>::quiet_NaN();
+        double p95 = std::numeric_limits<double>::quiet_NaN();
+        double maximum = std::numeric_limits<double>::quiet_NaN();
+        template <typename Cloud>
+        explicit OfficeLioNormalStatistics(const Cloud& normals)
+        {
+            double signed_sum = 0, absolute_sum = 0, square_sum = 0;
+            std::vector<double> residuals;
+            residuals.reserve(normals.size());
+            for (const auto& point : normals.points)
+            {
+                const Eigen::Vector3d normal(point.x, point.y, point.z);
+                const double residual = point.intensity;
+                if (!normal.allFinite() || !std::isfinite(residual))
+                    continue;
+                gram.noalias() += normal * normal.transpose();
+                signed_sum += residual;
+                absolute_sum += std::abs(residual);
+                square_sum += residual * residual;
+                residuals.push_back(std::abs(residual));
+                ++count;
+            }
+            if (!count)
+                return;
+            Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> solver(gram, Eigen::EigenvaluesOnly);
+            if (solver.info() == Eigen::Success)
+                eigenvalues = solver.eigenvalues();
+            signed_mean = signed_sum / count;
+            absolute_mean = absolute_sum / count;
+            rms = std::sqrt(square_sum / count);
+            std::sort(residuals.begin(), residuals.end());
+            // Nearest-rank quantiles of absolute accepted point-to-plane residuals.
+            p50 = residuals[static_cast<size_t>(std::ceil(0.50 * count)) - 1];
+            p95 = residuals[static_cast<size_t>(std::ceil(0.95 * count)) - 1];
+            maximum = residuals.back();
+        }
+    };
+
+    class OfficeLioDiagnosticCsv
+    {
+        FILE* file_ = nullptr;
+        std::array<char, 16384> buffer_;
+        size_t rows_ = 0;
+        double previous_stamp_ = std::numeric_limits<double>::quiet_NaN();
+    public:
+        OfficeLioDiagnosticCsv() noexcept
+        {
+            const char* path = std::getenv("OFFICE_LIO_TRACE_PATH");
+            if (!path || !*path)
+                path = std::getenv("OFFICE_LIO_DIAGNOSTIC_CSV");
+            if (!path || !*path)
+                return;
+            // Exclusive creation: never truncate an existing diagnostic artifact.
+            file_ = std::fopen(path, "wx");
+            if (!file_)
+            {
+                std::fprintf(stderr, "LIO trace disabled: cannot create new file '%s' (errno=%d)\n", path, errno);
+                return;
+            }
+            std::setvbuf(file_, buffer_.data(), _IOFBF, buffer_.size());
+            std::fprintf(file_, "source_begin,source_end,source_dt,imu_count,imu_first,imu_last,preprocessed_points,deskewed_points,downsampled_points,effective_features,finite_feature_normals");
+            const char* names[] = {"px", "py", "pz", "vx", "vy", "vz", "bax", "bay", "baz", "bgx", "bgy", "bgz", "gx", "gy", "gz", "qx", "qy", "qz", "qw"};
+            for (const char* phase : {"pre", "post"})
+                for (const char* name : names)
+                    std::fprintf(file_, ",%s_%s", phase, name);
+            std::fprintf(file_, ",nz2_mean,gram_xx,gram_xy,gram_xz,gram_yy,gram_yz,gram_zz,eigen_min,eigen_mid,eigen_max,residual_signed_mean,residual_abs_mean,residual_rms,residual_abs_p50,residual_abs_p95,residual_abs_max,predict_calls,predict_dt_sum,predict_dt_min,predict_dt_max,predict_negative_dt_count,predict_raw_gyro_x_dt,predict_raw_gyro_y_dt,predict_raw_gyro_z_dt,predict_corrected_gyro_x_dt,predict_corrected_gyro_y_dt,predict_corrected_gyro_z_dt,predict_normalized_acc_x_dt,predict_normalized_acc_y_dt,predict_normalized_acc_z_dt,imu_init_mean_acc_norm,imu_normalization_scale,predict_previous_lidar_end,predict_previous_imu_tail,predict_extrapolation_dt,predict_delta_qx,predict_delta_qy,predict_delta_qz,predict_delta_qw,filter_update_seconds,diagnostic_seconds\n");
+            std::fflush(file_);
+            office_lio_prediction_trace_set_enabled(true);
+            std::fprintf(stderr, "LIO observation-only trace enabled: %s\n", path);
+        }
+        ~OfficeLioDiagnosticCsv()
+        {
+            if (file_)
+                std::fclose(file_);
+        }
+        bool enabled() const noexcept { return file_ != nullptr; }
+        template <typename Measure, typename Cloud>
+        void append(const Measure& measures, size_t deskewed, size_t downsampled,
+                    size_t effective, const Cloud& normals,
+                    const OfficeLioStateObservation& before,
+                    const OfficeLioStateObservation& after, double filter_seconds) noexcept
+        {
+            if (!file_)
+                return;
+            try
+            {
+                const auto started = std::chrono::steady_clock::now();
+                const OfficeLioNormalStatistics stats(normals);
+                std::ostringstream row;
+                row << std::setprecision(17) << measures.lidar_beg_time << ',' << measures.lidar_end_time
+                    << ',' << measures.lidar_end_time - previous_stamp_ << ',' << measures.imu.size()
+                    << ',' << (measures.imu.empty() ? std::numeric_limits<double>::quiet_NaN() : measures.imu.front()->timestamp)
+                    << ',' << (measures.imu.empty() ? std::numeric_limits<double>::quiet_NaN() : measures.imu.back()->timestamp)
+                    << ',' << (measures.lidar ? measures.lidar->size() : 0) << ',' << deskewed << ',' << downsampled
+                    << ',' << effective << ',' << stats.count;
+                for (const auto* observation : {&before, &after})
+                    for (size_t i = 0; i < 19; ++i)
+                        row << ',' << observation->values[i];
+                row << ',' << (stats.count ? stats.gram(2, 2) / stats.count : std::numeric_limits<double>::quiet_NaN())
+                    << ',' << stats.gram(0, 0) << ',' << stats.gram(0, 1) << ',' << stats.gram(0, 2)
+                    << ',' << stats.gram(1, 1) << ',' << stats.gram(1, 2) << ',' << stats.gram(2, 2)
+                    << ',' << stats.eigenvalues[0] << ',' << stats.eigenvalues[1] << ',' << stats.eigenvalues[2]
+                    << ',' << stats.signed_mean << ',' << stats.absolute_mean << ',' << stats.rms
+                    << ',' << stats.p50 << ',' << stats.p95 << ',' << stats.maximum;
+                for (const double value : office_lio_prediction_trace_snapshot())
+                    row << ',' << value;
+                row << ',' << filter_seconds
+                    << ',' << std::chrono::duration<double>(std::chrono::steady_clock::now() - started).count() << '\n';
+                const auto text = row.str();
+                if (std::fwrite(text.data(), 1, text.size(), file_) != text.size() || (++rows_ % 10 == 0 && std::fflush(file_) != 0))
+                    throw std::runtime_error("CSV write failed");
+                previous_stamp_ = measures.lidar_end_time;
+            }
+            catch (...)
+            {
+                std::fprintf(stderr, "LIO trace disabled after logging error; estimator continues unchanged\n");
+                std::fclose(file_);
+                file_ = nullptr;
+                office_lio_prediction_trace_set_enabled(false);
+            }
+        }
+    };
+}  // namespace
+
+
 namespace robot::slam
 {
     MappingAlg::MappingAlg(const rclcpp::NodeOptions& options)
@@ -209,6 +379,7 @@ namespace robot::slam
         time_buffer.clear();
         lidar_buffer.clear();
         imu_buffer.clear();
+        lidar_pushed        = false;
         is_first_lidar      = true;
         flg_first_scan      = true;
         scan_num            = 0;
@@ -664,8 +835,10 @@ namespace robot::slam
         {
             if (point_selected_surf[i])
             {
-                laserCloudOri->points[effct_feat_num] = feats_down_body->points[i];
-                corr_normvect->points[effct_feat_num] = normvec->points[i];
+                // clear() retains capacity but removes every element: append
+                // selected pairs before the indexed Jacobian reads below.
+                laserCloudOri->push_back(feats_down_body->points[i]);
+                corr_normvect->push_back(normvec->points[i]);
                 effct_feat_num++;
             }
         }
@@ -718,6 +891,12 @@ namespace robot::slam
 
             if (syncData(Measures))
             {
+                if (Measures.imu.empty())
+                {
+                    feats_undistort->clear();
+                    RCLCPP_WARN(this->get_logger(), "Skip LiDAR scan %.9f without IMU; no stale cloud update", Measures.lidar_end_time);
+                    return;
+                }
                 if (flg_first_scan)
                 {
                     first_lidar_time        = Measures.lidar_beg_time;
@@ -782,8 +961,24 @@ namespace robot::slam
                 bool nearest_search_en = true;  //
 
                 double solve_H_time = 0;
+                static OfficeLioDiagnosticCsv diagnostic;
+                // A default-disabled trace performs no state copy or Gram/eigen work.
+                std::optional<OfficeLioStateObservation> diagnostic_before;
+                std::chrono::steady_clock::time_point diagnostic_update_start;
+                if (diagnostic.enabled())
+                {
+                    diagnostic_before.emplace(state_point);
+                    diagnostic_update_start = std::chrono::steady_clock::now();
+                }
                 kf.update_iterated_dyn_share_modified(LASER_POINT_COV, solve_H_time);
                 state_point = kf.get_x();
+                if (diagnostic_before)
+                {
+                    diagnostic.append(Measures, feats_undistort->size(), feats_down_body->size(),
+                                      effct_feat_num, *corr_normvect, *diagnostic_before,
+                                      OfficeLioStateObservation(state_point),
+                                      std::chrono::duration<double>(std::chrono::steady_clock::now() - diagnostic_update_start).count());
+                }
                 euler_cur   = SO3ToEuler(state_point.rot);
                 pos_lid     = state_point.pos + state_point.rot * state_point.offset_T_L_I;
                 geoQuat.x   = state_point.rot.coeffs()[0];

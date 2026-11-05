@@ -30,11 +30,16 @@ def cloud(xyz,labels,header):
     fields=[PointField(name=k,offset=i*4,datatype=7 if i<3 else 6,count=1) for i,k in enumerate(a.dtype.names)]
     return PointCloud2(header=header,height=1,width=len(a),fields=fields,point_step=20,row_step=20*len(a),data=a.tobytes(),is_dense=True),a
 
+def static_render_mask(labels):
+    """Render known static candidates; keep unclassified geometry in the full map."""
+    return (labels > 0) & (labels < len(LABELS)) & (labels != 4)
+
 class SemanticMap(Node):
     def __init__(self,out,export_pcd=False):
         super().__init__('wavego_semantic_map');self.out=out;out.mkdir(parents=True,exist_ok=True)
         self.export_pcd=export_pcd
         self.memory=SemanticVoxels();self.tracks=Tracks();self.scan=None;self.map=None;self.pose=None;self.pending=None;self.last=-1;self.map_at=0;self.frames=0;self.rejected=0;self.person_history={};self.max_counts={};self.status={};self.capture_counts={};self.capture_at={}
+        self.render_status={}
         latch=QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL)
         self.create_subscription(Odometry,'/wavego/navigation/odom',lambda m:setattr(self,'pose',m),qos_profile_sensor_data)
         self.create_subscription(PointCloud2,'/wavego/slam/registered_points',lambda m:setattr(self,'scan',m),qos_profile_sensor_data)
@@ -93,6 +98,7 @@ class SemanticMap(Node):
         counts={name:sum(o['label']==name for o in objects) for name in LABELS}
         for k,v in counts.items():self.max_counts[k]=max(v,self.max_counts.get(k,0))
         self.status=dict(state='sensor_stale' if stale else 'live',frame='lio_map',frames=self.frames,objects=objects,cluster_counts=counts,max_simultaneous_clusters=self.max_counts,semantic_voxels=len(self.memory.cells),rejected_semantic_frames=self.rejected,geometry_source='raw LiDAR + IMU LIO',semantic_source='Grounding DINO + SAM2 + synchronized metric UE depth + LIO pose',ground_truth_pose_used=False,voxel_m=.12,association_m=.18,semantic_accuracy_measured=False,absolute_map_accuracy_measured=False,loop_closure=False,processing_ms=(time.monotonic()-started)*1000)
+        self.status.update(self.render_status)
         self.status_pub.publish(String(data=json.dumps(self.status)))
         with (self.out/'events.jsonl').open('a') as f:f.write(json.dumps(dict(time=now,**self.status))+'\n')
         if self.map is not None and self.map.header.frame_id=='lio_map' and time.monotonic()-self.map_at>3:
@@ -100,12 +106,20 @@ class SemanticMap(Node):
             # Remove places directly observed as people from the static export.
             keep=np.array([tuple(k) not in self.person_history for k in np.floor(xyz/.2).astype(int)])
             xyz=xyz[keep];labels,_=self.memory.assign(xyz,now,live=False)
-            msg,a=cloud(xyz,labels,header);self.map_pub.publish(msg)
+            # The dense height layer already shows every measured map voxel.
+            # Do not cover it with a second, mostly unclassified color cloud.
+            # Selection changes display membership only, never source XYZ or labels.
+            render=static_render_mask(labels)
+            self.map_pub.publish(cloud(xyz[render],labels[render],header)[0])
+            self.render_status=dict(rendered_known_points=int(render.sum()),rendered_known_class_counts={n:int((labels[render]==i).sum()) for i,n in enumerate(LABELS) if i>0 and i!=4},rendered_unknown_points=0,render_excluded_unknown_points=int((labels==0).sum()),render_static_people_excluded=True,render_geometry_modified=False,render_semantics_are_candidates=True)
             np.savez_compressed(self.out/'semantic_map.npz',points=xyz,labels=labels)
             if self.export_pcd:
+                # Archives retain the complete map and all original label counts.
+                _,a=cloud(xyz,labels,header)
                 h=f'VERSION .7\nFIELDS x y z rgb label\nSIZE 4 4 4 4 4\nTYPE F F F U U\nCOUNT 1 1 1 1 1\nWIDTH {len(a)}\nHEIGHT 1\nVIEWPOINT 0 0 0 1 0 0 0\nPOINTS {len(a)}\nDATA binary\n'
                 with (self.out/'semantic_map.pcd').open('wb') as f:f.write(h.encode());f.write(a.tobytes())
             self.status.update(map_points=len(xyz),map_class_counts={n:int((labels==i).sum()) for i,n in enumerate(LABELS)})
+            self.status.update(self.render_status)
             (self.out/'summary.json').write_text(json.dumps(self.status,indent=2)+'\n');self.map_at=time.monotonic()
         (self.out/'objects.json').write_text(json.dumps(dict(time=now,frame='lio_map',objects=objects),indent=2)+'\n')
 

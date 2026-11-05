@@ -10,7 +10,7 @@ from scipy.spatial.transform import Rotation
 R=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(R/'scripts'))
 from go2w_office_inline_run import STAGES
-RES=.05; ORIGIN=(-8.,-8.); WIDTH=360; HEIGHT=240
+RES=.05; ORIGIN=(-8.,-8.); WIDTH=460; HEIGHT=240
 X,Y=np.meshgrid(ORIGIN[0]+(np.arange(WIDTH)+.5)*RES,ORIGIN[1]+(np.arange(HEIGHT)+.5)*RES)
 GEOMS=[]
 for g in ET.parse(R/'matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_inline.xml').findall('./worldbody/geom'):
@@ -31,7 +31,7 @@ def layer(index):
  elif index==8:free=rect(-6.19,-4.94,-6.25,2.08)
  elif index==9:free=rect(-6.24,-3.44,-6.74,-5.04)
  elif index==10:free=rect(-4.74,-3.48,-6.6,.25)
- elif index==11:free=rect(-4.75,-1.5,-.82,1.85)
+ elif index>=11:free=rect(-4.75,13.9,-2.9,1.85)
  else:free=rect(-6.25,8.8,-2.,2.1)
  a[~free]=100
  for name,t,p,s,rot in GEOMS:
@@ -41,7 +41,7 @@ def layer(index):
    bottom=p[2]-float(abs(rot[2])@s) if t=='box' else p[2]-s[1]
    if (name.startswith('phs_') or name.startswith('native_transition')) and bottom<1.5 and top>.12:
     a[footprint(t,p,s,rot)]=100
-  if index==11 and name.startswith('phs_'):
+  if index>=11 and name.startswith('phs_'):
    extent=float(abs(rot[2])@s)
    if p[2]-extent<6.5 and p[2]+extent>5.7:a[footprint(t,p,s,rot)]=100
  return a

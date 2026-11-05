@@ -147,7 +147,7 @@ namespace robot::slam
         int    effct_feat_num = 0, time_log_counter = 0, scan_count = 0;
         int    iterCount = 0, feats_down_size = 0, NUM_MAX_ITERATIONS = 0, laserCloudValidNum = 0;
         bool   point_selected_surf[100000] = { 0 };
-        bool   lidar_pushed, flg_first_scan = true, flg_EKF_inited;
+        bool   lidar_pushed = false, flg_first_scan = true, flg_EKF_inited;
         bool   pub_world_points_flag_ = false, pub_body_points_flag_ = false;
         bool   is_first_lidar = true;
 

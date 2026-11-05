@@ -18,6 +18,15 @@ mkdir -p "$OUT"
 import json, os
 from pathlib import Path
 p=Path('matrix/config/config.json');d=json.loads(p.read_text());s=d['robot']['sensors']['depth_sensor'];c=d['robot']['sensors']['camera'];s.update(position=c['position'].copy(),rotation=c['rotation'].copy(),topic='/go2w/depth/image_raw',cloudmode=False)
+if os.environ.get('GO2W_ENABLE_SIGN_SENSORS') == '1':
+ # A separate upward view keeps small wall plaques visible at a door stop.
+ # The native primary navigation RGB/depth mounts and topics stay unchanged.
+ mount=c['position'].copy();rotation=dict(roll=0,pitch=45,yaw=0)
+ d['robot']['sensors']['sign_camera']=dict(position=mount,rotation=rotation.copy(),width=3840,height=2160,sensor_type='rgb',topic='/go2w/sign/rgb/compressed',fov=90,frequency=1)
+ d['robot']['sensors']['sign_depth']=dict(position=mount,rotation=rotation.copy(),width=640,height=360,sensor_type='depth',topic='/go2w/sign/depth/image_raw',fov=90,frequency=1,cloudmode=False)
+else:
+ d['robot']['sensors'].pop('sign_camera',None)
+ d['robot']['sensors'].pop('sign_depth',None)
 draw=os.environ.get('MATRIX_LIDAR_DRAW_POINTS','0')
 if draw not in ('0','1'):
  raise ValueError('MATRIX_LIDAR_DRAW_POINTS must be 0 or 1')
@@ -31,7 +40,10 @@ p.write_text(json.dumps(d,indent=2)+'\n')
 PY
 bash scripts/start_go2w_systemd.sh
 systemctl --user stop go2w-anything-models.service >/dev/null 2>&1 || true
-systemd-run --user --quiet --collect --unit=go2w-anything-models --property=KillMode=control-group \
+MODEL_EXTRA_ENV=()
+if [[ -n "${ZENOH_SESSION_CONFIG_URI:-}" ]]; then MODEL_EXTRA_ENV+=("--setenv=ZENOH_SESSION_CONFIG_URI=$ZENOH_SESSION_CONFIG_URI"); fi
+if [[ -n "${GO2W_SIGN_TARGET_CODE:-}" ]]; then MODEL_EXTRA_ENV+=("--setenv=GO2W_SIGN_TARGET_CODE=$GO2W_SIGN_TARGET_CODE"); fi
+systemd-run --user --quiet --collect --unit=go2w-anything-models --property=KillMode=control-group "${MODEL_EXTRA_ENV[@]}" \
  --property="WorkingDirectory=$ROOT_DIR" --property="StandardOutput=append:$OUT/models.log" --property="StandardError=append:$OUT/models.log" \
  --setenv="GO2W_SEMANTIC_FRAME=${GO2W_SEMANTIC_FRAME:-odom}" --setenv="GO2W_SEMANTIC_ODOM_TOPIC=${GO2W_SEMANTIC_ODOM_TOPIC:-/odom/mujoco_odom}" \
  /bin/bash "$ROOT_DIR/scripts/run_go2w_anything_service.sh" "$OUT/anything"

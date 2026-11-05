@@ -1,0 +1,49 @@
+{
+  "time": 1791811148.938412,
+  "source_run": "/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/artifacts/office_auto_20261012_210928",
+  "passed": true,
+  "start_stage_index": 0,
+  "completed_stage_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "navigation_seconds": 376.3009934425354,
+  "final_goal_distance_m": 0.03666981627329785,
+  "heading_error_degrees": 4.842327447408542,
+  "final_robot_pose": {
+    "x": 13.31528576849837,
+    "y": -2.361815140996564,
+    "z": 5.9216686988108975,
+    "roll": 0.022037772967738983,
+    "pitch": 0.041429766345749686,
+    "yaw": -0.08451455741697161
+  },
+  "yield_count": 12,
+  "minimum_candidate_center_distance_m": 0.9230819690683268,
+  "entrance_recovery_events": 0,
+  "source_sha256": "b115b15ff56cde18cfab11bd8c7a1a828aa8bf0962bfddd074554b70feb65391",
+  "simulation_pose_reset_during_course": false,
+  "partial_runs_spliced": false,
+  "room_identity_verified": false,
+  "scope": "One complete measured-odometry route execution; does not verify SLAM accuracy, neural pedestrian labels or absence of every physical contact",
+  "regression_checks": {
+    "run": 86,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "default_Office_idle_stand": 0
+}

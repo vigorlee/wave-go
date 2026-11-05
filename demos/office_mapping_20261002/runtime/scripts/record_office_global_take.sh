@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+source scripts/office_ros_environment.sh
 export DISPLAY=:0 XAUTHORITY=/run/user/1000/gdm/Xauthority
 TAKE_DIR="$(realpath "$1")"
 [[ ! -e "$TAKE_DIR/go2w_four_screen_demo.mp4" ]] || { echo "Recording already exists; choose a fresh run." >&2; exit 1; }
@@ -33,7 +34,7 @@ for i in {1..30}; do [[ -s "$TAKE_DIR/ffmpeg.pid" ]] && break; sleep 1; done
 [[ -s "$TAKE_DIR/ffmpeg.pid" ]]
 # Explicit automatic launch transfers control after the manual process has stopped.
 rm -f .run/go2w/manual_control
-systemd-run --user --quiet --collect --unit=go2w-course --property=KillSignal=SIGINT --property="WorkingDirectory=$PWD" --property="StandardOutput=append:$TAKE_DIR/course.log" --property="StandardError=append:$TAKE_DIR/course.log" --setenv="OFFICE_TAKE_DIR=$TAKE_DIR" --setenv="OFFICE_PLANNER=${2:-NavFnDijkstra}" /bin/bash -c 'source /opt/ros/humble/setup.bash; source genisom_roamerx_open/install/setup.bash; export ROS_DOMAIN_ID=89 RMW_IMPLEMENTATION=rmw_zenoh_cpp; exec /usr/bin/python3 scripts/global_compare/follow_route.py --output "$OFFICE_TAKE_DIR/course" --routes artifacts/global_compare_20261001/plans/routes.json --planner "$OFFICE_PLANNER"'
+systemd-run --user --quiet --collect --unit=go2w-course --property=KillSignal=SIGINT --property="WorkingDirectory=$PWD" --property="StandardOutput=append:$TAKE_DIR/course.log" --property="StandardError=append:$TAKE_DIR/course.log" --setenv="ZENOH_SESSION_CONFIG_URI=$ZENOH_SESSION_CONFIG_URI" --setenv="OFFICE_TAKE_DIR=$TAKE_DIR" --setenv="OFFICE_PLANNER=${2:-NavFnDijkstra}" /bin/bash -c 'source /opt/ros/humble/setup.bash; source genisom_roamerx_open/install/setup.bash; export ROS_DOMAIN_ID=89 RMW_IMPLEMENTATION=rmw_zenoh_cpp; exec /usr/bin/python3 scripts/global_compare/follow_route.py --output "$OFFICE_TAKE_DIR/course" --routes config/global_compare/door_routes.json --planner "$OFFICE_PLANNER"'
 /usr/bin/python3 - "$TAKE_DIR" <<'PY'
 import json,time,sys,os,signal,subprocess
 from pathlib import Path

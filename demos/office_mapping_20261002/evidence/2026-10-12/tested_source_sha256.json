@@ -1,0 +1,6 @@
+{
+  "scripts/global_compare/follow_route.py": "a8d9f781aec07d58646a3b45d6d55688762144bcb850cc1b1c61d1d52e88e087",
+  "scripts/global_compare/flat_escape.py": "3a4efe091b99d4810c7bed164a4ffcf38b85d270b1104f06be752c1d50544e6d",
+  "scripts/start_go2w_global_compare_world.sh": "d00286861cd14d96104adeb957d665bc2d6b9841045645d14fcc3a295d6fd584",
+  "scripts/start_go2w_systemd.sh": "60f2a9abe22b949aee6f61a325b404b07963536d19447bd8ce611a37c727498f"
+}

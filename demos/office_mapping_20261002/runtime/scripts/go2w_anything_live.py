@@ -16,6 +16,8 @@ from go2w_mid360_semantics import sensor_world,associate_labels
 from std_msgs.msg import String,Header
 from go2w_anything_models import Anything,panel,COLORS,LABELS,ROOT
 from go2w_dense_depth import project_depth
+from go2w_sign_ocr import AsyncSignOCR
+from go2w_door_target_live import DoorTargetView
 
 def stamp(m):return m.header.stamp.sec+m.header.stamp.nanosec*1e-9
 
@@ -33,7 +35,9 @@ def lift_masks(depth,labels,config,pose):
 
 class Live(Node):
  def __init__(self,out):
-  super().__init__('go2w_anything_pretrained');self.frame=os.environ.get('GO2W_SEMANTIC_FRAME','odom');self.latest=None;self.semantic_cache=None;self.midstats={};self.lidars=deque(maxlen=8);self.depths=deque(maxlen=12);self.poses=deque(maxlen=150);self.out=out;out.mkdir(parents=True,exist_ok=True);self.counts={};self.frames=0
+  super().__init__('go2w_anything_pretrained');self.frame=os.environ.get('GO2W_SEMANTIC_FRAME','odom');self.latest=None;self.semantic_cache=None;self.midstats={};self.lidars=deque(maxlen=8);self.depths=deque(maxlen=12);self.poses=deque(maxlen=150);self.out=out;out.mkdir(parents=True,exist_ok=True);self.counts={};self.frames=0;self.ocr=AsyncSignOCR()
+  sensor_cfg=json.loads((ROOT/'matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/config/config.json').read_text())['robot']['sensors']
+  self.door_target=DoorTargetView(self,out.parent/'door_recognition') if 'sign_camera' in sensor_cfg and 'sign_depth' in sensor_cfg else None
   self.create_subscription(CompressedImage,'/image_raw/compressed',lambda m:setattr(self,'latest',(time.time(),m)),qos_profile_sensor_data)
   self.create_subscription(PointCloud2,'/livox/lidar_raw',self.on_lidar,qos_profile_sensor_data)
   self.midpub=self.create_publisher(PointCloud2,'/go2w/anything/mid360_points',qos_profile_sensor_data)
@@ -63,7 +67,8 @@ class Live(Node):
   self.midpub.publish(PointCloud2(header=Header(stamp=raw.header.stamp,frame_id=self.frame),height=1,width=len(arr),fields=[PointField(name=k,offset=i*4,datatype=PointField.FLOAT32 if i<3 else PointField.UINT32,count=1) for i,k in enumerate(('x','y','z','rgb'))]+[PointField(name='label',offset=16,datatype=PointField.UINT8,count=1)],point_step=17,row_step=len(arr)*17,data=arr.tobytes(),is_dense=True))
   self.midstats=dict(mid360_points=len(arr),mid360_labeled_points=int((labels>0).sum()),mid360_semantic_age_seconds=age,mid360_geometry_source='/livox/lidar_raw',mid360_association_radius_m=.12,mid360_publish_mode='sensor_callback_independent_of_inference',lidar_sensor_type=cfg['robot']['sensors']['lidar']['sensor_type'],lidar_output_topic='/go2w/anything/mid360_points')
  def process(self,engine,latest):
-  received,m=latest;rgb=cv2.imdecode(np.frombuffer(m.data,np.uint8),cv2.IMREAD_COLOR)[:,:,::-1];d,labels,objects,stats=engine.infer(rgb)
+  received,m=latest;rgb=cv2.imdecode(np.frombuffer(m.data,np.uint8),cv2.IMREAD_COLOR)[:,:,::-1]
+  self.ocr.submit(rgb,stamp(m));d,labels,objects,stats=engine.infer(rgb)
   stats.update(frame=self.frames,input_stamp=stamp(m),received_at=received,finished_at=time.time(),input_age_seconds=time.time()-received,objects=objects,labels=LABELS)
   pcloud=None;pose=None;depthmsg=None
   if self.depths and self.poses:
@@ -81,8 +86,12 @@ class Live(Node):
      stats.update(self.midstats)
      stats['metric_cloud_points']=len(arr);stats['metric_cloud_depth_source']='UE_depth_sensor_not_DepthAnything';stats['metric_cloud_semantics']='GroundingDINO_plus_SAM2'
     except ValueError as exc:stats['metric_cloud_skip_reason']=str(exc)
+  stats.update(finished_at=time.time(),input_age_seconds=time.time()-received,ocr=self.ocr.snapshot(rgb,stamp(m)))
+  door_preview=None
+  if self.door_target is not None:
+   door_data,door_preview=self.door_target.update(engine);stats['door_target']=door_data
   stats.update(finished_at=time.time(),input_age_seconds=time.time()-received)
-  vis=panel(rgb,d,labels,objects,stats);self.imgpub.publish(Image(header=m.header,height=vis.shape[0],width=vis.shape[1],encoding='rgb8',step=vis.shape[1]*3,data=vis.tobytes()))
+  vis=panel(rgb,d,labels,objects,stats,door_view=door_preview);self.imgpub.publish(Image(header=m.header,height=vis.shape[0],width=vis.shape[1],encoding='rgb8',step=vis.shape[1]*3,data=vis.tobytes()))
   stats['semantic_pixel_counts']={LABELS[k]:int((labels==k).sum()) for k in range(len(LABELS))};self.status.publish(String(data=json.dumps(stats)));self.frames+=1
   with (self.out/'frames.jsonl').open('a') as f:f.write(json.dumps(stats)+'\n')
   region='stationary'
@@ -106,5 +115,8 @@ def main():
    if time.time()-item[0]>1:continue
    node.process(engine,item)
  except KeyboardInterrupt:pass
- finally:rclpy.shutdown()
+ finally:
+  node.ocr.close()
+  if node.door_target is not None:node.door_target.close()
+  rclpy.try_shutdown()
 if __name__=='__main__':main()

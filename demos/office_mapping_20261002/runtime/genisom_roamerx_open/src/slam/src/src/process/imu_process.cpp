@@ -1,4 +1,71 @@
 #include "process/imu_process.h"
+
+#include <array>
+#include <limits>
+
+// Observation-only aggregation around actual predict() calls; never writes to
+// inputs, model state, covariance, timing, or point clouds. Enabled by CSV logger.
+namespace
+{
+    thread_local bool office_prediction_trace_enabled = false;
+    thread_local std::array<double, 23> office_prediction_trace_values = [] {
+        std::array<double, 23> values;
+        values.fill(std::numeric_limits<double>::quiet_NaN());
+        return values;
+    }();
+    thread_local Eigen::Quaterniond office_prediction_trace_rotation = Eigen::Quaterniond::Identity();
+
+    void office_prediction_trace_begin(double mean_acc_norm, double previous_end, double previous_imu_stamp)
+    {
+        if (!office_prediction_trace_enabled)
+            return;
+        office_prediction_trace_values.fill(0.0);
+        office_prediction_trace_values[2] = std::numeric_limits<double>::infinity();
+        office_prediction_trace_values[3] = -std::numeric_limits<double>::infinity();
+        office_prediction_trace_values[14] = mean_acc_norm;
+        office_prediction_trace_values[15] = robot::slam::G_m_s2 / mean_acc_norm;
+        office_prediction_trace_values[16] = previous_end;
+        office_prediction_trace_values[17] = previous_imu_stamp;
+        office_prediction_trace_rotation = Eigen::Quaterniond::Identity();
+    }
+
+    void office_prediction_trace_observe(double dt, const input_ikfom& input, const state_ikfom& state, bool extrapolation)
+    {
+        if (!office_prediction_trace_enabled)
+            return;
+        ++office_prediction_trace_values[0];
+        office_prediction_trace_values[1] += dt;
+        office_prediction_trace_values[2] = std::min(office_prediction_trace_values[2], dt);
+        office_prediction_trace_values[3] = std::max(office_prediction_trace_values[3], dt);
+        if (dt < 0)
+            ++office_prediction_trace_values[4];
+        const Eigen::Vector3d corrected_gyro = input.gyro - state.bg;
+        for (int i = 0; i < 3; ++i)
+        {
+            office_prediction_trace_values[5 + i] += input.gyro[i] * dt;
+            office_prediction_trace_values[8 + i] += corrected_gyro[i] * dt;
+            office_prediction_trace_values[11 + i] += input.acc[i] * dt;
+        }
+        const double norm = corrected_gyro.norm();
+        if (norm > 1e-12)
+            office_prediction_trace_rotation = office_prediction_trace_rotation * Eigen::Quaterniond(Eigen::AngleAxisd(norm * dt, corrected_gyro / norm));
+        if (extrapolation)
+            office_prediction_trace_values[18] = dt;
+        for (int i = 0; i < 4; ++i)
+            office_prediction_trace_values[19 + i] = office_prediction_trace_rotation.coeffs()[i];
+    }
+}
+
+void office_lio_prediction_trace_set_enabled(bool enabled) noexcept
+{
+    office_prediction_trace_enabled = enabled;
+}
+
+std::array<double, 23> office_lio_prediction_trace_snapshot() noexcept
+{
+    return office_prediction_trace_values;
+}
+
 const bool time_list(robot::slam::PointType& x, robot::slam::PointType& y)
 {
     return (x.curvature < y.curvature);
@@ -18,6 +85,8 @@ ImuProcess::ImuProcess()
     mean_acc        = robot::slam::Vec3d(0, 0, -1.0);
     mean_gyr        = robot::slam::Vec3d(0, 0, 0);
     angvel_last     = robot::slam::Zero3d;
+    acc_s_last       = robot::slam::Zero3d;
+    last_lidar_end_time_ = 0.0;
     Lidar_T_wrt_IMU = robot::slam::Zero3d;
     Lidar_R_wrt_IMU = robot::slam::Eye3d;
     last_imu_.reset(new robot::slam::ImuMessage());
@@ -31,6 +100,8 @@ void ImuProcess::Reset()
     mean_acc         = robot::slam::Vec3d(0, 0, -1.0);
     mean_gyr         = robot::slam::Vec3d(0, 0, 0);
     angvel_last      = robot::slam::Zero3d;
+    acc_s_last       = robot::slam::Zero3d;
+    last_lidar_end_time_ = 0.0;
     imu_need_init_   = true;
     start_timestamp_ = -1;
     init_iter_num    = 1;
@@ -63,6 +134,8 @@ void ImuProcess::reset()
     mean_acc         = robot::slam::Vec3d(0, 0, -1.0);
     mean_gyr         = robot::slam::Vec3d(0, 0, 0);
     angvel_last      = robot::slam::Zero3d;
+    acc_s_last       = robot::slam::Zero3d;
+    last_lidar_end_time_ = 0.0;
     b_first_frame_   = true;
     imu_need_init_   = true;
     start_timestamp_ = -1;
@@ -148,11 +221,15 @@ void ImuProcess::IMU_init(const robot::slam::MeasureGroup& meas, esekfom::esekf<
     init_P(21, 21) = init_P(22, 22) = 0.00001;
     kf_state.change_P(init_P);
     last_imu_ = meas.imu.back();
+    // Initialization establishes this state at the current scan horizon.
+    last_lidar_end_time_ = meas.lidar_end_time;
 }
 
 void ImuProcess::UndistortPcl(
     const robot::slam::MeasureGroup& meas, esekfom::esekf<state_ikfom, 12, input_ikfom>& kf_state, robot::slam::PointCloudType& pcl_out)
 {
+    if (office_prediction_trace_enabled)
+        office_prediction_trace_begin(mean_acc.norm(), last_lidar_end_time_, last_imu_->timestamp);
     /*** add the imu of the last frame-tail to the of current frame-head ***/
     auto v_imu = meas.imu;
     v_imu.push_front(last_imu_);
@@ -211,6 +288,8 @@ void ImuProcess::UndistortPcl(
         Q.block<3, 3>(3, 3).diagonal() = cov_acc;
         Q.block<3, 3>(6, 6).diagonal() = cov_bias_gyr;
         Q.block<3, 3>(9, 9).diagonal() = cov_bias_acc;
+        if (office_prediction_trace_enabled)
+            office_prediction_trace_observe(dt, in, kf_state.get_x(), false);
         kf_state.predict(dt, Q, in);
 
         /* save the poses at each IMU measurements */
@@ -229,6 +308,8 @@ void ImuProcess::UndistortPcl(
     /*** calculated the pos and attitude prediction at the frame-end ***/
     double note = pcl_end_time > imu_end_time ? 1.0 : -1.0;
     dt          = note * (pcl_end_time - imu_end_time);
+    if (office_prediction_trace_enabled)
+        office_prediction_trace_observe(dt, in, kf_state.get_x(), true);
     kf_state.predict(dt, Q, in);
 
     imu_state            = kf_state.get_x();
@@ -239,7 +320,8 @@ void ImuProcess::UndistortPcl(
     if (pcl_out.points.begin() == pcl_out.points.end())
         return;
     auto it_pcl = pcl_out.points.end() - 1;
-    for (auto it_kp = IMUpose.end() - 1; it_kp != IMUpose.begin(); it_kp--)
+    bool points_remaining = true;
+    for (auto it_kp = IMUpose.end() - 1; it_kp != IMUpose.begin() && points_remaining; it_kp--)
     {
         auto head = it_kp - 1;
         auto tail = it_kp;
@@ -267,7 +349,12 @@ void ImuProcess::UndistortPcl(
             it_pcl->z = P_compensate(2);
 
             if (it_pcl == pcl_out.points.begin())
+            {
+                // The first point is consumed too. Leaving only the inner loop
+                // would deskew it again for every earlier IMU interval.
+                points_remaining = false;
                 break;
+            }
         }
     }
 }
@@ -280,6 +367,9 @@ void ImuProcess::Process(
 
     if (meas.imu.empty())
     {
+        // An absent inertial group cannot produce a new deskewed scan. Never
+        // leave the preceding scan in this caller-owned output cloud.
+        cur_pcl_un_->clear();
         return;
     };
     assert(meas.lidar != nullptr);

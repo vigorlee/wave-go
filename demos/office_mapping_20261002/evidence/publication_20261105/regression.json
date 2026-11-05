@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-05",
+  "source": "packaged runtime, not original workspace",
+  "run": 86,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "passed": true,
+  "live_simulation_restarted": false
+}

@@ -10,7 +10,7 @@ from geometry_msgs.msg import Twist,PoseStamped
 from scipy.spatial.transform import Rotation
 R=Path(__file__).resolve().parents[1]
 def stage(n,x,y,z,mode='avoid',frame=None):return dict(id=n,x=x,y=y,z=z,mode=mode,frame=frame)
-STAGES=[stage('stair_alignment',8.,.0,.40),stage('large_stair_crest',5.13,.0,1.48,'up',(7.4,.0,math.pi,1.95,1.34)),stage('large_stair_exit',2.9,-.05,.40,'down'),stage('ramp_crest',0,-.05,.83,'slope'),stage('ramp_exit',-2.85,-.05,.40,'slope'),stage('pedestrian_crossing',-4.0,.7,.40),stage('native_entry_clearance',-3.8,1.65,.40),stage('native_stair_approach',-5.57,1.65,.40),stage('native_lower_landing',-5.57,-5.75,3.60,'up',(-5.57,1.4,-math.pi/2,6.4,3.4)),stage('native_half_landing_turn',-4.12,-5.9,3.60),stage('native_upper_exit',-4.12,-.35,5.90,'up',(-4.12,-5.9,math.pi/2,5.4,5.7)),stage('second_floor_goal',-2.7,.65,5.90)]
+STAGES=[stage('stair_alignment',8.,.0,.40),stage('large_stair_crest',5.13,.0,1.48,'up',(7.4,.0,math.pi,1.95,1.34)),stage('large_stair_exit',2.9,-.05,.40,'down'),stage('ramp_crest',0,-.05,.83,'slope'),stage('ramp_exit',-2.85,-.05,.40,'slope'),stage('pedestrian_crossing',-4.0,.7,.40),stage('native_entry_clearance',-3.8,1.65,.40),stage('native_stair_approach',-5.57,1.65,.40),stage('native_lower_landing',-5.57,-5.75,3.60,'up',(-5.57,1.4,-math.pi/2,6.4,3.4)),stage('native_half_landing_turn',-4.12,-5.9,3.60),stage('native_upper_exit',-4.12,-.35,5.90,'up',(-4.12,-5.9,math.pi/2,5.4,5.7)),stage('second_floor_goal',-2.7,.65,5.90),stage('upper_corridor_entry',2.8,-1.30,5.90),stage('upper_tables_bypass',12.2,-2.35,5.90),stage('second_floor_door',13.35,-2.35,5.90)]
 class Runner(Node):
  def __init__(self,out,native,start_stage=None):
   super().__init__('office_inline_follower');

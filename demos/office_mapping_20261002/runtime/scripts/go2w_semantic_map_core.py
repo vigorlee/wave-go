@@ -3,8 +3,8 @@ from collections import deque
 import numpy as np
 from scipy.spatial import cKDTree
 
-LABELS=['unknown obstacle','stairs','ramp','cylinder','person','wall','floor','stairs/ramp uncertain']
-COLORS=np.array([[110,125,140],[45,170,255],[180,105,250],[255,165,35],[250,65,135],[155,175,195],[65,195,135],[235,205,65]],np.uint8)
+LABELS=['unknown obstacle','stairs','ramp','cylinder','person','wall','floor','stairs/ramp uncertain','door']
+COLORS=np.array([[110,125,140],[45,170,255],[180,105,250],[255,165,35],[250,65,135],[155,175,195],[65,195,135],[235,205,65],[55,225,225]],np.uint8)
 
 def voxel_sample(xyz, size=.12):
     if not len(xyz):return np.empty(0,dtype=int)
@@ -41,7 +41,7 @@ class SemanticVoxels:
         for p,label in zip(xyz,labels):
             if label==4:continue  # People never enter the static label archive.
             k=tuple(np.floor(p/self.size).astype(int))
-            if k not in self.cells:self.cells[k]=[p,np.zeros(8,np.float32),stamp,0]
+            if k not in self.cells:self.cells[k]=[p,np.zeros(len(LABELS),np.float32),stamp,0]
             c=self.cells[k];c[1]*=.98;c[1][label]+=1;c[2]=stamp;c[3]+=1
         if len(self.cells)>self.limit:
             for k in sorted(self.cells,key=lambda k:self.cells[k][2])[:len(self.cells)-self.limit]:del self.cells[k]
@@ -66,7 +66,7 @@ def cluster_obstacles(xyz,labels,support):
     # Local lower envelope removes horizontal ground without a world-height prior.
     xy=np.floor(xyz[:,:2]/.6).astype(int);_,inv=np.unique(xy,axis=0,return_inverse=True)
     low=np.full(inv.max()+1,np.inf);np.minimum.at(low,inv,xyz[:,2])
-    keep=(xyz[:,2]-low[inv]>.18)|(np.isin(labels,[1,2,3,4,7]))
+    keep=(xyz[:,2]-low[inv]>.18)|(np.isin(labels,[1,2,3,4,7,8]))
     keep&=labels!=6;xyz=xyz[keep];labels=labels[keep];support=support[keep]
     if len(xyz)>16000:
         idx=np.linspace(0,len(xyz)-1,16000,dtype=int);xyz=xyz[idx];labels=labels[idx];support=support[idx]

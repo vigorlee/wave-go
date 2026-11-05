@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-export GO2W_RL_STOCHASTIC=1 GO2W_NATIVE_PEOPLE=1 GO2W_MJ_STATE_RELAY=0 MATRIX_MAP_ID=13
+# Learned zero-command balancing avoids the observed tilted static stand
+# after entrance manoeuvres; callers may explicitly restore the baseline.
+export GO2W_RL_IDLE_STAND="${GO2W_RL_IDLE_STAND:-0}"
+export GO2W_RL_STOCHASTIC="${OFFICE_RL_STOCHASTIC:-1}" GO2W_NATIVE_PEOPLE=1 GO2W_MJ_STATE_RELAY=0 MATRIX_MAP_ID=13
+export GO2W_ENABLE_SIGN_SENSORS=1
 export GO2W_WORLD_SCENE="$PWD/matrix/src/robot_mujoco/zsibot_robots/go2w/scene_terrain_office_inline.xml"
 export MATRIX_MUJOCO_SCENE=go2w_lcm/scene_terrain_office_inline.xml
 export MATRIX_UE_SCENE_OVERRIDE="$PWD/matrix/src/UeSim/Linux/zsibot_mujoco_ue/Content/model/go2w/scene_terrain_office_inline.xml"
 export MATRIX_WORLD_MODEL_VALIDATOR="$PWD/scripts/validate_go2w_office_inline.py"
 export ROAMERX_MAP="$PWD/config/go2w_office_course.yaml"
 export MATRIX_SCENE_JSON_OVERRIDE="$PWD/matrix/scene/scene_go2w_global_compare.json"
+export MATRIX_UE_EXTRA_EXEC_COMMANDS='t.IdleWhenNotForeground 0,LoadPackage /Game/BluePrint/BP_SceneLoader,summon /Game/BluePrint/BP_SceneLoader.BP_SceneLoader_C,set CharacterMovementComponent MaxWalkSpeed 100,set BP_Human_C DisThresh 15,getall SkeletalMeshComponent SkeletalMesh,getall CapsuleComponent RelativeLocation,getall BP_Human_C Traj_Index'
+if [[ -n "${OFFICE_INSPECTION_COMMANDS:-}" ]]; then
+  MATRIX_UE_EXTRA_EXEC_COMMANDS+=",$OFFICE_INSPECTION_COMMANDS"
+fi
 export MATRIX_ROBOT_INITIAL_X="${INLINE_START_X:-8}" MATRIX_ROBOT_INITIAL_Y="${INLINE_START_Y:-0}" MATRIX_ROBOT_INITIAL_YAW_DEG="${INLINE_START_YAW:-180}"
 export GO2W_RL_STAIR_FRAME_FILE="$PWD/.run/go2w/stair_frame"
 export GO2W_RL_DYNAMIC_YIELD_FILE="$PWD/.run/go2w/native_dynamic_yield"

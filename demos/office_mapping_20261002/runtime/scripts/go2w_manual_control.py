@@ -16,20 +16,23 @@ class Keys:
   return speed*(int('forward' in self.held)-int('back' in self.held)),.7*(int('left' in self.held)-int('right' in self.held))
 class Panel(QtWidgets.QWidget):
  def __init__(self):
-  super().__init__();self.setWindowTitle('Go2-W 手动驾驶 | WASD / 方向键');self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint);self.resize(460,360);self.keys=Keys();self.owned=False;self.node=rclpy.create_node('go2w_keyboard_control');self.pub=self.node.create_publisher(Twist,'/cmd_vel_nav',10);self.node.create_subscription(Odometry,'/odom/mujoco_odom',self.odom,10);self.pose=None;self.yaw=0.;self.recovering_until=0.
+  super().__init__();self.setWindowTitle('Go2-W 手动驾驶 | WASD / 方向键');self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint);self.compact=os.environ.get('GO2W_MANUAL_COMPACT')=='1';self.resize(240,600) if self.compact else self.resize(460,360);self.keys=Keys();self.owned=False;self.node=rclpy.create_node('go2w_keyboard_control');self.pub=self.node.create_publisher(Twist,'/cmd_vel_nav',10);self.node.create_subscription(Odometry,'/odom/mujoco_odom',self.odom,10);self.pose=None;self.yaw=0.;self.recovering_until=0.
   layout=QtWidgets.QVBoxLayout(self);self.status=QtWidgets.QLabel('点击“接管手动”，再按住按键或按钮');self.status.setWordWrap(True);layout.addWidget(self.status)
   b=QtWidgets.QPushButton('接管手动 / 解除停止锁定');b.clicked.connect(self.take);layout.addWidget(b)
-  modes=QtWidgets.QHBoxLayout();layout.addLayout(modes)
+  modes=QtWidgets.QVBoxLayout() if self.compact else QtWidgets.QHBoxLayout();layout.addLayout(modes)
   for text,mode in [('1 普通行走','flat'),('2 爬楼 / 越障','up')]:
    b=QtWidgets.QPushButton(text);b.clicked.connect(lambda checked=False,m=mode:self.setmode(m));modes.addWidget(b)
-  b=QtWidgets.QPushButton('R 恢复站立（重启仿真到起点）');b.clicked.connect(self.recover);layout.addWidget(b)
+  b=QtWidgets.QPushButton('R 恢复站立\n（重启仿真到起点）' if self.compact else 'R 恢复站立（重启仿真到起点）');b.clicked.connect(self.recover);layout.addWidget(b)
   grid=QtWidgets.QGridLayout();layout.addLayout(grid)
   for text,key,row,col in [('↑ W 前进','forward',0,1),('← A 左转','left',1,0),('↓ S 后退','back',1,1),('→ D 右转','right',1,2)]:
-   b=QtWidgets.QPushButton(text);b.setMinimumHeight(58);b.setFocusPolicy(QtCore.Qt.NoFocus);b.pressed.connect(lambda k=key:self.keys.held.add(k));b.released.connect(lambda k=key:self.keys.held.discard(k));grid.addWidget(b,row,col)
-  b=QtWidgets.QPushButton('停止并锁定（空格 / Esc）');b.setStyleSheet('background:#a62a32;color:white;padding:12px');b.clicked.connect(lambda:self.keys.stop(True));layout.addWidget(b)
-  self.speed=QtWidgets.QSlider(QtCore.Qt.Horizontal);self.speed.setRange(15,80);self.speed.setValue(45);layout.addWidget(QtWidgets.QLabel('速度 0.15–0.80 m/s；先用低速熟悉场景'));layout.addWidget(self.speed)
-  layout.addWidget(QtWidgets.QLabel('W/↑ 前进 · S/↓ 后退 · A/← 左转 · D/→ 右转\nR 重启仿真恢复站立；空格/Esc 停止锁定。\n松键或失焦停止。此面板仅控制仿真。'))
-  self.setStyleSheet(self.styleSheet()+'QWidget{font-size:15px;}');QtWidgets.QApplication.instance().installEventFilter(self);self.timer=QtCore.QTimer();self.timer.timeout.connect(self.tick);self.timer.start(50)
+   b=QtWidgets.QPushButton(' '.join(text.split()[:2]) if self.compact else text);b.setMinimumHeight(48 if self.compact else 58);b.setFocusPolicy(QtCore.Qt.NoFocus);b.pressed.connect(lambda k=key:self.keys.held.add(k));b.released.connect(lambda k=key:self.keys.held.discard(k));grid.addWidget(b,row,col)
+  b=QtWidgets.QPushButton('空格 / Esc 停止锁定' if self.compact else '停止并锁定（空格 / Esc）');b.setStyleSheet('background:#a62a32;color:white;padding:12px');b.clicked.connect(lambda:self.keys.stop(True));layout.addWidget(b)
+  self.speed=QtWidgets.QSlider(QtCore.Qt.Horizontal);self.speed.setRange(15,80);self.speed.setValue(45);speed_label=QtWidgets.QLabel('速度 0.15–0.80 m/s；先用低速熟悉场景');speed_label.setWordWrap(True);layout.addWidget(speed_label);layout.addWidget(self.speed)
+  help_label=QtWidgets.QLabel('W/↑ 前进 · S/↓ 后退 · A/← 左转 · D/→ 右转\nR 重启仿真恢复站立；空格/Esc 停止锁定。\n松键或失焦停止。此面板仅控制仿真。');help_label.setWordWrap(True);layout.addWidget(help_label)
+  self.setStyleSheet(self.styleSheet()+('QWidget{font-size:13px;}' if self.compact else 'QWidget{font-size:15px;}'))
+  if self.compact:
+   self.setFixedWidth(240);screen=QtWidgets.QApplication.primaryScreen().availableGeometry();self.move(screen.right()-self.width()-18,screen.top()+80)
+  QtWidgets.QApplication.instance().installEventFilter(self);self.timer=QtCore.QTimer();self.timer.timeout.connect(self.tick);self.timer.start(50)
  def write(self,name,text):
   p=R/'.run/go2w'/name;p.parent.mkdir(parents=True,exist_ok=True);t=p.with_suffix('.teleop.tmp');t.write_text(text);t.replace(p)
  def odom(self,m):

@@ -1,38 +1,15 @@
-# 源码、数据与实现范围
+# 来源与实现范围（2026-11-05）
 
-## 快照来源
+此次将本机 matrix_go2w_office_20260916 的运行源码覆盖层同步到原 OfficeWorld 发布目录。导航核心四个文件与 2026-10-12 完整测试记录的 SHA-256 一致，见 evidence/2026-10-12/tested_source_sha256.json。所有打包文件在 source_manifest.json 中记录来源与摘要。
 
-- 运行工程：`/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916`；复制时间、每个原路径、字节数、原 SHA-256 和发布 SHA-256 见 [清单](../source_manifest.json)。源工程未被本次发布操作改写。
-- MATRiX 源码基线：`918fae36216e4abb70fbbe275c687c0127fe4b02`，保留 [BSD 3-Clause License](../runtime/matrix/LICENSE)。需要另外取得 UE OfficeWorld、机器人模型等运行资产。
-- RoamerX 源码基线：`51d1e9d22e9bf73380e92a9c4792983d0b355ad0`，保留 [BSD 3-Clause License](../runtime/genisom_roamerx_open/LICENSE)。`robot_slam` 完整包源码随快照保存，内部第三方代码保留各自版权头。
-- 自适应膨胀来自本机 `semantic_map_preview/adaptive_inflation/adaptive_core.py`；算法受到 flycar 距离场处理的启发，是本地分析组件。[源说明](adaptive_inflation_source.md)保留实验参数和范围；其中本机输出链接不属于发布包。
-- 9 月中文标签组件、LAZ 导入、去顶、Z≤5 m 几何特征、局部楼梯拼接源码保存在 `demos/semantic_hierarchy/`。实测 LAZ/微信原始资料没有混入 OfficeWorld 仿真数据包；运行那些入口需准备对应本机输入。
+保留上游 MATRiX / RoamerX 的许可证和版权。沿用已有打包方式，将 dense_capture.py 的自适应膨胀导入改成同目录模块，并复制本机 adaptive_core.py；源摘要与打包摘要分别保留。其他运行源码按原文件复制。
 
-运行源码只做了一处发布路径适配：`dense_capture.py` 导入同目录捆绑的 `adaptive_core.py`。包装层另增只读核验、可选备份恢复、地图查看命令与文档，没有更换控制器或重算原地图。
+最近完整任务使用 MuJoCo 里程计跟踪场景几何约束下的分层 Nav2 路线；原生 LIO 建图独立运行。它不是无先验地图探索，也不是仅依靠 SLAM 位姿完成的导航精度实验。
 
-## 原始记录与版本关系
+原生 LIO 保存了逐点处理边界、容器写入、状态初始化等修复。路线和膨胀用实测支撑面，并进行显示坐标对齐；该对齐没有写入 LIO 滤波器，也不等于解决了上楼漂移。3 cm 是采样分辨率，不能称为 3 cm 绝对精度。
 
-| 记录 | 本次保留 | 与其他记录的关系 |
-|---|---|---|
-| 2026-10-01 NavFn / Smac 成功运行 | 六张视频关键帧、验证报告、路线、配置哈希；Smac 压缩点云/轨迹/语义 | 原始每轮坐标对齐 JSON 独立；不以截图证明新代码重跑通过 |
-| 2026-10-02 地图复核 | 实际 RViz 截图与离线三视图；当前显示源码 | 使用 10 月 1 日保存数据，属于回放/后处理 |
-| 2026-09-16 bag 的原生地图回放 | 567,242 点 ikd-Tree NPZ、图像与出口检查 | 独立旧记录，不能直接与 10 月 1 日地图叠加 |
-| 2026-09-19 校正图 / 9 月 23 日中文截图 | 旧查看器源码、截图、状态校验 | 使用显式场景层高先验，不是新一次纯 LIO 精度结果 |
+2026-10-12 完整运行确实到达二楼门前，但房号未确认。10 月 2 日的独立房号记录保留，不能混用。当前避障的几何候选、视觉神经网络标签与房号 OCR 是不同来源。
 
-完整 MP4 与原始 rosbag 保留在本机，未放入本分支；视频源绝对路径及关键帧时间均在 [截图说明](../evidence/README.md)。旧 PCD 已在本次任务前清理，历史 `demo_manifest.json` 中的 `pcd_exports` 只保留当时统计，不能解释为仍可下载的文件。
+运行源码、参数、场景 XML 与测试已保存；场景安装包、机器人网格、模型权重、虚拟环境、编译产物、原始 rosbag、MP4 与 PCD 留在本机。原 MP4 的路径、字节数与 SHA-256 见 evidence/2026-10-12/video_source.json。其他研究目录与其他工作区未提交的更改没有并入此次导航快照。
 
-## 算法与可视化边界
-
-- 当前实时工程的 `robot_slam` 是 LiDAR/IMU + ikd-Tree 前端。独立官方 FAST-LIO 的代码保留在 V2；两者不能混称。没有运行完整 Super-LIO、Hydra、LiDAR S-Graphs 或 Elevator-LIO。
-- 相机深度投影使用仿真提供的公制深度。Depth Anything 的图是相对深度模型输出，不能当成已标定的米制深度。
-- RGB-D 模型类别、点云几何候选、抽样位姿图、9 月 Spark-DSG 物体关系图是不同表示。最新 `trajectory_graph` 中的边仅连接相邻抽样位姿，没有语义关系或回环求解。
-- 动态避让使用实测 LiDAR 几何簇。原生行人可见，不代表已评测人体识别精度、人体网格间距或碰撞动力学。
-- 自适应膨胀输出为分析/显示图层，尚未验证闭环驱动本页的两种全局规划器。
-- 本轮静态路线来自场景几何和地形检查点，不是无图探索。Nav2 2D 求解和 RL 攀爬分别承担各自功能。
-- 源消息逐点时间偏移为零；运动去畸变、回环与绝对精度仍待验证。动态回波历史和定位漂移可见于累积图，不能通过配色消除。
-
-## 外部运行依赖
-
-Ubuntu 22.04、ROS 2 Humble；Nav2 NavFn/Smac 1.1.20 为保存记录时版本；RoamerX 的 `rmw_zenoh_cpp`；MATRiX UE/MuJoCo 资源；DreamWaQ Go2-W g2wDWAQ 模型；eCAL 5.13.3、Protobuf 3.12.4、LCM 1.5.1、zsibot_common 0.5.9、LibTorch/CUDA；视觉模型依赖及检查点见 `runtime/models/anything/manifest.json`。这些运行依赖不因提供源码覆盖包而自动安装。
-
-单独看随附点云只需 ROS 2/Python 可视化依赖，无需上述控制、UE 和模型环境。旧中文窗口则使用 Noetic 的 Qt5/Ogre 环境，具体入口见其 README。
+旧上游版本、10 月 1 日数据及独立 V2 / Graph 来源说明保留在 [历史来源记录](history_20261002/SOURCE_AND_LIMITATIONS.md)。

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+if [[ "$(cat .run/go2w/manual_context 2>/dev/null || true)" == global_compare ]]; then
+  source scripts/office_ros_environment.sh
+fi
 set +u
 source /opt/ros/humble/setup.bash
 source genisom_roamerx_open/install/setup.bash

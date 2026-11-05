@@ -162,7 +162,7 @@ is_running() {
 
 zenoh_port_in_use() {
   if command -v ss >/dev/null 2>&1; then
-    ss -ltn '( sport = :7447 )' 2>/dev/null | grep -q '7447'
+    ss -H -ltn "( sport = :${ROAMERX_ZENOH_PORT:-7447} )" 2>/dev/null | grep -q .
   else
     is_running "rmw_zenohd"
   fi
@@ -283,7 +283,7 @@ start_linked_stack() {
   local zenohd_pid pubtf_pid odom_bridge_pid forward_pid nav_pid rviz_pid
 
   if zenoh_port_in_use; then
-    echo "[WARN] rmw_zenohd port 7447 already in use; reuse existing zenohd and skip launching a new one."
+    echo "[INFO] reusing rmw_zenohd on port ${ROAMERX_ZENOH_PORT:-7447}."
     zenohd_pid=""
   else
     zenohd_pid="$(start_background "rmw_zenohd" "${LOG_DIR}/roamerx_zenohd.log" \

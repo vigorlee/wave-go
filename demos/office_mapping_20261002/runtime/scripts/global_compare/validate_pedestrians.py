@@ -26,7 +26,16 @@ def progress():
     return {name:int(index) for name,index in re.findall(r'(BP_Crown_Traj_1_C_\d+)\.Traj_Index = (\d+)', s)}, s
 
 if __name__ == '__main__':
-    a = argparse.ArgumentParser();a.add_argument('--output', type=Path, required=True);args = a.parse_args()
+    a = argparse.ArgumentParser();a.add_argument('--output', type=Path, required=True);a.add_argument('--startup-log',action='store_true');args = a.parse_args()
+    if args.startup_log:
+        raw=LOG.read_text(errors='replace')
+        mesh_lines=[s for s in raw.splitlines() if 'SK_Survival_Character.SK_Survival_Character' in s and 'SkeletalMesh =' in s]
+        assert len(mesh_lines)==2, mesh_lines
+        matches=re.findall(r'(BP_Crown_Traj_1_C_\d+)\.CollisionCylinder.RelativeLocation = \(X=([-\d.]+),Y=([-\d.]+),Z=([-\d.]+)\)',raw)
+        positions={name:list(map(float,xyz)) for name,*xyz in matches}
+        assert len(positions)==2, positions
+        report=dict(verified_count=2,actual_mesh='SK_Survival_Character',actual_class='BP_Crown_Traj_1_C',initial_positions_cm=positions,source='UE startup getall output; no keyboard focus required',movement_verified=False,movement_validation='Live LiDAR tracking and demo recording validate subsequent motion',raw_mesh_lines=mesh_lines)
+        args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(report,indent=2));print(json.dumps(report));raise SystemExit(0)
     meshes = query('getall SkeletalMeshComponent SkeletalMesh')
     assert meshes.count('SK_Survival_Character.SK_Survival_Character') == 2, meshes
     start_index, start_log = progress()

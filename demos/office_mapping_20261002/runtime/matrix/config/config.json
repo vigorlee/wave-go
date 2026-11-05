@@ -1,7 +1,7 @@
 {
   "robot": {
     "robot_type": "go2w",
-    "weapon": "",
+    "weapon": "gun",
     "position": {
       "x": 8,
       "y": 0,
@@ -60,7 +60,7 @@
         },
         "rotation": {
           "roll": 0,
-          "pitch": 0,
+          "pitch": -20,
           "yaw": 0
         },
         "sensor_type": "mid360",
@@ -68,6 +68,43 @@
         "draw_points": false,
         "random_scan": true,
         "frequency": 10
+      },
+      "sign_camera": {
+        "position": {
+          "x": 29,
+          "y": 0,
+          "z": 1
+        },
+        "rotation": {
+          "roll": 0,
+          "pitch": 45,
+          "yaw": 0
+        },
+        "width": 3840,
+        "height": 2160,
+        "sensor_type": "rgb",
+        "topic": "/go2w/sign/rgb/compressed",
+        "fov": 90,
+        "frequency": 1
+      },
+      "sign_depth": {
+        "position": {
+          "x": 29,
+          "y": 0,
+          "z": 1
+        },
+        "rotation": {
+          "roll": 0,
+          "pitch": 45,
+          "yaw": 0
+        },
+        "width": 640,
+        "height": 360,
+        "sensor_type": "depth",
+        "topic": "/go2w/sign/depth/image_raw",
+        "fov": 90,
+        "frequency": 1,
+        "cloudmode": false
       }
     },
     "mujoco_running": true,

@@ -1,47 +1,15 @@
-# 2026-10-02 发布校验
+# 发布检查（2026-11-05）
 
-本次验证针对发布包、数据读取、ROS 话题与已有核心测试；没有重新驱动机器人执行两轮全程导航。
+在这次准备上传的 runtime 源码上重新执行了 86 项回归检查：0 失败、0 错误、0 跳过。
+覆盖楼梯入口状态机、局部短距恢复、恢复停止条件及路线/实测地面显示；没有启动仿真或重建大型依赖。
 
-| 检查 | 结果 |
-|---|---|
-| 源码/数据/证据摘要 | `install_snapshot.py` 核对 381 个文件 SHA-256，通过；其中运行覆盖文件 346 个 |
-| 本机恢复预检 | 对已有 OfficeWorld 工程执行只读检查，通过；没有执行 `--apply` |
-| 启动脚本语法 | 54 个 shell 脚本通过 `bash -n` |
-| Python 语法 | 快照运行脚本/测试及 `semantic_hierarchy/scripts` 均通过解析 |
-| 点云读取 | 3,316,238 个源测点；ROI 显示 2,410,731 点；剖切 1,746,643 点 |
-| 语义关联 | 19,454 点通过 5 cm 几何一致性筛选，3,191 点被拒绝；楼梯 4,070、坡道 333、圆柱 243、墙 5,238、地面 9,570 |
-| ROS 2 发布/订阅 | 独立 Domain 137 上收到完整点云、语义点云与 5 个轨迹节点；两种点云坐标均为 `lio_map` |
-| 原有核心测试 | 13 项通过：语义聚类/时序、检测过滤、深度投影、雷达安装坐标 |
-| 截图文件 | 16 张 PNG 可解码；导航六帧与地图图像已人工查看，误截桌面未纳入 |
+- Python 语法解析：130 个文件通过。
+- Bash 语法检查：60 个文件通过。
+- 导航核心四个文件与 2026-10-12 最终验收时的 SHA-256 一致。
+- 本次运行结果见 [regression.json](../evidence/publication_20261105/regression.json)，逐项输出见 [regression.txt](../evidence/publication_20261105/regression.txt)。
+- 全部发布文件的来源和摘要见 [source_manifest.json](../source_manifest.json)，可运行 python3 install_snapshot.py 复核。
 
-话题检查结果见 [topic_smoke.json](../evidence/reports/topic_smoke.json)。已有导航结果见两轮各自的 `verification.json`；它们保留 10 月 1 日日期，不作为本次测试结果。
+最近完整导航的 15/15 记录仍来自 2026-10-12，未将今天的静态检查作为新的全程运动验证。
+本次导航没有证明原生 SLAM 精度或房号识别成功，也没有触发新增后退动作。
 
-## 重复核验
-
-```bash
-cd /home/unitree/Go2w+cosmos3Nav/wave-go-v2/demos/office_mapping_20261002
-python3 install_snapshot.py
-bash scripts/replay_map.sh --check
-```
-
-测试需要 ROS 2 消息与 Torch/Transformers 环境。此次复用本机已有视觉 Python，并补充系统 pytest 模块搜索路径，没有安装新依赖：
-
-```bash
-source /opt/ros/humble/setup.bash
-/home/unitree/Go2w+cosmos3Nav/matrix_go2w_office_20260916/.venv-anything/bin/python - <<'PY'
-import sys
-sys.path.append('/usr/lib/python3/dist-packages')
-import pytest
-raise SystemExit(pytest.main([
-    '-q',
-    'runtime/tests/test_semantic_map_core.py',
-    'runtime/tests/test_detection_filter.py',
-    'runtime/tests/test_anything_projection.py',
-    'runtime/tests/test_lidar_mount.py',
-]))
-PY
-```
-
-纯 ROS 系统 Python 没有 Torch，视觉虚拟环境没有单独安装 pytest，因此必须使用上面的组合或自行准备具有全部依赖的测试环境。测试不调用完整模型推理或控制机器狗。
-
-未在本次重跑：全量 C++ 工作空间编译、两轮 UE 运动、模型重新推理、原始 bag 全回放和绝对地图精度评测。相关历史结果、版本差异和数据边界在各自说明中保留。
+本机原始工程、视频和其他 Git 工作区的未提交更改保持原样。

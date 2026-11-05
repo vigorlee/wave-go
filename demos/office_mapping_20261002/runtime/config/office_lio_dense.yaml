@@ -29,16 +29,18 @@ laser_mapping:
       - 0.15568
       - -0.02329
       - 0.13366
+      # Raw UE points remain in the sensor frame. UE pitch -20 degrees is
+      # ROS sensor-to-IMU Ry(+20 degrees); Eigen consumes this list row-wise.
       extrinsic_R:
-      - 1.0
+      - 0.9396926207859084
       - 0.0
-      - 0.0
-      - 0.0
-      - 1.0
-      - 0.0
-      - 0.0
+      - 0.3420201433256687
       - 0.0
       - 1.0
+      - 0.0
+      - -0.3420201433256687
+      - 0.0
+      - 0.9396926207859084
     publish:
       path_en: true
       map_en: true
