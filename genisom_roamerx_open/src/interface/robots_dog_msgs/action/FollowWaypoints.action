@@ -1,0 +1,20 @@
+#goal definition
+uint8 function_id
+geometry_msgs/PoseStamped[] poses
+robots_dog_msgs/Trajectory[] reference_paths
+geometry_msgs/Vector3 desired_velocity
+string behavior_tree
+---
+#result definition
+int32[] missed_waypoints
+---
+#feedback definition
+uint32 current_waypoint_index
+geometry_msgs/PoseStamped current_goal
+geometry_msgs/PoseStamped current_pose
+builtin_interfaces/Duration navigation_time
+builtin_interfaces/Duration estimated_time_remaining_to_current
+builtin_interfaces/Duration estimated_time_remaining_to_final
+float32 distance_remaining_to_current
+float32 distance_remaining_to_final
+int16 number_of_poses_remaining

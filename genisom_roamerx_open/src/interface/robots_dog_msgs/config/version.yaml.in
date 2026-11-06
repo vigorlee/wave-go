@@ -1,0 +1,7 @@
+name: robots_dog_msgs
+version: @CMAKE_PROJECT_VERSION@
+last_commit_id: @GIT_COMMIT_HASH_FULL@
+last_commit_author: robot
+last_commit_time: @GIT_LAST_COMMIT_DATE_SHORT@
+last_commit_info: xx
+release_info: @CMAKE_PROJECT_VERSION@

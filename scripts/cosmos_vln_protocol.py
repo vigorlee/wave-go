@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Pure protocol helpers for NWM-Cosmos3Edge high-level route commands."""
+"""Pure protocol helpers for Cosmos high-level route commands."""
 
 from __future__ import annotations
 
@@ -23,12 +23,16 @@ COMMAND_FIELDS = {
     "reason",
 }
 FUTURE_FIELDS = {"expected_observation", "hazards", "progress"}
-SUPPORTED_PROFILES = {"generic", "stair_up", "stair_down"}
-SUPPORTED_NAVIGATION_MODES = {"avoid", "flat", "up", "down"}
+SUPPORTED_PROFILES = {"generic", "stair_up", "stair_down", "slope_up", "slope_down"}
+SUPPORTED_NAVIGATION_MODES = {"avoid", "flat", "up", "down", "slope"}
 PROFILE_NAVIGATION_MODES = {
     "generic": {"avoid", "flat"},
     "stair_up": {"up"},
     "stair_down": {"down"},
+    # A dedicated slope mode keeps the ramp surface out of the 2-D obstacle
+    # layer without enabling the stair-only committed-forward override.
+    "slope_up": {"slope"},
+    "slope_down": {"slope"},
 }
 
 
@@ -213,25 +217,6 @@ def load_route_catalog(path: Path) -> dict[str, RouteDefinition]:
 def prompt_route_catalog(routes: Iterable[RouteDefinition]) -> str:
     entries = [route.prompt_entry() for route in routes]
     return json.dumps(entries, ensure_ascii=False, indent=2)
-
-
-def route_selection_guidance(routes: Iterable[RouteDefinition]) -> str:
-    """Build scene-neutral guidance for choosing one catalog-owned route."""
-    entries = tuple(routes)
-    if not entries:
-        raise ValueError("route selection guidance requires at least one route")
-    guidance = (
-        "The selected route must satisfy the entire task, not merely its first "
-        "phase. When the task asks for the longest route, a far endpoint, multiple "
-        "areas, obstacles, or stairs, choose the approved route whose description "
-        "covers all requested phases instead of a shorter partial route."
-    )
-    if any(len(route.stages) > 1 for route in entries):
-        guidance += (
-            " Multi-stage route execution is owned by the navigation supervisor; "
-            "select only its route_id and do not reproduce its stages."
-        )
-    return guidance
 
 
 def extract_route_command_json(text: str) -> dict[str, Any]:

@@ -1,0 +1,13 @@
+# Get the optmized path
+robots_dog_msgs/Trajectory[] raw_paths
+geometry_msgs/Pose[] raw_key_poses
+string smooth_method
+###smooth_method###
+# BSPLINE #
+# PP #
+---
+# Results
+bool success
+string error_msg
+robots_dog_msgs/Trajectory[] opt_paths
+geometry_msgs/Pose[] opt_key_poses

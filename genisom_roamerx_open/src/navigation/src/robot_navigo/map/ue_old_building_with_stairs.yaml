@@ -1,0 +1,6 @@
+image: ue_old_building_with_stairs.pgm
+resolution: 0.02
+origin: [-6.36, -9.48, 0.0]
+occupied_thresh: 0.5
+free_thresh: 0.2
+negate: 0

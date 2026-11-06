@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-06",
+  "tests": 86,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "native_lio_ldd_missing": [],
+  "control_bridge_ldd_missing": [],
+  "simulation_restarted": false,
+  "checked_directory": "/home/unitree/Go2w+cosmos3Nav/wave-go-officeworld-complete-20261106"
+}

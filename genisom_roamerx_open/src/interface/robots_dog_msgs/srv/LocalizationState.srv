@@ -1,0 +1,7 @@
+uint8 data
+---
+bool success
+string message
+float64 latitude
+float64 longitude
+float64 height

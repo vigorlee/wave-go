@@ -1,0 +1,5 @@
+<library path="navigo_navfn_planner">
+	<class name="navigo_navfn_planner/NavfnPlanner" type="navigo_navfn_planner::NavfnPlanner" base_class_type="navigo_core::GlobalPlanner">
+	  <description></description>
+	</class>
+</library>

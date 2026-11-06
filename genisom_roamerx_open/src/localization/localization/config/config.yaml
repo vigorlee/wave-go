@@ -1,0 +1,61 @@
+localization:
+  ros__parameters:
+    # basic parameters
+    points_topic: "/livox/lidar"
+    imu_topic: "/livox/imu"
+    localization_odom_frame_id: "base_link"
+    
+    # topic name
+    odom_topic: "/odom/localization_odom"        #"/odom/current_pose"   /odom/localization_odom 
+    aligned_points_topic: "/aligned_points"
+    localization_info_topic: "/localization_info"
+    global_map_points_topic: "/global_map_points"
+
+    # IMU parameters
+    use_imu: true
+    invert_acc: false
+    invert_gyro: false
+    
+    # IMU initialization parameters
+    imu_init_time: 3.0                    # IMU初始化时间(s)
+    imu_init_queue_size: 600              # IMU初始化队列长度
+    imu_init_max_gyro_var: 0.05          # IMU陀螺仪最大方差阈值
+    imu_init_max_acce_var: 0.5           # IMU加速度计最大方差阈值
+
+    # numeric parameters
+    imu_data_filter_num: 5
+    globalmap_voxel_size: 0.3
+    points_voxel_filter_size: 0.2
+
+    # other parameters
+    cool_time_duration: 0.5
+
+    # registration method parameters
+    reg_method: "NDT_OMP"
+    ndt_neighbor_search_method: "DIRECT7"
+    ndt_neighbor_search_radius: 1.0
+    ndt_resolution: 0.5
+
+    # initial pose parameters
+    specify_init_pose: true
+    init_pos_x: 0.0
+    init_pos_y: 0.0
+    init_pos_z: 0.0
+    init_ori_w: 1.0
+    init_ori_x: 0.0
+    init_ori_y: 0.0
+    init_ori_z: 0.0
+
+    init_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]  # imu安装位置的旋转矩阵
+    init_T: [1.0, 0.0, 0.0, -0.011, 0.0, 1.0, 0.0, -0.02329, 0.0, 0.0, 1.0, 0.04412, 0.0, 0.0, 0.0, 1.0] # 雷达到imu的变换矩阵
+
+    # initial pose initialization parameters 
+    init_match_count_threshold: 2         
+    init_match_score_threshold: 0.15      
+
+    # Global localization parameters
+    use_global_localization_init: true
+    init_pose_change_threshold: 0.01      
+    init_quat_change_threshold: 0.01      
+    global_localization_timeout: 10.0     
+

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Execute high-level NWM-Cosmos3Edge missions through a fail-closed Nav2 supervisor."""
+"""Execute high-level Cosmos VLN missions through a fail-closed Nav2 supervisor."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import uuid
 import rclpy
 from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import PoseStamped
-from nav2_msgs.action import NavigateToPose
+from nav2_msgs.action import NavigateThroughPoses, NavigateToPose
 from nav_msgs.msg import Odometry
 from rclpy.action import ActionClient
 from rclpy.node import Node
@@ -37,6 +37,8 @@ from cosmos_vln_protocol import (
 ROOT_DIR = Path(__file__).resolve().parents[1]
 STAIR_UP_PROFILE = "stair_up"
 STAIR_DOWN_PROFILE = "stair_down"
+SLOPE_UP_PROFILE = "slope_up"
+SLOPE_DOWN_PROFILE = "slope_down"
 GENERIC_PROFILE = "generic"
 
 
@@ -53,6 +55,13 @@ def env_int(name: str, default: int) -> int:
         return int(os.environ.get(name, default))
     except ValueError:
         return default
+
+
+def env_bool(name: str, default: bool) -> bool:
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
 def wrap_angle(value: float) -> float:
@@ -110,6 +119,9 @@ class CosmosVlnMission(Node):
         self.create_subscription(String, "/cosmos_vln/status", self.on_planner_status, 10)
         self.create_subscription(Odometry, "/odom/mujoco_odom", self.on_odom, 20)
         self.navigate_client = ActionClient(self, NavigateToPose, "/navigate_to_pose")
+        self.navigate_through_client = ActionClient(
+            self, NavigateThroughPoses, "/navigate_through_poses"
+        )
 
         self.routes_file = Path(
             os.environ.get(
@@ -132,6 +144,9 @@ class CosmosVlnMission(Node):
         )
         self.max_plan_failures = max(
             0, env_int("COSMOS_VLN_MISSION_MAX_PLAN_FAILURES", 2)
+        )
+        self.nav_mode_attempts = max(
+            1, env_int("COSMOS_VLN_NAV_MODE_ATTEMPTS", 3)
         )
         self.timeout_sec = max(
             30.0, env_float("COSMOS_VLN_MISSION_TIMEOUT_SEC", 480.0)
@@ -219,6 +234,24 @@ class CosmosVlnMission(Node):
             0.02,
             env_float("COSMOS_VLN_ROUTE_PROGRESS_MIN_DISPLACEMENT", 0.10),
         )
+        self.continuous_route_enabled = env_bool(
+            "COSMOS_VLN_CONTINUOUS_ROUTE", False
+        )
+        self.continuous_pass_radius = max(
+            0.25, env_float("COSMOS_VLN_CONTINUOUS_PASS_RADIUS", 0.68)
+        )
+        self.ramp_min_elevation_gain = max(
+            0.15, env_float("COSMOS_VLN_RAMP_MIN_ELEVATION_GAIN", 0.30)
+        )
+        self.ramp_min_pitch = max(
+            0.04, env_float("COSMOS_VLN_RAMP_MIN_PITCH", 0.07)
+        )
+        self.ramp_crest_min_z = max(
+            0.55, env_float("COSMOS_VLN_RAMP_CREST_MIN_Z", 0.72)
+        )
+        self.ramp_exit_max_z = max(
+            0.45, env_float("COSMOS_VLN_RAMP_EXIT_MAX_Z", 0.58)
+        )
         self.nav_mode_script = Path(
             os.environ.get(
                 "COSMOS_VLN_NAV_MODE_SCRIPT",
@@ -268,19 +301,37 @@ class CosmosVlnMission(Node):
         self.mode_switch_confidence = 0.0
         self.next_avoid_restore_at = 0.0
         self.current_nav_mode = "avoid"
+        # A shallow ramp pair intentionally reuses the ``up`` costmap mode in
+        # both directions.  Force one mode refresh at a slope-profile change
+        # so the local obstacle layer is cleared just as it is in the proven
+        # manual sequence.
+        self.force_mode_refresh = False
         try:
             mode = self.nav_mode_file.read_text().strip()
-            if mode in {"avoid", "up", "down", "flat"}:
+            if mode in {"avoid", "up", "down", "slope", "flat"}:
                 self.current_nav_mode = mode
             self.stair_mode_active = self.current_nav_mode != "avoid"
         except OSError:
             pass
         self.timer = self.create_timer(0.2, self.on_timer)
+        self.continuous_route_active = False
+        self.continuous_all_stages_complete = False
+        self.continuous_action_goal_count = 0
+        self.continuous_feedback_remaining = 0
+        self.continuous_goal_request_future: Any = None
+        self.pending_continuous_mode: str | None = None
+        self.mode_switch_kind = "stage"
+        self.ramp_approach_z: float | None = None
+        self.ramp_peak_z = -math.inf
+        self.ramp_exit_z: float | None = None
+        self.ramp_up_max_abs_pitch = 0.0
+        self.ramp_down_max_abs_pitch = 0.0
         self.get_logger().info(
-            "NWM-Cosmos3Edge mission ready: input=/cosmos_vln/mission "
+            "Cosmos VLN mission ready: input=/cosmos_vln/mission "
             f"routes={','.join(sorted(self.routes))} "
             f"min_confidence={self.min_confidence:.2f} "
-            f"required_route={self.required_route_id or 'none'}"
+            f"required_route={self.required_route_id or 'none'} "
+            f"continuous_route={self.continuous_route_enabled}"
         )
 
     @property
@@ -312,6 +363,7 @@ class CosmosVlnMission(Node):
             valid_mode = (
                 (profile == STAIR_UP_PROFILE and navigation_mode == "up")
                 or (profile == STAIR_DOWN_PROFILE and navigation_mode == "down")
+                or (profile in {SLOPE_UP_PROFILE, SLOPE_DOWN_PROFILE} and navigation_mode == "slope")
                 or (profile == GENERIC_PROFILE and navigation_mode in {"avoid", "flat"})
             )
             if not valid_mode:
@@ -392,7 +444,19 @@ class CosmosVlnMission(Node):
             return False, "stage_start_odom_unavailable"
         if time.monotonic() - pose.received_at > self.odom_max_age_sec:
             return False, "stage_start_odom_stale"
-        if abs(pose.roll) > 0.30 or abs(pose.pitch) > 0.30 or pose.z < 0.18:
+        terrain_stage = stage.profile in {
+            STAIR_UP_PROFILE,
+            STAIR_DOWN_PROFILE,
+            SLOPE_UP_PROFILE,
+            SLOPE_DOWN_PROFILE,
+        }
+        # A goal at the foot of a shallow ramp can be reported successful
+        # while the body is still settling onto the incline.  Use the already
+        # validated terrain attitude envelope for those transitions instead
+        # of the flat-ground 0.30 rad entry gate.
+        max_entry_roll = self.stair_max_roll if terrain_stage else 0.30
+        max_entry_pitch = self.stair_max_pitch if terrain_stage else 0.30
+        if abs(pose.roll) > max_entry_roll or abs(pose.pitch) > max_entry_pitch or pose.z < 0.18:
             return False, "stage_start_attitude_unsafe"
 
         if stage.profile == STAIR_UP_PROFILE:
@@ -483,6 +547,18 @@ class CosmosVlnMission(Node):
         self.route_progress_at = time.monotonic()
         self.platform_stable_since = 0.0
         self.platform_validation_started = 0.0
+        self.continuous_route_active = False
+        self.continuous_all_stages_complete = False
+        self.continuous_action_goal_count = 0
+        self.continuous_feedback_remaining = 0
+        self.continuous_goal_request_future = None
+        self.pending_continuous_mode = None
+        self.mode_switch_kind = "stage"
+        self.ramp_approach_z = None
+        self.ramp_peak_z = -math.inf
+        self.ramp_exit_z = None
+        self.ramp_up_max_abs_pitch = 0.0
+        self.ramp_down_max_abs_pitch = 0.0
         self.publish_status("started", robot_pose=self.pose_details())
 
     def on_cancel(self, _message: Empty) -> None:
@@ -511,7 +587,10 @@ class CosmosVlnMission(Node):
         if self.current_stage is not None and (
             self.navigation_active or self.awaiting_platform_validation
         ):
-            if not self.check_stage_route(now):
+            if self.continuous_route_active:
+                if not self.check_continuous_route(now):
+                    return
+            elif not self.check_stage_route(now):
                 return
         if self.next_plan_at is None or now < self.next_plan_at:
             return
@@ -528,6 +607,9 @@ class CosmosVlnMission(Node):
             self.abort_stage("stage_definition_lost")
             return False
 
+        # Slope stages use the same up/down costmap mode as stairs, but do not
+        # require the stair platform-height checks below.  Their safety envelope
+        # is the normal bounded Nav2 corridor plus the attitude limits.
         stair_stage = stage.profile in {STAIR_UP_PROFILE, STAIR_DOWN_PROFILE}
         lateral_error = self.stage_lateral_error(stage, pose)
         heading_error = wrap_angle(pose.yaw - stage.yaw_rad)
@@ -640,6 +722,501 @@ class CosmosVlnMission(Node):
                 return True
         return True
 
+    def stage_pose(self, stage: MissionStage) -> PoseStamped:
+        pose = PoseStamped()
+        pose.header.stamp = self.get_clock().now().to_msg()
+        pose.header.frame_id = stage.frame_id
+        pose.pose.position.x = stage.x
+        pose.pose.position.y = stage.y
+        pose.pose.orientation.z = math.sin(stage.yaw_rad / 2.0)
+        pose.pose.orientation.w = math.cos(stage.yaw_rad / 2.0)
+        return pose
+
+    def update_ramp_physics(self, pose: RobotPose) -> None:
+        if 12.10 <= pose.y <= 12.85:
+            if self.ramp_approach_z is None:
+                self.ramp_approach_z = pose.z
+            else:
+                self.ramp_approach_z = min(self.ramp_approach_z, pose.z)
+        if 12.75 <= pose.y <= 15.55:
+            self.ramp_peak_z = max(self.ramp_peak_z, pose.z)
+            self.ramp_up_max_abs_pitch = max(
+                self.ramp_up_max_abs_pitch, abs(pose.pitch)
+            )
+        if 15.45 <= pose.y <= 18.30:
+            self.ramp_peak_z = max(self.ramp_peak_z, pose.z)
+            self.ramp_down_max_abs_pitch = max(
+                self.ramp_down_max_abs_pitch, abs(pose.pitch)
+            )
+        if 17.80 <= pose.y <= 18.85:
+            self.ramp_exit_z = pose.z
+
+    def ramp_physics_details(self) -> dict[str, Any]:
+        peak_z = self.ramp_peak_z if math.isfinite(self.ramp_peak_z) else None
+        gain = (
+            peak_z - self.ramp_approach_z
+            if peak_z is not None and self.ramp_approach_z is not None
+            else None
+        )
+        drop = (
+            peak_z - self.ramp_exit_z
+            if peak_z is not None and self.ramp_exit_z is not None
+            else None
+        )
+        passed = bool(
+            gain is not None
+            and drop is not None
+            and gain >= self.ramp_min_elevation_gain
+            and drop >= self.ramp_min_elevation_gain * 0.75
+            and peak_z >= self.ramp_crest_min_z
+            and self.ramp_up_max_abs_pitch >= self.ramp_min_pitch * 0.50
+            and self.ramp_down_max_abs_pitch >= self.ramp_min_pitch
+            and self.ramp_exit_z is not None
+            and self.ramp_exit_z <= self.ramp_exit_max_z
+        )
+        return {
+            "passed": passed,
+            "approach_z_m": self.ramp_approach_z,
+            "crest_max_z_m": peak_z,
+            "exit_z_m": self.ramp_exit_z,
+            "elevation_gain_m": gain,
+            "elevation_drop_m": drop,
+            "uphill_max_abs_pitch_rad": self.ramp_up_max_abs_pitch,
+            "downhill_max_abs_pitch_rad": self.ramp_down_max_abs_pitch,
+            "minimum_elevation_gain_m": self.ramp_min_elevation_gain,
+            "minimum_pitch_rad": self.ramp_min_pitch,
+        }
+
+    def continuous_position_reached(
+        self, stage: MissionStage, pose: RobotPose
+    ) -> bool:
+        distance = math.hypot(stage.x - pose.x, stage.y - pose.y)
+        if distance <= self.continuous_pass_radius:
+            return True
+        start = self.stage_start_pose
+        if start is None:
+            return False
+        delta_x = stage.x - start.x
+        delta_y = stage.y - start.y
+        length = math.hypot(delta_x, delta_y)
+        if length < 0.05:
+            return distance <= self.continuous_pass_radius
+        along = ((pose.x - start.x) * delta_x + (pose.y - start.y) * delta_y) / length
+        lateral = abs(
+            ((pose.x - start.x) * delta_y - (pose.y - start.y) * delta_x)
+            / length
+        )
+        return along >= length and lateral <= self.route_max_lateral
+
+    def continuous_stage_reached(
+        self, stage: MissionStage, pose: RobotPose, now: float
+    ) -> tuple[bool, str]:
+        if stage.profile == STAIR_UP_PROFILE:
+            safe = (
+                pose.y >= self.stair_platform_min_y
+                and pose.z >= self.stair_platform_min_z
+                and abs(pose.x - stage.x) <= 0.70
+                and abs(wrap_angle(pose.yaw - stage.yaw_rad)) <= 0.40
+                and abs(pose.roll) <= 0.30
+                and abs(pose.pitch) <= 0.30
+            )
+            reason = "upper_platform_verified_while_moving"
+        elif stage.profile == STAIR_DOWN_PROFILE:
+            safe = (
+                pose.y >= self.stair_down_platform_min_y
+                and pose.z <= self.stair_down_platform_max_z
+                and abs(pose.x - stage.x) <= 0.70
+                and abs(wrap_angle(pose.yaw - stage.yaw_rad)) <= 0.40
+                and abs(pose.roll) <= 0.30
+                and abs(pose.pitch) <= 0.30
+            )
+            reason = "lower_platform_verified_while_moving"
+        else:
+            safe = False
+            reason = "continuous_waypoint_passed"
+
+        if stage.profile in {STAIR_UP_PROFILE, STAIR_DOWN_PROFILE}:
+            if safe:
+                if self.platform_stable_since == 0.0:
+                    self.platform_stable_since = now
+                elif now - self.platform_stable_since >= min(
+                    self.stair_platform_settle_sec, 0.40
+                ):
+                    return True, reason
+            else:
+                self.platform_stable_since = 0.0
+            return False, reason
+
+        approach_z = self.ramp_approach_z
+        gain = (
+            self.ramp_peak_z - approach_z
+            if approach_z is not None and math.isfinite(self.ramp_peak_z)
+            else 0.0
+        )
+        if stage.stage_id == "ramp_up_entry":
+            return (
+                pose.y >= 13.05
+                and approach_z is not None
+                and pose.z >= approach_z + 0.04,
+                "physical_uphill_contact_verified",
+            )
+        if stage.stage_id == "ramp_up_crest":
+            return (
+                pose.y >= 15.15
+                and gain >= self.ramp_min_elevation_gain
+                and self.ramp_peak_z >= self.ramp_crest_min_z,
+                "physical_ramp_crest_verified",
+            )
+        if stage.stage_id == "ramp_down_entry":
+            return (
+                pose.y >= 15.90 and pose.z >= self.ramp_crest_min_z - 0.08,
+                "physical_downhill_entry_verified",
+            )
+        if stage.stage_id == "ramp_down_exit":
+            physics = self.ramp_physics_details()
+            return (
+                pose.y >= 17.85 and bool(physics["passed"]),
+                "physical_up_and_down_profile_verified",
+            )
+        return self.continuous_position_reached(stage, pose), reason
+
+    def check_continuous_route(self, now: float) -> bool:
+        pose = self.robot_pose
+        if pose is None or now - pose.received_at > self.odom_max_age_sec:
+            self.abort_stage("continuous_route_odom_lost")
+            return False
+        stage = self.current_stage
+        if stage is None:
+            if self.continuous_all_stages_complete:
+                return True
+            self.abort_stage("continuous_stage_definition_lost")
+            return False
+
+        self.update_ramp_physics(pose)
+        stair_stage = stage.profile in {STAIR_UP_PROFILE, STAIR_DOWN_PROFILE}
+        lateral_error = self.stage_lateral_error(stage, pose)
+        heading_error = wrap_angle(pose.yaw - stage.yaw_rad)
+        corridor_overrun = (
+            0.0 if stair_stage else self.generic_stage_corridor_overrun(stage, pose)
+        )
+        max_roll = self.stair_max_roll if stair_stage else self.route_max_roll
+        max_pitch = self.stair_max_pitch if stair_stage else self.route_max_pitch
+        if (
+            (stair_stage and abs(lateral_error) > self.stair_max_lateral + 0.15)
+            or (stair_stage and abs(heading_error) > self.stair_max_heading + 0.15)
+            or (not stair_stage and corridor_overrun > 0.05)
+            or abs(pose.roll) > max_roll
+            or abs(pose.pitch) > max_pitch
+            or pose.z < 0.18
+        ):
+            self.abort_stage(
+                "continuous_route_safety_boundary",
+                lateral_error=lateral_error,
+                heading_error=heading_error,
+                corridor_overrun=corridor_overrun,
+                robot_pose=self.pose_details(),
+                ramp_physics=self.ramp_physics_details(),
+            )
+            return False
+
+        reached, reason = self.continuous_stage_reached(stage, pose, now)
+        if reached:
+            self.complete_continuous_stage(
+                reason=reason,
+                robot_pose=self.pose_details(),
+                ramp_physics=self.ramp_physics_details(),
+            )
+            return True
+
+        distance = math.hypot(stage.x - pose.x, stage.y - pose.y)
+        target_progress = distance <= self.stage_best_distance - 0.05
+        progress_pose = self.route_progress_pose
+        displacement = 0.0
+        if progress_pose is not None:
+            displacement = math.hypot(pose.x - progress_pose.x, pose.y - progress_pose.y)
+        if target_progress:
+            self.stage_best_distance = distance
+        if target_progress or displacement >= self.route_progress_min_displacement:
+            self.route_progress_at = now
+            self.route_progress_pose = pose
+        if now - self.route_progress_at >= self.route_no_progress_sec:
+            self.abort_stage(
+                "continuous_route_no_progress",
+                distance_to_target=distance,
+                displacement_since_progress=displacement,
+                robot_pose=self.pose_details(),
+                ramp_physics=self.ramp_physics_details(),
+            )
+            return False
+        return True
+
+    def complete_continuous_stage(self, *, reason: str, **details: Any) -> None:
+        stage = self.current_stage
+        if not self.active or stage is None or self.continuous_all_stages_complete:
+            return
+        completed_index = self.stage_index
+        self.step += 1
+        self.plan_failures = 0
+        self.recovery_hint = ""
+        self.publish_status(
+            "stage_completed",
+            reason=reason,
+            route_id=self.active_route.route_id if self.active_route else "",
+            future_prediction=self.accepted_plan.get("future_prediction", {}),
+            execution_mode="navigate_through_poses",
+            action_goal_count=self.continuous_action_goal_count,
+            **details,
+        )
+
+        next_index = completed_index + 1
+        self.platform_stable_since = 0.0
+        if next_index >= len(self.active_stages):
+            self.continuous_all_stages_complete = True
+            self.publish_status(
+                "continuous_route_waypoints_completed",
+                action_goal_count=self.continuous_action_goal_count,
+                ramp_physics=self.ramp_physics_details(),
+            )
+            return
+
+        self.stage_index = next_index
+        next_stage = self.active_stages[next_index]
+        self.profile = next_stage.profile
+        self.stage_start_pose = self.robot_pose
+        self.route_progress_at = time.monotonic()
+        self.route_progress_pose = self.robot_pose
+        self.stage_best_distance = (
+            math.hypot(next_stage.x - self.robot_pose.x, next_stage.y - self.robot_pose.y)
+            if self.robot_pose is not None
+            else math.inf
+        )
+        target = self.stage_pose(next_stage)
+        self.target_publisher.publish(target)
+        self.publish_status(
+            "stage_starting",
+            route_id=self.active_route.route_id if self.active_route else "",
+            navigation_mode=next_stage.navigation_mode,
+            target_source="validated_route_catalog",
+            execution_mode="navigate_through_poses",
+            action_goal_count=self.continuous_action_goal_count,
+        )
+        if self.current_nav_mode != next_stage.navigation_mode:
+            self.request_continuous_mode(next_stage.navigation_mode)
+
+    def request_continuous_mode(self, mode: str) -> None:
+        if self.current_nav_mode == mode:
+            return
+        if self.mode_switch_future is not None:
+            if self.mode_switch_mode == mode:
+                return
+            self.pending_continuous_mode = mode
+            self.publish_status(
+                "continuous_navigation_mode_queued",
+                active_request=self.mode_switch_mode,
+                navigation_mode=mode,
+                execution_mode="navigate_through_poses",
+                action_goal_count=self.continuous_action_goal_count,
+            )
+            return
+        self.mode_switch_mission_id = self.mission_id
+        self.mode_switch_stage_index = self.stage_index
+        self.mode_switch_mode = mode
+        self.mode_switch_plan = self.accepted_plan
+        self.mode_switch_confidence = self.accepted_confidence
+        self.mode_switch_kind = "continuous_runtime"
+        self.mode_switch_future = self.mode_executor.submit(self.set_nav_mode, mode)
+        self.publish_status(
+            "switching_navigation_mode",
+            navigation_mode=mode,
+            execution_mode="navigate_through_poses",
+            action_goal_count=self.continuous_action_goal_count,
+        )
+
+    def begin_continuous_route(self) -> None:
+        if not self.active or not self.active_stages:
+            self.finish("failed", reason="continuous_route_definition_lost")
+            return
+        self.continuous_route_active = True
+        self.continuous_all_stages_complete = False
+        self.stage_index = 0
+        self.step = 0
+        self.profile = self.active_stages[0].profile
+        self.stage_start_pose = self.robot_pose
+        self.route_progress_at = time.monotonic()
+        self.route_progress_pose = self.robot_pose
+        first = self.active_stages[0]
+        self.stage_best_distance = (
+            math.hypot(first.x - self.robot_pose.x, first.y - self.robot_pose.y)
+            if self.robot_pose is not None
+            else math.inf
+        )
+        safe, reason = self.stage_start_is_safe(first)
+        if not safe:
+            self.finish("failed", reason=reason, robot_pose=self.pose_details())
+            return
+        self.publish_status(
+            "stage_starting",
+            route_id=self.active_route.route_id if self.active_route else "",
+            navigation_mode=first.navigation_mode,
+            target_source="validated_route_catalog",
+            execution_mode="navigate_through_poses",
+            action_goal_count=0,
+        )
+        if self.current_nav_mode == first.navigation_mode:
+            self.dispatch_continuous_route()
+            return
+        self.mode_switch_mission_id = self.mission_id
+        self.mode_switch_stage_index = 0
+        self.mode_switch_mode = first.navigation_mode
+        self.mode_switch_plan = self.accepted_plan
+        self.mode_switch_confidence = self.accepted_confidence
+        self.mode_switch_kind = "continuous_initial"
+        self.mode_switch_future = self.mode_executor.submit(
+            self.set_nav_mode, first.navigation_mode
+        )
+        self.publish_status(
+            "switching_navigation_mode",
+            navigation_mode=first.navigation_mode,
+            execution_mode="navigate_through_poses",
+            action_goal_count=0,
+        )
+
+    def continuous_goal_poses(self) -> list[PoseStamped]:
+        return [self.stage_pose(stage) for stage in self.active_stages]
+
+    def dispatch_continuous_route(self) -> None:
+        if not self.active or not self.continuous_route_active:
+            return
+        goal = NavigateThroughPoses.Goal()
+        goal.poses = self.continuous_goal_poses()
+        goal.behavior_tree = os.environ.get("COSMOS_VLN_CONTINUOUS_BT_XML", "")
+        first_target = goal.poses[0]
+        self.target_publisher.publish(first_target)
+        self.navigation_active = True
+        self.continuous_action_goal_count += 1
+        self.continuous_feedback_remaining = len(goal.poses)
+        request_mission_id = self.mission_id
+        future = self.navigate_through_client.send_goal_async(
+            goal, feedback_callback=self.on_continuous_feedback
+        )
+        self.goal_request_future = future
+        self.continuous_goal_request_future = future
+        future.add_done_callback(
+            lambda completed, mission_id=request_mission_id: (
+                self.on_continuous_goal_response(completed, mission_id)
+            )
+        )
+        self.publish_status(
+            "continuous_goal_requested",
+            route_id=self.active_route.route_id if self.active_route else "",
+            pose_count=len(goal.poses),
+            action_goal_count=self.continuous_action_goal_count,
+            intermediate_goal_restarts=0,
+            execution_mode="navigate_through_poses",
+        )
+
+    def on_continuous_feedback(self, message: Any) -> None:
+        if not self.active or not self.continuous_route_active:
+            return
+        feedback = getattr(message, "feedback", None)
+        if feedback is None:
+            return
+        self.continuous_feedback_remaining = int(
+            getattr(feedback, "number_of_poses_remaining", 0)
+        )
+
+    def on_continuous_goal_response(self, future: Any, mission_id: str) -> None:
+        if self.goal_request_future is future:
+            self.goal_request_future = None
+        if self.continuous_goal_request_future is future:
+            self.continuous_goal_request_future = None
+        try:
+            goal_handle = future.result()
+        except Exception as exc:
+            if self.active and mission_id == self.mission_id:
+                self.finish("failed", reason=f"continuous_goal_request_error:{exc}")
+            return
+        if not self.active or mission_id != self.mission_id:
+            if goal_handle is not None and goal_handle.accepted:
+                goal_handle.cancel_goal_async()
+            return
+        if goal_handle is None or not goal_handle.accepted:
+            self.finish("failed", reason="continuous_goal_rejected")
+            return
+        self.goal_handle = goal_handle
+        result = goal_handle.get_result_async()
+        result.add_done_callback(
+            lambda completed, request_mission_id=mission_id: (
+                self.on_continuous_goal_result(completed, request_mission_id)
+            )
+        )
+        self.publish_status(
+            "navigating",
+            execution_mode="navigate_through_poses",
+            action_goal_count=self.continuous_action_goal_count,
+            intermediate_goal_restarts=0,
+        )
+
+    def on_continuous_goal_result(self, future: Any, mission_id: str) -> None:
+        if not self.active or mission_id != self.mission_id:
+            return
+        self.navigation_active = False
+        self.goal_handle = None
+        try:
+            status = future.result().status
+        except Exception as exc:
+            self.finish("failed", reason=f"continuous_goal_result_error:{exc}")
+            return
+        if status != GoalStatus.STATUS_SUCCEEDED:
+            self.finish(
+                "failed", reason="continuous_navigation_failed", action_status=status
+            )
+            return
+
+        now = time.monotonic()
+        pose = self.robot_pose
+        while not self.continuous_all_stages_complete and self.current_stage is not None:
+            stage = self.current_stage
+            reached = False
+            reason = "navigate_through_poses_confirmed"
+            if pose is not None:
+                reached, reason = self.continuous_stage_reached(stage, pose, now)
+            if not reached and stage.profile != GENERIC_PROFILE:
+                self.finish(
+                    "failed",
+                    reason="physical_terrain_profile_not_verified",
+                    incomplete_stage=stage.stage_id,
+                    robot_pose=self.pose_details(),
+                    ramp_physics=self.ramp_physics_details(),
+                )
+                return
+            self.complete_continuous_stage(
+                reason=reason if reached else "navigate_through_poses_confirmed",
+                robot_pose=self.pose_details(),
+                ramp_physics=self.ramp_physics_details(),
+            )
+
+        ramp_physics = self.ramp_physics_details()
+        if not ramp_physics["passed"]:
+            self.finish(
+                "failed",
+                reason="physical_ramp_profile_not_verified",
+                ramp_physics=ramp_physics,
+                robot_pose=self.pose_details(),
+            )
+            return
+        self.finish(
+            "succeeded",
+            reason="continuous_route_completed",
+            route_id=self.active_route.route_id if self.active_route else "",
+            future_prediction=self.accepted_plan.get("future_prediction", {}),
+            robot_pose=self.pose_details(),
+            execution_mode="navigate_through_poses",
+            action_goal_count=self.continuous_action_goal_count,
+            intermediate_goal_restarts=0,
+            ramp_physics=ramp_physics,
+        )
+
     def poll_mode_switch(self, _now: float) -> None:
         future = self.mode_switch_future
         if future is None or not future.done():
@@ -649,10 +1226,12 @@ class CosmosVlnMission(Node):
         requested_mode = self.mode_switch_mode
         plan = self.mode_switch_plan
         confidence = self.mode_switch_confidence
+        switch_kind = self.mode_switch_kind
         self.mode_switch_future = None
         self.mode_switch_mission_id = ""
         self.mode_switch_stage_index = -1
         self.mode_switch_plan = {}
+        self.mode_switch_kind = "stage"
         try:
             armed = future.result()
         except Exception as exc:
@@ -662,11 +1241,11 @@ class CosmosVlnMission(Node):
             self.current_nav_mode = requested_mode
             self.stair_mode_active = requested_mode != "avoid"
 
-        if (
-            not self.active
-            or request_mission_id != self.mission_id
-            or request_stage_index != self.stage_index
-        ):
+        stage_mismatch = (
+            switch_kind != "continuous_runtime"
+            and request_stage_index != self.stage_index
+        )
+        if not self.active or request_mission_id != self.mission_id or stage_mismatch:
             if armed:
                 if self.set_nav_mode("avoid"):
                     self.stair_mode_active = False
@@ -686,6 +1265,36 @@ class CosmosVlnMission(Node):
                 reason="failed_to_set_navigation_mode",
                 requested_mode=requested_mode,
             )
+            return
+
+        if switch_kind == "continuous_runtime":
+            self.publish_status(
+                "continuous_navigation_mode_active",
+                navigation_mode=requested_mode,
+                execution_mode="navigate_through_poses",
+                action_goal_count=self.continuous_action_goal_count,
+            )
+            queued_mode = self.pending_continuous_mode
+            self.pending_continuous_mode = None
+            if queued_mode is not None and queued_mode != self.current_nav_mode:
+                self.request_continuous_mode(queued_mode)
+            return
+
+        if switch_kind == "continuous_initial":
+            stage = self.current_stage
+            if stage is None or stage.navigation_mode != requested_mode:
+                self.finish("failed", reason="continuous_initial_mode_stage_lost")
+                return
+            safe, reason = self.stage_start_is_safe(stage)
+            if not safe:
+                self.finish(
+                    "failed",
+                    reason=reason,
+                    confidence=confidence,
+                    robot_pose=self.pose_details(),
+                )
+                return
+            self.dispatch_continuous_route()
             return
 
         stage = self.current_stage
@@ -734,7 +1343,9 @@ class CosmosVlnMission(Node):
             navigation_mode=stage.navigation_mode,
             target_source="validated_route_catalog",
         )
-        if self.current_nav_mode == stage.navigation_mode:
+        force_mode_refresh = self.force_mode_refresh
+        self.force_mode_refresh = False
+        if self.current_nav_mode == stage.navigation_mode and not force_mode_refresh:
             self.dispatch_stage(
                 stage, self.accepted_plan, self.accepted_confidence, stage_index
             )
@@ -745,6 +1356,7 @@ class CosmosVlnMission(Node):
         self.mode_switch_mode = stage.navigation_mode
         self.mode_switch_plan = self.accepted_plan
         self.mode_switch_confidence = self.accepted_confidence
+        self.mode_switch_kind = "stage"
         self.mode_switch_future = self.mode_executor.submit(
             self.set_nav_mode, stage.navigation_mode
         )
@@ -798,6 +1410,13 @@ class CosmosVlnMission(Node):
 
         next_index = completed_index + 1
         if next_index < len(self.active_stages):
+            next_stage = self.active_stages[next_index]
+            if (
+                stage.profile in {SLOPE_UP_PROFILE, SLOPE_DOWN_PROFILE}
+                and next_stage.profile in {SLOPE_UP_PROFILE, SLOPE_DOWN_PROFILE}
+                and next_stage.navigation_mode == self.current_nav_mode
+            ):
+                self.force_mode_refresh = True
             self.stage_index = next_index
             self.profile = self.active_stages[next_index].profile
         if old_goal_handle is not None:
@@ -970,7 +1589,12 @@ class CosmosVlnMission(Node):
         self.profile = stages[0].profile
         self.accepted_plan = payload
         self.accepted_confidence = confidence
-        if not self.navigate_client.wait_for_server(timeout_sec=2.0):
+        use_continuous_route = self.continuous_route_enabled and len(stages) > 1
+        if use_continuous_route:
+            if not self.navigate_through_client.wait_for_server(timeout_sec=3.0):
+                self.finish("failed", reason="navigate_through_poses_unavailable")
+                return
+        elif not self.navigate_client.wait_for_server(timeout_sec=2.0):
             self.finish("failed", reason="navigate_to_pose_unavailable")
             return
         self.publish_status(
@@ -981,8 +1605,14 @@ class CosmosVlnMission(Node):
             command_reason=command["reason"],
             future_prediction=future_prediction,
             target_source="validated_route_catalog",
+            execution_mode=(
+                "navigate_through_poses" if use_continuous_route else "staged_navigate_to_pose"
+            ),
         )
-        self.begin_stage(0)
+        if use_continuous_route:
+            self.begin_continuous_route()
+        else:
+            self.begin_stage(0)
 
     def send_goal(
         self,
@@ -1137,27 +1767,39 @@ class CosmosVlnMission(Node):
     def set_nav_mode(self, mode: str) -> bool:
         environment = os.environ.copy()
         environment["GO2W_NAV_MODE_FILE"] = str(self.nav_mode_file)
-        try:
-            result = subprocess.run(
-                [str(self.nav_mode_script), mode],
-                cwd=ROOT_DIR,
-                env=environment,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                timeout=20.0,
-                check=False,
-            )
-        except (OSError, subprocess.TimeoutExpired) as exc:
-            self.get_logger().error(f"Failed to set Go2-W navigation mode {mode}: {exc}")
-            return False
-        if result.returncode != 0:
-            self.get_logger().error(
-                f"Failed to set Go2-W navigation mode {mode}: {result.stdout[-1200:]}"
-            )
-            return False
-        self.get_logger().info(f"Go2-W navigation mode set to {mode}")
-        return True
+        last_error = ""
+        for attempt in range(1, self.nav_mode_attempts + 1):
+            try:
+                result = subprocess.run(
+                    [str(self.nav_mode_script), mode],
+                    cwd=ROOT_DIR,
+                    env=environment,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    timeout=25.0,
+                    check=False,
+                )
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                last_error = str(exc)
+            else:
+                if result.returncode == 0:
+                    self.get_logger().info(
+                        f"Go2-W navigation mode set to {mode} "
+                        f"(attempt {attempt}/{self.nav_mode_attempts})"
+                    )
+                    return True
+                last_error = result.stdout[-1200:]
+            if attempt < self.nav_mode_attempts:
+                self.get_logger().warning(
+                    f"Navigation mode {mode} attempt {attempt} failed; retrying."
+                )
+                time.sleep(0.8)
+        self.get_logger().error(
+            f"Failed to set Go2-W navigation mode {mode} after "
+            f"{self.nav_mode_attempts} attempts: {last_error}"
+        )
+        return False
 
     def finish(self, state: str, **details: Any) -> None:
         if not self.active:
@@ -1193,6 +1835,13 @@ class CosmosVlnMission(Node):
         self.platform_validation_started = 0.0
         self.stage_best_distance = math.inf
         self.route_progress_pose = None
+        self.force_mode_refresh = False
+        self.continuous_route_active = False
+        self.continuous_all_stages_complete = False
+        self.continuous_feedback_remaining = 0
+        self.continuous_goal_request_future = None
+        self.pending_continuous_mode = None
+        self.mode_switch_kind = "stage"
 
     def shutdown(self) -> None:
         if self.goal_handle is not None:

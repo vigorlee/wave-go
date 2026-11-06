@@ -1,0 +1,2 @@
+geometry_msgs/TwistStamped cmd_vel
+nav_msgs/Path trajectory

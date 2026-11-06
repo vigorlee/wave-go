@@ -1,0 +1,4 @@
+builtin_interfaces/Time timestamp
+geometry_msgs/PoseStamped[] goals
+---
+bool[] is_valid

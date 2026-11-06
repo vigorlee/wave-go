@@ -80,25 +80,11 @@ std::string read_mode_file(const std::string& path, const std::string& fallback)
   std::transform(mode.begin(), mode.end(), mode.begin(), [](unsigned char value) {
     return static_cast<char>(std::tolower(value));
   });
-  if (mode != "avoid" && mode != "up" && mode != "down" && mode != "flat") {
+  if (mode != "avoid" && mode != "up" && mode != "down" && mode != "slope" &&
+      mode != "flat") {
     return fallback;
   }
   return mode;
-}
-
-std::string read_posture_file(const std::string& path) {
-  if (path.empty()) {
-    return "stand";
-  }
-  std::ifstream input(path);
-  std::string posture;
-  if (!input || !(input >> posture)) {
-    return "stand";
-  }
-  std::transform(posture.begin(), posture.end(), posture.begin(), [](unsigned char value) {
-    return static_cast<char>(std::tolower(value));
-  });
-  return posture == "charge" || posture == "recover" ? posture : "stand";
 }
 
 class VelocityReceiver {
@@ -371,6 +357,7 @@ class DreamWaQPolicy {
 
   const std::array<float, kActionCount>& last_action() const { return last_action_; }
   void clear_action() { last_action_.fill(0.0F); }
+  void reset_history() { history_.fill(0.0F); clear_action(); }
   bool training_history() const { return training_history_; }
   bool stochastic() const { return stochastic_; }
 
@@ -395,8 +382,6 @@ enum class Stage {
   kPolicy,
   kStairAssist,
   kTerrainExit,
-  kCharge,
-  kRecover,
   kSafety
 };
 
@@ -416,10 +401,6 @@ const char* stage_name(Stage stage) {
       return "stair_assist";
     case Stage::kTerrainExit:
       return "terrain_exit";
-    case Stage::kCharge:
-      return "charge";
-    case Stage::kRecover:
-      return "recover";
     case Stage::kSafety:
       return "safety";
   }
@@ -526,26 +507,23 @@ int main(int argc, char** argv) {
       std::max(1.0, env_double("GO2W_RL_STAIR_ASSIST_SECONDS", 15.0));
   const bool stair_approach_assist = env_bool("GO2W_RL_STAIR_APPROACH_ASSIST", false);
   const std::string nav_mode_file = env_string("GO2W_NAV_MODE_FILE", "");
-  const std::string posture_file = env_string("GO2W_RL_POSTURE_FILE", "");
-  const float charge_hip = static_cast<float>(
-      std::clamp(env_double("GO2W_RL_CHARGE_HIP", 1.20), 0.90, 1.60));
-  const float charge_knee = static_cast<float>(
-      std::clamp(env_double("GO2W_RL_CHARGE_KNEE", -2.30), -2.60, -1.80));
-  const double posture_ramp_seconds =
-      std::clamp(env_double("GO2W_RL_POSTURE_RAMP_SECONDS", 2.5), 1.0, 6.0);
-  const float stair_route_center_x =
+  const std::string native_yield_file = env_string("GO2W_RL_DYNAMIC_YIELD_FILE", "");
+  const std::string dynamic_yield_file = !native_yield_file.empty() ? native_yield_file :
+      (env_bool("GO2W_MJ_STATE_RELAY", false)
+       ? nav_mode_file.substr(0, nav_mode_file.find_last_of('/') + 1) + "dynamic_yield" : "");
+  float stair_route_center_x =
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_CENTER_X", 0.2));
-  const float stair_outbound_min_y =
+  float stair_outbound_min_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_OUTBOUND_MIN_Y", -0.2));
-  const float stair_outbound_max_y =
+  float stair_outbound_max_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_OUTBOUND_MAX_Y", 3.8));
-  const float stair_return_min_y =
+  float stair_return_min_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_RETURN_MIN_Y", 6.2));
-  const float stair_return_max_y =
+  float stair_return_max_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_RETURN_MAX_Y", 10.2));
-  const float stair_outbound_fast_y =
+  float stair_outbound_fast_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_OUTBOUND_FAST_Y", 1.2));
-  const float stair_outbound_slow_y =
+  float stair_outbound_slow_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_OUTBOUND_SLOW_Y", 2.7));
   const float stair_return_fast_y =
       static_cast<float>(env_double("GO2W_RL_STAIR_RETURN_FAST_Y", 8.9));
@@ -565,6 +543,28 @@ int main(int argc, char** argv) {
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_MAX_VY", 0.40));
   const float stair_route_max_yaw =
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_MAX_YAW", 0.80));
+  // The committed stair gait normally owns yaw and lateral centering so that
+  // transient Nav2 stop/spin commands cannot destabilize a riser crossing.
+  // The extended obstacle course opts into a bounded steering blend: MPPI may
+  // bend the route around a centerline bollard, while this bridge still keeps
+  // a small forward command and the existing attitude/corridor safety gates.
+  const bool stair_obstacle_avoidance =
+      env_bool("GO2W_RL_STAIR_OBSTACLE_AVOIDANCE", false);
+  const float stair_planner_yaw_blend = static_cast<float>(std::clamp(
+      env_double("GO2W_RL_STAIR_PLANNER_YAW_BLEND", 0.90), 0.0, 1.0));
+  const float stair_planner_centering_scale = static_cast<float>(std::clamp(
+      env_double("GO2W_RL_STAIR_PLANNER_CENTERING_SCALE", 0.25), 0.0, 1.0));
+  const float stair_planner_min_vx = static_cast<float>(std::max(
+      0.05, env_double("GO2W_RL_STAIR_PLANNER_MIN_VX", 0.18)));
+  const float stair_planner_max_vx = static_cast<float>(std::max(
+      static_cast<double>(stair_planner_min_vx),
+      env_double("GO2W_RL_STAIR_PLANNER_MAX_VX", 0.80)));
+  const float stair_planner_turn_threshold = static_cast<float>(std::max(
+      0.01, env_double("GO2W_RL_STAIR_PLANNER_TURN_THRESHOLD", 0.06)));
+  const float stair_obstacle_min_y = static_cast<float>(
+      env_double("GO2W_RL_STAIR_OBSTACLE_MIN_Y", 2.55));
+  const float stair_obstacle_max_y = static_cast<float>(
+      env_double("GO2W_RL_STAIR_OBSTACLE_MAX_Y", 3.70));
   const float stair_route_hard_max_lateral =
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_HARD_MAX_LATERAL", 0.65));
   const float stair_route_hard_max_heading =
@@ -581,7 +581,7 @@ int main(int argc, char** argv) {
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_EMERGENCY_MAX_ROLL", 0.85));
   const float stair_route_emergency_max_pitch =
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_EMERGENCY_MAX_PITCH", 1.00));
-  const float stair_route_platform_height =
+  float stair_route_platform_height =
       static_cast<float>(env_double("GO2W_RL_STAIR_ROUTE_PLATFORM_HEIGHT", 1.40));
   const double stair_route_max_seconds =
       std::max(5.0, env_double("GO2W_RL_STAIR_ROUTE_MAX_SECONDS", 45.0));
@@ -640,14 +640,11 @@ int main(int argc, char** argv) {
   Clock::time_point stair_stall_started{};
   Clock::time_point stair_assist_until{};
   Clock::time_point next_nav_mode_read{};
-  Clock::time_point next_posture_read{};
-  Clock::time_point posture_transition_started{};
   Clock::time_point up_mode_started{};
   Clock::time_point stair_route_started{};
   Clock::time_point stair_route_progress_at{};
   Clock::time_point stair_route_level_started{};
   std::array<float, 2> stair_stall_origin{};
-  std::array<float, kActionCount> posture_initial_q{};
   float terrain_exit_yaw = 0.0F;
   float stair_approach_speed = 0.0F;
   bool terrain_exit_active = false;
@@ -663,13 +660,20 @@ int main(int argc, char** argv) {
   float stair_route_heading_error = 0.0F;
   float stair_route_best_progress = 0.0F;
   std::string nav_mode{"avoid"};
-  std::string posture{"stand"};
+  bool dynamic_yield = !dynamic_yield_file.empty();
   bool stair_route_fault = false;
   bool stair_route_degraded = false;
   bool stair_route_degraded_reported = false;
   bool state_timeout_active = false;
   bool downhill_limited = false;
-  bool recover_release_to_policy = false;
+  bool manual_owned=false, manual_deadman=false;
+  const std::string manual_file=nav_mode_file.substr(0,nav_mode_file.find_last_of('/')+1)+"manual_control";
+
+  const std::string stair_frame_file = env_string("GO2W_RL_STAIR_FRAME_FILE", "");
+  std::string stair_frame_id;
+  std::string recovery_id;
+  float frame_x=0.0F, frame_y=0.0F, frame_heading=1.57079632679F;
+
 
   auto next_publish = Clock::now();
   auto next_policy = Clock::now();
@@ -681,6 +685,44 @@ int main(int argc, char** argv) {
         state.valid && now - state.updated_at <= std::chrono::milliseconds(250);
 
     if (now >= next_nav_mode_read) {
+      std::ifstream recovery_input(manual_file + ".recover");
+      std::string requested_recovery;
+      if (recovery_input >> requested_recovery && requested_recovery != recovery_id) {
+        recovery_id=requested_recovery; initialized=false; policy_enabled=false;
+        history_frames=0; policy.reset_history(); applied_command={};
+        stair_route_fault=false; stair_up_direction=0; stair_route_direction=0;
+        stair_assist_active=false; stair_stall_started={}; terrain_exit_active=false;
+        terrain_exit_armed=false; downhill_active=false;
+        std::cout << "Explicit simulation recovery: restarting stand transition.\n";
+      }
+      std::ifstream manual_input(manual_file);manual_owned=manual_input.is_open();
+      double expires=0;int moving=0;
+      const double wall=std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
+      manual_deadman=bool(manual_input >> expires >> moving) && std::isfinite(expires) && expires>=wall && expires<=wall+1.0 && moving==1;
+      if(manual_owned) {
+        stair_up_direction=0;stair_route_direction=0;terrain_exit_active=false;terrain_exit_armed=false;
+        if(!manual_deadman){applied_command={};stair_assist_active=false;stair_approach_active=false;stair_approach_speed=0;}
+      }
+
+      if (!stair_frame_file.empty()) {
+        std::ifstream input(stair_frame_file);
+        std::string id; float x,y,h,end,height;
+        if (input >> id >> x >> y >> h >> end >> height &&
+            std::isfinite(x) && std::isfinite(y) && std::isfinite(h) &&
+            std::isfinite(end) && std::isfinite(height) && end>0 && end<15) {
+          if (id != stair_frame_id) {
+            stair_up_direction=0; stair_route_direction=0; stair_route_fault=false;
+            stair_route_degraded=false; stair_route_level_started={};
+            stair_approach_speed=0; stair_frame_id=id;
+            std::cout << "Stair frame " << id << " origin=" << x << ',' << y << " heading=" << h << '\n';
+          }
+          frame_x=x; frame_y=y; frame_heading=h;
+          stair_route_center_x=0; stair_outbound_min_y=-0.4F; stair_outbound_max_y=end;
+          stair_outbound_fast_y=0.6F; stair_outbound_slow_y=end-0.5F;
+          stair_return_min_y=100; stair_return_max_y=101; stair_route_platform_height=height;
+        }
+      }
+
       const std::string next_mode = read_mode_file(nav_mode_file, "avoid");
       if (next_mode != nav_mode) {
         std::cout << "Navigation mode changed: " << nav_mode << " -> " << next_mode
@@ -690,22 +732,23 @@ int main(int argc, char** argv) {
         }
         nav_mode = next_mode;
       }
-      next_nav_mode_read = now + std::chrono::milliseconds(200);
-    }
-
-    if (now >= next_posture_read) {
-      const std::string next_posture = read_posture_file(posture_file);
-      if (next_posture != posture) {
-        recover_release_to_policy = posture == "recover" && next_posture == "stand";
-        posture = next_posture;
-        posture_initial_q = state_fresh ? state.q : kDefaultJointPosition;
-        posture_transition_started = now;
-        std::cout << "Posture changed to " << posture << " with a "
-                  << posture_ramp_seconds << " s transition.\n";
+      if (!dynamic_yield_file.empty()) {
+        std::ifstream input(dynamic_yield_file);
+        double expires = 0.0; int wait = 1;
+        const double wall = std::chrono::duration<double>(std::chrono::system_clock::now().time_since_epoch()).count();
+        const bool fresh = bool(input >> expires >> wait) && std::isfinite(expires) && expires >= wall && expires <= wall + 2.0;
+        const bool next_yield = !fresh || wait != 0;
+        if (next_yield != dynamic_yield) std::cout << "Dynamic crossing yield=" << next_yield << " fresh=" << fresh << '\n';
+        dynamic_yield = next_yield;
       }
-      next_posture_read = now + std::chrono::milliseconds(200);
+      next_nav_mode_read = now + std::chrono::milliseconds(100);
     }
 
+    const float stair_x = stair_frame_file.empty() ? state.position[0] :
+      std::sin(frame_heading)*(state.position[0]-frame_x)-std::cos(frame_heading)*(state.position[1]-frame_y);
+    const float stair_y = stair_frame_file.empty() ? state.position[1] :
+      std::cos(frame_heading)*(state.position[0]-frame_x)+std::sin(frame_heading)*(state.position[1]-frame_y);
+    const float stair_yaw = stair_frame_file.empty() ? state.rpy[2] : wrap_angle(state.rpy[2]-frame_heading+1.57079632679F);
     if (state_fresh && !initialized) {
       initial_q = state.q;
       stand_started = now;
@@ -774,21 +817,22 @@ int main(int argc, char** argv) {
         }
         stage = Stage::kPolicy;
 
+        if (manual_owned) stair_up_direction=0;
         if (stair_up_direction != 0) {
           constexpr float kHalfPi = 1.57079632679F;
           const float route_heading = stair_up_direction > 0 ? kHalfPi : -kHalfPi;
-          const float route_progress = stair_up_direction * state.position[1];
+          const float route_progress = stair_up_direction * stair_y;
           stair_route_lateral_error =
-              -std::sin(route_heading) * (state.position[0] - stair_route_center_x);
-          stair_route_heading_error = wrap_angle(state.rpy[2] - route_heading);
+              -std::sin(route_heading) * (stair_x - stair_route_center_x);
+          stair_route_heading_error = wrap_angle(stair_yaw - route_heading);
           if (route_progress >= stair_route_best_progress + 0.04F) {
             stair_route_best_progress = route_progress;
             stair_route_progress_at = now;
           }
 
           const bool beyond_stairs =
-              stair_up_direction > 0 ? state.position[1] >= stair_outbound_max_y
-                                     : state.position[1] <= stair_return_min_y;
+              stair_up_direction > 0 ? stair_y >= stair_outbound_max_y
+                                     : stair_y <= stair_return_min_y;
           const bool stable_on_platform =
               beyond_stairs && state.position[2] >= stair_route_platform_height &&
               std::abs(state.rpy[0]) <= terrain_level_roll &&
@@ -892,31 +936,34 @@ int main(int argc, char** argv) {
                        test_vy - test_lateral_gain * test_lateral_error,
                        test_yaw - test_heading_gain * test_heading_error};
           }
+          // Preserve the collision-aware MPPI command before the committed
+          // stair route applies its terrain-specific speed and centering.
+          const std::array<float, 3> planner_desired = desired;
 
           const bool was_stair_approach_active = stair_approach_active;
           stair_approach_active = false;
           stair_route_direction = 0;
           stair_route_lateral_error = 0.0F;
           stair_route_heading_error = 0.0F;
-          if (stair_approach_assist && !test_active && nav_mode == "up" &&
+          if (stair_approach_assist && (!manual_owned || (manual_deadman && std::abs(desired[2])<0.15F)) && !test_active && nav_mode == "up" &&
               stair_up_direction == 0 && desired[0] > idle_vx_deadband &&
               velocity_receiver.updated_after(up_mode_started)) {
             constexpr float kHalfPi = 1.57079632679F;
             float route_heading = 0.0F;
-            if (state.position[1] >= stair_outbound_min_y &&
-                state.position[1] <= stair_outbound_max_y) {
+            if (stair_y >= stair_outbound_min_y &&
+                stair_y <= stair_outbound_max_y) {
               route_heading = kHalfPi;
               stair_route_direction = 1;
-            } else if (state.position[1] >= stair_return_min_y &&
-                       state.position[1] <= stair_return_max_y) {
+            } else if (stair_y >= stair_return_min_y &&
+                       stair_y <= stair_return_max_y) {
               route_heading = -kHalfPi;
               stair_route_direction = -1;
             }
 
             if (stair_route_direction != 0) {
-              const float route_dx = state.position[0] - stair_route_center_x;
+              const float route_dx = stair_x - stair_route_center_x;
               stair_route_lateral_error = -std::sin(route_heading) * route_dx;
-              stair_route_heading_error = wrap_angle(state.rpy[2] - route_heading);
+              stair_route_heading_error = wrap_angle(stair_yaw - route_heading);
               stair_approach_active =
                   std::abs(stair_route_lateral_error) <= stair_approach_max_lateral &&
                   std::abs(stair_route_heading_error) <= stair_approach_max_heading;
@@ -927,7 +974,7 @@ int main(int argc, char** argv) {
                 stair_up_direction = stair_route_direction;
                 stair_route_started = now;
                 stair_route_progress_at = now;
-                stair_route_best_progress = stair_up_direction * state.position[1];
+                stair_route_best_progress = stair_up_direction * stair_y;
                 stair_route_level_started = {};
                 stair_route_degraded = false;
                 stair_route_degraded_reported = false;
@@ -942,21 +989,21 @@ int main(int argc, char** argv) {
             const float route_heading = stair_up_direction > 0 ? kHalfPi : -kHalfPi;
             stair_route_direction = stair_up_direction;
             stair_route_lateral_error =
-                -std::sin(route_heading) * (state.position[0] - stair_route_center_x);
-            stair_route_heading_error = wrap_angle(state.rpy[2] - route_heading);
+                -std::sin(route_heading) * (stair_x - stair_route_center_x);
+            stair_route_heading_error = wrap_angle(stair_yaw - route_heading);
             stair_approach_active = true;
             if (!was_stair_approach_active) {
               stair_approach_speed =
                   std::max(0.2F, std::min(std::abs(applied_command[0]), stair_assist_vx));
             }
             float stair_target_speed = stair_assist_vx;
-            if ((stair_route_direction > 0 && state.position[1] < stair_outbound_fast_y) ||
-                (stair_route_direction < 0 && state.position[1] > stair_return_fast_y)) {
+            if ((stair_route_direction > 0 && stair_y < stair_outbound_fast_y) ||
+                (stair_route_direction < 0 && stair_y > stair_return_fast_y)) {
               stair_target_speed = std::min(stair_target_speed, stair_entry_vx);
             } else if ((stair_route_direction > 0 &&
-                        state.position[1] > stair_outbound_slow_y) ||
+                        stair_y > stair_outbound_slow_y) ||
                        (stair_route_direction < 0 &&
-                        state.position[1] < stair_return_slow_y)) {
+                        stair_y < stair_return_slow_y)) {
               stair_target_speed = std::min(stair_target_speed, stair_exit_vx);
             }
             const bool route_aligned =
@@ -965,6 +1012,22 @@ int main(int argc, char** argv) {
             if (!route_aligned || stair_route_degraded) {
               stair_target_speed = std::min(stair_target_speed, stair_alignment_vx);
             }
+            const bool planner_command_fresh =
+                stair_obstacle_avoidance &&
+                velocity_receiver.updated_after(up_mode_started);
+            const bool planner_avoidance_active =
+                planner_command_fresh &&
+                stair_route_direction > 0 &&
+                stair_y >= stair_obstacle_min_y &&
+                stair_y <= stair_obstacle_max_y &&
+                std::abs(planner_desired[2]) >= stair_planner_turn_threshold;
+            if (planner_avoidance_active) {
+              const float planner_forward = std::max(0.0F, planner_desired[0]);
+              stair_target_speed = std::min(stair_target_speed, stair_planner_max_vx);
+              stair_target_speed = std::min(
+                  stair_target_speed,
+                  std::max(stair_planner_min_vx, planner_forward));
+            }
             if (stair_approach_speed < stair_target_speed) {
               stair_approach_speed = std::min(
                   stair_target_speed, stair_approach_speed + 0.02F * stair_assist_accel);
@@ -972,11 +1035,21 @@ int main(int argc, char** argv) {
               stair_approach_speed = std::max(
                   stair_target_speed, stair_approach_speed - 0.02F * stair_assist_decel);
             }
-            desired = {stair_approach_speed,
-                       std::clamp(-test_lateral_gain * stair_route_lateral_error,
-                                  -stair_route_max_vy, stair_route_max_vy),
-                       std::clamp(-test_heading_gain * stair_route_heading_error,
-                                  -stair_route_max_yaw, stair_route_max_yaw)};
+            const float centering_scale =
+                planner_avoidance_active ? stair_planner_centering_scale : 1.0F;
+            const float centering_vy = std::clamp(
+                -test_lateral_gain * stair_route_lateral_error * centering_scale,
+                -stair_route_max_vy, stair_route_max_vy);
+            const float centering_yaw = std::clamp(
+                -test_heading_gain * stair_route_heading_error,
+                -stair_route_max_yaw, stair_route_max_yaw);
+            const float route_yaw = planner_avoidance_active
+                ? std::clamp(
+                      stair_planner_yaw_blend * planner_desired[2] +
+                          (1.0F - stair_planner_yaw_blend) * centering_yaw,
+                      -stair_route_max_yaw, stair_route_max_yaw)
+                : centering_yaw;
+            desired = {stair_approach_speed, centering_vy, route_yaw};
             stage = Stage::kStairAssist;
           } else {
             stair_approach_speed = 0.0F;
@@ -985,6 +1058,7 @@ int main(int argc, char** argv) {
             }
           }
 
+          if(manual_owned && !manual_deadman) desired={};
           desired[0] = std::clamp(desired[0], -max_vx, max_vx);
           desired[1] = std::clamp(desired[1], -max_vy, max_vy);
           desired[2] = std::clamp(desired[2], -max_yaw, max_yaw);
@@ -1003,20 +1077,28 @@ int main(int argc, char** argv) {
           // override MPPI outside the two known stair centerline corridors.
           constexpr float kHalfPi = 1.57079632679F;
           const bool stair_centered =
-              std::abs(state.position[0] - stair_route_center_x) <=
+              std::abs(stair_x - stair_route_center_x) <=
               stair_alignment_max_lateral;
           const bool outbound_stair_corridor =
-              state.position[1] >= stair_outbound_min_y &&
-              state.position[1] <= stair_outbound_max_y && stair_centered &&
-              std::abs(wrap_angle(state.rpy[2] - kHalfPi)) <=
+              stair_y >= stair_outbound_min_y &&
+              stair_y <= stair_outbound_max_y && stair_centered &&
+              std::abs(wrap_angle(stair_yaw - kHalfPi)) <=
                   stair_alignment_max_heading;
           const bool return_stair_corridor =
-              state.position[1] >= stair_return_min_y &&
-              state.position[1] <= stair_return_max_y && stair_centered &&
-              std::abs(wrap_angle(state.rpy[2] + kHalfPi)) <=
+              stair_y >= stair_return_min_y &&
+              stair_y <= stair_return_max_y && stair_centered &&
+              std::abs(wrap_angle(stair_yaw + kHalfPi)) <=
                   stair_alignment_max_heading;
+          // The obstacle-free lower staircase permits a bounded re-centering
+          // recovery. Otherwise a small lateral error limits forward speed
+          // while also disabling riser recovery, leaving the wheels wedged.
+          const bool lower_stair_recovery = nav_mode == "up" &&
+              stair_y >= stair_outbound_min_y &&
+              stair_y < stair_obstacle_min_y - 0.20F &&
+              std::abs(stair_x - stair_route_center_x) <= 0.55F &&
+              std::abs(wrap_angle(stair_yaw - kHalfPi)) <= 0.30F;
           const bool stair_assist_corridor =
-              outbound_stair_corridor || return_stair_corridor;
+              outbound_stair_corridor || return_stair_corridor || lower_stair_recovery;
 
           const int drive_direction = desired[0] > 0.0F ? 1 : -1;
           const bool stair_stall_tracking = stair_assist_active ||
@@ -1025,7 +1107,7 @@ int main(int argc, char** argv) {
               stair_stall_tracking ? idle_vx_deadband : stair_stall_command;
           const bool assist_command = !requested_idle &&
                                       std::abs(desired[0]) >= stair_assist_command_threshold &&
-                                      std::abs(desired[1]) < 0.10F &&
+                                      (std::abs(desired[1]) < 0.10F || lower_stair_recovery) &&
                                       std::abs(desired[2]) <= stair_stall_max_yaw;
           const bool assist_hold_command =
               !requested_idle && std::abs(desired[0]) >= idle_vx_deadband;
@@ -1072,7 +1154,12 @@ int main(int argc, char** argv) {
                 std::min(stair_assist_vx,
                          std::max(std::abs(desired[0]),
                                   std::abs(applied_command[0]) + 0.02F * stair_assist_accel));
-            desired[0] = std::copysign(assist_speed, desired[0]);
+            desired[0] = std::copysign(
+                lower_stair_recovery ? std::min(assist_speed, 0.80F) : assist_speed,
+                desired[0]);
+            if (lower_stair_recovery) {
+              desired[1] = std::clamp(desired[1], -0.08F, 0.08F);
+            }
             stage = Stage::kStairAssist;
           }
 
@@ -1121,7 +1208,7 @@ int main(int argc, char** argv) {
           const bool descending_attitude =
               std::abs(state.rpy[1]) >= terrain_exit_pitch &&
               last_drive_command[0] * state.rpy[1] > 0.0F;
-          if (terrain_guard && terrain_exit_armed && !terrain_exit_active && requested_idle &&
+          if (terrain_guard && !manual_owned && terrain_exit_armed && !terrain_exit_active && requested_idle &&
               descending_attitude && std::abs(last_drive_command[0]) >= 0.10F) {
             terrain_exit_active = true;
             terrain_exit_armed = false;
@@ -1170,64 +1257,20 @@ int main(int argc, char** argv) {
             }
           }
 
+          // A transverse actor must clear the crossing before driving into it.
+          // Apply after terrain helpers so they cannot override a requested wait.
+          if (dynamic_yield && !manual_owned &&
+              (nav_mode == "avoid" || (!native_yield_file.empty() && nav_mode == "slope"))) {
+            desired = {0.0F, 0.0F, 0.0F};
+            terrain_exit_active = false;
+            terrain_exit_armed = false;
+          }
           applied_command = desired;
           const bool idle = idle_stand && !terrain_exit_active &&
                             std::abs(desired[0]) < idle_vx_deadband &&
                             std::abs(desired[1]) < idle_vy_deadband &&
                             std::abs(desired[2]) < idle_yaw_deadband;
-          const double posture_elapsed =
-              posture_transition_started.time_since_epoch().count() == 0
-                  ? posture_ramp_seconds
-                  : std::chrono::duration<double>(now - posture_transition_started).count();
-          const bool posture_transition_active = posture_elapsed < posture_ramp_seconds;
-          const bool charge_requested = posture == "charge";
-          const bool recover_requested = posture == "recover";
-          const bool policy_recovery =
-              recover_requested || (recover_release_to_policy && posture_transition_active);
-          const auto apply_policy_command = [&](const std::array<float, 3>& policy_command) {
-            const auto obs = policy.observation(state, policy_command);
-            const auto action = policy.infer(obs, &inference_ms);
-            for (int leg = 0; leg < kLegCount; ++leg) {
-              const int offset = leg * 4;
-              set_leg_target(
-                  command, leg,
-                  kDefaultJointPosition[offset] + action_scale * action[offset],
-                  kDefaultJointPosition[offset + 1] + action_scale * action[offset + 1],
-                  kDefaultJointPosition[offset + 2] + action_scale * action[offset + 2],
-                  leg_kp, leg_kd, wheel_scale * action[offset + 3], wheel_kd);
-            }
-          };
-          if (policy_recovery) {
-            stage = Stage::kRecover;
-            applied_command = {};
-            apply_policy_command({0.0F, 0.0F, 0.0F});
-          } else if (charge_requested || posture_transition_active) {
-            stage = charge_requested ? Stage::kCharge : Stage::kStand;
-            applied_command = {};
-            inference_ms = 0.0;
-            policy.clear_action();
-            policy.append_history(policy.observation(state, {0.0F, 0.0F, 0.0F}));
-            double posture_alpha =
-                std::clamp(posture_elapsed / posture_ramp_seconds, 0.0, 1.0);
-            posture_alpha = posture_alpha * posture_alpha * (3.0 - 2.0 * posture_alpha);
-            const float target_hip = charge_requested ? charge_hip : kDefaultJointPosition[1];
-            const float target_knee =
-                charge_requested ? charge_knee : kDefaultJointPosition[2];
-            for (int leg = 0; leg < kLegCount; ++leg) {
-              const int offset = leg * 4;
-              const float abad = posture_initial_q[offset] +
-                                 static_cast<float>(posture_alpha) *
-                                     (kDefaultJointPosition[offset] - posture_initial_q[offset]);
-              const float hip = posture_initial_q[offset + 1] +
-                                static_cast<float>(posture_alpha) *
-                                    (target_hip - posture_initial_q[offset + 1]);
-              const float knee = posture_initial_q[offset + 2] +
-                                 static_cast<float>(posture_alpha) *
-                                     (target_knee - posture_initial_q[offset + 2]);
-              set_leg_target(command, leg, abad, hip, knee, leg_kp, leg_kd, 0.0F,
-                             wheel_kd);
-            }
-          } else if (idle) {
+          if (idle) {
             stage = Stage::kIdle;
             inference_ms = 0.0;
             policy.clear_action();
@@ -1240,7 +1283,16 @@ int main(int argc, char** argv) {
                              wheel_kd);
             }
           } else {
-            apply_policy_command(desired);
+            const auto obs = policy.observation(state, desired);
+            const auto action = policy.infer(obs, &inference_ms);
+            for (int leg = 0; leg < kLegCount; ++leg) {
+              const int offset = leg * 4;
+              set_leg_target(command, leg,
+                             kDefaultJointPosition[offset] + action_scale * action[offset],
+                             kDefaultJointPosition[offset + 1] + action_scale * action[offset + 1],
+                             kDefaultJointPosition[offset + 2] + action_scale * action[offset + 2],
+                             leg_kp, leg_kd, wheel_scale * action[offset + 3], wheel_kd);
+            }
           }
         }
       }

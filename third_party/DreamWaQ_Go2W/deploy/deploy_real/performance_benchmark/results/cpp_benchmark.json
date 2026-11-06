@@ -1,0 +1,16 @@
+{
+  "timing": {
+    "loop_time_ms": {"mean": 0.601992, "std": 0.782865, "min": 0.355114, "max": 42.214516, "percentile_99": 0.897313, "count": 2885},
+    "inference_time_ms": {"mean": 0.557681, "std": 0.782392, "max": 42.164472},
+    "encoder_time_ms": {"mean": 0.217409, "max": 39.126094},
+    "actor_time_ms": {"mean": 0.153029, "max": 1.201871}
+  },
+  "control_quality": {
+    "mean_error": 0.08947127,
+    "max_error": 0.49202096
+  },
+  "metadata": {
+    "language": "cpp",
+    "total_samples": 2885
+  }
+}

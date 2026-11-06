@@ -1,0 +1,13 @@
+# 忽略所有 .log 文件
+*.log
+ 
+# 忽略所有__pycache__文件
+*.pyc
+
+#忽略vscode的配置文件
+*.vscode
+
+# 忽略特定文件夹
+deploy/deploy_real/cpp_go2w/build/
+deploy/deploy_real/cpp_go2w/libtorch/
+deploy/deploy_real/performance_benchmark/cpp/build/

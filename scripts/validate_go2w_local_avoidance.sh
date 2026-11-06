@@ -16,11 +16,11 @@ fail() {
   exit 1
 }
 
-topic_type="$(timeout 5 ros2 topic type --no-daemon /livox/lidar 2>/dev/null || true)"
+topic_type="$(timeout 5 ros2 topic type /livox/lidar 2>/dev/null || true)"
 [[ "${topic_type}" == "sensor_msgs/msg/PointCloud2" ]] || \
   fail "/livox/lidar type is '${topic_type:-missing}', expected PointCloud2"
 
-cloud_sample="$(timeout 8 ros2 topic echo /livox/lidar --no-daemon --once \
+cloud_sample="$(timeout 8 ros2 topic echo /livox/lidar --once \
   --field header.frame_id \
   --qos-reliability best_effort --qos-durability volatile \
   2>/dev/null || true)"
@@ -30,7 +30,7 @@ tf_sample="$(timeout 8 ros2 run tf2_ros tf2_echo base_link lidar 2>/dev/null || 
 grep -q 'Translation' <<<"${tf_sample}" || fail "TF base_link -> lidar is unavailable"
 
 param_value() {
-  timeout 5 ros2 param get --no-daemon "$1" "$2" 2>/dev/null | awk -F': ' 'NF > 1 {print $NF}'
+  timeout 5 ros2 param get "$1" "$2" 2>/dev/null | awk -F': ' 'NF > 1 {print $NF}'
 }
 
 enabled="$(param_value /local_costmap/local_costmap obstacle_layer.enabled)"

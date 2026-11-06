@@ -1,0 +1,18 @@
+# Record the path
+
+# CMD Enum
+uint8 CMD_STANDBY=0
+uint8 CMD_START=1
+uint8 CMD_ADD_KEY_POSE=2
+uint8 CMD_STOP_AND_SAVE=3
+uint8 CMD_STOP_AND_DISCARD=4
+
+uint8 cmd
+string target_save_path
+---
+bool success
+string message
+nav_msgs/Path path
+geometry_msgs/Pose[] key_poses
+
+
